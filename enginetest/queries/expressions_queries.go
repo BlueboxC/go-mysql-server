@@ -22,6 +22,16 @@ import (
 // ExpressionsScriptTests contains self-contained expressions script tests.
 var ExpressionsScriptTests = []ScriptTest{
 	{
+		Name:        "fork subquery unnesting preserves other negations",
+		SetUpScript: []string{"CREATE TABLE t(id INT PRIMARY KEY,kind VARCHAR(20))", "INSERT INTO t VALUES(1,'task'),(2,'template')", "CREATE TABLE labels(id INT)", "INSERT INTO labels VALUES(1),(2)", "CREATE TABLE empty_scalar_rows(id INT)"},
+		Assertions: []ScriptTestAssertion{
+			{Query: "SELECT id FROM t WHERE kind<>'template' AND id IN(SELECT id FROM labels)", Expected: []sql.Row{{1}}},
+			{Query: "SELECT id FROM t WHERE NOT(kind='template') AND id IN(SELECT id FROM labels)", Expected: []sql.Row{{1}}},
+			{Query: "SELECT id FROM t WHERE id<>(SELECT id FROM empty_scalar_rows) AND id IN(SELECT id FROM labels)", Expected: []sql.Row{}},
+		},
+	},
+
+	{
 		Name:        "fork join predicates require every referenced relation",
 		SetUpScript: []string{"CREATE TABLE t0(x INT)", "INSERT INTO t0 VALUES(1),(2)", "CREATE TABLE t1(y INT)", "INSERT INTO t1 VALUES(1),(NULL)", "CREATE TABLE t2(z INT)", "INSERT INTO t2 VALUES(1),(0)", "CREATE VIEW v2 AS SELECT z FROM t2", "CREATE TABLE a(c0 BOOLEAN PRIMARY KEY,c1 INT)", "CREATE TABLE b(c0 INT,c1 BOOLEAN,c2 BOOLEAN,PRIMARY KEY(c0,c1))", "INSERT INTO b VALUES(1,false,false),(2,true,true),(3,false,NULL),(4,true,NULL)", "INSERT INTO a VALUES(true,1),(false,NULL)", "CREATE VIEW va(c0) AS SELECT a.c1 FROM a"},
 		Assertions: []ScriptTestAssertion{

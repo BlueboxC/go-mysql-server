@@ -106,13 +106,13 @@ func unnestInSubqueries(ctx *sql.Context, a *Analyzer, n sql.Node, scope *plan.S
 
 					joinF = expression.NewEquals(nil, nil)
 				case expression.Comparer:
-					if op == plan.JoinTypeAnti {
-						// NOT(scalar comparison) must retain empty-result NULL and
-						// the scalar subquery's at-most-one-row check.
-						newFilters = append(newFilters, e)
+					sq, _ = e.Right().(*plan.Subquery)
+					if op == plan.JoinTypeAnti && sq != nil {
+						// Keep the entire negated scalar predicate, including when
+						// another subquery in this filter is successfully unnested.
+						newFilters = append(newFilters, expression.NewNot(e))
 						continue
 					}
-					sq, _ = e.Right().(*plan.Subquery)
 					l = e.Left()
 					joinF = e
 					max1 = true
