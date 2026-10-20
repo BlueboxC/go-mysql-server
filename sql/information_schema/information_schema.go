@@ -807,22 +807,12 @@ func checkConstraintsRowIter(ctx *Context, c Catalog) (RowIter, error) {
 	}
 
 	for _, db := range databases {
-		tableNames, err := db.Database.GetTableNames(ctx)
-		if err != nil {
-			return nil, err
-		}
-
-		for _, tableName := range tableNames {
-			tbl, _, err := c.DatabaseTable(ctx, db.Database, tableName)
-			if err != nil {
-				return nil, err
-			}
-
+		err := forEachDBTable(ctx, c, db.Database, func(tbl Table) error {
 			checkTbl, ok := tbl.(CheckTable)
 			if ok {
 				checkDefinitions, err := checkTbl.GetChecks(ctx)
 				if err != nil {
-					return nil, err
+					return err
 				}
 
 				for _, checkDefinition := range checkDefinitions {
@@ -834,6 +824,10 @@ func checkConstraintsRowIter(ctx *Context, c Catalog) (RowIter, error) {
 					})
 				}
 			}
+			return nil
+		})
+		if err != nil {
+			return nil, err
 		}
 	}
 
@@ -888,7 +882,7 @@ func columnStatisticsRowIter(ctx *Context, c Catalog) (RowIter, error) {
 		dbName := db.Database.Name()
 		privSetDb := privSet.Database(dbName)
 
-		err := DBTableIter(ctx, db.Database, func(t Table) (cont bool, err error) {
+		err := iterDBTables(ctx, db.Database, func(t Table) (cont bool, err error) {
 			privSetTbl := privSetDb.Table(t.Name())
 			tableStats, err := c.GetTableStats(ctx, TableSchemaName(t), dbName, t)
 			if err != nil {
@@ -931,7 +925,7 @@ func columnsExtensionsRowIter(ctx *Context, cat Catalog) (RowIter, error) {
 	}
 
 	for _, db := range databases {
-		err := DBTableIter(ctx, db.Database, func(t Table) (cont bool, err error) {
+		err := iterDBTables(ctx, db.Database, func(t Table) (cont bool, err error) {
 			tblName := t.Name()
 			for _, col := range t.Schema(ctx) {
 				rows = append(rows, Row{
@@ -988,7 +982,7 @@ func eventsRowIter(ctx *Context, c Catalog) (RowIter, error) {
 
 		eventDb, ok := db.Database.(EventDatabase)
 		if ok {
-			eventDefs, _, err := eventDb.GetEvents(ctx)
+			eventDefs, err := dbEvents(ctx, eventDb)
 			if err != nil {
 				return nil, err
 			}
@@ -1082,24 +1076,14 @@ func keyColumnUsageRowIter(ctx *Context, c Catalog) (RowIter, error) {
 	}
 
 	for _, db := range databases {
-		tableNames, err := db.Database.GetTableNames(ctx)
-		if err != nil {
-			return nil, err
-		}
-
-		for _, tableName := range tableNames {
-			tbl, _, err := c.DatabaseTable(ctx, db.Database, tableName)
-			if err != nil {
-				return nil, err
-			}
-
+		err := forEachDBTable(ctx, c, db.Database, func(tbl Table) error {
 			// Get UNIQUEs, PRIMARY KEYs
 			// TODO: Doesn't correctly consider primary keys from table implementations that don't implement sql.IndexedTable
 			indexTable, ok := tbl.(IndexAddressable)
 			if ok {
 				indexes, err := indexTable.GetIndexes(ctx)
 				if err != nil {
-					return nil, err
+					return err
 				}
 
 				for _, index := range indexes {
@@ -1137,7 +1121,7 @@ func keyColumnUsageRowIter(ctx *Context, c Catalog) (RowIter, error) {
 			if ok {
 				fks, err := fkTable.GetDeclaredForeignKeys(ctx)
 				if err != nil {
-					return nil, err
+					return err
 				}
 
 				for _, fk := range fks {
@@ -1165,6 +1149,10 @@ func keyColumnUsageRowIter(ctx *Context, c Catalog) (RowIter, error) {
 					}
 				}
 			}
+			return nil
+		})
+		if err != nil {
+			return nil, err
 		}
 	}
 
@@ -1229,23 +1217,13 @@ func referentialConstraintsRowIter(ctx *Context, c Catalog) (RowIter, error) {
 	}
 
 	for _, db := range databases {
-		tableNames, err := db.Database.GetTableNames(ctx)
-		if err != nil {
-			return nil, err
-		}
-
-		for _, tableName := range tableNames {
-			tbl, _, err := c.DatabaseTable(ctx, db.Database, tableName)
-			if err != nil {
-				return nil, err
-			}
-
+		err := forEachDBTable(ctx, c, db.Database, func(tbl Table) error {
 			// Get FKs
 			fkTable, ok := tbl.(ForeignKeyTable)
 			if ok {
 				fks, err := fkTable.GetDeclaredForeignKeys(ctx)
 				if err != nil {
-					return nil, err
+					return err
 				}
 
 				for _, fk := range fks {
@@ -1291,8 +1269,8 @@ func referentialConstraintsRowIter(ctx *Context, c Catalog) (RowIter, error) {
 								}
 							}
 						}
-					} else if !ErrTableNotFound.Is(refErr) {
-						return nil, refErr
+					} else if !ErrTableNotFound.Is(refErr) && !ErrDatabaseNotFound.Is(refErr) {
+						return refErr
 					}
 
 					rows = append(rows, Row{
@@ -1310,6 +1288,10 @@ func referentialConstraintsRowIter(ctx *Context, c Catalog) (RowIter, error) {
 					})
 				}
 			}
+			return nil
+		})
+		if err != nil {
+			return nil, err
 		}
 	}
 
@@ -1421,7 +1403,7 @@ func stGeometryColumnsRowIter(ctx *Context, cat Catalog) (RowIter, error) {
 	}
 
 	for _, db := range databases {
-		err := DBTableIter(ctx, db.Database, func(t Table) (cont bool, err error) {
+		err := iterDBTables(ctx, db.Database, func(t Table) (cont bool, err error) {
 			tblName := t.Name()
 
 			for _, col := range t.Schema(ctx) {
@@ -1503,22 +1485,12 @@ func statisticsRowIter(ctx *Context, c Catalog) (RowIter, error) {
 	}
 
 	for _, db := range databases {
-		tableNames, tErr := db.Database.GetTableNames(ctx)
-		if tErr != nil {
-			return nil, tErr
-		}
-
-		for _, tableName := range tableNames {
-			tbl, _, err := c.DatabaseTable(ctx, db.Database, tableName)
-			if err != nil {
-				return nil, err
-			}
-
+		err := forEachDBTable(ctx, c, db.Database, func(tbl Table) error {
 			indexTable, ok := tbl.(IndexAddressable)
 			if ok {
 				indexes, iErr := indexTable.GetIndexes(ctx)
 				if iErr != nil {
-					return nil, iErr
+					return iErr
 				}
 
 				for _, index := range indexes {
@@ -1609,6 +1581,10 @@ func statisticsRowIter(ctx *Context, c Catalog) (RowIter, error) {
 					}
 				}
 			}
+			return nil
+		})
+		if err != nil {
+			return nil, err
 		}
 	}
 
@@ -1625,23 +1601,13 @@ func tableConstraintsRowIter(ctx *Context, c Catalog) (RowIter, error) {
 	}
 
 	for _, db := range databases {
-		tableNames, err := db.Database.GetTableNames(ctx)
-		if err != nil {
-			return nil, err
-		}
-
-		for _, tableName := range tableNames {
-			tbl, _, err := c.DatabaseTable(ctx, db.Database, tableName)
-			if err != nil {
-				return nil, err
-			}
-
+		err := forEachDBTable(ctx, c, db.Database, func(tbl Table) error {
 			// Get all the CHECKs
 			checkTbl, ok := tbl.(CheckTable)
 			if ok {
 				checkDefinitions, err := checkTbl.GetChecks(ctx)
 				if err != nil {
-					return nil, err
+					return err
 				}
 
 				for _, checkDefinition := range checkDefinitions {
@@ -1667,7 +1633,7 @@ func tableConstraintsRowIter(ctx *Context, c Catalog) (RowIter, error) {
 			if ok {
 				indexes, err := indexTable.GetIndexes(ctx)
 				if err != nil {
-					return nil, err
+					return err
 				}
 
 				for _, index := range indexes {
@@ -1699,7 +1665,7 @@ func tableConstraintsRowIter(ctx *Context, c Catalog) (RowIter, error) {
 			if ok {
 				fks, err := fkTable.GetDeclaredForeignKeys(ctx)
 				if err != nil {
-					return nil, err
+					return err
 				}
 
 				for _, fk := range fks {
@@ -1714,6 +1680,10 @@ func tableConstraintsRowIter(ctx *Context, c Catalog) (RowIter, error) {
 					})
 				}
 			}
+			return nil
+		})
+		if err != nil {
+			return nil, err
 		}
 	}
 
@@ -1730,16 +1700,7 @@ func tableConstraintsExtensionsRowIter(ctx *Context, c Catalog) (RowIter, error)
 	}
 
 	for _, db := range databases {
-		tableNames, err := db.Database.GetTableNames(ctx)
-		if err != nil {
-			return nil, err
-		}
-
-		for _, tableName := range tableNames {
-			tbl, _, err := c.DatabaseTable(ctx, db.Database, tableName)
-			if err != nil {
-				return nil, err
-			}
+		err := forEachDBTable(ctx, c, db.Database, func(tbl Table) error {
 			tblName := tbl.Name()
 
 			// Get UNIQUEs, PRIMARY KEYs
@@ -1748,7 +1709,7 @@ func tableConstraintsExtensionsRowIter(ctx *Context, c Catalog) (RowIter, error)
 			if ok {
 				indexes, err := indexTable.GetIndexes(ctx)
 				if err != nil {
-					return nil, err
+					return err
 				}
 
 				for _, index := range indexes {
@@ -1762,6 +1723,10 @@ func tableConstraintsExtensionsRowIter(ctx *Context, c Catalog) (RowIter, error)
 					})
 				}
 			}
+			return nil
+		})
+		if err != nil {
+			return nil, err
 		}
 	}
 
@@ -1926,7 +1891,7 @@ func tablesExtensionsRowIter(ctx *Context, cat Catalog) (RowIter, error) {
 	}
 
 	for _, db := range databases {
-		err := DBTableIter(ctx, db.Database, func(t Table) (cont bool, err error) {
+		err := iterDBTables(ctx, db.Database, func(t Table) (cont bool, err error) {
 			rows = append(rows, Row{
 				db.CatalogName, // table_catalog
 				db.SchemaName,  // table_schema
@@ -1972,7 +1937,7 @@ func triggersRowIter(ctx *Context, c Catalog) (RowIter, error) {
 		if ok {
 			privDbSet := privSet.Database(db.Database.Name())
 			hasDbTriggerPriv := privDbSet.Has(PrivilegeType_Trigger)
-			triggers, err := triggerDb.GetTriggers(ctx)
+			triggers, err := dbTriggers(ctx, triggerDb)
 			if err != nil {
 				return nil, err
 			}

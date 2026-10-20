@@ -357,6 +357,10 @@ func IsConvertibleKeyType(colType Type, keyType Type) bool {
 		if IsEnumType(keyType) {
 			return colType.Equals(keyType)
 		}
+	case IsDecimalType(colType) && IsDecimalType(keyType):
+		// Lookup keys must fit without rounding before the predicate can be removed.
+		column, key := colType.(DecimalType), keyType.(DecimalType)
+		return key.Scale() <= column.Scale() && key.Precision()-key.Scale() <= column.Precision()-column.Scale()
 	case IsStringType(colType):
 		return !(IsNumberType(keyType) || IsDecimalType(keyType))
 	}

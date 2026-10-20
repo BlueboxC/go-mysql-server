@@ -128,7 +128,7 @@ func (b *ExecBuilder) buildRangeHeapJoin(ctx *sql.Context, j *RangeHeapJoin, chi
 	var left sql.Node
 	var err error
 	if j.RangeHeap.ValueIndex != nil {
-		left, err = b.buildIndexScan(ctx, j.RangeHeap.ValueIndex)
+		left, err = b.buildIndexScan(ctx, j.RangeHeap.ValueIndex, children[0])
 		if err != nil {
 			return nil, err
 		}

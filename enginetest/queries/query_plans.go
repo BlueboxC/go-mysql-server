@@ -26189,7 +26189,7 @@ order by x, y;
 			"",
 		ExpectedEstimates: "Project\n" +
 			" ├─ columns: [mytable.i, mytable.s, othertable.s2, othertable.i2]\n" +
-			" └─ LeftOuterJoin (estimated cost=2.030 rows=3)\n" +
+			" └─ LeftOuterJoin (No stats)\n" +
 			"     ├─ Table\n" +
 			"     │   ├─ name: mytable\n" +
 			"     │   └─ columns: [i s]\n" +
@@ -26197,7 +26197,7 @@ order by x, y;
 			"",
 		ExpectedAnalysis: "Project\n" +
 			" ├─ columns: [mytable.i, mytable.s, othertable.s2, othertable.i2]\n" +
-			" └─ LeftOuterJoin (estimated cost=2.030 rows=3) (actual rows=3 loops=1)\n" +
+			" └─ LeftOuterJoin (No stats)\n" +
 			"     ├─ Table\n" +
 			"     │   ├─ name: mytable\n" +
 			"     │   └─ columns: [i s]\n" +
@@ -26252,7 +26252,7 @@ order by x, y;
 			"",
 		ExpectedEstimates: "Project\n" +
 			" ├─ columns: [mytable.i, mytable.s, othertable.s2, othertable.i2]\n" +
-			" └─ LeftOuterJoin (estimated cost=2.030 rows=3)\n" +
+			" └─ LeftOuterJoin (No stats)\n" +
 			"     ├─ Table\n" +
 			"     │   ├─ name: othertable\n" +
 			"     │   └─ columns: [s2 i2]\n" +
@@ -26260,7 +26260,7 @@ order by x, y;
 			"",
 		ExpectedAnalysis: "Project\n" +
 			" ├─ columns: [mytable.i, mytable.s, othertable.s2, othertable.i2]\n" +
-			" └─ LeftOuterJoin (estimated cost=2.030 rows=3) (actual rows=3 loops=1)\n" +
+			" └─ LeftOuterJoin (No stats)\n" +
 			"     ├─ Table\n" +
 			"     │   ├─ name: othertable\n" +
 			"     │   └─ columns: [s2 i2]\n" +

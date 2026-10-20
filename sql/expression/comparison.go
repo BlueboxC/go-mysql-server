@@ -381,7 +381,6 @@ func castLeftAndRight(ctx *sql.Context, lTyp, rTyp sql.Type, left, right any) (a
 
 	if types.IsNumber(lTyp) || types.IsNumber(rTyp) {
 		if types.IsDecimal(lTyp) || types.IsDecimal(rTyp) {
-			// TODO: We need to set to the actual DECIMAL type
 			l, err := convertValue(ctx, left, ConvertToDecimal, lTyp, 0, 0)
 			if err != nil {
 				return nil, nil, nil, err
@@ -390,11 +389,7 @@ func castLeftAndRight(ctx *sql.Context, lTyp, rTyp sql.Type, left, right any) (a
 			if err != nil {
 				return nil, nil, nil, err
 			}
-			if types.IsDecimal(lTyp) {
-				return l, r, lTyp, nil
-			} else {
-				return l, r, rTyp, nil
-			}
+			return l, r, types.InternalDecimalType, nil
 		}
 
 		if types.IsFloat(lTyp) || types.IsFloat(rTyp) {

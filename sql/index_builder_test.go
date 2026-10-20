@@ -234,3 +234,16 @@ func (testIndex) PrefixLengths() []uint16 {
 }
 
 var _ sql.Index = testIndex{}
+
+func TestDecimalLookupKeyMustFitColumnWithoutRounding(t *testing.T) {
+	column := types.MustCreateColumnDecimalType(10, 2)
+	for _, tc := range []struct {
+		precision, scale uint8
+		want             bool
+	}{
+		{10, 2, true}, {4, 2, true}, {4, 3, false}, {12, 2, false}, {8, 0, true}, {9, 0, false},
+	} {
+		key := types.MustCreateDecimalType(tc.precision, tc.scale)
+		assert.Equal(t, tc.want, sql.IsConvertibleKeyType(column, key), "%v", key)
+	}
+}

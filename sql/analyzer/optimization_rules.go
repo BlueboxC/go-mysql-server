@@ -115,7 +115,11 @@ func simplifyFilters(ctx *sql.Context, a *Analyzer, node sql.Node, scope *plan.S
 					case plan.JoinTypeLeftOuter, plan.JoinTypeLateralLeft:
 						// In a left join, we still want all rows on the left side. But because the filter is always
 						// false, it will never match rows on the right side so we can treat it like it's empty
-						return plan.NewJoin(ctx, n.Left(), plan.NewEmptyTableWithSchema(n.Right().Schema(ctx)), joinType, nil), transform.NewTree, nil
+						right := plan.NewEmptyTableWithSchema(n.Right().Schema(ctx))
+						if source, ok := n.Right().(plan.TableIdNode); ok {
+							right = right.(plan.TableIdNode).WithId(source.Id()).WithColumns(source.Columns())
+						}
+						return plan.NewJoin(ctx, n.Left(), right, joinType, nil), transform.NewTree, nil
 					default:
 						// For non-outer joins, a join condition that always evaluates to false would return an empty set
 						return plan.NewEmptyTableWithSchema(n.Schema(ctx)), transform.NewTree, nil

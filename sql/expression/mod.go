@@ -86,11 +86,17 @@ func (m *Mod) Type(ctx *sql.Context) sql.Type {
 		return lTyp
 	}
 
-	if types.IsText(lTyp) || types.IsText(rTyp) {
+	if types.IsText(lTyp) || types.IsText(rTyp) || types.IsFloat(lTyp) || types.IsFloat(rTyp) {
 		return types.Float64
 	}
 
-	// TODO: This is not correct when both inputs are ints https://github.com/dolthub/dolt/issues/12126
+	if types.IsInteger(lTyp) && types.IsInteger(rTyp) {
+		if types.IsUnsigned(lTyp) {
+			return types.Uint64
+		}
+		return types.Int64
+	}
+
 	return getFloatOrMaxDecimalType(ctx, m, false)
 }
 
@@ -120,7 +126,15 @@ func (m *Mod) Eval(ctx *sql.Context, row sql.Row) (interface{}, error) {
 
 	lval, rval = m.convertLeftRight(ctx, lval, rval)
 
-	return mod(ctx, lval, rval)
+	result, err := mod(ctx, lval, rval)
+	if err != nil || result == nil {
+		return result, err
+	}
+	if typ := m.Type(ctx); types.IsInteger(typ) {
+		converted, _, err := typ.Convert(ctx, result)
+		return converted, err
+	}
+	return result, nil
 }
 
 func (m *Mod) evalLeftRight(ctx *sql.Context, row sql.Row) (interface{}, interface{}, error) {

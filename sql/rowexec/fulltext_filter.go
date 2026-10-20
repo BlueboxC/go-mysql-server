@@ -21,6 +21,8 @@ import (
 	"github.com/dolthub/go-mysql-server/sql"
 	"github.com/dolthub/go-mysql-server/sql/expression"
 	"github.com/dolthub/go-mysql-server/sql/fulltext"
+	"github.com/dolthub/go-mysql-server/sql/iters"
+	"github.com/dolthub/go-mysql-server/sql/plan"
 )
 
 // FulltextFilterTable handles row iteration for filters involving Full-Text indexes, as they behave differently than
@@ -129,14 +131,16 @@ func (f *FulltextFilterTable) PartitionRows(ctx *sql.Context, partition sql.Part
 		return nil, fmt.Errorf("Full-Text filter cannot find the index on the table `%s`", f.MatchAgainst.ParentTable.Name())
 	}
 
-	return &fulltextFilterTableRowIter{
+	// A document can occur in the posting list for several search words.
+	// Deduplicate keyed parent rows with the existing SQL distinct iterator.
+	return iters.NewDistinctIter(ctx, &fulltextFilterTableRowIter{
 		matchAgainst:  f.MatchAgainst,
 		parser:        parser,
 		parentIndex:   parentIndex,
 		docCountIndex: docCountIndexes[0],
 		parentIter:    nil,
 		docCountIter:  nil,
-	}, nil
+	}, plan.DistinctHasher{}), nil
 }
 
 // LookupPartitions implements the interface sql.IndexedTable.

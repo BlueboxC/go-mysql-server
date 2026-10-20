@@ -586,6 +586,9 @@ func (j *joinOrderBuilder) buildJoinLeaf(ctx *sql.Context, n plan.TableIdNode) *
 	case sql.TableFunction:
 		rel = &TableFunc{sourceBase: b, Table: n}
 	case *plan.EmptyTable:
+		if len(n.Schema(ctx)) > 0 {
+			j.m.HandleErr(fmt.Errorf("%w: empty relation cannot provide complete reorder properties", ErrUnsupportedReorderNode))
+		}
 		rel = &EmptyTable{sourceBase: b, Table: n}
 	case *plan.SetOp:
 		rel = &SetOp{sourceBase: b, Table: n}

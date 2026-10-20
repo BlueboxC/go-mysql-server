@@ -596,7 +596,8 @@ func DecimalMod(a, b *apd.Decimal) (*apd.Decimal, error) {
 	if bnd := b.NumDigits(); p < bnd {
 		p = bnd
 	}
-	// need to set precision for decimal context because it does division operation.
+	// Rem must also represent the integer quotient, whose digits depend on the exponent gap.
+	p = max(p, a.NumDigits()+int64(a.Exponent)-int64(b.Exponent))
 	_, err := sql.DecimalCtx.WithPrecision(uint32(p)).Rem(res, a, b)
 	// apd keeps the sign of the dividend for a zero remainder (e.g. -5 % 5 = -0), but MySQL has no negative zero
 	if res.IsZero() {

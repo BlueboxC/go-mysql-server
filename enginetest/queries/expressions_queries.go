@@ -21,6 +21,123 @@ import (
 
 // ExpressionsScriptTests contains self-contained expressions script tests.
 var ExpressionsScriptTests = []ScriptTest{
+	{
+		Name:        "fork join predicates require every referenced relation",
+		SetUpScript: []string{"CREATE TABLE t0(x INT)", "INSERT INTO t0 VALUES(1),(2)", "CREATE TABLE t1(y INT)", "INSERT INTO t1 VALUES(1),(NULL)", "CREATE TABLE t2(z INT)", "INSERT INTO t2 VALUES(1),(0)", "CREATE VIEW v2 AS SELECT z FROM t2", "CREATE TABLE a(c0 BOOLEAN PRIMARY KEY,c1 INT)", "CREATE TABLE b(c0 INT,c1 BOOLEAN,c2 BOOLEAN,PRIMARY KEY(c0,c1))", "INSERT INTO b VALUES(1,false,false),(2,true,true),(3,false,NULL),(4,true,NULL)", "INSERT INTO a VALUES(true,1),(false,NULL)", "CREATE VIEW va(c0) AS SELECT a.c1 FROM a"},
+		Assertions: []ScriptTestAssertion{
+			{Query: "SELECT COUNT(*) FROM t0,t1,v2 WHERE (x=y) OR (v2.z<>1)", Expected: []sql.Row{{5}}},
+			{Query: "SELECT * FROM va,b,a WHERE (va.c0=b.c0)<=(CASE WHEN a.c0 THEN b.c2 END)", Expected: []sql.Row{{1, 2, 1, 1, 1, 1}}},
+		},
+	},
+	{
+		Name:        "fork NULL extended relation remains in predicate eligibility",
+		SetUpScript: []string{"CREATE TABLE a(x BOOLEAN)", "INSERT INTO a VALUES(0)", "CREATE TABLE b(y BOOLEAN)", "INSERT INTO b VALUES(1)", "CREATE TABLE e(z BOOLEAN)"},
+		Assertions: []ScriptTestAssertion{
+			{Query: "SELECT * FROM a,b LEFT JOIN e ON(1=0) WHERE (a.x<b.y) AND (a.x<e.z)", Expected: []sql.Row{}},
+			{Query: "SELECT * FROM a,b LEFT JOIN e ON(1=0) WHERE a.x<e.z", Expected: []sql.Row{}},
+			{Query: "SELECT * FROM a,b LEFT JOIN e ON(1=0) WHERE ((a.x<b.y) AND (a.x<e.z)) IS NULL", Expected: []sql.Row{{0, 1, nil}}},
+		},
+	},
+
+	{
+		Name:        "fork indexed comparisons retain the original value",
+		SetUpScript: []string{"CREATE TABLE t0(c0 INT PRIMARY KEY)", "INSERT INTO t0 VALUES(1),(2)", "CREATE TABLE t1(c0 FLOAT PRIMARY KEY)", "INSERT INTO t1 VALUES(0.89451053545548)", "CREATE TABLE t2(c0 TIMESTAMP PRIMARY KEY)", "INSERT INTO t2 VALUES('1970-01-23 10:07:51')", "CREATE TABLE t3(c0 TIME PRIMARY KEY)", "INSERT INTO t3 VALUES('12:00:00')", "CREATE TABLE t4(c0 DECIMAL(10,2) PRIMARY KEY)", "INSERT INTO t4 VALUES(1.00)"},
+		Assertions: []ScriptTestAssertion{
+			{Query: "SELECT c0 FROM t0 WHERE c0<>'1.5' ORDER BY c0", Expected: []sql.Row{{1}, {2}}},
+			{Query: "SELECT COUNT(*) FROM t1 WHERE c0<>CAST(0.89451053545548 AS FLOAT)", Expected: []sql.Row{{0}}},
+			{Query: "SELECT COUNT(*) FROM t2 WHERE c0>'1969-12-18 02:32:34'", Expected: []sql.Row{{1}}},
+			{Query: "SELECT COUNT(*) FROM t3 WHERE c0<>2411793", Expected: []sql.Row{{1}}},
+			{Query: "SELECT COUNT(*) FROM t4 WHERE c0=1.001", Expected: []sql.Row{{0}}},
+			{Query: "SELECT * FROM t4 WHERE 1.001=c0", Expected: []sql.Row{}},
+			{Query: "SELECT * FROM t4 WHERE c0=1.00", Expected: []sql.Row{{"1.00"}}},
+			{Query: "SELECT * FROM t4 WHERE c0<1.001", Expected: []sql.Row{{"1.00"}}},
+			{Query: "SELECT c0 FROM t0 WHERE c0='1'", Expected: []sql.Row{{1}}},
+		},
+	},
+	{
+		Name:        "fork explicit collation cannot reuse incompatible index ordering",
+		SetUpScript: []string{"CREATE TABLE t0(s VARCHAR(20) COLLATE utf8mb4_bin PRIMARY KEY)", "INSERT INTO t0 VALUES('a'),('B')"},
+		Assertions: []ScriptTestAssertion{
+			{Query: "SELECT s FROM t0 WHERE s=('A' COLLATE utf8mb4_general_ci)", Expected: []sql.Row{{"a"}}},
+			{Query: "SELECT s FROM t0 WHERE ('A' COLLATE utf8mb4_general_ci)=s", Expected: []sql.Row{{"a"}}},
+			{Query: "SELECT s FROM t0 WHERE s='a'", Expected: []sql.Row{{"a"}}},
+			{Query: "SELECT s FROM t0 WHERE s='A'", Expected: []sql.Row{}},
+		},
+	},
+
+	{
+		Name:        "fork unique NULL join keys obey comparison semantics",
+		SetUpScript: []string{"CREATE TABLE t0(c0 INT)", "CREATE TABLE t1(c0 INT UNIQUE)", "INSERT INTO t0 VALUES(NULL),(1),(2)", "INSERT INTO t1 VALUES(NULL),(1),(2)"},
+		Assertions: []ScriptTestAssertion{
+			{Query: "SELECT * FROM t0 JOIN t1 ON t0.c0=t1.c0 ORDER BY t0.c0", Expected: []sql.Row{{1, 1}, {2, 2}}},
+			{Query: "SELECT /*+ LOOKUP_JOIN(t0,t1) */ * FROM t0 JOIN t1 ON t0.c0=t1.c0 ORDER BY t0.c0", Expected: []sql.Row{{1, 1}, {2, 2}}},
+			{Query: "SELECT /*+ LOOKUP_JOIN(t0,t1) */ * FROM t0 JOIN t1 ON t0.c0<=>t1.c0 ORDER BY t0.c0", Expected: []sql.Row{{nil, nil}, {1, 1}, {2, 2}}},
+			{Query: "SELECT /*+ LOOKUP_JOIN(t0,t1) */ * FROM t0 LEFT JOIN t1 ON t0.c0=t1.c0 ORDER BY t0.c0", Expected: []sql.Row{{nil, nil}, {1, 1}, {2, 2}}},
+		},
+	},
+	{
+		Name:        "fork mixed IN subquery uses SQL comparison",
+		SetUpScript: []string{"CREATE TABLE t0(c0 INT)", "INSERT INTO t0 VALUES(2),(NULL)"},
+		Assertions: []ScriptTestAssertion{
+			{Query: "SELECT false IN(SELECT 'W1q'),false NOT IN(SELECT 'W1q')", Expected: []sql.Row{{true, false}}},
+			{Query: "SELECT 'a' IN(SELECT c0 FROM t0),'a' NOT IN(SELECT c0 FROM t0)", Expected: []sql.Row{{nil, nil}}},
+			{Query: "SELECT NULL IN(SELECT c0 FROM t0 WHERE false),NULL NOT IN(SELECT c0 FROM t0 WHERE false)", Expected: []sql.Row{{false, true}}},
+			{Query: "SELECT 2 IN(SELECT c0 FROM t0),2 NOT IN(SELECT c0 FROM t0)", Expected: []sql.Row{{true, false}}},
+		},
+	},
+	{
+		Name:        "fork negated scalar subquery retains cardinality and NULL",
+		SetUpScript: []string{"CREATE TABLE t0(c0 INT)", "CREATE TABLE t1(c0 INT)", "INSERT INTO t1 VALUES(1)", "CREATE TABLE t2(c0 INT)", "INSERT INTO t2 VALUES(2)", "CREATE TABLE t3(c0 INT)", "INSERT INTO t3 VALUES(2),(3)"},
+		Assertions: []ScriptTestAssertion{
+			{Query: "SELECT * FROM t1 WHERE c0<>(SELECT c0 FROM t0)", Expected: []sql.Row{}},
+			{Query: "SELECT * FROM t1 WHERE c0<>(SELECT c0 FROM t2)", Expected: []sql.Row{{1}}},
+			{Query: "SELECT * FROM t1 WHERE c0<>(SELECT c0 FROM t3)", ExpectedErr: sql.ErrExpectedSingleRow},
+		},
+	},
+
+	{
+		Name:        "fork range heap preserves input filters",
+		SetUpScript: []string{"CREATE TABLE t0(a INT PRIMARY KEY, w INT)", "INSERT INTO t0 VALUES (1,0),(2,1)", "CREATE TABLE t1(lo INT, hi INT)", "INSERT INTO t1 VALUES (0,10)"},
+		Assertions: []ScriptTestAssertion{
+			{Query: "SELECT t0.a,t0.w FROM t0 JOIN t1 ON t0.a BETWEEN t1.lo AND t1.hi WHERE t0.w=1", Expected: []sql.Row{{2, 1}}},
+			{Query: "SELECT t0.a,t0.w FROM t0 LEFT JOIN t1 ON t0.a BETWEEN t1.lo AND t1.hi WHERE t0.w=1", Expected: []sql.Row{{2, 1}}},
+		},
+	},
+	{
+		Name:        "fork fulltext returns each keyed document once",
+		SetUpScript: []string{"CREATE TABLE t0(c0 INT PRIMARY KEY,c1 TEXT,c2 TEXT,FULLTEXT ft(c1,c2))", "INSERT INTO t0 VALUES (1,'abc def','ghi jkl'),(2,'abc','mno'),(3,'xyz','pqr'),(4,'abc def','ghi jkl')", "CREATE TABLE t1(c1 TEXT,FULLTEXT ft(c1))", "INSERT INTO t1 VALUES ('abc def'),('abc def'),('xyz')"},
+		Assertions: []ScriptTestAssertion{
+			{Query: "SELECT c0 FROM t0 WHERE MATCH(c1,c2) AGAINST ('abc def') ORDER BY c0", Expected: []sql.Row{{1}, {2}, {4}}},
+			{Query: "SELECT c0 FROM t0 WHERE MATCH(c1,c2) AGAINST ('abc') ORDER BY c0", Expected: []sql.Row{{1}, {2}, {4}}},
+			{Query: "SELECT c1 FROM t1 WHERE MATCH(c1) AGAINST ('abc def')", Expected: []sql.Row{{"abc def"}, {"abc def"}}},
+		},
+	},
+	{
+		Name:        "fork fulltext is not an ordered column index",
+		SetUpScript: []string{"CREATE TABLE t0(c0 INT,c1 VARCHAR(100))", "CREATE FULLTEXT INDEX ft ON t0(c1)", "INSERT INTO t0 VALUES (1,'b'),(2,'a')"},
+		Assertions: []ScriptTestAssertion{
+			{Query: "SELECT * FROM t0 ORDER BY c1", Expected: []sql.Row{{2, "a"}, {1, "b"}}},
+			{Query: "SELECT * FROM t0 ORDER BY c1 DESC", Expected: []sql.Row{{1, "b"}, {2, "a"}}},
+		},
+	},
+	{
+		Name:        "fork decimal comparisons retain both scales",
+		SetUpScript: []string{"CREATE TABLE t0(c0 DECIMAL(10,2))", "INSERT INTO t0 VALUES (1.00)"},
+		Assertions: []ScriptTestAssertion{
+			{Query: "SELECT c0=1.001,1.001=c0,c0<1.001,1.001>c0 FROM t0", Expected: []sql.Row{{false, false, true, true}}},
+			{Query: "SELECT * FROM t0 WHERE c0=1.001", Expected: []sql.Row{}},
+			{Query: "SELECT CAST(2 AS DECIMAL(20,0))>1.5,1.5<CAST(2 AS DECIMAL(20,0))", Expected: []sql.Row{{true, true}}},
+		},
+	},
+	{
+		Name:        "fork LIKE escape rejects row-dependent expressions",
+		SetUpScript: []string{"CREATE TABLE t0(c0 INT,c1 INT)", "INSERT INTO t0 VALUES (1,5),(2,0),(3,NULL),(NULL,7)"},
+		Assertions: []ScriptTestAssertion{
+			{Query: "SELECT * FROM t0 WHERE c1 LIKE c0 ESCAPE c0", ExpectedErr: sql.ErrInvalidArgument},
+			{Query: "SELECT * FROM t0 WHERE c1 LIKE c0 ESCAPE c0 UNION ALL SELECT * FROM t0 WHERE NOT(c1 LIKE c0 ESCAPE c0)", ExpectedErr: sql.ErrInvalidArgument},
+			{Query: "SELECT 'a_b' LIKE 'a!_b' ESCAPE '!', 'a_b' LIKE 'a!_b' ESCAPE CONCAT('','!')", Expected: []sql.Row{{true, true}}},
+		},
+	},
 
 	{
 		Name:    "coalesce tests",

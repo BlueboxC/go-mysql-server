@@ -79,6 +79,26 @@ func (in *InSubquery) Eval(ctx *sql.Context, row sql.Row) (interface{}, error) {
 
 		rTyp := right.Type(ctx)
 
+		// A hash in the right-hand type cannot represent mixed numeric/text
+		// comparison: converting "a" to INT fails, but SQL compares it as zero.
+		if (types.IsNumber(typ) && types.IsText(rTyp)) || (types.IsText(typ) && types.IsNumber(rTyp)) {
+			values, err := right.EvalMultiple(ctx, row)
+			if err != nil {
+				return nil, err
+			}
+			if len(values) == 0 {
+				return false, nil
+			}
+			if leftNull {
+				return nil, nil
+			}
+			tuple := make(expression.Tuple, len(values))
+			for i, value := range values {
+				tuple[i] = expression.NewLiteral(value, rTyp)
+			}
+			return expression.NewInTuple(expression.NewLiteral(left, typ), tuple).Eval(ctx, nil)
+		}
+
 		values, err := right.HashMultiple(ctx, row)
 		if err != nil {
 			return nil, err

@@ -150,6 +150,9 @@ func routinesRowIter(ctx *Context, c Catalog, p map[string][]*plan.Procedure) (R
 			continue
 		}
 		db, err := c.Database(ctx, dbName)
+		if ErrDatabaseNotFound.Is(err) {
+			continue
+		}
 		if err != nil {
 			return nil, err
 		}

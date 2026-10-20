@@ -791,7 +791,6 @@ func (b *Builder) typeExpandComparisonLiteral(left, right sql.Expression) (sql.E
 		if types.IsSigned(left.Type(b.ctx)) && types.IsSigned(right.Type(b.ctx)) ||
 			types.IsUnsigned(left.Type(b.ctx)) && types.IsUnsigned(right.Type(b.ctx)) ||
 			types.IsFloat(left.Type(b.ctx)) && types.IsFloat(right.Type(b.ctx)) ||
-			types.IsDecimal(left.Type(b.ctx)) && types.IsDecimal(right.Type(b.ctx)) ||
 			types.IsText(left.Type(b.ctx)) && types.IsText(right.Type(b.ctx)) {
 			if left.Type(b.ctx).MaxTextResponseByteLength(b.ctx) >= right.Type(b.ctx).MaxTextResponseByteLength(b.ctx) {
 				// The types are congruent and the literal does not lose
@@ -822,6 +821,13 @@ func (b *Builder) buildComparison(inScope *scope, c *ast.ComparisonExpr) sql.Exp
 	var escape sql.Expression = nil
 	if c.Escape != nil {
 		escape = b.buildScalar(inScope, c.Escape)
+		sql.Inspect(b.ctx, escape, func(_ *sql.Context, e sql.Expression) bool {
+			switch e.(type) {
+			case *expression.GetField, *expression.UnresolvedColumn, *plan.Subquery:
+				b.handleErr(sql.ErrInvalidArgument.New("ESCAPE"))
+			}
+			return true
+		})
 	}
 
 	switch strings.ToLower(c.Operator) {
@@ -1206,9 +1212,23 @@ func (b *Builder) ConvertVal(v *ast.SQLVal) sql.Expression {
 // one can assume that the expression has been fully resolved and is valid.
 func (b *Builder) buildMatchAgainst(inScope *scope, v *ast.MatchExpr) *expression.MatchAgainst {
 	rts := getResolvedTablesByName(b.ctx, inScope.node)
+	// MATCH ... AGAINST may name a column through a derived table, but the
+	// full-text index belongs to the table that derived table reads from.
+	derivedAliases := make(map[string]*plan.SubqueryAlias)
+	transform.InspectWithOpaque(b.ctx, inScope.node, func(ctx *sql.Context, n sql.Node) bool {
+		if sqa, ok := n.(*plan.SubqueryAlias); ok {
+			if rt := getResolvedTable(ctx, sqa); rt != nil {
+				name := strings.ToLower(sqa.Name())
+				rts[name] = rt
+				derivedAliases[name] = sqa
+			}
+		}
+		return true
+	})
 	var rt *plan.ResolvedTable
 	var matchTable string
 	cols := make([]*expression.GetField, len(v.Columns))
+	indexCols := make([]*expression.GetField, len(v.Columns))
 	for i, selectExpr := range v.Columns {
 		expr := b.selectExprToExpression(inScope, selectExpr)
 		gf, ok := expr.(*expression.GetField)
@@ -1227,7 +1247,22 @@ func (b *Builder) buildMatchAgainst(inScope *scope, v *ast.MatchExpr) *expressio
 			err := sql.ErrFullTextMatchAgainstSameTable.New()
 			b.handleErr(err)
 		}
+		// A derived table can rename the columns it exposes, so look up the
+		// index by the underlying column it selects.
+		indexCol := gf
+		if sqa := derivedAliases[matchTable]; sqa != nil {
+			if proj, ok := sqa.Child.(*plan.Project); ok {
+				for _, p := range proj.Projections {
+					if a, ok := p.(*expression.Alias); ok && strings.EqualFold(a.Name(), gf.Name()) {
+						if u := expression.ExtractGetField(b.ctx, a); u != nil {
+							indexCol = u
+						}
+					}
+				}
+			}
+		}
 		cols[i] = gf
+		indexCols[i] = indexCol
 	}
 	matchExpr := b.buildScalar(inScope, v.Expr)
 	var searchModifier fulltext.SearchModifier
@@ -1262,7 +1297,7 @@ func (b *Builder) buildMatchAgainst(inScope *scope, v *ast.MatchExpr) *expressio
 	if err != nil {
 		b.handleErr(err)
 	}
-	ftIndex := findMatchAgainstIndex(cols, indexes, indexedTbl.Name())
+	ftIndex := findMatchAgainstIndex(indexCols, indexes, indexedTbl.Name())
 	if ftIndex == nil {
 		err := sql.ErrNoFullTextIndexFound.New(indexedTbl.Name())
 		b.handleErr(err)

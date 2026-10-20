@@ -308,21 +308,23 @@ func TestMod(t *testing.T) {
 		left     interface{}
 		right    interface{}
 		expected interface{}
+		lt, rt   sql.Type
 	}{
-		{"MOD(5,2)", 5, 2, "1"},
-		{"MOD(2,5)", 2, 5, "2"},
-		{"MOD(1,0.240)", 1, "0.240", "0.040"},
-		{"MOD(NULL,2)", nil, 2, nil},
-		{"MOD(5,NULL)", 5, nil, nil},
-		{"MOD(NULL,NULL)", nil, nil, nil},
+		{"MOD(5,2)", int32(5), int32(2), int64(1), types.Int32, types.Int32},
+		{"MOD(2,5)", int32(2), int32(5), int64(2), types.Int32, types.Int32},
+		{"MOD(1,0.240)", int32(1), "0.240", "0.040", types.Int32, types.MustCreateDecimalType(4, 3)},
+		{"MOD(NULL,2)", nil, int32(2), nil, types.Null, types.Int32},
+		{"MOD(5,NULL)", int32(5), nil, nil, types.Int32, types.Null},
+		{"MOD(NULL,NULL)", nil, nil, nil, types.Null, types.Null},
 	}
 
 	f := sql.FunctionN{Name: "mod", Fn: NewMod}
 
 	for _, test := range tests {
 		t.Run(test.name, func(t *testing.T) {
-			mod, err := f.Fn(sql.NewEmptyContext(), expression.NewLiteral(test.left, types.Int32), expression.NewLiteral(test.right, types.Int32))
-			res, err := mod.Eval(nil, nil)
+			mod, err := f.Fn(sql.NewEmptyContext(), expression.NewLiteral(test.left, test.lt), expression.NewLiteral(test.right, test.rt))
+			require.NoError(t, err)
+			res, err := mod.Eval(sql.NewEmptyContext(), nil)
 			assert.NoError(t, err)
 			if r, ok := res.(*apd.Decimal); ok {
 				assert.Equal(t, test.expected, r.Text('f'))

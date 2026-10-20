@@ -70,6 +70,19 @@ func comparisonSatisfiesJoinCondition(ctx *sql.Context, expr expression.Comparer
 // satisfies the join condition. The input conjunctions have already been split,
 // so we do not care which predicate satisfies the expression.
 func expressionCoversJoin(ctx *sql.Context, c sql.Expression, j *plan.JoinNode) (found bool) {
+	columns := append(j.Left().Schema(ctx).Copy(), j.Right().Schema(ctx)...)
+	missingInput := transform.InspectExpr(ctx, c, func(_ *sql.Context, e sql.Expression) bool {
+		switch e := e.(type) {
+		case *expression.GetField:
+			return !columns.Contains(e.Name(), e.Table())
+		case *plan.Subquery:
+			return true
+		}
+		return false
+	})
+	if missingInput {
+		return false
+	}
 	return transform.InspectExpr(ctx, c, func(ctx *sql.Context, expr sql.Expression) bool {
 		switch e := expr.(type) {
 		case expression.Comparer:

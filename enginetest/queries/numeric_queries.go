@@ -354,7 +354,7 @@ var NumericScriptTests = []ScriptTest{
 		Assertions: []ScriptTestAssertion{
 			{
 				Query:    "select c1 % 2, c2 % 2, c3 % 2 from a;",
-				Expected: []sql.Row{{"1", 1.111, "1.111"}, {"0", 0.11100000000000021, "0.111"}},
+				Expected: []sql.Row{{int64(1), 1.111, "1.111"}, {int64(0), 0.11100000000000021, "0.111"}},
 			},
 			{
 				Query:    "select c1 % 0.5, c2 % 0.5, c3 % 0.5 from a;",
@@ -362,7 +362,7 @@ var NumericScriptTests = []ScriptTest{
 			},
 			{
 				Query:    "select 20 % c1, 20 % c2, 20 % c3 from a;",
-				Expected: []sql.Row{{"0", 0.002000000000000224, "0.002"}, {"0", 1.0009999999999981, "1.001"}},
+				Expected: []sql.Row{{int64(0), 0.002000000000000224, "0.002"}, {int64(0), 1.0009999999999981, "1.001"}},
 			},
 		},
 	},
@@ -2282,6 +2282,53 @@ ORDER BY ordinal_position`,
 					{"i64", "decimal(20,1)"},
 					{"u64", "decimal(21,1)"},
 				},
+			},
+		},
+	},
+	{
+		// https://github.com/dolthub/dolt/issues/12118
+		Name: "coalesce of an integer column with a decimal literal keeps the integer value",
+		SetUpScript: []string{
+			"CREATE TABLE t0 (a INT);",
+			"INSERT INTO t0 VALUES (1000), (2), (NULL);",
+			"CREATE TABLE t1 (b BIGINT, y YEAR, k BIT(1));",
+			"INSERT INTO t1 VALUES (9223372036854775807, NULL, NULL);",
+		},
+		Assertions: []ScriptTestAssertion{
+			{
+				Dialect:  "mysql",
+				Query:    "SELECT * FROM t0 WHERE COALESCE(1.5, a) > 1 ORDER BY a;",
+				Expected: []sql.Row{{nil}, {2}, {1000}},
+			},
+			{
+				Dialect:  "mysql",
+				Query:    "SELECT * FROM t0 WHERE COALESCE(a, 1.5) > 1 ORDER BY a;",
+				Expected: []sql.Row{{nil}, {2}, {1000}},
+			},
+			{
+				Dialect:  "mysql",
+				Query:    "SELECT a, COALESCE(a, 1.5) FROM t0 ORDER BY a;",
+				Expected: []sql.Row{{nil, "1.5"}, {2, "2.0"}, {1000, "1000.0"}},
+			},
+			{
+				Query:    "SELECT COUNT(*) FROM t0 WHERE COALESCE(a, 1.5) > 1;",
+				Expected: []sql.Row{{3}},
+			},
+			{
+				Query:    "SELECT SUM(COALESCE(a, 1.5)) FROM t0;",
+				Expected: []sql.Row{{"1003.5"}},
+			},
+			{
+				Query:    "SELECT a FROM t0 WHERE a IS NOT NULL AND COALESCE(a, 1.5) > 1 ORDER BY a;",
+				Expected: []sql.Row{{2}, {1000}},
+			},
+			{
+				Query:    "SELECT a, b, COALESCE(a, 1.5, b) FROM t0, t1 WHERE a = 1000;",
+				Expected: []sql.Row{{1000, int64(9223372036854775807), "1000.0"}},
+			},
+			{
+				Query:    "SELECT COALESCE(y, 1.5), COALESCE(1.5, y), COALESCE(k, 1.5), COALESCE(1.5, k) FROM t1;",
+				Expected: []sql.Row{{"1.5", "1.5", "1.5", "1.5"}},
 			},
 		},
 	},

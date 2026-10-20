@@ -714,9 +714,8 @@ var FunctionQueryTests = []QueryTest{
 	},
 	{
 		// https://github.com/dolthub/dolt/issues/12124
-		Query: "SELECT -5 MOD 5, 5 MOD 5",
-		// TODO: This should be an integer type https://github.com/dolthub/dolt/issues/12126
-		Expected: []sql.Row{{"0", "0"}},
+		Query:    "SELECT -5 MOD 5, 5 MOD 5",
+		Expected: []sql.Row{{int64(0), int64(0)}},
 	},
 	{
 		// https://github.com/dolthub/dolt/issues/12124
@@ -726,8 +725,7 @@ var FunctionQueryTests = []QueryTest{
 	{
 		Query: "SELECT MOD(i, 2) from mytable order by i limit 1",
 		Expected: []sql.Row{
-			// TODO: This should be an integer type if the inputs of MOD are integers https://github.com/dolthub/dolt/issues/12126
-			{"1"},
+			{int64(1)},
 		},
 	},
 	{

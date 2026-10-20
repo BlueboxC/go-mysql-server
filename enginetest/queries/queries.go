@@ -875,7 +875,20 @@ var QueryTests = []QueryTest{
 	},
 	{
 		Query:    "select coalesce(1, 0.0);",
-		Expected: []sql.Row{{"1"}},
+		Expected: []sql.Row{{"1.0"}},
+	},
+	{
+		// https://github.com/dolthub/dolt/issues/12118
+		Query:    "select coalesce(1000, 1.5);",
+		Expected: []sql.Row{{"1000.0"}},
+	},
+	{
+		Query:    "select coalesce(null, 123456, 1.5);",
+		Expected: []sql.Row{{"123456.0"}},
+	},
+	{
+		Query:    "select coalesce(9223372036854775807, 1.5);",
+		Expected: []sql.Row{{"9223372036854775807.0"}},
 	},
 	{
 		Query:    "select coalesce(1, '0');",
@@ -913,7 +926,7 @@ var QueryTests = []QueryTest{
 	// Miscellaneous type conversion queries
 	{
 		Query:    "SELECT 1 % true",
-		Expected: []sql.Row{{"0"}},
+		Expected: []sql.Row{{int64(0)}},
 	},
 	{
 		Query: `SELECT "1" + '1'`,
@@ -9769,8 +9782,7 @@ from typestable`,
 	{
 		Query: "select mod(pk2, 2) from two_pk group by pk1 + 1, mod(pk2, 2)",
 		Expected: []sql.Row{
-			// TODO: These should be integer types if the inputs are integers https://github.com/dolthub/dolt/issues/12126
-			{"0"}, {"1"}, {"0"}, {"1"},
+			{int64(0)}, {int64(1)}, {int64(0)}, {int64(1)},
 		},
 	},
 	// https://github.com/dolthub/dolt/issues/7095

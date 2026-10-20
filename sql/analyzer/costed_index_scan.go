@@ -1780,6 +1780,31 @@ func (c *indexCoster) buildLeafFromParts(ctx *sql.Context, id indexScanId, name 
 	if err != nil {
 		return nil, false
 	}
+	if value != nil {
+		if decimal, ok := typ.(sql.DecimalType); ok {
+			if bound, ok := value.(*apd.Decimal); ok && -bound.Exponent > int32(decimal.Scale()) {
+				return nil, false
+			}
+		}
+		// A narrowed bound must denote the same value as the SQL predicate.
+		// Keep lossy or invalid conversions as a residual full-scan filter.
+		conversionType := typ
+		if decimal, ok := typ.(sql.DecimalType); ok {
+			conversionType = types.MustCreateColumnDecimalType(decimal.Precision(), decimal.Scale())
+		}
+		converted, inRange, err := conversionType.Convert(ctx, value)
+		if err != nil || inRange != sql.InRange {
+			return nil, false
+		}
+		if types.IsFloat(typ) && op == sql.IndexScanOpNotEq {
+			// Approximate equality and encoded exclusion bounds can disagree.
+			return nil, false
+		}
+		equal, err := expression.NewEquals(expression.NewLiteral(converted, typ), expression.NewLiteral(value, litExpr.Type(ctx))).Eval(ctx, nil)
+		if err != nil || !sql.IsTrue(equal) {
+			return nil, false
+		}
+	}
 	return &iScanLeaf{
 		id:         id,
 		name:       name,
@@ -1972,6 +1997,12 @@ func (c *indexCoster) buildLeaf(ctx *sql.Context, id indexScanId, e sql.Expressi
 	name, typ, normalizedOp, litExpr, ok := c.normalizeLeafSides(ctx, op, left, right)
 	if !ok {
 		return nil, false
+	}
+	if column, ok := typ.(sql.StringType); ok && types.IsText(typ) && litExpr != nil {
+		collation, _ := sql.ResolveCoercibilityExpressions(ctx, left, right)
+		if collation != column.Collation() {
+			return nil, false
+		}
 	}
 	return c.buildLeafFromParts(ctx, id, name, typ, normalizedOp, litExpr)
 }

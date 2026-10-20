@@ -576,6 +576,9 @@ func sortExprsMatchIdxColExprsWithConstantColumns(sortExprs []sql.Expression, so
 // If relevantOrderByColumns is not nil, each element describes each relevant offset into the order-by expression and its
 // corresponding offset into the index. All other parts of the ORDER BY and the rest of the index can be safely ignored.
 func indexSortOrder(ctx *sql.Context, idx sql.Index, scs sql.SortConditions, table sql.Table, relevantOrderByColumns []indexAndOrderByOffsets) (ordered, reverseScan bool) {
+	if idx.IsFullText() || idx.IsSpatial() || idx.IsVector() {
+		return false, false
+	}
 	ordIdx, isOrdIdx := idx.(sql.OrderedIndex)
 	if !isOrdIdx {
 		return false, false
