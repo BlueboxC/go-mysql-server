@@ -792,7 +792,850 @@ func (c *indexCoster) updateBest(s sql.Statistic, hist []sql.HistogramBucket, fd
 		}
 
 		// the one below is sketchy, this is why we need costing
-		// prefer unique key even if non-unique has m…6193 tokens truncated…ls, idx)
+		// prefer unique key even if non-unique has more constants
+		_, bestHasLax := best.LaxKey()
+		_, cmpHasLax := cmp.LaxKey()
+		if cmp.Constants().Len() > best.Constants().Len() {
+			if bestHasLax && !cmpHasLax {
+				// keep unique key
+				return
+			}
+			update = true
+			return
+		} else if cmp.Constants().Len() < best.Constants().Len() {
+			if cmpHasLax && !bestHasLax {
+				// keep unique key
+				update = true
+			}
+			return
+		}
+
+		if filters.Len() > c.bestFilters.Len() {
+			update = true
+			return
+		}
+
+		if filters.Len() < c.bestFilters.Len() {
+			return
+		}
+
+		if s.ColSet().Len()-filters.Len() < c.bestStat.ColSet().Len()-c.bestFilters.Len() {
+			// prefer 1 range filter over 1 column index (1 - 1 = 0)
+			// vs. 1 range filter over 2 column index (2 - 1 = 1)
+			update = true
+			return
+		}
+
+		{
+			// if no unique keys, prefer equality over ranges
+			bestConst, bestIsNull := c.getConstAndNullFilters(c.bestFilters)
+			cmpConst, cmpIsNull := c.getConstAndNullFilters(filters)
+			if cmpConst.Len() > bestConst.Len() {
+				update = true
+				return
+			}
+			if cmpIsNull.Len() > bestIsNull.Len() {
+				update = true
+				return
+			}
+		}
+
+		{
+			if strings.EqualFold(s.Qualifier().Index(), "primary") {
+				update = true
+				return
+			} else if strings.EqualFold(c.bestStat.Qualifier().Index(), "primary") {
+				return
+			}
+			if strings.Compare(s.Qualifier().Index(), c.bestStat.Qualifier().Index()) < 0 {
+				// if they are still equal, use index name to make deterministic
+				update = true
+				return
+			}
+		}
+	}
+}
+
+func (c *indexCoster) getConstAndNullFilters(filters sets.FastIntSet) (sets.FastIntSet, sets.FastIntSet) {
+	var isConst sets.FastIntSet
+	var isNull sets.FastIntSet
+	for i, hasNext := filters.Next(0); hasNext; i, hasNext = filters.Next(i + 1) {
+		e := c.idToExpr[indexScanId(i)]
+		switch e.(type) {
+		case *expression.Equals:
+			isConst.Add(i)
+		case sql.IsNullExpression:
+			isNull.Add(i)
+		case *expression.NullSafeEquals:
+			isConst.Add(i)
+			isNull.Add(i)
+		}
+	}
+	return isConst, isNull
+}
+
+type defaultLogicTreeWalker struct{}
+
+func (d defaultLogicTreeWalker) Next(e sql.Expression) sql.Expression {
+	return e
+}
+
+func NewDefaultLogicTreeWalker() sql.ExpressionTreeFilter {
+	return &defaultLogicTreeWalker{}
+}
+
+// buildRoot converts a filter into a tree of indexFilter, a format designed
+// to make costing index scans easier. We return the root of the new tree
+// and a conjunction of filters that cannot be pushed into index scans.
+func (c *indexCoster) buildRoot(ctx *sql.Context, e sql.Expression, walker sql.ExpressionTreeFilter) (indexFilter, sql.Expression, sets.FastIntSet) {
+	e = c.transformForIndexCosting(ctx, e)
+	e = walker.Next(e)
+
+	switch e := e.(type) {
+	case *expression.And:
+		c.idToExpr[c.i] = e
+		newAnd := &iScanAnd{id: c.i}
+		c.i++
+		invalid, imprecise := c.buildAnd(ctx, e, newAnd, walker)
+		var leftovers []sql.Expression
+		for i, hasMore := invalid.Next(1); hasMore; i, hasMore = invalid.Next(i + 1) {
+			f, ok := c.idToExpr[indexScanId(i)]
+			if !ok {
+				panic("todo filter map not working")
+			}
+			leftovers = append(leftovers, f)
+		}
+		return newAnd, expression.JoinAnd(leftovers...), imprecise
+
+	case *expression.Or:
+		c.idToExpr[c.i] = e
+		newOr := &iScanOr{id: c.i}
+		c.i++
+		valid, imp := c.buildOr(ctx, e, newOr, walker)
+		if !valid {
+			return nil, e, sets.FastIntSet{}
+		}
+		var imprecise sets.FastIntSet
+		if imp {
+			imprecise.Add(int(newOr.id))
+		}
+		return newOr, nil, imprecise
+
+	default:
+		c.idToExpr[c.i] = e
+		leaf, ok := c.buildLeaf(ctx, c.i, e)
+		c.i++
+		if !ok {
+			return nil, e, sets.FastIntSet{}
+		}
+		var imprecise sets.FastIntSet
+		if !expression.PreciseComparison(ctx, e) {
+			imprecise.Add(int(leaf.id))
+		}
+		return leaf, nil, imprecise
+	}
+}
+
+// buildAnd return two bitsets to indicate invalid index filter ids, and imprecise filter ids
+func (c *indexCoster) buildAnd(ctx *sql.Context, e *expression.And, and *iScanAnd, walker sql.ExpressionTreeFilter) (sets.FastIntSet, sets.FastIntSet) {
+	var invalid sets.FastIntSet
+	var imprecise sets.FastIntSet
+	for _, e := range e.Children() {
+		switch e := walker.Next(e).(type) {
+		case *expression.And:
+			c.idToExpr[c.i] = e
+			c.i++
+			inv, imp := c.buildAnd(ctx, e, and, walker)
+			invalid = invalid.Union(inv)
+			imprecise = invalid.Union(imp)
+		case *expression.Or:
+			c.idToExpr[c.i] = e
+			newOr := &iScanOr{id: c.i}
+			c.i++
+			valid, imp := c.buildOr(ctx, e, newOr, walker)
+			if !valid {
+				// this or is invalid
+				invalid.Add(int(newOr.Id()))
+			} else {
+				and.orChildren = append(and.orChildren, newOr)
+				and.cnt++
+				if imp {
+					imprecise.Add(int(newOr.id))
+				}
+			}
+		default:
+			c.idToExpr[c.i] = e
+			leaf, ok := c.buildLeaf(ctx, c.i, e)
+			if !ok {
+				invalid.Add(int(c.i))
+			} else {
+				and.newLeaf(leaf)
+				if !expression.PreciseComparison(ctx, e) {
+					imprecise.Add(int(leaf.id))
+				}
+			}
+			// keep a ref to the invalid |e|
+			c.i++
+		}
+	}
+	return invalid, imprecise
+}
+
+func (c *indexCoster) buildOr(ctx *sql.Context, e *expression.Or, or *iScanOr, walker sql.ExpressionTreeFilter) (bool, bool) {
+	var imprecise bool
+	for _, e := range e.Children() {
+		switch e := walker.Next(e).(type) {
+		case *expression.And:
+			c.idToExpr[c.i] = e
+			newAnd := &iScanAnd{id: c.i}
+			c.i++
+			inv, imp := c.buildAnd(ctx, e, newAnd, walker)
+			if !inv.Empty() {
+				return false, false
+			}
+			or.children = append(or.children, newAnd)
+			imprecise = imprecise || !imp.Empty()
+		case *expression.Or:
+			c.idToExpr[c.i] = e
+			c.i++
+			ok, imp := c.buildOr(ctx, e, or, walker)
+			if !ok {
+				return false, false
+			}
+			imprecise = imprecise || imp
+		default:
+			c.idToExpr[c.i] = e
+			leaf, ok := c.buildLeaf(ctx, c.i, e)
+			if !ok {
+				return false, false
+			} else {
+				c.i++
+				or.children = append(or.children, leaf)
+				if !expression.PreciseComparison(ctx, e) {
+					imprecise = true
+				}
+			}
+		}
+	}
+	return true, imprecise
+}
+
+func newIndexScanRangeBuilder(ctx *sql.Context, idx sql.Index, include, imprecise sets.FastIntSet, idToExpr map[indexScanId]sql.Expression) *indexScanRangeBuilder {
+	return &indexScanRangeBuilder{
+		ctx:       ctx,
+		idx:       idx,
+		include:   include,
+		imprecise: imprecise,
+		idToExpr:  idToExpr,
+	}
+}
+
+type indexScanRangeBuilder struct {
+	idx       sql.Index
+	ctx       *sql.Context
+	idToExpr  map[indexScanId]sql.Expression
+	conjIb    *sql.MySQLIndexBuilder
+	include   sets.FastIntSet
+	imprecise sets.FastIntSet
+	tableName string
+	allRanges []sql.MySQLRange
+	leftover  []sql.Expression
+}
+
+func inValsToMySQLRangeCollHelper[N cmp.Ordered](ctx *sql.Context, vals []any, typ sql.Type, precise bool) (sql.MySQLRangeCollection, bool) {
+	keys := make([]N, 0, len(vals))
+	// Due to MySQL's conversion rules, this optimization doesn't apply when comparing numeric expressions to string columns
+	// https://github.com/dolthub/dolt/issues/10316
+	_, isStrType := typ.(types.StringType)
+	for _, val := range vals {
+		switch v := val.(type) {
+		case int, int8, int16, int32, int64,
+			uint, uint8, uint16, uint32, uint64:
+			if isStrType {
+				return nil, false
+			}
+		case float32:
+			if isStrType {
+				return nil, false
+			}
+			if precise && float32(int(v)) != v {
+				continue
+			}
+		case float64:
+			if isStrType {
+				return nil, false
+			}
+			if precise && float64(int(v)) != v {
+				continue
+			}
+		case *apd.Decimal:
+			if isStrType {
+				return nil, false
+			}
+			vInt, err := sql.DecimalRound(v, 0)
+			if err != nil {
+				return nil, false
+			}
+			if precise && v.Cmp(vInt) != 0 {
+				continue
+			}
+		case string:
+		default:
+			return nil, false
+		}
+		key, inRange, err := typ.Convert(ctx, val)
+		if err != nil {
+			return nil, false
+		}
+		if inRange != sql.InRange {
+			continue
+		}
+		keys = append(keys, key.(N))
+	}
+
+	// TODO: for integers, if len(keys) - 1 == keys[len(keys)-1] - keys[0],
+	//  then we can just have one continuous range. unsure if this is worth it
+	slices.Sort(keys)
+	keys = slices.Compact(keys)
+	res := make(sql.MySQLRangeCollection, len(keys))
+	for i, key := range keys {
+		res[i] = sql.MySQLRange{
+			sql.ClosedRangeColumnExpr(key, key, typ),
+		}
+	}
+
+	if len(res) == 0 {
+		return nil, true
+	}
+	return res, true
+}
+
+// inValsToMySQLRangeColl is a fast path for in filters over columns of cmp.Ordered type.
+func inValsToMySQLRangeColl(ctx *sql.Context, vals []any, typ sql.Type) (sql.MySQLRangeCollection, bool) {
+	switch typ.Type() {
+	case sqltypes.Int8:
+		return inValsToMySQLRangeCollHelper[int8](ctx, vals, typ, true)
+	case sqltypes.Int16:
+		return inValsToMySQLRangeCollHelper[int16](ctx, vals, typ, true)
+	case sqltypes.Int32:
+		return inValsToMySQLRangeCollHelper[int32](ctx, vals, typ, true)
+	case sqltypes.Int64:
+		return inValsToMySQLRangeCollHelper[int64](ctx, vals, typ, true)
+	case sqltypes.Uint8:
+		return inValsToMySQLRangeCollHelper[uint8](ctx, vals, typ, true)
+	case sqltypes.Uint16:
+		return inValsToMySQLRangeCollHelper[uint16](ctx, vals, typ, true)
+	case sqltypes.Uint32:
+		return inValsToMySQLRangeCollHelper[uint32](ctx, vals, typ, true)
+	case sqltypes.Uint64:
+		return inValsToMySQLRangeCollHelper[uint64](ctx, vals, typ, true)
+	case sqltypes.Float32:
+		return inValsToMySQLRangeCollHelper[float32](ctx, vals, typ, false)
+	case sqltypes.Float64:
+		return inValsToMySQLRangeCollHelper[float64](ctx, vals, typ, false)
+	case sqltypes.Char, sqltypes.VarChar:
+		return inValsToMySQLRangeCollHelper[string](ctx, vals, typ, false)
+	default:
+		return nil, false
+	}
+}
+
+// buildRangeCollection converts our representation of the best index scan
+// into the format that represents an index lookup, a list of sql.Range.
+func (b *indexScanRangeBuilder) buildRangeCollection(f indexFilter) (sql.MySQLRangeCollection, error) {
+	inScan := b.include.Contains(int(f.Id()))
+
+	var ranges []sql.MySQLRange
+	var err error
+	switch f := f.(type) {
+	case *iScanAnd:
+		ranges, err = b.rangeBuildAnd(f, inScan)
+	case *iScanOr:
+		ranges, err = b.rangeBuildOr(f, inScan)
+	case *iScanLeaf:
+		// When the filter is a simple IN, we can skip costly checks like building the RangeTree.
+		if f.Op() == sql.IndexScanOpInSet {
+			cets := b.idx.ColumnExpressionTypes(b.ctx)
+			if len(cets) == 1 {
+				var ok bool
+				if ranges, ok = inValsToMySQLRangeColl(b.ctx, f.setValues, cets[0].Type); ok {
+					return ranges, nil
+				}
+			}
+		}
+		ranges, err = b.rangeBuildLeaf(f, inScan)
+	default:
+		return nil, fmt.Errorf("unknown indexFilter type: %T", f)
+	}
+
+	if err != nil {
+		return nil, err
+	}
+	return sql.RemoveOverlappingRanges(b.ctx, ranges...)
+}
+
+func (b *indexScanRangeBuilder) Ranges() (sql.MySQLRangeCollection, error) {
+	return sql.RemoveOverlappingRanges(b.ctx, b.allRanges...)
+}
+
+func (b *indexScanRangeBuilder) rangeBuildAnd(f *iScanAnd, inScan bool) (sql.MySQLRangeCollection, error) {
+	// no leftover check for AND, it's children may be included in scan
+	inScan = inScan || b.include.Contains(int(f.Id()))
+
+	var ret sql.MySQLRangeCollection
+	for _, or := range f.orChildren {
+		// separate range builder for each, before UNIONing
+		ranges, err := b.rangeBuildOr(or.(*iScanOr), inScan)
+		if err != nil {
+			return nil, err
+		}
+		if ranges == nil {
+			continue
+		}
+		if ret == nil {
+			ret = ranges
+			continue
+		}
+		ret, err = ret.Intersect(b.ctx, ranges)
+		if err != nil {
+			return nil, err
+		}
+	}
+
+	partBuilder := sql.NewMySQLIndexBuilder(b.ctx, b.idx)
+	for _, leaf := range f.leaves() {
+		switch leaf.Op() {
+		case sql.IndexScanOpSpatialEq:
+			ranges, err := b.rangeBuildSpatialLeaf(leaf, inScan)
+			if err != nil {
+				return nil, err
+			}
+			if ranges != nil {
+				ret, err = ret.Intersect(b.ctx, partBuilder.Ranges(b.ctx))
+				if err != nil {
+					return nil, err
+				}
+			}
+		case sql.IndexScanOpFulltextEq:
+			ranges, err := b.rangeBuildFulltextLeaf(leaf, inScan)
+			if err != nil {
+				return nil, err
+			}
+			if ranges != nil {
+				ret, err = ret.Intersect(b.ctx, partBuilder.Ranges(b.ctx))
+				if err != nil {
+					return nil, err
+				}
+			}
+		default:
+			b.rangeBuildDefaultLeaf(partBuilder, leaf, inScan)
+		}
+	}
+
+	if _, err := partBuilder.Build(b.ctx); err != nil {
+		return nil, err
+	}
+
+	if ret == nil {
+		return partBuilder.Ranges(b.ctx), nil
+	}
+
+	ret, err := ret.Intersect(b.ctx, partBuilder.Ranges(b.ctx))
+	if err != nil {
+		return nil, err
+	}
+
+	return ret, nil
+}
+
+func (b *indexScanRangeBuilder) rangeBuildOr(f *iScanOr, inScan bool) (sql.MySQLRangeCollection, error) {
+	inScan = !b.markLeftover(f, inScan)
+	if !inScan {
+		return nil, nil
+	}
+
+	// imprecise filters cannot be removed
+	b.markImprecise(f)
+
+	// todo union the or ranges
+	var ret sql.MySQLRangeCollection
+	for _, c := range f.children {
+		var ranges sql.MySQLRangeCollection
+		var err error
+		switch c := c.(type) {
+		case *iScanAnd:
+			ranges, err = b.rangeBuildAnd(c, inScan)
+		case *iScanLeaf:
+			ranges, err = b.rangeBuildLeaf(c, inScan)
+		default:
+			return nil, fmt.Errorf("invalid *iScanOr child: %T", c)
+		}
+		if err != nil {
+			return nil, err
+		}
+		ret = append(ret, ranges...)
+	}
+	return ret, nil
+}
+
+func (b *indexScanRangeBuilder) rangeBuildSpatialLeaf(f *iScanLeaf, inScan bool) (sql.MySQLRangeCollection, error) {
+	inScan = !b.markLeftover(f, inScan)
+	if inScan {
+		// always mark leftover
+		b.leftover = append(b.leftover, b.idToExpr[f.Id()])
+	} else {
+		return nil, nil
+	}
+
+	g, ok := f.litValue.(types.GeometryValue)
+	if !ok {
+		return nil, sql.ErrInvalidGISData.New()
+	}
+	minX, minY, maxX, maxY := g.BBox()
+	lower := types.Point{X: minX, Y: minY}
+	upper := types.Point{X: maxX, Y: maxY}
+
+	typ := f.typ
+	return sql.MySQLRangeCollection{{{
+		LowerBound: sql.Below{
+			Key: lower,
+			Typ: typ,
+		},
+		UpperBound: sql.Above{
+			Key: upper,
+			Typ: typ,
+		},
+		Typ: typ,
+	}}}, nil
+}
+
+func (b *indexScanRangeBuilder) rangeBuildFulltextLeaf(f *iScanLeaf, inScan bool) (sql.MySQLRangeCollection, error) {
+	// fulltext leaf doesn't use ranges
+	inScan = !b.markLeftover(f, inScan)
+	if inScan {
+		// always mark leftover
+		b.leftover = append(b.leftover, b.idToExpr[f.Id()])
+	} else {
+		return nil, nil
+	}
+	return sql.MySQLRangeCollection{{sql.EmptyRangeColumnExpr(f.typ)}}, nil
+}
+
+func (b *indexScanRangeBuilder) rangeBuildLeaf(f *iScanLeaf, inScan bool) (sql.MySQLRangeCollection, error) {
+	switch f.Op() {
+	case sql.IndexScanOpSpatialEq:
+		return b.rangeBuildSpatialLeaf(f, inScan)
+	case sql.IndexScanOpFulltextEq:
+		return b.rangeBuildFulltextLeaf(f, inScan)
+	default:
+		bb := sql.NewMySQLIndexBuilder(b.ctx, b.idx)
+		b.rangeBuildDefaultLeaf(bb, f, inScan)
+		if _, err := bb.Build(b.ctx); err != nil {
+			return nil, err
+		}
+		return bb.Ranges(b.ctx), nil
+	}
+}
+
+func (b *indexScanRangeBuilder) rangeBuildDefaultLeaf(bb *sql.MySQLIndexBuilder, f *iScanLeaf, inScan bool) {
+	inScan = !b.markLeftover(f, inScan)
+	if !inScan {
+		return
+	}
+
+	b.markImprecise(f)
+
+	name := f.normString()
+	switch f.Op() {
+	case sql.IndexScanOpEq:
+		bb.Equals(b.ctx, name, f.litType, f.litValue)
+	case sql.IndexScanOpNotEq:
+		bb.NotEquals(b.ctx, name, f.litType, f.litValue)
+	case sql.IndexScanOpInSet:
+		bb.In(b.ctx, name, f.setTypes, f.setValues)
+	case sql.IndexScanOpNotInSet:
+		bb.NotIn(b.ctx, name, f.setTypes, f.setValues)
+	case sql.IndexScanOpGt:
+		bb.GreaterThan(b.ctx, name, f.litType, f.litValue)
+	case sql.IndexScanOpGte:
+		bb.GreaterOrEqual(b.ctx, name, f.litType, f.litValue)
+	case sql.IndexScanOpLt:
+		bb.LessThan(b.ctx, name, f.litType, f.litValue)
+	case sql.IndexScanOpLte:
+		bb.LessOrEqual(b.ctx, name, f.litType, f.litValue)
+	case sql.IndexScanOpIsNotNull:
+		bb.IsNotNull(b.ctx, name)
+	case sql.IndexScanOpIsNull:
+		bb.IsNull(b.ctx, name)
+	case sql.IndexScanOpNullSafeEq:
+		if f.litValue == nil {
+			bb.IsNull(b.ctx, name)
+		} else {
+			bb.Equals(b.ctx, name, f.litType, f.litValue)
+		}
+	default:
+		panic(fmt.Sprintf("unknown IndexScanOp: %d", f.Op()))
+	}
+}
+
+// markLeftover is used to check if leaf nodes and OR filters are left out
+// of the index lookup. We omit this check for AND filters because a portion
+// of their children can contribute to the scan.
+func (b *indexScanRangeBuilder) markLeftover(f indexFilter, inScan bool) bool {
+	if !inScan && !b.include.Contains(int(f.Id())) {
+		b.leftover = append(b.leftover, b.idToExpr[f.Id()])
+		return true
+	}
+	return false
+}
+
+func (b *indexScanRangeBuilder) markImprecise(f indexFilter) {
+	if b.imprecise.Contains(int(f.Id())) {
+		b.leftover = append(b.leftover, b.idToExpr[f.Id()])
+	}
+}
+
+// indexFilter decomposes filter conjunction into a format
+// amenable for checking index prefix alignment
+type indexFilter interface {
+	Op() sql.IndexScanOp
+	Id() indexScanId
+}
+
+type iScanLeaf struct {
+	litValue      interface{}
+	litType       sql.Type
+	typ           sql.Type
+	name          string
+	underlying    string
+	fulltextIndex string
+	setValues     []interface{}
+	setTypes      []sql.Type
+	id            indexScanId
+	op            sql.IndexScanOp
+}
+
+func (l *iScanLeaf) normString() string {
+	if l.underlying != "" {
+		return strings.ToLower(l.underlying) + "." + strings.ToLower(l.name)
+	}
+	return strings.ToLower(l.name)
+}
+
+func (l *iScanLeaf) Id() indexScanId {
+	return l.id
+}
+
+func (l *iScanLeaf) Op() sql.IndexScanOp {
+	return l.op
+}
+
+type iScanOr struct {
+	children []indexFilter
+	id       indexScanId
+}
+
+func (o *iScanOr) Id() indexScanId {
+	return o.id
+}
+
+func (o *iScanOr) Op() sql.IndexScanOp {
+	return sql.IndexScanOpOr
+}
+
+func newIScanAnd(id indexScanId) *iScanAnd {
+	return &iScanAnd{
+		id: id,
+	}
+}
+
+type iScanAnd struct {
+	leafChildren map[string][]*iScanLeaf
+	orChildren   []indexFilter
+	cnt          int
+	id           indexScanId
+}
+
+func (a *iScanAnd) Op() sql.IndexScanOp {
+	return sql.IndexScanOpAnd
+}
+
+func (a *iScanAnd) Id() indexScanId {
+	return a.id
+}
+
+func (a *iScanAnd) newLeaf(l *iScanLeaf) {
+	if a.leafChildren == nil {
+		a.leafChildren = make(map[string][]*iScanLeaf)
+	}
+	key := strings.ToLower(l.name)
+	a.leafChildren[key] = append(a.leafChildren[key], l)
+	a.cnt++
+}
+
+// leaves returns a list of this nodes leaf filters, sorted by id
+func (a *iScanAnd) leaves() []*iScanLeaf {
+	var ret []*iScanLeaf
+	for _, colLeaves := range a.leafChildren {
+		for _, leaf := range colLeaves {
+			ret = append(ret, leaf)
+		}
+	}
+	sort.SliceStable(ret, func(i, j int) bool {
+		return ret[i].id < ret[j].id
+	})
+	return ret
+}
+
+func (a *iScanAnd) childCnt() int {
+	return a.cnt
+}
+
+func formatIndexFilter(f indexFilter) string {
+	b := &strings.Builder{}
+	formatIndexFilterRec(b, 0, f)
+	return b.String()
+}
+
+func formatIndexFilterRec(b *strings.Builder, nesting int, f indexFilter) {
+	if f == nil {
+		return
+	}
+	switch f := f.(type) {
+	case *iScanAnd:
+		for i := 0; i < nesting; i++ {
+			b.WriteString("  ")
+		}
+		fmt.Fprintf(b, "(%d: and", f.Id())
+		for _, leaf := range f.leaves() {
+			fmt.Fprintf(b, "\n")
+			formatIndexFilterRec(b, nesting+1, leaf)
+		}
+		for _, or := range f.orChildren {
+			fmt.Fprintf(b, "\n")
+			formatIndexFilterRec(b, nesting+1, or)
+		}
+
+		fmt.Fprintf(b, ")")
+
+	case *iScanOr:
+		for i := 0; i < nesting; i++ {
+			b.WriteString("  ")
+		}
+		fmt.Fprintf(b, "(%d: or", f.Id())
+
+		for _, c := range f.children {
+			fmt.Fprintf(b, "\n")
+			formatIndexFilterRec(b, nesting+1, c)
+		}
+		fmt.Fprintf(b, ")")
+
+	case *iScanLeaf:
+		for i := 0; i < nesting; i++ {
+			b.WriteString("  ")
+		}
+		switch f.Op() {
+		case sql.IndexScanOpIsNull, sql.IndexScanOpIsNotNull:
+			fmt.Fprintf(b, "(%d: %s %s)", f.Id(), f.normString(), f.Op())
+		case sql.IndexScanOpInSet, sql.IndexScanOpNotInSet:
+			var valStrs []string
+			for _, v := range f.setValues {
+				valStrs = append(valStrs, fmt.Sprintf("%v", v))
+			}
+			fmt.Fprintf(b, "(%d: %s %s (%s))", f.Id(), f.normString(), f.Op(), strings.Join(valStrs, ", "))
+		default:
+			fmt.Fprintf(b, "(%d: %s %s %v)", f.Id(), f.normString(), f.Op(), f.litValue)
+		}
+
+	default:
+		panic(fmt.Sprintf("unknown indexFilter type :%T", f))
+	}
+}
+
+type indexScanId uint16
+
+func ordinalsForStat(stat sql.Statistic) map[string]int {
+	ret := make(map[string]int)
+	for i, c := range stat.Columns() {
+		ret[strings.ToLower(c)] = i
+	}
+	return ret
+}
+
+// costIndexScanAnd applies (1) series of disjunctions and (2) a set of
+// conjunctions to an index represented by a statistic. We return the
+// updated statistic, the subset of applicable filters, the maximum prefix
+// key created by a subset of equality filters (from conjunction only),
+// or an error if applicable.
+func (c *indexCoster) costIndexScanAnd(ctx *sql.Context, filter *iScanAnd, s sql.Statistic, buckets []sql.HistogramBucket, ordinals map[string]int, idx sql.Index) ([]sql.HistogramBucket, *sql.FuncDepSet, sets.FastIntSet, int, bool, error) {
+	// first step finds the conjunctions that match index prefix columns.
+	// we divide into eqFilters and rangeFilters
+
+	ret := s.Histogram()
+	var exact sets.FastIntSet
+
+	if len(filter.orChildren) > 0 {
+		for _, or := range filter.orChildren {
+			childStat, _, ok, err := c.costIndexScanOr(ctx, or.(*iScanOr), s, buckets, ordinals, idx)
+			if err != nil {
+				return nil, nil, sets.FastIntSet{}, 0, false, err
+			}
+			// if valid, INTERSECT
+			if ok {
+				ret, err = stats.Intersect(ctx, ret, childStat, s.Types())
+				if err != nil {
+					return nil, nil, sets.FastIntSet{}, 0, false, err
+				}
+				exact.Add(int(or.Id()))
+			}
+		}
+	}
+
+	conj := newConjCollector(s, ret, ordinals)
+	for _, c := range s.Columns() {
+		if colFilters, ok := filter.leafChildren[c]; ok {
+			for _, f := range colFilters {
+				if f.op == sql.IndexScanOpFulltextEq {
+					continue
+				}
+				conj.add(ctx, f)
+			}
+		}
+	}
+
+	var conjFDs *sql.FuncDepSet
+	if idx.IsUnique() {
+		conjFDs = conj.getFds()
+	}
+
+	hasRange := conj.ineqCols.Contains(conj.missingPrefix)
+	return conj.hist, conjFDs, exact.Union(conj.applied), conj.missingPrefix, hasRange, nil
+}
+
+func (c *indexCoster) costIndexScanOr(ctx *sql.Context, filter *iScanOr, s sql.Statistic, buckets []sql.HistogramBucket, ordinals map[string]int, idx sql.Index) ([]sql.HistogramBucket, *sql.FuncDepSet, bool, error) {
+	// OR just unions the statistics from each child?
+	// if one of the children is invalid, we balk and return false
+	// otherwise we union the buckets between the children
+	ret := buckets
+	for _, child := range filter.children {
+		switch child := child.(type) {
+		case *iScanAnd:
+			childBuckets, _, ids, _, _, err := c.costIndexScanAnd(ctx, child, s, buckets, ordinals, idx)
+			if err != nil {
+				return nil, nil, false, err
+			}
+			if ids.Len() != child.childCnt() {
+				// scan option missed some filters
+				return nil, nil, false, nil
+			}
+			ret, err = stats.Union(ctx, buckets, childBuckets, s.Types())
+			if err != nil {
+				return nil, nil, false, err
+			}
+
+		case *iScanLeaf:
+			var ok bool
+			childBuckets, _, ok, _, err := c.costIndexScanLeaf(ctx, child, s, ret, ordinals, idx)
 			if err != nil {
 				return nil, nil, false, err
 			}
