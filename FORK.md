@@ -17,3 +17,7 @@ The newer base retains the MIN/MAX index-bounds and decimal MOD corrections miss
 Qualification uses disposable databases, normal/prepared queries, the 23 supplied #12100 repro scripts, additional NULL/collation/index/cardinality controls and the affected analyzer/engine suites. Pure-Go regex tests have separately reproduced ICU-dependent baseline differences; they are not a regex compatibility claim. The existing non-array JSON-path edge cases are not generalized from the supplied JSON-null repro. This fork does not claim full MySQL compatibility or a general-purpose set of optimizer proofs.
 
 Subquery unnesting preserves ordinary negated predicates when another IN subquery becomes a join. Negated scalar subqueries remain scalar, retaining empty-result NULL semantics and multi-row errors. Consumer regression tests include Graph Preview label, lifecycle and ready-work filters.
+
+## Ordinary predicates on Full-Text columns
+
+A Full-Text index is not an ordered lookup for equality, NULL, range or other ordinary filters. Cost it only for a matching MATCH predicate; keep other conjuncts as residual filters and fall back for OR branches that cannot be represented by a complete lookup. Ordinary indexes also leave MATCH residuals intact. Keyed/keyless fixtures, with and without an ordinary same-column index, preserve NULL and physical-duplicate semantics across twenty predicates in normal and prepared mode. This correction also reproduces on the official Dolt 2.5.1 engine/analyzer pair.
