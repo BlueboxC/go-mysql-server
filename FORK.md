@@ -21,3 +21,15 @@ Subquery unnesting preserves ordinary negated predicates when another IN subquer
 ## Ordinary predicates on Full-Text columns
 
 A Full-Text index is not an ordered lookup for equality, NULL, range or other ordinary filters. Cost it only for a matching MATCH predicate; keep other conjuncts as residual filters and fall back for OR branches that cannot be represented by a complete lookup. Ordinary indexes also leave MATCH residuals intact. Keyed/keyless fixtures, with and without an ordinary same-column index, preserve NULL and physical-duplicate semantics across twenty predicates in normal and prepared mode. This correction also reproduces on the official Dolt 2.5.1 engine/analyzer pair.
+
+## Complete predicates during join reordering
+
+Adapt Nick Tobey's GMS PR #4056 (https://github.com/dolthub/go-mysql-server/pull/4056), merged in 38a1fb50b434, for Dolt PR #12193. Reject joins that drop required filters unless functional dependencies prove an equality redundant. Preserve the contributor ten-table keyed/keyless fixture. IMDB plans are regenerated with the existing plangen for this fork; previous NULL/scalar safeguards remain intact.
+
+## Mixed comparison types
+
+Adapt James Cor's GMS PR #4047, carried by Dolt PR #12197, retaining exact-decimal direction/scale tests and contributor type/query regressions. Comparison type is distinct from result type for temporal and string combinations. The adaptation propagates comparison errors and shares decimal-width helpers with the retained COALESCE correction. Text-length inference remains upstream issue #12181; this does not claim complete MySQL type-metadata parity.
+
+## Prepared historical table bindings
+
+Dolt issue [#12191](https://github.com/dolthub/dolt/issues/12191) is addressed by distinguishing metadata preparation from value binding. A bare `AS OF ?` uses the current table schema for prepare metadata, then resolves the supplied revision afresh on every execution. Execution with NULL, absent or invalid revisions remains an error; it cannot fall back to HEAD. Tables or columns absent from the current schema still require a literal revision for preparation.

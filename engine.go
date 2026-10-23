@@ -238,7 +238,7 @@ func (e *Engine) PrepareParsedQuery(
 	e.beginTransaction(ctx)
 
 	binder := planbuilder.New(ctx, e.Analyzer.Catalog, e.EventScheduler)
-	node, _, err := binder.BindOnly(stmt, query, nil)
+	node, _, err := binder.BindForPrepare(stmt, query, nil)
 	if err != nil {
 		return nil, err
 	}

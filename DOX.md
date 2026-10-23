@@ -19,6 +19,12 @@ Root owns the pinned upstream base, adaptation policy and attribution in FORK.md
 - Keep contributor regressions and query-plan updates with the fix. No Beads-specific configuration, schema or private data.
 - A consumer must pin the replacement in its own main module; dependency replacements are not transitive.
 
+- Join reordering rejects alternatives that leave a required connecting predicate unapplied. Omit a predicate only when existing functional dependencies prove its equality redundant; preserve non-equality filters and unsupported-plan fallback.
+
+- GREATEST/LEAST choose comparison and return types separately for mixed numeric, text and temporal operands. Preserve exact decimals, unsigned range, NULL propagation and conversion warnings; comparison errors must propagate. Shared decimal precision helpers retain the existing COALESCE correction.
+
+- Historical bind parameters defer only during explicit metadata preparation. Execution rebinds the original AST, resolves the supplied revision and rejects NULL or missing values; current-schema preparation does not promise access to historical-only tables or columns.
+
 ## Work Guidance
 
 Keep the patch focused on the reported SQL behavior; qualify the complete consumer dependency tuple before installation.

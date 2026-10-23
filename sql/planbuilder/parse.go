@@ -89,6 +89,15 @@ func (b *Builder) Parse(query string, qFlags *sql.QueryFlags, multi bool) (ret s
 	return outScope.node, parsed, remainder, b.qFlags, err
 }
 
+// BindForPrepare resolves result metadata without evaluating unbound parameters.
+// Execution must bind the original AST again with its supplied values.
+func (b *Builder) BindForPrepare(stmt ast.Statement, s string, queryFlags *sql.QueryFlags) (sql.Node, *sql.QueryFlags, error) {
+	old := b.bindCtx
+	b.bindCtx = &BindvarContext{resolveOnly: true}
+	defer func() { b.bindCtx = old }()
+	return b.BindOnly(stmt, s, queryFlags)
+}
+
 func (b *Builder) BindOnly(stmt ast.Statement, s string, queryFlags *sql.QueryFlags) (sql.Node, *sql.QueryFlags, error) {
 	outScope, err := b.bindOnly(stmt, s, queryFlags)
 	if err != nil {
