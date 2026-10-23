@@ -10,7 +10,7 @@ Root owns the pinned upstream base, adaptation policy and attribution in FORK.md
 
 ## Local Contracts
 
-- Preserve the Apache-2.0 license, public module path and current upstream MIN/MAX and MOD fixes.
+- Base this dependency on upstream 38a1fb50b434dc88df4a6e6dd3a3b50598dc9446 with Go 1.27.3. Preserve the Apache-2.0 license, public module path and current upstream MIN/MAX and MOD fixes.
 - Projected aliases require unique column IDs independently of sibling-reference visibility.
 - Preserve predicates and NULL/cardinality semantics through optimizer rewrites; use full-scan or unsupported-reordering fallbacks when exact index bounds or complete relation properties cannot be proved. Keyed FULLTEXT deduplication must preserve separate physical keyless rows.
 - Full-Text costed scans require a MATCH predicate bound to that exact index. Other AND predicates remain residual filters; OR branches without a complete lookup use the ordinary fallback. Ordinary indexes cannot consume MATCH predicates.

@@ -69,7 +69,7 @@ WHERE ci.note LIKE '%(voice)%'
 			"         │   │   │   │   │   │   └─ IndexedTableAccess(movie_companies)\n" +
 			"         │   │   │   │   │   │       ├─ index: [movie_companies.movie_id]\n" +
 			"         │   │   │   │   │   │       ├─ static: [{[NULL, ∞)}]\n" +
-			"         │   │   │   │   │   │       ├─ colSet: (24-28)\n" +
+			"         │   │   │   │   │   │       ├─ colSet: (25-27)\n" +
 			"         │   │   │   │   │   │       ├─ tableId: 5\n" +
 			"         │   │   │   │   │   │       └─ Table\n" +
 			"         │   │   │   │   │   │           ├─ name: movie_companies\n" +
@@ -82,7 +82,7 @@ WHERE ci.note LIKE '%(voice)%'
 			"         │   │   │   │   │           └─ IndexedTableAccess(title)\n" +
 			"         │   │   │   │   │               ├─ index: [title.id]\n" +
 			"         │   │   │   │   │               ├─ static: [{[NULL, ∞)}]\n" +
-			"         │   │   │   │   │               ├─ colSet: (31-42)\n" +
+			"         │   │   │   │   │               ├─ colSet: (31,32,35)\n" +
 			"         │   │   │   │   │               ├─ tableId: 7\n" +
 			"         │   │   │   │   │               └─ Table\n" +
 			"         │   │   │   │   │                   ├─ name: title\n" +
@@ -95,7 +95,7 @@ WHERE ci.note LIKE '%(voice)%'
 			"         │   │   │   │           └─ IndexedTableAccess(cast_info)\n" +
 			"         │   │   │   │               ├─ index: [cast_info.movie_id]\n" +
 			"         │   │   │   │               ├─ keys: [mc.movie_id:0!null]\n" +
-			"         │   │   │   │               ├─ colSet: (8-14)\n" +
+			"         │   │   │   │               ├─ colSet: (10-12,14)\n" +
 			"         │   │   │   │               ├─ tableId: 2\n" +
 			"         │   │   │   │               └─ Table\n" +
 			"         │   │   │   │                   ├─ name: cast_info\n" +
@@ -104,7 +104,7 @@ WHERE ci.note LIKE '%(voice)%'
 			"         │   │   │       └─ IndexedTableAccess(char_name)\n" +
 			"         │   │   │           ├─ index: [char_name.id]\n" +
 			"         │   │   │           ├─ keys: [ci.person_role_id:7]\n" +
-			"         │   │   │           ├─ colSet: (1-7)\n" +
+			"         │   │   │           ├─ colSet: (1,2)\n" +
 			"         │   │   │           ├─ tableId: 1\n" +
 			"         │   │   │           └─ Table\n" +
 			"         │   │   │               ├─ name: char_name\n" +
@@ -314,7 +314,7 @@ WHERE ci.note LIKE '%(voice)%'
 			"         │   │   │   │   │   │   └─ IndexedTableAccess(movie_companies)\n" +
 			"         │   │   │   │   │   │       ├─ index: [movie_companies.movie_id]\n" +
 			"         │   │   │   │   │   │       ├─ static: [{[NULL, ∞)}]\n" +
-			"         │   │   │   │   │   │       ├─ colSet: (24-28)\n" +
+			"         │   │   │   │   │   │       ├─ colSet: (25-27)\n" +
 			"         │   │   │   │   │   │       ├─ tableId: 5\n" +
 			"         │   │   │   │   │   │       └─ Table\n" +
 			"         │   │   │   │   │   │           ├─ name: movie_companies\n" +
@@ -327,7 +327,7 @@ WHERE ci.note LIKE '%(voice)%'
 			"         │   │   │   │   │           └─ IndexedTableAccess(title)\n" +
 			"         │   │   │   │   │               ├─ index: [title.id]\n" +
 			"         │   │   │   │   │               ├─ static: [{[NULL, ∞)}]\n" +
-			"         │   │   │   │   │               ├─ colSet: (31-42)\n" +
+			"         │   │   │   │   │               ├─ colSet: (31,32,35)\n" +
 			"         │   │   │   │   │               ├─ tableId: 7\n" +
 			"         │   │   │   │   │               └─ Table\n" +
 			"         │   │   │   │   │                   ├─ name: title\n" +
@@ -338,7 +338,7 @@ WHERE ci.note LIKE '%(voice)%'
 			"         │   │   │   │           └─ IndexedTableAccess(cast_info)\n" +
 			"         │   │   │   │               ├─ index: [cast_info.movie_id]\n" +
 			"         │   │   │   │               ├─ keys: [mc.movie_id:0!null]\n" +
-			"         │   │   │   │               ├─ colSet: (8-14)\n" +
+			"         │   │   │   │               ├─ colSet: (10-12,14)\n" +
 			"         │   │   │   │               ├─ tableId: 2\n" +
 			"         │   │   │   │               └─ Table\n" +
 			"         │   │   │   │                   ├─ name: cast_info\n" +
@@ -347,7 +347,7 @@ WHERE ci.note LIKE '%(voice)%'
 			"         │   │   │       └─ IndexedTableAccess(char_name)\n" +
 			"         │   │   │           ├─ index: [char_name.id]\n" +
 			"         │   │   │           ├─ keys: [ci.person_role_id:7]\n" +
-			"         │   │   │           ├─ colSet: (1-7)\n" +
+			"         │   │   │           ├─ colSet: (1,2)\n" +
 			"         │   │   │           ├─ tableId: 1\n" +
 			"         │   │   │           └─ Table\n" +
 			"         │   │   │               ├─ name: char_name\n" +
@@ -556,7 +556,7 @@ WHERE ci.note LIKE '%(voice)%'
 			"         │   │   │   │   │   │   └─ IndexedTableAccess(movie_companies)\n" +
 			"         │   │   │   │   │   │       ├─ index: [movie_companies.movie_id]\n" +
 			"         │   │   │   │   │   │       ├─ static: [{[NULL, ∞)}]\n" +
-			"         │   │   │   │   │   │       ├─ colSet: (24-28)\n" +
+			"         │   │   │   │   │   │       ├─ colSet: (25-27)\n" +
 			"         │   │   │   │   │   │       ├─ tableId: 5\n" +
 			"         │   │   │   │   │   │       └─ Table\n" +
 			"         │   │   │   │   │   │           ├─ name: movie_companies\n" +
@@ -569,7 +569,7 @@ WHERE ci.note LIKE '%(voice)%'
 			"         │   │   │   │   │           └─ IndexedTableAccess(title)\n" +
 			"         │   │   │   │   │               ├─ index: [title.id]\n" +
 			"         │   │   │   │   │               ├─ static: [{[NULL, ∞)}]\n" +
-			"         │   │   │   │   │               ├─ colSet: (31-42)\n" +
+			"         │   │   │   │   │               ├─ colSet: (31,32,35)\n" +
 			"         │   │   │   │   │               ├─ tableId: 7\n" +
 			"         │   │   │   │   │               └─ Table\n" +
 			"         │   │   │   │   │                   ├─ name: title\n" +
@@ -580,7 +580,7 @@ WHERE ci.note LIKE '%(voice)%'
 			"         │   │   │   │           └─ IndexedTableAccess(cast_info)\n" +
 			"         │   │   │   │               ├─ index: [cast_info.movie_id]\n" +
 			"         │   │   │   │               ├─ keys: [mc.movie_id:0!null]\n" +
-			"         │   │   │   │               ├─ colSet: (8-14)\n" +
+			"         │   │   │   │               ├─ colSet: (10-12,14)\n" +
 			"         │   │   │   │               ├─ tableId: 2\n" +
 			"         │   │   │   │               └─ Table\n" +
 			"         │   │   │   │                   ├─ name: cast_info\n" +
@@ -589,7 +589,7 @@ WHERE ci.note LIKE '%(voice)%'
 			"         │   │   │       └─ IndexedTableAccess(char_name)\n" +
 			"         │   │   │           ├─ index: [char_name.id]\n" +
 			"         │   │   │           ├─ keys: [ci.person_role_id:7]\n" +
-			"         │   │   │           ├─ colSet: (1-7)\n" +
+			"         │   │   │           ├─ colSet: (1,2)\n" +
 			"         │   │   │           ├─ tableId: 1\n" +
 			"         │   │   │           └─ Table\n" +
 			"         │   │   │               ├─ name: char_name\n" +
@@ -816,7 +816,7 @@ WHERE cn.country_code !='[pl]'
 			"         │   │   │   │   │   │           └─ IndexedTableAccess(title)\n" +
 			"         │   │   │   │   │   │               ├─ index: [title.id]\n" +
 			"         │   │   │   │   │   │               ├─ keys: [ml.movie_id:0!null]\n" +
-			"         │   │   │   │   │   │               ├─ colSet: (27-38)\n" +
+			"         │   │   │   │   │   │               ├─ colSet: (27,28,31)\n" +
 			"         │   │   │   │   │   │               ├─ tableId: 8\n" +
 			"         │   │   │   │   │   │               └─ Table\n" +
 			"         │   │   │   │   │   │                   ├─ name: title\n" +
@@ -827,7 +827,7 @@ WHERE cn.country_code !='[pl]'
 			"         │   │   │   │   │           └─ IndexedTableAccess(movie_companies)\n" +
 			"         │   │   │   │   │               ├─ index: [movie_companies.movie_id]\n" +
 			"         │   │   │   │   │               ├─ keys: [ml.movie_id:0!null]\n" +
-			"         │   │   │   │   │               ├─ colSet: (15-19)\n" +
+			"         │   │   │   │   │               ├─ colSet: (16-19)\n" +
 			"         │   │   │   │   │               ├─ tableId: 5\n" +
 			"         │   │   │   │   │               └─ Table\n" +
 			"         │   │   │   │   │                   ├─ name: movie_companies\n" +
@@ -845,7 +845,7 @@ WHERE cn.country_code !='[pl]'
 			"         │   │   │   │           └─ IndexedTableAccess(company_name)\n" +
 			"         │   │   │   │               ├─ index: [company_name.id]\n" +
 			"         │   │   │   │               ├─ keys: [mc.company_id:6!null]\n" +
-			"         │   │   │   │               ├─ colSet: (1-7)\n" +
+			"         │   │   │   │               ├─ colSet: (1-3)\n" +
 			"         │   │   │   │               ├─ tableId: 1\n" +
 			"         │   │   │   │               └─ Table\n" +
 			"         │   │   │   │                   ├─ name: company_name\n" +
@@ -876,7 +876,7 @@ WHERE cn.country_code !='[pl]'
 			"         │       └─ IndexedTableAccess(movie_keyword)\n" +
 			"         │           ├─ index: [movie_keyword.movie_id]\n" +
 			"         │           ├─ keys: [mc.movie_id:5!null]\n" +
-			"         │           ├─ colSet: (20-22)\n" +
+			"         │           ├─ colSet: (21,22)\n" +
 			"         │           ├─ tableId: 6\n" +
 			"         │           └─ Table\n" +
 			"         │               ├─ name: movie_keyword\n" +
@@ -889,7 +889,7 @@ WHERE cn.country_code !='[pl]'
 			"                 └─ IndexedTableAccess(keyword)\n" +
 			"                     ├─ index: [keyword.id]\n" +
 			"                     ├─ keys: [mk.keyword_id:17!null]\n" +
-			"                     ├─ colSet: (10-12)\n" +
+			"                     ├─ colSet: (10,11)\n" +
 			"                     ├─ tableId: 3\n" +
 			"                     └─ Table\n" +
 			"                         ├─ name: keyword\n" +
@@ -1112,7 +1112,7 @@ WHERE cn.country_code !='[pl]'
 			"         │   │   │   │   │   │           └─ IndexedTableAccess(title)\n" +
 			"         │   │   │   │   │   │               ├─ index: [title.id]\n" +
 			"         │   │   │   │   │   │               ├─ keys: [ml.movie_id:0!null]\n" +
-			"         │   │   │   │   │   │               ├─ colSet: (27-38)\n" +
+			"         │   │   │   │   │   │               ├─ colSet: (27,28,31)\n" +
 			"         │   │   │   │   │   │               ├─ tableId: 8\n" +
 			"         │   │   │   │   │   │               └─ Table\n" +
 			"         │   │   │   │   │   │                   ├─ name: title\n" +
@@ -1123,7 +1123,7 @@ WHERE cn.country_code !='[pl]'
 			"         │   │   │   │   │           └─ IndexedTableAccess(movie_companies)\n" +
 			"         │   │   │   │   │               ├─ index: [movie_companies.movie_id]\n" +
 			"         │   │   │   │   │               ├─ keys: [ml.movie_id:0!null]\n" +
-			"         │   │   │   │   │               ├─ colSet: (15-19)\n" +
+			"         │   │   │   │   │               ├─ colSet: (16-19)\n" +
 			"         │   │   │   │   │               ├─ tableId: 5\n" +
 			"         │   │   │   │   │               └─ Table\n" +
 			"         │   │   │   │   │                   ├─ name: movie_companies\n" +
@@ -1141,7 +1141,7 @@ WHERE cn.country_code !='[pl]'
 			"         │   │   │   │           └─ IndexedTableAccess(company_name)\n" +
 			"         │   │   │   │               ├─ index: [company_name.id]\n" +
 			"         │   │   │   │               ├─ keys: [mc.company_id:6!null]\n" +
-			"         │   │   │   │               ├─ colSet: (1-7)\n" +
+			"         │   │   │   │               ├─ colSet: (1-3)\n" +
 			"         │   │   │   │               ├─ tableId: 1\n" +
 			"         │   │   │   │               └─ Table\n" +
 			"         │   │   │   │                   ├─ name: company_name\n" +
@@ -1172,7 +1172,7 @@ WHERE cn.country_code !='[pl]'
 			"         │       └─ IndexedTableAccess(movie_keyword)\n" +
 			"         │           ├─ index: [movie_keyword.movie_id]\n" +
 			"         │           ├─ keys: [mc.movie_id:5!null]\n" +
-			"         │           ├─ colSet: (20-22)\n" +
+			"         │           ├─ colSet: (21,22)\n" +
 			"         │           ├─ tableId: 6\n" +
 			"         │           └─ Table\n" +
 			"         │               ├─ name: movie_keyword\n" +
@@ -1185,7 +1185,7 @@ WHERE cn.country_code !='[pl]'
 			"                 └─ IndexedTableAccess(keyword)\n" +
 			"                     ├─ index: [keyword.id]\n" +
 			"                     ├─ keys: [mk.keyword_id:17!null]\n" +
-			"                     ├─ colSet: (10-12)\n" +
+			"                     ├─ colSet: (10,11)\n" +
 			"                     ├─ tableId: 3\n" +
 			"                     └─ Table\n" +
 			"                         ├─ name: keyword\n" +
@@ -1407,7 +1407,7 @@ WHERE cn.country_code !='[pl]'
 			"         │   │   │   │   │   │           └─ IndexedTableAccess(title)\n" +
 			"         │   │   │   │   │   │               ├─ index: [title.id]\n" +
 			"         │   │   │   │   │   │               ├─ keys: [ml.movie_id:0!null]\n" +
-			"         │   │   │   │   │   │               ├─ colSet: (27-38)\n" +
+			"         │   │   │   │   │   │               ├─ colSet: (27,28,31)\n" +
 			"         │   │   │   │   │   │               ├─ tableId: 8\n" +
 			"         │   │   │   │   │   │               └─ Table\n" +
 			"         │   │   │   │   │   │                   ├─ name: title\n" +
@@ -1419,7 +1419,7 @@ WHERE cn.country_code !='[pl]'
 			"         │   │   │   │   │           └─ IndexedTableAccess(movie_companies)\n" +
 			"         │   │   │   │   │               ├─ index: [movie_companies.movie_id]\n" +
 			"         │   │   │   │   │               ├─ keys: [ml.movie_id:0!null]\n" +
-			"         │   │   │   │   │               ├─ colSet: (15-19)\n" +
+			"         │   │   │   │   │               ├─ colSet: (16-19)\n" +
 			"         │   │   │   │   │               ├─ tableId: 5\n" +
 			"         │   │   │   │   │               └─ Table\n" +
 			"         │   │   │   │   │                   ├─ name: movie_companies\n" +
@@ -1449,7 +1449,7 @@ WHERE cn.country_code !='[pl]'
 			"         │   │   │   │           └─ IndexedTableAccess(company_name)\n" +
 			"         │   │   │   │               ├─ index: [company_name.id]\n" +
 			"         │   │   │   │               ├─ keys: [mc.company_id:6!null]\n" +
-			"         │   │   │   │               ├─ colSet: (1-7)\n" +
+			"         │   │   │   │               ├─ colSet: (1-3)\n" +
 			"         │   │   │   │               ├─ tableId: 1\n" +
 			"         │   │   │   │               └─ Table\n" +
 			"         │   │   │   │                   ├─ name: company_name\n" +
@@ -1482,7 +1482,7 @@ WHERE cn.country_code !='[pl]'
 			"         │       └─ IndexedTableAccess(movie_keyword)\n" +
 			"         │           ├─ index: [movie_keyword.movie_id]\n" +
 			"         │           ├─ keys: [mc.movie_id:5!null]\n" +
-			"         │           ├─ colSet: (20-22)\n" +
+			"         │           ├─ colSet: (21,22)\n" +
 			"         │           ├─ tableId: 6\n" +
 			"         │           └─ Table\n" +
 			"         │               ├─ name: movie_keyword\n" +
@@ -1495,7 +1495,7 @@ WHERE cn.country_code !='[pl]'
 			"                 └─ IndexedTableAccess(keyword)\n" +
 			"                     ├─ index: [keyword.id]\n" +
 			"                     ├─ keys: [mk.keyword_id:16!null]\n" +
-			"                     ├─ colSet: (10-12)\n" +
+			"                     ├─ colSet: (10,11)\n" +
 			"                     ├─ tableId: 3\n" +
 			"                     └─ Table\n" +
 			"                         ├─ name: keyword\n" +
@@ -1711,7 +1711,7 @@ WHERE cn.country_code !='[pl]'
 			"         │   │   │   │   │   │           └─ IndexedTableAccess(title)\n" +
 			"         │   │   │   │   │   │               ├─ index: [title.id]\n" +
 			"         │   │   │   │   │   │               ├─ keys: [ml.movie_id:0!null]\n" +
-			"         │   │   │   │   │   │               ├─ colSet: (27-38)\n" +
+			"         │   │   │   │   │   │               ├─ colSet: (27,28,31)\n" +
 			"         │   │   │   │   │   │               ├─ tableId: 8\n" +
 			"         │   │   │   │   │   │               └─ Table\n" +
 			"         │   │   │   │   │   │                   ├─ name: title\n" +
@@ -1723,7 +1723,7 @@ WHERE cn.country_code !='[pl]'
 			"         │   │   │   │   │           └─ IndexedTableAccess(movie_companies)\n" +
 			"         │   │   │   │   │               ├─ index: [movie_companies.movie_id]\n" +
 			"         │   │   │   │   │               ├─ keys: [ml.movie_id:0!null]\n" +
-			"         │   │   │   │   │               ├─ colSet: (15-19)\n" +
+			"         │   │   │   │   │               ├─ colSet: (16-19)\n" +
 			"         │   │   │   │   │               ├─ tableId: 5\n" +
 			"         │   │   │   │   │               └─ Table\n" +
 			"         │   │   │   │   │                   ├─ name: movie_companies\n" +
@@ -1737,7 +1737,7 @@ WHERE cn.country_code !='[pl]'
 			"         │   │   │   │           └─ IndexedTableAccess(company_name)\n" +
 			"         │   │   │   │               ├─ index: [company_name.id]\n" +
 			"         │   │   │   │               ├─ keys: [mc.company_id:6!null]\n" +
-			"         │   │   │   │               ├─ colSet: (1-7)\n" +
+			"         │   │   │   │               ├─ colSet: (1-3)\n" +
 			"         │   │   │   │               ├─ tableId: 1\n" +
 			"         │   │   │   │               └─ Table\n" +
 			"         │   │   │   │                   ├─ name: company_name\n" +
@@ -1770,7 +1770,7 @@ WHERE cn.country_code !='[pl]'
 			"         │       └─ IndexedTableAccess(movie_keyword)\n" +
 			"         │           ├─ index: [movie_keyword.movie_id]\n" +
 			"         │           ├─ keys: [mc.movie_id:5!null]\n" +
-			"         │           ├─ colSet: (20-22)\n" +
+			"         │           ├─ colSet: (21,22)\n" +
 			"         │           ├─ tableId: 6\n" +
 			"         │           └─ Table\n" +
 			"         │               ├─ name: movie_keyword\n" +
@@ -1783,7 +1783,7 @@ WHERE cn.country_code !='[pl]'
 			"                 └─ IndexedTableAccess(keyword)\n" +
 			"                     ├─ index: [keyword.id]\n" +
 			"                     ├─ keys: [mk.keyword_id:16!null]\n" +
-			"                     ├─ colSet: (10-12)\n" +
+			"                     ├─ colSet: (10,11)\n" +
 			"                     ├─ tableId: 3\n" +
 			"                     └─ Table\n" +
 			"                         ├─ name: keyword\n" +
@@ -2056,7 +2056,7 @@ WHERE cn.country_code = '[us]'
 			"                 │   │           └─ IndexedTableAccess(movie_info)\n" +
 			"                 │   │               ├─ index: [movie_info.info_type_id]\n" +
 			"                 │   │               ├─ keys: [it1.id:5!null]\n" +
-			"                 │   │               ├─ colSet: (19-23)\n" +
+			"                 │   │               ├─ colSet: (20-22)\n" +
 			"                 │   │               ├─ tableId: 6\n" +
 			"                 │   │               └─ Table\n" +
 			"                 │   │                   ├─ name: movie_info\n" +
@@ -2073,7 +2073,7 @@ WHERE cn.country_code = '[us]'
 			"                 │           └─ IndexedTableAccess(title)\n" +
 			"                 │               ├─ index: [title.id]\n" +
 			"                 │               ├─ keys: [mi.movie_id:12!null]\n" +
-			"                 │               ├─ colSet: (29-40)\n" +
+			"                 │               ├─ colSet: (29,30,33)\n" +
 			"                 │               ├─ tableId: 8\n" +
 			"                 │               └─ Table\n" +
 			"                 │                   ├─ name: title\n" +
@@ -2082,7 +2082,7 @@ WHERE cn.country_code = '[us]'
 			"                     └─ IndexedTableAccess(movie_companies)\n" +
 			"                         ├─ index: [movie_companies.movie_id]\n" +
 			"                         ├─ keys: [mi.movie_id:12!null]\n" +
-			"                         ├─ colSet: (14-18)\n" +
+			"                         ├─ colSet: (15-17)\n" +
 			"                         ├─ tableId: 5\n" +
 			"                         └─ Table\n" +
 			"                             ├─ name: movie_companies\n" +
@@ -2350,7 +2350,7 @@ WHERE cn.country_code ='[us]'
 			"                 │   │       └─ IndexedTableAccess(movie_info)\n" +
 			"                 │   │           ├─ index: [movie_info.info_type_id]\n" +
 			"                 │   │           ├─ keys: [it1.id:4!null]\n" +
-			"                 │   │           ├─ colSet: (19-23)\n" +
+			"                 │   │           ├─ colSet: (20-22)\n" +
 			"                 │   │           ├─ tableId: 6\n" +
 			"                 │   │           └─ Table\n" +
 			"                 │   │               ├─ name: movie_info\n" +
@@ -2373,7 +2373,7 @@ WHERE cn.country_code ='[us]'
 			"                 │           └─ IndexedTableAccess(title)\n" +
 			"                 │               ├─ index: [title.id]\n" +
 			"                 │               ├─ keys: [mi.movie_id:10!null]\n" +
-			"                 │               ├─ colSet: (29-40)\n" +
+			"                 │               ├─ colSet: (29,30,33)\n" +
 			"                 │               ├─ tableId: 8\n" +
 			"                 │               └─ Table\n" +
 			"                 │                   ├─ name: title\n" +
@@ -2382,7 +2382,7 @@ WHERE cn.country_code ='[us]'
 			"                     └─ IndexedTableAccess(movie_companies)\n" +
 			"                         ├─ index: [movie_companies.movie_id]\n" +
 			"                         ├─ keys: [mi.movie_id:10!null]\n" +
-			"                         ├─ colSet: (14-18)\n" +
+			"                         ├─ colSet: (15-17)\n" +
 			"                         ├─ tableId: 5\n" +
 			"                         └─ Table\n" +
 			"                             ├─ name: movie_companies\n" +
@@ -2645,7 +2645,7 @@ WHERE cn.country_code = '[us]'
 			"                 │   │           └─ IndexedTableAccess(movie_info)\n" +
 			"                 │   │               ├─ index: [movie_info.info_type_id]\n" +
 			"                 │   │               ├─ keys: [it1.id:5!null]\n" +
-			"                 │   │               ├─ colSet: (19-23)\n" +
+			"                 │   │               ├─ colSet: (20-22)\n" +
 			"                 │   │               ├─ tableId: 6\n" +
 			"                 │   │               └─ Table\n" +
 			"                 │   │                   ├─ name: movie_info\n" +
@@ -2662,7 +2662,7 @@ WHERE cn.country_code = '[us]'
 			"                 │           └─ IndexedTableAccess(title)\n" +
 			"                 │               ├─ index: [title.id]\n" +
 			"                 │               ├─ keys: [mi.movie_id:12!null]\n" +
-			"                 │               ├─ colSet: (29-40)\n" +
+			"                 │               ├─ colSet: (29,30,33)\n" +
 			"                 │               ├─ tableId: 8\n" +
 			"                 │               └─ Table\n" +
 			"                 │                   ├─ name: title\n" +
@@ -2671,7 +2671,7 @@ WHERE cn.country_code = '[us]'
 			"                     └─ IndexedTableAccess(movie_companies)\n" +
 			"                         ├─ index: [movie_companies.movie_id]\n" +
 			"                         ├─ keys: [mi.movie_id:12!null]\n" +
-			"                         ├─ colSet: (14-18)\n" +
+			"                         ├─ colSet: (15-17)\n" +
 			"                         ├─ tableId: 5\n" +
 			"                         └─ Table\n" +
 			"                             ├─ name: movie_companies\n" +
@@ -2905,7 +2905,7 @@ WHERE cn.country_code ='[de]'
 			"         │   │   │   │   │       └─ IndexedTableAccess(movie_companies)\n" +
 			"         │   │   │   │   │           ├─ index: [movie_companies.company_type_id]\n" +
 			"         │   │   │   │   │           ├─ keys: [ct.id:2!null]\n" +
-			"         │   │   │   │   │           ├─ colSet: (16-20)\n" +
+			"         │   │   │   │   │           ├─ colSet: (17-19)\n" +
 			"         │   │   │   │   │           ├─ tableId: 6\n" +
 			"         │   │   │   │   │           └─ Table\n" +
 			"         │   │   │   │   │               ├─ name: movie_companies\n" +
@@ -2914,7 +2914,7 @@ WHERE cn.country_code ='[de]'
 			"         │   │   │   │       └─ IndexedTableAccess(title)\n" +
 			"         │   │   │   │           ├─ index: [title.id]\n" +
 			"         │   │   │   │           ├─ keys: [mc.movie_id:6!null]\n" +
-			"         │   │   │   │           ├─ colSet: (31-42)\n" +
+			"         │   │   │   │           ├─ colSet: (31,32,34)\n" +
 			"         │   │   │   │           ├─ tableId: 9\n" +
 			"         │   │   │   │           └─ Table\n" +
 			"         │   │   │   │               ├─ name: title\n" +
@@ -2936,7 +2936,7 @@ WHERE cn.country_code ='[de]'
 			"         │   │       └─ IndexedTableAccess(movie_info)\n" +
 			"         │   │           ├─ index: [movie_info.movie_id]\n" +
 			"         │   │           ├─ keys: [mc.movie_id:6!null]\n" +
-			"         │   │           ├─ colSet: (21-25)\n" +
+			"         │   │           ├─ colSet: (22-24)\n" +
 			"         │   │           ├─ tableId: 7\n" +
 			"         │   │           └─ Table\n" +
 			"         │   │               ├─ name: movie_info\n" +
@@ -2958,7 +2958,7 @@ WHERE cn.country_code ='[de]'
 			"             └─ IndexedTableAccess(movie_info_idx)\n" +
 			"                 ├─ index: [movie_info_idx.movie_id]\n" +
 			"                 ├─ keys: [mi.movie_id:14!null]\n" +
-			"                 ├─ colSet: (26-30)\n" +
+			"                 ├─ colSet: (27-29)\n" +
 			"                 ├─ tableId: 8\n" +
 			"                 └─ Table\n" +
 			"                     ├─ name: movie_info_idx\n" +
@@ -3199,7 +3199,7 @@ WHERE cn.country_code ='[us]'
 			"         │   │   │   │   │       └─ IndexedTableAccess(movie_companies)\n" +
 			"         │   │   │   │   │           ├─ index: [movie_companies.company_type_id]\n" +
 			"         │   │   │   │   │           ├─ keys: [ct.id:2!null]\n" +
-			"         │   │   │   │   │           ├─ colSet: (16-20)\n" +
+			"         │   │   │   │   │           ├─ colSet: (17-19)\n" +
 			"         │   │   │   │   │           ├─ tableId: 6\n" +
 			"         │   │   │   │   │           └─ Table\n" +
 			"         │   │   │   │   │               ├─ name: movie_companies\n" +
@@ -3217,7 +3217,7 @@ WHERE cn.country_code ='[us]'
 			"         │   │   │   │           └─ IndexedTableAccess(title)\n" +
 			"         │   │   │   │               ├─ index: [title.id]\n" +
 			"         │   │   │   │               ├─ keys: [mc.movie_id:7!null]\n" +
-			"         │   │   │   │               ├─ colSet: (31-42)\n" +
+			"         │   │   │   │               ├─ colSet: (31,32,34)\n" +
 			"         │   │   │   │               ├─ tableId: 9\n" +
 			"         │   │   │   │               └─ Table\n" +
 			"         │   │   │   │                   ├─ name: title\n" +
@@ -3239,7 +3239,7 @@ WHERE cn.country_code ='[us]'
 			"         │   │       └─ IndexedTableAccess(movie_info)\n" +
 			"         │   │           ├─ index: [movie_info.movie_id]\n" +
 			"         │   │           ├─ keys: [mc.movie_id:7!null]\n" +
-			"         │   │           ├─ colSet: (21-25)\n" +
+			"         │   │           ├─ colSet: (22,23)\n" +
 			"         │   │           ├─ tableId: 7\n" +
 			"         │   │           └─ Table\n" +
 			"         │   │               ├─ name: movie_info\n" +
@@ -3261,7 +3261,7 @@ WHERE cn.country_code ='[us]'
 			"             └─ IndexedTableAccess(movie_info_idx)\n" +
 			"                 ├─ index: [movie_info_idx.movie_id]\n" +
 			"                 ├─ keys: [mi.movie_id:15!null]\n" +
-			"                 ├─ colSet: (26-30)\n" +
+			"                 ├─ colSet: (27-29)\n" +
 			"                 ├─ tableId: 8\n" +
 			"                 └─ Table\n" +
 			"                     ├─ name: movie_info_idx\n" +
@@ -3506,7 +3506,7 @@ WHERE cn.country_code ='[us]'
 			"         │   │   │   │   │       └─ IndexedTableAccess(movie_companies)\n" +
 			"         │   │   │   │   │           ├─ index: [movie_companies.company_type_id]\n" +
 			"         │   │   │   │   │           ├─ keys: [ct.id:2!null]\n" +
-			"         │   │   │   │   │           ├─ colSet: (16-20)\n" +
+			"         │   │   │   │   │           ├─ colSet: (17-19)\n" +
 			"         │   │   │   │   │           ├─ tableId: 6\n" +
 			"         │   │   │   │   │           └─ Table\n" +
 			"         │   │   │   │   │               ├─ name: movie_companies\n" +
@@ -3536,7 +3536,7 @@ WHERE cn.country_code ='[us]'
 			"         │   │   │   │           └─ IndexedTableAccess(title)\n" +
 			"         │   │   │   │               ├─ index: [title.id]\n" +
 			"         │   │   │   │               ├─ keys: [mc.movie_id:7!null]\n" +
-			"         │   │   │   │               ├─ colSet: (31-42)\n" +
+			"         │   │   │   │               ├─ colSet: (31,32,34)\n" +
 			"         │   │   │   │               ├─ tableId: 9\n" +
 			"         │   │   │   │               └─ Table\n" +
 			"         │   │   │   │                   ├─ name: title\n" +
@@ -3558,7 +3558,7 @@ WHERE cn.country_code ='[us]'
 			"         │   │       └─ IndexedTableAccess(movie_info)\n" +
 			"         │   │           ├─ index: [movie_info.movie_id]\n" +
 			"         │   │           ├─ keys: [mc.movie_id:7!null]\n" +
-			"         │   │           ├─ colSet: (21-25)\n" +
+			"         │   │           ├─ colSet: (22,23)\n" +
 			"         │   │           ├─ tableId: 7\n" +
 			"         │   │           └─ Table\n" +
 			"         │   │               ├─ name: movie_info\n" +
@@ -3580,7 +3580,7 @@ WHERE cn.country_code ='[us]'
 			"             └─ IndexedTableAccess(movie_info_idx)\n" +
 			"                 ├─ index: [movie_info_idx.movie_id]\n" +
 			"                 ├─ keys: [mi.movie_id:15!null]\n" +
-			"                 ├─ colSet: (26-30)\n" +
+			"                 ├─ colSet: (27-29)\n" +
 			"                 ├─ tableId: 8\n" +
 			"                 └─ Table\n" +
 			"                     ├─ name: movie_info_idx\n" +
@@ -3822,7 +3822,7 @@ WHERE cn.country_code ='[us]'
 			"         │   │   │   │   │       └─ IndexedTableAccess(movie_companies)\n" +
 			"         │   │   │   │   │           ├─ index: [movie_companies.company_type_id]\n" +
 			"         │   │   │   │   │           ├─ keys: [ct.id:2!null]\n" +
-			"         │   │   │   │   │           ├─ colSet: (16-20)\n" +
+			"         │   │   │   │   │           ├─ colSet: (17-19)\n" +
 			"         │   │   │   │   │           ├─ tableId: 6\n" +
 			"         │   │   │   │   │           └─ Table\n" +
 			"         │   │   │   │   │               ├─ name: movie_companies\n" +
@@ -3831,7 +3831,7 @@ WHERE cn.country_code ='[us]'
 			"         │   │   │   │       └─ IndexedTableAccess(title)\n" +
 			"         │   │   │   │           ├─ index: [title.id]\n" +
 			"         │   │   │   │           ├─ keys: [mc.movie_id:7!null]\n" +
-			"         │   │   │   │           ├─ colSet: (31-42)\n" +
+			"         │   │   │   │           ├─ colSet: (31,32,34)\n" +
 			"         │   │   │   │           ├─ tableId: 9\n" +
 			"         │   │   │   │           └─ Table\n" +
 			"         │   │   │   │               ├─ name: title\n" +
@@ -3853,7 +3853,7 @@ WHERE cn.country_code ='[us]'
 			"         │   │       └─ IndexedTableAccess(movie_info)\n" +
 			"         │   │           ├─ index: [movie_info.movie_id]\n" +
 			"         │   │           ├─ keys: [mc.movie_id:7!null]\n" +
-			"         │   │           ├─ colSet: (21-25)\n" +
+			"         │   │           ├─ colSet: (22,23)\n" +
 			"         │   │           ├─ tableId: 7\n" +
 			"         │   │           └─ Table\n" +
 			"         │   │               ├─ name: movie_info\n" +
@@ -3875,7 +3875,7 @@ WHERE cn.country_code ='[us]'
 			"             └─ IndexedTableAccess(movie_info_idx)\n" +
 			"                 ├─ index: [movie_info_idx.movie_id]\n" +
 			"                 ├─ keys: [mi.movie_id:15!null]\n" +
-			"                 ├─ colSet: (26-30)\n" +
+			"                 ├─ colSet: (27-29)\n" +
 			"                 ├─ tableId: 8\n" +
 			"                 └─ Table\n" +
 			"                     ├─ name: movie_info_idx\n" +
@@ -4119,7 +4119,7 @@ WHERE it1.info = 'countries'
 			"         │   │   │   │   │           └─ IndexedTableAccess(movie_info)\n" +
 			"         │   │   │   │   │               ├─ index: [movie_info.info_type_id]\n" +
 			"         │   │   │   │   │               ├─ keys: [it1.id:2!null]\n" +
-			"         │   │   │   │   │               ├─ colSet: (10-14)\n" +
+			"         │   │   │   │   │               ├─ colSet: (11-13)\n" +
 			"         │   │   │   │   │               ├─ tableId: 5\n" +
 			"         │   │   │   │   │               └─ Table\n" +
 			"         │   │   │   │   │                   ├─ name: movie_info\n" +
@@ -4132,7 +4132,7 @@ WHERE it1.info = 'countries'
 			"         │   │   │   │           └─ IndexedTableAccess(title)\n" +
 			"         │   │   │   │               ├─ index: [title.id]\n" +
 			"         │   │   │   │               ├─ keys: [mi.movie_id:4!null]\n" +
-			"         │   │   │   │               ├─ colSet: (23-34)\n" +
+			"         │   │   │   │               ├─ colSet: (23,24,26,27)\n" +
 			"         │   │   │   │               ├─ tableId: 8\n" +
 			"         │   │   │   │               └─ Table\n" +
 			"         │   │   │   │                   ├─ name: title\n" +
@@ -4153,7 +4153,7 @@ WHERE it1.info = 'countries'
 			"         │   │       └─ IndexedTableAccess(movie_keyword)\n" +
 			"         │   │           ├─ index: [movie_keyword.movie_id]\n" +
 			"         │   │           ├─ keys: [mi.movie_id:4!null]\n" +
-			"         │   │           ├─ colSet: (20-22)\n" +
+			"         │   │           ├─ colSet: (21,22)\n" +
 			"         │   │           ├─ tableId: 7\n" +
 			"         │   │           └─ Table\n" +
 			"         │   │               ├─ name: movie_keyword\n" +
@@ -4166,7 +4166,7 @@ WHERE it1.info = 'countries'
 			"         │           └─ IndexedTableAccess(keyword)\n" +
 			"         │               ├─ index: [keyword.id]\n" +
 			"         │               ├─ keys: [mk.keyword_id:14!null]\n" +
-			"         │               ├─ colSet: (5-7)\n" +
+			"         │               ├─ colSet: (5,6)\n" +
 			"         │               ├─ tableId: 3\n" +
 			"         │               └─ Table\n" +
 			"         │                   ├─ name: keyword\n" +
@@ -4179,7 +4179,7 @@ WHERE it1.info = 'countries'
 			"                 └─ IndexedTableAccess(movie_info_idx)\n" +
 			"                     ├─ index: [movie_info_idx.movie_id]\n" +
 			"                     ├─ keys: [mi.movie_id:4!null]\n" +
-			"                     ├─ colSet: (15-19)\n" +
+			"                     ├─ colSet: (16-18)\n" +
 			"                     ├─ tableId: 6\n" +
 			"                     └─ Table\n" +
 			"                         ├─ name: movie_info_idx\n" +
@@ -4426,7 +4426,7 @@ WHERE it1.info = 'countries'
 			"         │   │   │   │   │           └─ IndexedTableAccess(movie_info)\n" +
 			"         │   │   │   │   │               ├─ index: [movie_info.info_type_id]\n" +
 			"         │   │   │   │   │               ├─ keys: [it1.id:2!null]\n" +
-			"         │   │   │   │   │               ├─ colSet: (10-14)\n" +
+			"         │   │   │   │   │               ├─ colSet: (11-13)\n" +
 			"         │   │   │   │   │               ├─ tableId: 5\n" +
 			"         │   │   │   │   │               └─ Table\n" +
 			"         │   │   │   │   │                   ├─ name: movie_info\n" +
@@ -4445,7 +4445,7 @@ WHERE it1.info = 'countries'
 			"         │   │   │   │           └─ IndexedTableAccess(title)\n" +
 			"         │   │   │   │               ├─ index: [title.id]\n" +
 			"         │   │   │   │               ├─ keys: [mi.movie_id:4!null]\n" +
-			"         │   │   │   │               ├─ colSet: (23-34)\n" +
+			"         │   │   │   │               ├─ colSet: (23,24,26,27)\n" +
 			"         │   │   │   │               ├─ tableId: 8\n" +
 			"         │   │   │   │               └─ Table\n" +
 			"         │   │   │   │                   ├─ name: title\n" +
@@ -4466,7 +4466,7 @@ WHERE it1.info = 'countries'
 			"         │   │       └─ IndexedTableAccess(movie_keyword)\n" +
 			"         │   │           ├─ index: [movie_keyword.movie_id]\n" +
 			"         │   │           ├─ keys: [mi.movie_id:4!null]\n" +
-			"         │   │           ├─ colSet: (20-22)\n" +
+			"         │   │           ├─ colSet: (21,22)\n" +
 			"         │   │           ├─ tableId: 7\n" +
 			"         │   │           └─ Table\n" +
 			"         │   │               ├─ name: movie_keyword\n" +
@@ -4479,7 +4479,7 @@ WHERE it1.info = 'countries'
 			"         │           └─ IndexedTableAccess(keyword)\n" +
 			"         │               ├─ index: [keyword.id]\n" +
 			"         │               ├─ keys: [mk.keyword_id:14!null]\n" +
-			"         │               ├─ colSet: (5-7)\n" +
+			"         │               ├─ colSet: (5,6)\n" +
 			"         │               ├─ tableId: 3\n" +
 			"         │               └─ Table\n" +
 			"         │                   ├─ name: keyword\n" +
@@ -4492,7 +4492,7 @@ WHERE it1.info = 'countries'
 			"                 └─ IndexedTableAccess(movie_info_idx)\n" +
 			"                     ├─ index: [movie_info_idx.movie_id]\n" +
 			"                     ├─ keys: [mi.movie_id:4!null]\n" +
-			"                     ├─ colSet: (15-19)\n" +
+			"                     ├─ colSet: (16-18)\n" +
 			"                     ├─ tableId: 6\n" +
 			"                     └─ Table\n" +
 			"                         ├─ name: movie_info_idx\n" +
@@ -4740,7 +4740,7 @@ WHERE it1.info = 'countries'
 			"         │   │   │   │   │           └─ IndexedTableAccess(movie_info)\n" +
 			"         │   │   │   │   │               ├─ index: [movie_info.info_type_id]\n" +
 			"         │   │   │   │   │               ├─ keys: [it1.id:2!null]\n" +
-			"         │   │   │   │   │               ├─ colSet: (10-14)\n" +
+			"         │   │   │   │   │               ├─ colSet: (11-13)\n" +
 			"         │   │   │   │   │               ├─ tableId: 5\n" +
 			"         │   │   │   │   │               └─ Table\n" +
 			"         │   │   │   │   │                   ├─ name: movie_info\n" +
@@ -4753,7 +4753,7 @@ WHERE it1.info = 'countries'
 			"         │   │   │   │           └─ IndexedTableAccess(title)\n" +
 			"         │   │   │   │               ├─ index: [title.id]\n" +
 			"         │   │   │   │               ├─ keys: [mi.movie_id:4!null]\n" +
-			"         │   │   │   │               ├─ colSet: (23-34)\n" +
+			"         │   │   │   │               ├─ colSet: (23,24,26,27)\n" +
 			"         │   │   │   │               ├─ tableId: 8\n" +
 			"         │   │   │   │               └─ Table\n" +
 			"         │   │   │   │                   ├─ name: title\n" +
@@ -4774,7 +4774,7 @@ WHERE it1.info = 'countries'
 			"         │   │       └─ IndexedTableAccess(movie_keyword)\n" +
 			"         │   │           ├─ index: [movie_keyword.movie_id]\n" +
 			"         │   │           ├─ keys: [mi.movie_id:4!null]\n" +
-			"         │   │           ├─ colSet: (20-22)\n" +
+			"         │   │           ├─ colSet: (21,22)\n" +
 			"         │   │           ├─ tableId: 7\n" +
 			"         │   │           └─ Table\n" +
 			"         │   │               ├─ name: movie_keyword\n" +
@@ -4790,7 +4790,7 @@ WHERE it1.info = 'countries'
 			"         │           └─ IndexedTableAccess(keyword)\n" +
 			"         │               ├─ index: [keyword.id]\n" +
 			"         │               ├─ keys: [mk.keyword_id:14!null]\n" +
-			"         │               ├─ colSet: (5-7)\n" +
+			"         │               ├─ colSet: (5,6)\n" +
 			"         │               ├─ tableId: 3\n" +
 			"         │               └─ Table\n" +
 			"         │                   ├─ name: keyword\n" +
@@ -4803,7 +4803,7 @@ WHERE it1.info = 'countries'
 			"                 └─ IndexedTableAccess(movie_info_idx)\n" +
 			"                     ├─ index: [movie_info_idx.movie_id]\n" +
 			"                     ├─ keys: [mi.movie_id:4!null]\n" +
-			"                     ├─ colSet: (15-19)\n" +
+			"                     ├─ colSet: (16-18)\n" +
 			"                     ├─ tableId: 6\n" +
 			"                     └─ Table\n" +
 			"                         ├─ name: movie_info_idx\n" +
@@ -5033,7 +5033,7 @@ WHERE cn.country_code = '[us]'
 			"         │   │   │   │   │   │   │           └─ IndexedTableAccess(title)\n" +
 			"         │   │   │   │   │   │   │               ├─ index: [title.id]\n" +
 			"         │   │   │   │   │   │   │               ├─ keys: [at.movie_id:0!null]\n" +
-			"         │   │   │   │   │   │   │               ├─ colSet: (40-51)\n" +
+			"         │   │   │   │   │   │   │               ├─ colSet: (40,41,44)\n" +
 			"         │   │   │   │   │   │   │               ├─ tableId: 9\n" +
 			"         │   │   │   │   │   │   │               └─ Table\n" +
 			"         │   │   │   │   │   │   │                   ├─ name: title\n" +
@@ -5046,7 +5046,7 @@ WHERE cn.country_code = '[us]'
 			"         │   │   │   │   │   │           └─ IndexedTableAccess(movie_info)\n" +
 			"         │   │   │   │   │   │               ├─ index: [movie_info.movie_id]\n" +
 			"         │   │   │   │   │   │               ├─ keys: [at.movie_id:0!null]\n" +
-			"         │   │   │   │   │   │               ├─ colSet: (32-36)\n" +
+			"         │   │   │   │   │   │               ├─ colSet: (33-36)\n" +
 			"         │   │   │   │   │   │               ├─ tableId: 7\n" +
 			"         │   │   │   │   │   │               └─ Table\n" +
 			"         │   │   │   │   │   │                   ├─ name: movie_info\n" +
@@ -5055,7 +5055,7 @@ WHERE cn.country_code = '[us]'
 			"         │   │   │   │   │       └─ IndexedTableAccess(movie_keyword)\n" +
 			"         │   │   │   │   │           ├─ index: [movie_keyword.movie_id]\n" +
 			"         │   │   │   │   │           ├─ keys: [mi.movie_id:4!null]\n" +
-			"         │   │   │   │   │           ├─ colSet: (37-39)\n" +
+			"         │   │   │   │   │           ├─ colSet: (38,39)\n" +
 			"         │   │   │   │   │           ├─ tableId: 8\n" +
 			"         │   │   │   │   │           └─ Table\n" +
 			"         │   │   │   │   │               ├─ name: movie_keyword\n" +
@@ -5068,7 +5068,7 @@ WHERE cn.country_code = '[us]'
 			"         │   │   │   │           └─ IndexedTableAccess(movie_companies)\n" +
 			"         │   │   │   │               ├─ index: [movie_companies.movie_id]\n" +
 			"         │   │   │   │               ├─ keys: [at.movie_id:0!null]\n" +
-			"         │   │   │   │               ├─ colSet: (27-31)\n" +
+			"         │   │   │   │               ├─ colSet: (28-31)\n" +
 			"         │   │   │   │               ├─ tableId: 6\n" +
 			"         │   │   │   │               └─ Table\n" +
 			"         │   │   │   │                   ├─ name: movie_companies\n" +
@@ -5369,7 +5369,7 @@ WHERE cn.country_code = '[us]'
 			"         │   │   │   │   │   │   │           └─ IndexedTableAccess(title)\n" +
 			"         │   │   │   │   │   │   │               ├─ index: [title.id]\n" +
 			"         │   │   │   │   │   │   │               ├─ keys: [at.movie_id:0!null]\n" +
-			"         │   │   │   │   │   │   │               ├─ colSet: (40-51)\n" +
+			"         │   │   │   │   │   │   │               ├─ colSet: (40,41,44)\n" +
 			"         │   │   │   │   │   │   │               ├─ tableId: 9\n" +
 			"         │   │   │   │   │   │   │               └─ Table\n" +
 			"         │   │   │   │   │   │   │                   ├─ name: title\n" +
@@ -5382,7 +5382,7 @@ WHERE cn.country_code = '[us]'
 			"         │   │   │   │   │   │           └─ IndexedTableAccess(movie_info)\n" +
 			"         │   │   │   │   │   │               ├─ index: [movie_info.movie_id]\n" +
 			"         │   │   │   │   │   │               ├─ keys: [at.movie_id:0!null]\n" +
-			"         │   │   │   │   │   │               ├─ colSet: (32-36)\n" +
+			"         │   │   │   │   │   │               ├─ colSet: (33-36)\n" +
 			"         │   │   │   │   │   │               ├─ tableId: 7\n" +
 			"         │   │   │   │   │   │               └─ Table\n" +
 			"         │   │   │   │   │   │                   ├─ name: movie_info\n" +
@@ -5391,7 +5391,7 @@ WHERE cn.country_code = '[us]'
 			"         │   │   │   │   │       └─ IndexedTableAccess(movie_keyword)\n" +
 			"         │   │   │   │   │           ├─ index: [movie_keyword.movie_id]\n" +
 			"         │   │   │   │   │           ├─ keys: [mi.movie_id:4!null]\n" +
-			"         │   │   │   │   │           ├─ colSet: (37-39)\n" +
+			"         │   │   │   │   │           ├─ colSet: (38,39)\n" +
 			"         │   │   │   │   │           ├─ tableId: 8\n" +
 			"         │   │   │   │   │           └─ Table\n" +
 			"         │   │   │   │   │               ├─ name: movie_keyword\n" +
@@ -5404,7 +5404,7 @@ WHERE cn.country_code = '[us]'
 			"         │   │   │   │           └─ IndexedTableAccess(movie_companies)\n" +
 			"         │   │   │   │               ├─ index: [movie_companies.movie_id]\n" +
 			"         │   │   │   │               ├─ keys: [at.movie_id:0!null]\n" +
-			"         │   │   │   │               ├─ colSet: (27-31)\n" +
+			"         │   │   │   │               ├─ colSet: (28-31)\n" +
 			"         │   │   │   │               ├─ tableId: 6\n" +
 			"         │   │   │   │               └─ Table\n" +
 			"         │   │   │   │                   ├─ name: movie_companies\n" +
@@ -5704,7 +5704,7 @@ WHERE cn.country_code = '[us]'
 			"         │   │   │   │   │   │   │           └─ IndexedTableAccess(title)\n" +
 			"         │   │   │   │   │   │   │               ├─ index: [title.id]\n" +
 			"         │   │   │   │   │   │   │               ├─ keys: [at.movie_id:0!null]\n" +
-			"         │   │   │   │   │   │   │               ├─ colSet: (40-51)\n" +
+			"         │   │   │   │   │   │   │               ├─ colSet: (40,41,44)\n" +
 			"         │   │   │   │   │   │   │               ├─ tableId: 9\n" +
 			"         │   │   │   │   │   │   │               └─ Table\n" +
 			"         │   │   │   │   │   │   │                   ├─ name: title\n" +
@@ -5722,7 +5722,7 @@ WHERE cn.country_code = '[us]'
 			"         │   │   │   │   │   │           └─ IndexedTableAccess(movie_info)\n" +
 			"         │   │   │   │   │   │               ├─ index: [movie_info.movie_id]\n" +
 			"         │   │   │   │   │   │               ├─ keys: [at.movie_id:0!null]\n" +
-			"         │   │   │   │   │   │               ├─ colSet: (32-36)\n" +
+			"         │   │   │   │   │   │               ├─ colSet: (33-36)\n" +
 			"         │   │   │   │   │   │               ├─ tableId: 7\n" +
 			"         │   │   │   │   │   │               └─ Table\n" +
 			"         │   │   │   │   │   │                   ├─ name: movie_info\n" +
@@ -5731,7 +5731,7 @@ WHERE cn.country_code = '[us]'
 			"         │   │   │   │   │       └─ IndexedTableAccess(movie_companies)\n" +
 			"         │   │   │   │   │           ├─ index: [movie_companies.movie_id]\n" +
 			"         │   │   │   │   │           ├─ keys: [at.movie_id:0!null]\n" +
-			"         │   │   │   │   │           ├─ colSet: (27-31)\n" +
+			"         │   │   │   │   │           ├─ colSet: (28-30)\n" +
 			"         │   │   │   │   │           ├─ tableId: 6\n" +
 			"         │   │   │   │   │           └─ Table\n" +
 			"         │   │   │   │   │               ├─ name: movie_companies\n" +
@@ -5740,7 +5740,7 @@ WHERE cn.country_code = '[us]'
 			"         │   │   │   │       └─ IndexedTableAccess(movie_keyword)\n" +
 			"         │   │   │   │           ├─ index: [movie_keyword.movie_id]\n" +
 			"         │   │   │   │           ├─ keys: [mi.movie_id:4!null]\n" +
-			"         │   │   │   │           ├─ colSet: (37-39)\n" +
+			"         │   │   │   │           ├─ colSet: (38,39)\n" +
 			"         │   │   │   │           ├─ tableId: 8\n" +
 			"         │   │   │   │           └─ Table\n" +
 			"         │   │   │   │               ├─ name: movie_keyword\n" +
@@ -6029,7 +6029,7 @@ WHERE cn.country_code = '[us]'
 			"         │   │   │   │   │   │   │           └─ IndexedTableAccess(title)\n" +
 			"         │   │   │   │   │   │   │               ├─ index: [title.id]\n" +
 			"         │   │   │   │   │   │   │               ├─ keys: [at.movie_id:0!null]\n" +
-			"         │   │   │   │   │   │   │               ├─ colSet: (40-51)\n" +
+			"         │   │   │   │   │   │   │               ├─ colSet: (40,41,44)\n" +
 			"         │   │   │   │   │   │   │               ├─ tableId: 9\n" +
 			"         │   │   │   │   │   │   │               └─ Table\n" +
 			"         │   │   │   │   │   │   │                   ├─ name: title\n" +
@@ -6040,7 +6040,7 @@ WHERE cn.country_code = '[us]'
 			"         │   │   │   │   │   │           └─ IndexedTableAccess(movie_info)\n" +
 			"         │   │   │   │   │   │               ├─ index: [movie_info.movie_id]\n" +
 			"         │   │   │   │   │   │               ├─ keys: [at.movie_id:0!null]\n" +
-			"         │   │   │   │   │   │               ├─ colSet: (32-36)\n" +
+			"         │   │   │   │   │   │               ├─ colSet: (33,34,36)\n" +
 			"         │   │   │   │   │   │               ├─ tableId: 7\n" +
 			"         │   │   │   │   │   │               └─ Table\n" +
 			"         │   │   │   │   │   │                   ├─ name: movie_info\n" +
@@ -6049,7 +6049,7 @@ WHERE cn.country_code = '[us]'
 			"         │   │   │   │   │       └─ IndexedTableAccess(movie_companies)\n" +
 			"         │   │   │   │   │           ├─ index: [movie_companies.movie_id]\n" +
 			"         │   │   │   │   │           ├─ keys: [at.movie_id:0!null]\n" +
-			"         │   │   │   │   │           ├─ colSet: (27-31)\n" +
+			"         │   │   │   │   │           ├─ colSet: (28-30)\n" +
 			"         │   │   │   │   │           ├─ tableId: 6\n" +
 			"         │   │   │   │   │           └─ Table\n" +
 			"         │   │   │   │   │               ├─ name: movie_companies\n" +
@@ -6058,7 +6058,7 @@ WHERE cn.country_code = '[us]'
 			"         │   │   │   │       └─ IndexedTableAccess(movie_keyword)\n" +
 			"         │   │   │   │           ├─ index: [movie_keyword.movie_id]\n" +
 			"         │   │   │   │           ├─ keys: [mi.movie_id:5!null]\n" +
-			"         │   │   │   │           ├─ colSet: (37-39)\n" +
+			"         │   │   │   │           ├─ colSet: (38,39)\n" +
 			"         │   │   │   │           ├─ tableId: 8\n" +
 			"         │   │   │   │           └─ Table\n" +
 			"         │   │   │   │               ├─ name: movie_keyword\n" +
@@ -6332,7 +6332,7 @@ WHERE cn.country_code ='[us]'
 			"         │   │   │   │   │   │       └─ IndexedTableAccess(name)\n" +
 			"         │   │   │   │   │   │           ├─ index: [name.id]\n" +
 			"         │   │   │   │   │   │           ├─ keys: [an.person_id:0!null]\n" +
-			"         │   │   │   │   │   │           ├─ colSet: (34-42)\n" +
+			"         │   │   │   │   │   │           ├─ colSet: (34)\n" +
 			"         │   │   │   │   │   │           ├─ tableId: 7\n" +
 			"         │   │   │   │   │   │           └─ Table\n" +
 			"         │   │   │   │   │   │               ├─ name: name\n" +
@@ -6341,7 +6341,7 @@ WHERE cn.country_code ='[us]'
 			"         │   │   │   │   │       └─ IndexedTableAccess(cast_info)\n" +
 			"         │   │   │   │   │           ├─ index: [cast_info.person_id]\n" +
 			"         │   │   │   │   │           ├─ keys: [an.person_id:0!null]\n" +
-			"         │   │   │   │   │           ├─ colSet: (9-15)\n" +
+			"         │   │   │   │   │           ├─ colSet: (10,11)\n" +
 			"         │   │   │   │   │           ├─ tableId: 2\n" +
 			"         │   │   │   │   │           └─ Table\n" +
 			"         │   │   │   │   │               ├─ name: cast_info\n" +
@@ -6358,7 +6358,7 @@ WHERE cn.country_code ='[us]'
 			"         │   │   │   │           └─ IndexedTableAccess(title)\n" +
 			"         │   │   │   │               ├─ index: [title.id]\n" +
 			"         │   │   │   │               ├─ keys: [ci.movie_id:4!null]\n" +
-			"         │   │   │   │               ├─ colSet: (43-54)\n" +
+			"         │   │   │   │               ├─ colSet: (43,44,52)\n" +
 			"         │   │   │   │               ├─ tableId: 8\n" +
 			"         │   │   │   │               └─ Table\n" +
 			"         │   │   │   │                   ├─ name: title\n" +
@@ -6367,7 +6367,7 @@ WHERE cn.country_code ='[us]'
 			"         │   │   │       └─ IndexedTableAccess(movie_keyword)\n" +
 			"         │   │   │           ├─ index: [movie_keyword.movie_id]\n" +
 			"         │   │   │           ├─ keys: [ci.movie_id:4!null]\n" +
-			"         │   │   │           ├─ colSet: (31-33)\n" +
+			"         │   │   │           ├─ colSet: (32,33)\n" +
 			"         │   │   │           ├─ tableId: 6\n" +
 			"         │   │   │           └─ Table\n" +
 			"         │   │   │               ├─ name: movie_keyword\n" +
@@ -6388,7 +6388,7 @@ WHERE cn.country_code ='[us]'
 			"         │       └─ IndexedTableAccess(movie_companies)\n" +
 			"         │           ├─ index: [movie_companies.movie_id]\n" +
 			"         │           ├─ keys: [mk.movie_id:8!null]\n" +
-			"         │           ├─ colSet: (26-30)\n" +
+			"         │           ├─ colSet: (27,28)\n" +
 			"         │           ├─ tableId: 5\n" +
 			"         │           └─ Table\n" +
 			"         │               ├─ name: movie_companies\n" +
@@ -6601,7 +6601,7 @@ WHERE cn.country_code ='[us]'
 			"         │   │   │   │   │   │       └─ IndexedTableAccess(name)\n" +
 			"         │   │   │   │   │   │           ├─ index: [name.id]\n" +
 			"         │   │   │   │   │   │           ├─ keys: [an.person_id:0!null]\n" +
-			"         │   │   │   │   │   │           ├─ colSet: (34-42)\n" +
+			"         │   │   │   │   │   │           ├─ colSet: (34)\n" +
 			"         │   │   │   │   │   │           ├─ tableId: 7\n" +
 			"         │   │   │   │   │   │           └─ Table\n" +
 			"         │   │   │   │   │   │               ├─ name: name\n" +
@@ -6610,7 +6610,7 @@ WHERE cn.country_code ='[us]'
 			"         │   │   │   │   │       └─ IndexedTableAccess(cast_info)\n" +
 			"         │   │   │   │   │           ├─ index: [cast_info.person_id]\n" +
 			"         │   │   │   │   │           ├─ keys: [an.person_id:0!null]\n" +
-			"         │   │   │   │   │           ├─ colSet: (9-15)\n" +
+			"         │   │   │   │   │           ├─ colSet: (10,11)\n" +
 			"         │   │   │   │   │           ├─ tableId: 2\n" +
 			"         │   │   │   │   │           └─ Table\n" +
 			"         │   │   │   │   │               ├─ name: cast_info\n" +
@@ -6619,7 +6619,7 @@ WHERE cn.country_code ='[us]'
 			"         │   │   │   │       └─ IndexedTableAccess(movie_keyword)\n" +
 			"         │   │   │   │           ├─ index: [movie_keyword.movie_id]\n" +
 			"         │   │   │   │           ├─ keys: [ci.movie_id:4!null]\n" +
-			"         │   │   │   │           ├─ colSet: (31-33)\n" +
+			"         │   │   │   │           ├─ colSet: (32,33)\n" +
 			"         │   │   │   │           ├─ tableId: 6\n" +
 			"         │   │   │   │           └─ Table\n" +
 			"         │   │   │   │               ├─ name: movie_keyword\n" +
@@ -6628,7 +6628,7 @@ WHERE cn.country_code ='[us]'
 			"         │   │   │       └─ IndexedTableAccess(title)\n" +
 			"         │   │   │           ├─ index: [title.id]\n" +
 			"         │   │   │           ├─ keys: [mk.movie_id:5!null]\n" +
-			"         │   │   │           ├─ colSet: (43-54)\n" +
+			"         │   │   │           ├─ colSet: (43,44)\n" +
 			"         │   │   │           ├─ tableId: 8\n" +
 			"         │   │   │           └─ Table\n" +
 			"         │   │   │               ├─ name: title\n" +
@@ -6649,7 +6649,7 @@ WHERE cn.country_code ='[us]'
 			"         │       └─ IndexedTableAccess(movie_companies)\n" +
 			"         │           ├─ index: [movie_companies.movie_id]\n" +
 			"         │           ├─ keys: [mk.movie_id:5!null]\n" +
-			"         │           ├─ colSet: (26-30)\n" +
+			"         │           ├─ colSet: (27,28)\n" +
 			"         │           ├─ tableId: 5\n" +
 			"         │           └─ Table\n" +
 			"         │               ├─ name: movie_companies\n" +
@@ -6861,7 +6861,7 @@ WHERE cn.country_code ='[us]'
 			"         │   │   │   │   │   │       └─ IndexedTableAccess(name)\n" +
 			"         │   │   │   │   │   │           ├─ index: [name.id]\n" +
 			"         │   │   │   │   │   │           ├─ keys: [an.person_id:0!null]\n" +
-			"         │   │   │   │   │   │           ├─ colSet: (34-42)\n" +
+			"         │   │   │   │   │   │           ├─ colSet: (34)\n" +
 			"         │   │   │   │   │   │           ├─ tableId: 7\n" +
 			"         │   │   │   │   │   │           └─ Table\n" +
 			"         │   │   │   │   │   │               ├─ name: name\n" +
@@ -6870,7 +6870,7 @@ WHERE cn.country_code ='[us]'
 			"         │   │   │   │   │       └─ IndexedTableAccess(cast_info)\n" +
 			"         │   │   │   │   │           ├─ index: [cast_info.person_id]\n" +
 			"         │   │   │   │   │           ├─ keys: [an.person_id:0!null]\n" +
-			"         │   │   │   │   │           ├─ colSet: (9-15)\n" +
+			"         │   │   │   │   │           ├─ colSet: (10,11)\n" +
 			"         │   │   │   │   │           ├─ tableId: 2\n" +
 			"         │   │   │   │   │           └─ Table\n" +
 			"         │   │   │   │   │               ├─ name: cast_info\n" +
@@ -6879,7 +6879,7 @@ WHERE cn.country_code ='[us]'
 			"         │   │   │   │       └─ IndexedTableAccess(movie_keyword)\n" +
 			"         │   │   │   │           ├─ index: [movie_keyword.movie_id]\n" +
 			"         │   │   │   │           ├─ keys: [ci.movie_id:4!null]\n" +
-			"         │   │   │   │           ├─ colSet: (31-33)\n" +
+			"         │   │   │   │           ├─ colSet: (32,33)\n" +
 			"         │   │   │   │           ├─ tableId: 6\n" +
 			"         │   │   │   │           └─ Table\n" +
 			"         │   │   │   │               ├─ name: movie_keyword\n" +
@@ -6900,7 +6900,7 @@ WHERE cn.country_code ='[us]'
 			"         │   │       └─ IndexedTableAccess(movie_companies)\n" +
 			"         │   │           ├─ index: [movie_companies.movie_id]\n" +
 			"         │   │           ├─ keys: [mk.movie_id:5!null]\n" +
-			"         │   │           ├─ colSet: (26-30)\n" +
+			"         │   │           ├─ colSet: (27,28)\n" +
 			"         │   │           ├─ tableId: 5\n" +
 			"         │   │           └─ Table\n" +
 			"         │   │               ├─ name: movie_companies\n" +
@@ -6925,7 +6925,7 @@ WHERE cn.country_code ='[us]'
 			"                 └─ IndexedTableAccess(title)\n" +
 			"                     ├─ index: [title.id]\n" +
 			"                     ├─ keys: [ci.movie_id:4!null]\n" +
-			"                     ├─ colSet: (43-54)\n" +
+			"                     ├─ colSet: (43,44,52)\n" +
 			"                     ├─ tableId: 8\n" +
 			"                     └─ Table\n" +
 			"                         ├─ name: title\n" +
@@ -7129,7 +7129,7 @@ WHERE cn.country_code ='[us]'
 			"         │   │   │   │   │   │       └─ IndexedTableAccess(name)\n" +
 			"         │   │   │   │   │   │           ├─ index: [name.id]\n" +
 			"         │   │   │   │   │   │           ├─ keys: [an.person_id:0!null]\n" +
-			"         │   │   │   │   │   │           ├─ colSet: (34-42)\n" +
+			"         │   │   │   │   │   │           ├─ colSet: (34)\n" +
 			"         │   │   │   │   │   │           ├─ tableId: 7\n" +
 			"         │   │   │   │   │   │           └─ Table\n" +
 			"         │   │   │   │   │   │               ├─ name: name\n" +
@@ -7138,7 +7138,7 @@ WHERE cn.country_code ='[us]'
 			"         │   │   │   │   │       └─ IndexedTableAccess(cast_info)\n" +
 			"         │   │   │   │   │           ├─ index: [cast_info.person_id]\n" +
 			"         │   │   │   │   │           ├─ keys: [an.person_id:0!null]\n" +
-			"         │   │   │   │   │           ├─ colSet: (9-15)\n" +
+			"         │   │   │   │   │           ├─ colSet: (10,11)\n" +
 			"         │   │   │   │   │           ├─ tableId: 2\n" +
 			"         │   │   │   │   │           └─ Table\n" +
 			"         │   │   │   │   │               ├─ name: cast_info\n" +
@@ -7155,7 +7155,7 @@ WHERE cn.country_code ='[us]'
 			"         │   │   │   │           └─ IndexedTableAccess(title)\n" +
 			"         │   │   │   │               ├─ index: [title.id]\n" +
 			"         │   │   │   │               ├─ keys: [ci.movie_id:4!null]\n" +
-			"         │   │   │   │               ├─ colSet: (43-54)\n" +
+			"         │   │   │   │               ├─ colSet: (43,44,52)\n" +
 			"         │   │   │   │               ├─ tableId: 8\n" +
 			"         │   │   │   │               └─ Table\n" +
 			"         │   │   │   │                   ├─ name: title\n" +
@@ -7164,7 +7164,7 @@ WHERE cn.country_code ='[us]'
 			"         │   │   │       └─ IndexedTableAccess(movie_keyword)\n" +
 			"         │   │   │           ├─ index: [movie_keyword.movie_id]\n" +
 			"         │   │   │           ├─ keys: [ci.movie_id:4!null]\n" +
-			"         │   │   │           ├─ colSet: (31-33)\n" +
+			"         │   │   │           ├─ colSet: (32,33)\n" +
 			"         │   │   │           ├─ tableId: 6\n" +
 			"         │   │   │           └─ Table\n" +
 			"         │   │   │               ├─ name: movie_keyword\n" +
@@ -7185,7 +7185,7 @@ WHERE cn.country_code ='[us]'
 			"         │       └─ IndexedTableAccess(movie_companies)\n" +
 			"         │           ├─ index: [movie_companies.movie_id]\n" +
 			"         │           ├─ keys: [mk.movie_id:8!null]\n" +
-			"         │           ├─ colSet: (26-30)\n" +
+			"         │           ├─ colSet: (27,28)\n" +
 			"         │           ├─ tableId: 5\n" +
 			"         │           └─ Table\n" +
 			"         │               ├─ name: movie_companies\n" +
@@ -7397,7 +7397,7 @@ WHERE cn.country_code ='[us]'
 			"         │   │   │   │   │   │   └─ IndexedTableAccess(movie_companies)\n" +
 			"         │   │   │   │   │   │       ├─ index: [movie_companies.movie_id]\n" +
 			"         │   │   │   │   │   │       ├─ static: [{[NULL, ∞)}]\n" +
-			"         │   │   │   │   │   │       ├─ colSet: (18-22)\n" +
+			"         │   │   │   │   │   │       ├─ colSet: (19,20)\n" +
 			"         │   │   │   │   │   │       ├─ tableId: 4\n" +
 			"         │   │   │   │   │   │       └─ Table\n" +
 			"         │   │   │   │   │   │           ├─ name: movie_companies\n" +
@@ -7406,7 +7406,7 @@ WHERE cn.country_code ='[us]'
 			"         │   │   │   │   │       └─ IndexedTableAccess(title)\n" +
 			"         │   │   │   │   │           ├─ index: [title.id]\n" +
 			"         │   │   │   │   │           ├─ static: [{[NULL, ∞)}]\n" +
-			"         │   │   │   │   │           ├─ colSet: (35-46)\n" +
+			"         │   │   │   │   │           ├─ colSet: (35)\n" +
 			"         │   │   │   │   │           ├─ tableId: 7\n" +
 			"         │   │   │   │   │           └─ Table\n" +
 			"         │   │   │   │   │               ├─ name: title\n" +
@@ -7427,7 +7427,7 @@ WHERE cn.country_code ='[us]'
 			"         │   │   │       └─ IndexedTableAccess(cast_info)\n" +
 			"         │   │   │           ├─ index: [cast_info.movie_id]\n" +
 			"         │   │   │           ├─ keys: [mc.movie_id:0!null]\n" +
-			"         │   │   │           ├─ colSet: (1-7)\n" +
+			"         │   │   │           ├─ colSet: (2,3)\n" +
 			"         │   │   │           ├─ tableId: 1\n" +
 			"         │   │   │           └─ Table\n" +
 			"         │   │   │               ├─ name: cast_info\n" +
@@ -7444,7 +7444,7 @@ WHERE cn.country_code ='[us]'
 			"         │   │           └─ IndexedTableAccess(name)\n" +
 			"         │   │               ├─ index: [name.id]\n" +
 			"         │   │               ├─ keys: [ci.person_id:5!null]\n" +
-			"         │   │               ├─ colSet: (26-34)\n" +
+			"         │   │               ├─ colSet: (26,27)\n" +
 			"         │   │               ├─ tableId: 6\n" +
 			"         │   │               └─ Table\n" +
 			"         │   │                   ├─ name: name\n" +
@@ -7453,7 +7453,7 @@ WHERE cn.country_code ='[us]'
 			"         │       └─ IndexedTableAccess(movie_keyword)\n" +
 			"         │           ├─ index: [movie_keyword.movie_id]\n" +
 			"         │           ├─ keys: [ci.movie_id:6!null]\n" +
-			"         │           ├─ colSet: (23-25)\n" +
+			"         │           ├─ colSet: (24,25)\n" +
 			"         │           ├─ tableId: 5\n" +
 			"         │           └─ Table\n" +
 			"         │               ├─ name: movie_keyword\n" +
@@ -7654,7 +7654,7 @@ WHERE k.keyword ='character-name-in-title'
 			"         │   │   │   │   │   │   └─ IndexedTableAccess(movie_companies)\n" +
 			"         │   │   │   │   │   │       ├─ index: [movie_companies.movie_id]\n" +
 			"         │   │   │   │   │   │       ├─ static: [{[NULL, ∞)}]\n" +
-			"         │   │   │   │   │   │       ├─ colSet: (18-22)\n" +
+			"         │   │   │   │   │   │       ├─ colSet: (19,20)\n" +
 			"         │   │   │   │   │   │       ├─ tableId: 4\n" +
 			"         │   │   │   │   │   │       └─ Table\n" +
 			"         │   │   │   │   │   │           ├─ name: movie_companies\n" +
@@ -7663,7 +7663,7 @@ WHERE k.keyword ='character-name-in-title'
 			"         │   │   │   │   │       └─ IndexedTableAccess(title)\n" +
 			"         │   │   │   │   │           ├─ index: [title.id]\n" +
 			"         │   │   │   │   │           ├─ static: [{[NULL, ∞)}]\n" +
-			"         │   │   │   │   │           ├─ colSet: (35-46)\n" +
+			"         │   │   │   │   │           ├─ colSet: (35)\n" +
 			"         │   │   │   │   │           ├─ tableId: 7\n" +
 			"         │   │   │   │   │           └─ Table\n" +
 			"         │   │   │   │   │               ├─ name: title\n" +
@@ -7680,7 +7680,7 @@ WHERE k.keyword ='character-name-in-title'
 			"         │   │   │       └─ IndexedTableAccess(cast_info)\n" +
 			"         │   │   │           ├─ index: [cast_info.movie_id]\n" +
 			"         │   │   │           ├─ keys: [mc.movie_id:0!null]\n" +
-			"         │   │   │           ├─ colSet: (1-7)\n" +
+			"         │   │   │           ├─ colSet: (2,3)\n" +
 			"         │   │   │           ├─ tableId: 1\n" +
 			"         │   │   │           └─ Table\n" +
 			"         │   │   │               ├─ name: cast_info\n" +
@@ -7697,7 +7697,7 @@ WHERE k.keyword ='character-name-in-title'
 			"         │   │           └─ IndexedTableAccess(name)\n" +
 			"         │   │               ├─ index: [name.id]\n" +
 			"         │   │               ├─ keys: [ci.person_id:4!null]\n" +
-			"         │   │               ├─ colSet: (26-34)\n" +
+			"         │   │               ├─ colSet: (26,27)\n" +
 			"         │   │               ├─ tableId: 6\n" +
 			"         │   │               └─ Table\n" +
 			"         │   │                   ├─ name: name\n" +
@@ -7706,7 +7706,7 @@ WHERE k.keyword ='character-name-in-title'
 			"         │       └─ IndexedTableAccess(movie_keyword)\n" +
 			"         │           ├─ index: [movie_keyword.movie_id]\n" +
 			"         │           ├─ keys: [ci.movie_id:5!null]\n" +
-			"         │           ├─ colSet: (23-25)\n" +
+			"         │           ├─ colSet: (24,25)\n" +
 			"         │           ├─ tableId: 5\n" +
 			"         │           └─ Table\n" +
 			"         │               ├─ name: movie_keyword\n" +
@@ -7903,7 +7903,7 @@ WHERE k.keyword ='character-name-in-title'
 			"         │   │   │   │   │   │   └─ IndexedTableAccess(movie_companies)\n" +
 			"         │   │   │   │   │   │       ├─ index: [movie_companies.movie_id]\n" +
 			"         │   │   │   │   │   │       ├─ static: [{[NULL, ∞)}]\n" +
-			"         │   │   │   │   │   │       ├─ colSet: (18-22)\n" +
+			"         │   │   │   │   │   │       ├─ colSet: (19,20)\n" +
 			"         │   │   │   │   │   │       ├─ tableId: 4\n" +
 			"         │   │   │   │   │   │       └─ Table\n" +
 			"         │   │   │   │   │   │           ├─ name: movie_companies\n" +
@@ -7912,7 +7912,7 @@ WHERE k.keyword ='character-name-in-title'
 			"         │   │   │   │   │       └─ IndexedTableAccess(title)\n" +
 			"         │   │   │   │   │           ├─ index: [title.id]\n" +
 			"         │   │   │   │   │           ├─ static: [{[NULL, ∞)}]\n" +
-			"         │   │   │   │   │           ├─ colSet: (35-46)\n" +
+			"         │   │   │   │   │           ├─ colSet: (35)\n" +
 			"         │   │   │   │   │           ├─ tableId: 7\n" +
 			"         │   │   │   │   │           └─ Table\n" +
 			"         │   │   │   │   │               ├─ name: title\n" +
@@ -7929,7 +7929,7 @@ WHERE k.keyword ='character-name-in-title'
 			"         │   │   │       └─ IndexedTableAccess(cast_info)\n" +
 			"         │   │   │           ├─ index: [cast_info.movie_id]\n" +
 			"         │   │   │           ├─ keys: [mc.movie_id:0!null]\n" +
-			"         │   │   │           ├─ colSet: (1-7)\n" +
+			"         │   │   │           ├─ colSet: (2,3)\n" +
 			"         │   │   │           ├─ tableId: 1\n" +
 			"         │   │   │           └─ Table\n" +
 			"         │   │   │               ├─ name: cast_info\n" +
@@ -7946,7 +7946,7 @@ WHERE k.keyword ='character-name-in-title'
 			"         │   │           └─ IndexedTableAccess(name)\n" +
 			"         │   │               ├─ index: [name.id]\n" +
 			"         │   │               ├─ keys: [ci.person_id:4!null]\n" +
-			"         │   │               ├─ colSet: (26-34)\n" +
+			"         │   │               ├─ colSet: (26,27)\n" +
 			"         │   │               ├─ tableId: 6\n" +
 			"         │   │               └─ Table\n" +
 			"         │   │                   ├─ name: name\n" +
@@ -7955,7 +7955,7 @@ WHERE k.keyword ='character-name-in-title'
 			"         │       └─ IndexedTableAccess(movie_keyword)\n" +
 			"         │           ├─ index: [movie_keyword.movie_id]\n" +
 			"         │           ├─ keys: [ci.movie_id:5!null]\n" +
-			"         │           ├─ colSet: (23-25)\n" +
+			"         │           ├─ colSet: (24,25)\n" +
 			"         │           ├─ tableId: 5\n" +
 			"         │           └─ Table\n" +
 			"         │               ├─ name: movie_keyword\n" +
@@ -8151,7 +8151,7 @@ WHERE k.keyword ='character-name-in-title'
 			"         │   │   │   │   │   │   └─ IndexedTableAccess(movie_companies)\n" +
 			"         │   │   │   │   │   │       ├─ index: [movie_companies.movie_id]\n" +
 			"         │   │   │   │   │   │       ├─ static: [{[NULL, ∞)}]\n" +
-			"         │   │   │   │   │   │       ├─ colSet: (18-22)\n" +
+			"         │   │   │   │   │   │       ├─ colSet: (19,20)\n" +
 			"         │   │   │   │   │   │       ├─ tableId: 4\n" +
 			"         │   │   │   │   │   │       └─ Table\n" +
 			"         │   │   │   │   │   │           ├─ name: movie_companies\n" +
@@ -8160,7 +8160,7 @@ WHERE k.keyword ='character-name-in-title'
 			"         │   │   │   │   │       └─ IndexedTableAccess(title)\n" +
 			"         │   │   │   │   │           ├─ index: [title.id]\n" +
 			"         │   │   │   │   │           ├─ static: [{[NULL, ∞)}]\n" +
-			"         │   │   │   │   │           ├─ colSet: (35-46)\n" +
+			"         │   │   │   │   │           ├─ colSet: (35)\n" +
 			"         │   │   │   │   │           ├─ tableId: 7\n" +
 			"         │   │   │   │   │           └─ Table\n" +
 			"         │   │   │   │   │               ├─ name: title\n" +
@@ -8177,7 +8177,7 @@ WHERE k.keyword ='character-name-in-title'
 			"         │   │   │       └─ IndexedTableAccess(cast_info)\n" +
 			"         │   │   │           ├─ index: [cast_info.movie_id]\n" +
 			"         │   │   │           ├─ keys: [mc.movie_id:0!null]\n" +
-			"         │   │   │           ├─ colSet: (1-7)\n" +
+			"         │   │   │           ├─ colSet: (2,3)\n" +
 			"         │   │   │           ├─ tableId: 1\n" +
 			"         │   │   │           └─ Table\n" +
 			"         │   │   │               ├─ name: cast_info\n" +
@@ -8188,7 +8188,7 @@ WHERE k.keyword ='character-name-in-title'
 			"         │   │           └─ IndexedTableAccess(name)\n" +
 			"         │   │               ├─ index: [name.id]\n" +
 			"         │   │               ├─ keys: [ci.person_id:4!null]\n" +
-			"         │   │               ├─ colSet: (26-34)\n" +
+			"         │   │               ├─ colSet: (26,27)\n" +
 			"         │   │               ├─ tableId: 6\n" +
 			"         │   │               └─ Table\n" +
 			"         │   │                   ├─ name: name\n" +
@@ -8197,7 +8197,7 @@ WHERE k.keyword ='character-name-in-title'
 			"         │       └─ IndexedTableAccess(movie_keyword)\n" +
 			"         │           ├─ index: [movie_keyword.movie_id]\n" +
 			"         │           ├─ keys: [ci.movie_id:5!null]\n" +
-			"         │           ├─ colSet: (23-25)\n" +
+			"         │           ├─ colSet: (24,25)\n" +
 			"         │           ├─ tableId: 5\n" +
 			"         │           └─ Table\n" +
 			"         │               ├─ name: movie_keyword\n" +
@@ -8393,7 +8393,7 @@ WHERE cn.country_code ='[us]'
 			"         │   │   │   │   │   │   └─ IndexedTableAccess(movie_companies)\n" +
 			"         │   │   │   │   │   │       ├─ index: [movie_companies.movie_id]\n" +
 			"         │   │   │   │   │   │       ├─ static: [{[NULL, ∞)}]\n" +
-			"         │   │   │   │   │   │       ├─ colSet: (18-22)\n" +
+			"         │   │   │   │   │   │       ├─ colSet: (19,20)\n" +
 			"         │   │   │   │   │   │       ├─ tableId: 4\n" +
 			"         │   │   │   │   │   │       └─ Table\n" +
 			"         │   │   │   │   │   │           ├─ name: movie_companies\n" +
@@ -8402,7 +8402,7 @@ WHERE cn.country_code ='[us]'
 			"         │   │   │   │   │       └─ IndexedTableAccess(title)\n" +
 			"         │   │   │   │   │           ├─ index: [title.id]\n" +
 			"         │   │   │   │   │           ├─ static: [{[NULL, ∞)}]\n" +
-			"         │   │   │   │   │           ├─ colSet: (35-46)\n" +
+			"         │   │   │   │   │           ├─ colSet: (35)\n" +
 			"         │   │   │   │   │           ├─ tableId: 7\n" +
 			"         │   │   │   │   │           └─ Table\n" +
 			"         │   │   │   │   │               ├─ name: title\n" +
@@ -8423,7 +8423,7 @@ WHERE cn.country_code ='[us]'
 			"         │   │   │       └─ IndexedTableAccess(cast_info)\n" +
 			"         │   │   │           ├─ index: [cast_info.movie_id]\n" +
 			"         │   │   │           ├─ keys: [mc.movie_id:0!null]\n" +
-			"         │   │   │           ├─ colSet: (1-7)\n" +
+			"         │   │   │           ├─ colSet: (2,3)\n" +
 			"         │   │   │           ├─ tableId: 1\n" +
 			"         │   │   │           └─ Table\n" +
 			"         │   │   │               ├─ name: cast_info\n" +
@@ -8432,7 +8432,7 @@ WHERE cn.country_code ='[us]'
 			"         │   │       └─ IndexedTableAccess(name)\n" +
 			"         │   │           ├─ index: [name.id]\n" +
 			"         │   │           ├─ keys: [ci.person_id:5!null]\n" +
-			"         │   │           ├─ colSet: (26-34)\n" +
+			"         │   │           ├─ colSet: (26,27)\n" +
 			"         │   │           ├─ tableId: 6\n" +
 			"         │   │           └─ Table\n" +
 			"         │   │               ├─ name: name\n" +
@@ -8441,7 +8441,7 @@ WHERE cn.country_code ='[us]'
 			"         │       └─ IndexedTableAccess(movie_keyword)\n" +
 			"         │           ├─ index: [movie_keyword.movie_id]\n" +
 			"         │           ├─ keys: [ci.movie_id:6!null]\n" +
-			"         │           ├─ colSet: (23-25)\n" +
+			"         │           ├─ colSet: (24,25)\n" +
 			"         │           ├─ tableId: 5\n" +
 			"         │           └─ Table\n" +
 			"         │               ├─ name: movie_keyword\n" +
@@ -8637,7 +8637,7 @@ WHERE k.keyword ='character-name-in-title'
 			"         │   │   │   │   │   │   └─ IndexedTableAccess(movie_companies)\n" +
 			"         │   │   │   │   │   │       ├─ index: [movie_companies.movie_id]\n" +
 			"         │   │   │   │   │   │       ├─ static: [{[NULL, ∞)}]\n" +
-			"         │   │   │   │   │   │       ├─ colSet: (18-22)\n" +
+			"         │   │   │   │   │   │       ├─ colSet: (19,20)\n" +
 			"         │   │   │   │   │   │       ├─ tableId: 4\n" +
 			"         │   │   │   │   │   │       └─ Table\n" +
 			"         │   │   │   │   │   │           ├─ name: movie_companies\n" +
@@ -8646,7 +8646,7 @@ WHERE k.keyword ='character-name-in-title'
 			"         │   │   │   │   │       └─ IndexedTableAccess(title)\n" +
 			"         │   │   │   │   │           ├─ index: [title.id]\n" +
 			"         │   │   │   │   │           ├─ static: [{[NULL, ∞)}]\n" +
-			"         │   │   │   │   │           ├─ colSet: (35-46)\n" +
+			"         │   │   │   │   │           ├─ colSet: (35)\n" +
 			"         │   │   │   │   │           ├─ tableId: 7\n" +
 			"         │   │   │   │   │           └─ Table\n" +
 			"         │   │   │   │   │               ├─ name: title\n" +
@@ -8663,7 +8663,7 @@ WHERE k.keyword ='character-name-in-title'
 			"         │   │   │       └─ IndexedTableAccess(cast_info)\n" +
 			"         │   │   │           ├─ index: [cast_info.movie_id]\n" +
 			"         │   │   │           ├─ keys: [mc.movie_id:0!null]\n" +
-			"         │   │   │           ├─ colSet: (1-7)\n" +
+			"         │   │   │           ├─ colSet: (2,3)\n" +
 			"         │   │   │           ├─ tableId: 1\n" +
 			"         │   │   │           └─ Table\n" +
 			"         │   │   │               ├─ name: cast_info\n" +
@@ -8674,7 +8674,7 @@ WHERE k.keyword ='character-name-in-title'
 			"         │   │           └─ IndexedTableAccess(name)\n" +
 			"         │   │               ├─ index: [name.id]\n" +
 			"         │   │               ├─ keys: [ci.person_id:4!null]\n" +
-			"         │   │               ├─ colSet: (26-34)\n" +
+			"         │   │               ├─ colSet: (26,27)\n" +
 			"         │   │               ├─ tableId: 6\n" +
 			"         │   │               └─ Table\n" +
 			"         │   │                   ├─ name: name\n" +
@@ -8683,7 +8683,7 @@ WHERE k.keyword ='character-name-in-title'
 			"         │       └─ IndexedTableAccess(movie_keyword)\n" +
 			"         │           ├─ index: [movie_keyword.movie_id]\n" +
 			"         │           ├─ keys: [ci.movie_id:5!null]\n" +
-			"         │           ├─ colSet: (23-25)\n" +
+			"         │           ├─ colSet: (24,25)\n" +
 			"         │           ├─ tableId: 5\n" +
 			"         │           └─ Table\n" +
 			"         │               ├─ name: movie_keyword\n" +
@@ -8878,7 +8878,7 @@ WHERE ci.note IN ('(producer)',
 			"         │   │   │   │   │   │   └─ IndexedTableAccess(movie_info_idx)\n" +
 			"         │   │   │   │   │   │       ├─ index: [movie_info_idx.movie_id]\n" +
 			"         │   │   │   │   │   │       ├─ static: [{[NULL, ∞)}]\n" +
-			"         │   │   │   │   │   │       ├─ colSet: (17-21)\n" +
+			"         │   │   │   │   │   │       ├─ colSet: (18-20)\n" +
 			"         │   │   │   │   │   │       ├─ tableId: 5\n" +
 			"         │   │   │   │   │   │       └─ Table\n" +
 			"         │   │   │   │   │   │           ├─ name: movie_info_idx\n" +
@@ -8887,7 +8887,7 @@ WHERE ci.note IN ('(producer)',
 			"         │   │   │   │   │       └─ IndexedTableAccess(title)\n" +
 			"         │   │   │   │   │           ├─ index: [title.id]\n" +
 			"         │   │   │   │   │           ├─ static: [{[NULL, ∞)}]\n" +
-			"         │   │   │   │   │           ├─ colSet: (31-42)\n" +
+			"         │   │   │   │   │           ├─ colSet: (31,32)\n" +
 			"         │   │   │   │   │           ├─ tableId: 7\n" +
 			"         │   │   │   │   │           └─ Table\n" +
 			"         │   │   │   │   │               ├─ name: title\n" +
@@ -8900,7 +8900,7 @@ WHERE ci.note IN ('(producer)',
 			"         │   │   │   │           └─ IndexedTableAccess(cast_info)\n" +
 			"         │   │   │   │               ├─ index: [cast_info.movie_id]\n" +
 			"         │   │   │   │               ├─ keys: [mi_idx.movie_id:0!null]\n" +
-			"         │   │   │   │               ├─ colSet: (1-7)\n" +
+			"         │   │   │   │               ├─ colSet: (2,3,5)\n" +
 			"         │   │   │   │               ├─ tableId: 1\n" +
 			"         │   │   │   │               └─ Table\n" +
 			"         │   │   │   │                   ├─ name: cast_info\n" +
@@ -8921,7 +8921,7 @@ WHERE ci.note IN ('(producer)',
 			"         │   │       └─ IndexedTableAccess(movie_info)\n" +
 			"         │   │           ├─ index: [movie_info.movie_id]\n" +
 			"         │   │           ├─ keys: [mi_idx.movie_id:0!null]\n" +
-			"         │   │           ├─ colSet: (12-16)\n" +
+			"         │   │           ├─ colSet: (13-15)\n" +
 			"         │   │           ├─ tableId: 4\n" +
 			"         │   │           └─ Table\n" +
 			"         │   │               ├─ name: movie_info\n" +
@@ -8949,7 +8949,7 @@ WHERE ci.note IN ('(producer)',
 			"                 └─ IndexedTableAccess(name)\n" +
 			"                     ├─ index: [name.id]\n" +
 			"                     ├─ keys: [ci.person_id:5!null]\n" +
-			"                     ├─ colSet: (22-30)\n" +
+			"                     ├─ colSet: (22,23,26)\n" +
 			"                     ├─ tableId: 6\n" +
 			"                     └─ Table\n" +
 			"                         ├─ name: name\n" +
@@ -9150,7 +9150,7 @@ WHERE ci.note IN ('(writer)',
 			"         │   │   │   │   │   │       └─ IndexedTableAccess(movie_info_idx)\n" +
 			"         │   │   │   │   │   │           ├─ index: [movie_info_idx.movie_id]\n" +
 			"         │   │   │   │   │   │           ├─ static: [{[NULL, ∞)}]\n" +
-			"         │   │   │   │   │   │           ├─ colSet: (17-21)\n" +
+			"         │   │   │   │   │   │           ├─ colSet: (18-20)\n" +
 			"         │   │   │   │   │   │           ├─ tableId: 5\n" +
 			"         │   │   │   │   │   │           └─ Table\n" +
 			"         │   │   │   │   │   │               ├─ name: movie_info_idx\n" +
@@ -9167,7 +9167,7 @@ WHERE ci.note IN ('(writer)',
 			"         │   │   │   │   │           └─ IndexedTableAccess(title)\n" +
 			"         │   │   │   │   │               ├─ index: [title.id]\n" +
 			"         │   │   │   │   │               ├─ static: [{[NULL, ∞)}]\n" +
-			"         │   │   │   │   │               ├─ colSet: (31-42)\n" +
+			"         │   │   │   │   │               ├─ colSet: (31,32,35)\n" +
 			"         │   │   │   │   │               ├─ tableId: 7\n" +
 			"         │   │   │   │   │               └─ Table\n" +
 			"         │   │   │   │   │                   ├─ name: title\n" +
@@ -9180,7 +9180,7 @@ WHERE ci.note IN ('(writer)',
 			"         │   │   │   │           └─ IndexedTableAccess(cast_info)\n" +
 			"         │   │   │   │               ├─ index: [cast_info.movie_id]\n" +
 			"         │   │   │   │               ├─ keys: [mi_idx.movie_id:0!null]\n" +
-			"         │   │   │   │               ├─ colSet: (1-7)\n" +
+			"         │   │   │   │               ├─ colSet: (2,3,5)\n" +
 			"         │   │   │   │               ├─ tableId: 1\n" +
 			"         │   │   │   │               └─ Table\n" +
 			"         │   │   │   │                   ├─ name: cast_info\n" +
@@ -9207,7 +9207,7 @@ WHERE ci.note IN ('(writer)',
 			"         │   │           └─ IndexedTableAccess(movie_info)\n" +
 			"         │   │               ├─ index: [movie_info.movie_id]\n" +
 			"         │   │               ├─ keys: [mi_idx.movie_id:0!null]\n" +
-			"         │   │               ├─ colSet: (12-16)\n" +
+			"         │   │               ├─ colSet: (13-16)\n" +
 			"         │   │               ├─ tableId: 4\n" +
 			"         │   │               └─ Table\n" +
 			"         │   │                   ├─ name: movie_info\n" +
@@ -9236,7 +9236,7 @@ WHERE ci.note IN ('(writer)',
 			"                 └─ IndexedTableAccess(name)\n" +
 			"                     ├─ index: [name.id]\n" +
 			"                     ├─ keys: [ci.person_id:6!null]\n" +
-			"                     ├─ colSet: (22-30)\n" +
+			"                     ├─ colSet: (22,26)\n" +
 			"                     ├─ tableId: 6\n" +
 			"                     └─ Table\n" +
 			"                         ├─ name: name\n" +
@@ -9445,7 +9445,7 @@ WHERE ci.note IN ('(writer)',
 			"         │   │   │   │   │   │   └─ IndexedTableAccess(movie_info_idx)\n" +
 			"         │   │   │   │   │   │       ├─ index: [movie_info_idx.movie_id]\n" +
 			"         │   │   │   │   │   │       ├─ static: [{[NULL, ∞)}]\n" +
-			"         │   │   │   │   │   │       ├─ colSet: (17-21)\n" +
+			"         │   │   │   │   │   │       ├─ colSet: (18-20)\n" +
 			"         │   │   │   │   │   │       ├─ tableId: 5\n" +
 			"         │   │   │   │   │   │       └─ Table\n" +
 			"         │   │   │   │   │   │           ├─ name: movie_info_idx\n" +
@@ -9454,7 +9454,7 @@ WHERE ci.note IN ('(writer)',
 			"         │   │   │   │   │       └─ IndexedTableAccess(title)\n" +
 			"         │   │   │   │   │           ├─ index: [title.id]\n" +
 			"         │   │   │   │   │           ├─ static: [{[NULL, ∞)}]\n" +
-			"         │   │   │   │   │           ├─ colSet: (31-42)\n" +
+			"         │   │   │   │   │           ├─ colSet: (31,32)\n" +
 			"         │   │   │   │   │           ├─ tableId: 7\n" +
 			"         │   │   │   │   │           └─ Table\n" +
 			"         │   │   │   │   │               ├─ name: title\n" +
@@ -9467,7 +9467,7 @@ WHERE ci.note IN ('(writer)',
 			"         │   │   │   │           └─ IndexedTableAccess(cast_info)\n" +
 			"         │   │   │   │               ├─ index: [cast_info.movie_id]\n" +
 			"         │   │   │   │               ├─ keys: [mi_idx.movie_id:0!null]\n" +
-			"         │   │   │   │               ├─ colSet: (1-7)\n" +
+			"         │   │   │   │               ├─ colSet: (2,3,5)\n" +
 			"         │   │   │   │               ├─ tableId: 1\n" +
 			"         │   │   │   │               └─ Table\n" +
 			"         │   │   │   │                   ├─ name: cast_info\n" +
@@ -9492,7 +9492,7 @@ WHERE ci.note IN ('(writer)',
 			"         │   │           └─ IndexedTableAccess(movie_info)\n" +
 			"         │   │               ├─ index: [movie_info.movie_id]\n" +
 			"         │   │               ├─ keys: [mi_idx.movie_id:0!null]\n" +
-			"         │   │               ├─ colSet: (12-16)\n" +
+			"         │   │               ├─ colSet: (13-15)\n" +
 			"         │   │               ├─ tableId: 4\n" +
 			"         │   │               └─ Table\n" +
 			"         │   │                   ├─ name: movie_info\n" +
@@ -9518,7 +9518,7 @@ WHERE ci.note IN ('(writer)',
 			"                 └─ IndexedTableAccess(name)\n" +
 			"                     ├─ index: [name.id]\n" +
 			"                     ├─ keys: [ci.person_id:5!null]\n" +
-			"                     ├─ colSet: (22-30)\n" +
+			"                     ├─ colSet: (22,26)\n" +
 			"                     ├─ tableId: 6\n" +
 			"                     └─ Table\n" +
 			"                         ├─ name: name\n" +
@@ -9760,7 +9760,7 @@ WHERE ci.note IN ('(voice)',
 			"         │   │   │   │   │   │       │           └─ IndexedTableAccess(name)\n" +
 			"         │   │   │   │   │   │       │               ├─ index: [name.id]\n" +
 			"         │   │   │   │   │   │       │               ├─ keys: [an.person_id:2!null]\n" +
-			"         │   │   │   │   │   │       │               ├─ colSet: (42-50)\n" +
+			"         │   │   │   │   │   │       │               ├─ colSet: (42,43,46)\n" +
 			"         │   │   │   │   │   │       │               ├─ tableId: 8\n" +
 			"         │   │   │   │   │   │       │               └─ Table\n" +
 			"         │   │   │   │   │   │       │                   ├─ name: name\n" +
@@ -9773,7 +9773,7 @@ WHERE ci.note IN ('(voice)',
 			"         │   │   │   │   │   │               └─ IndexedTableAccess(cast_info)\n" +
 			"         │   │   │   │   │   │                   ├─ index: [cast_info.person_id]\n" +
 			"         │   │   │   │   │   │                   ├─ keys: [an.person_id:2!null]\n" +
-			"         │   │   │   │   │   │                   ├─ colSet: (16-22)\n" +
+			"         │   │   │   │   │   │                   ├─ colSet: (17-20,22)\n" +
 			"         │   │   │   │   │   │                   ├─ tableId: 3\n" +
 			"         │   │   │   │   │   │                   └─ Table\n" +
 			"         │   │   │   │   │   │                       ├─ name: cast_info\n" +
@@ -9789,7 +9789,7 @@ WHERE ci.note IN ('(voice)',
 			"         │   │   │   │   │           └─ IndexedTableAccess(movie_info)\n" +
 			"         │   │   │   │   │               ├─ index: [movie_info.movie_id]\n" +
 			"         │   │   │   │   │               ├─ keys: [ci.movie_id:7!null]\n" +
-			"         │   │   │   │   │               ├─ colSet: (37-41)\n" +
+			"         │   │   │   │   │               ├─ colSet: (38-40)\n" +
 			"         │   │   │   │   │               ├─ tableId: 7\n" +
 			"         │   │   │   │   │               └─ Table\n" +
 			"         │   │   │   │   │                   ├─ name: movie_info\n" +
@@ -9805,7 +9805,7 @@ WHERE ci.note IN ('(voice)',
 			"         │   │   │   │           └─ IndexedTableAccess(movie_companies)\n" +
 			"         │   │   │   │               ├─ index: [movie_companies.movie_id]\n" +
 			"         │   │   │   │               ├─ keys: [ci.movie_id:7!null]\n" +
-			"         │   │   │   │               ├─ colSet: (32-36)\n" +
+			"         │   │   │   │               ├─ colSet: (33,34,36)\n" +
 			"         │   │   │   │               ├─ tableId: 6\n" +
 			"         │   │   │   │               └─ Table\n" +
 			"         │   │   │   │                   ├─ name: movie_companies\n" +
@@ -9838,7 +9838,7 @@ WHERE ci.note IN ('(voice)',
 			"         │       └─ IndexedTableAccess(char_name)\n" +
 			"         │           ├─ index: [char_name.id]\n" +
 			"         │           ├─ keys: [ci.person_role_id:8]\n" +
-			"         │           ├─ colSet: (9-15)\n" +
+			"         │           ├─ colSet: (9)\n" +
 			"         │           ├─ tableId: 2\n" +
 			"         │           └─ Table\n" +
 			"         │               ├─ name: char_name\n" +
@@ -9855,7 +9855,7 @@ WHERE ci.note IN ('(voice)',
 			"                 └─ IndexedTableAccess(title)\n" +
 			"                     ├─ index: [title.id]\n" +
 			"                     ├─ keys: [mi.movie_id:11!null]\n" +
-			"                     ├─ colSet: (53-64)\n" +
+			"                     ├─ colSet: (53,54,57)\n" +
 			"                     ├─ tableId: 10\n" +
 			"                     └─ Table\n" +
 			"                         ├─ name: title\n" +
@@ -10139,7 +10139,7 @@ WHERE ci.note = '(voice)'
 			"         │   │   │   │   │   │       │           └─ IndexedTableAccess(name)\n" +
 			"         │   │   │   │   │   │       │               ├─ index: [name.id]\n" +
 			"         │   │   │   │   │   │       │               ├─ keys: [an.person_id:2!null]\n" +
-			"         │   │   │   │   │   │       │               ├─ colSet: (42-50)\n" +
+			"         │   │   │   │   │   │       │               ├─ colSet: (42,43,46)\n" +
 			"         │   │   │   │   │   │       │               ├─ tableId: 8\n" +
 			"         │   │   │   │   │   │       │               └─ Table\n" +
 			"         │   │   │   │   │   │       │                   ├─ name: name\n" +
@@ -10152,7 +10152,7 @@ WHERE ci.note = '(voice)'
 			"         │   │   │   │   │   │               └─ IndexedTableAccess(cast_info)\n" +
 			"         │   │   │   │   │   │                   ├─ index: [cast_info.person_id]\n" +
 			"         │   │   │   │   │   │                   ├─ keys: [an.person_id:2!null]\n" +
-			"         │   │   │   │   │   │                   ├─ colSet: (16-22)\n" +
+			"         │   │   │   │   │   │                   ├─ colSet: (17-20,22)\n" +
 			"         │   │   │   │   │   │                   ├─ tableId: 3\n" +
 			"         │   │   │   │   │   │                   └─ Table\n" +
 			"         │   │   │   │   │   │                       ├─ name: cast_info\n" +
@@ -10171,7 +10171,7 @@ WHERE ci.note = '(voice)'
 			"         │   │   │   │   │           └─ IndexedTableAccess(title)\n" +
 			"         │   │   │   │   │               ├─ index: [title.id]\n" +
 			"         │   │   │   │   │               ├─ keys: [ci.movie_id:7!null]\n" +
-			"         │   │   │   │   │               ├─ colSet: (53-64)\n" +
+			"         │   │   │   │   │               ├─ colSet: (53,54,57)\n" +
 			"         │   │   │   │   │               ├─ tableId: 10\n" +
 			"         │   │   │   │   │               └─ Table\n" +
 			"         │   │   │   │   │                   ├─ name: title\n" +
@@ -10186,7 +10186,7 @@ WHERE ci.note = '(voice)'
 			"         │   │   │   │           └─ IndexedTableAccess(movie_companies)\n" +
 			"         │   │   │   │               ├─ index: [movie_companies.movie_id]\n" +
 			"         │   │   │   │               ├─ keys: [ci.movie_id:7!null]\n" +
-			"         │   │   │   │               ├─ colSet: (32-36)\n" +
+			"         │   │   │   │               ├─ colSet: (33,34,36)\n" +
 			"         │   │   │   │               ├─ tableId: 6\n" +
 			"         │   │   │   │               └─ Table\n" +
 			"         │   │   │   │                   ├─ name: movie_companies\n" +
@@ -10202,7 +10202,7 @@ WHERE ci.note = '(voice)'
 			"         │   │   │           └─ IndexedTableAccess(movie_info)\n" +
 			"         │   │   │               ├─ index: [movie_info.movie_id]\n" +
 			"         │   │   │               ├─ keys: [mc.movie_id:14!null]\n" +
-			"         │   │   │               ├─ colSet: (37-41)\n" +
+			"         │   │   │               ├─ colSet: (38-40)\n" +
 			"         │   │   │               ├─ tableId: 7\n" +
 			"         │   │   │               └─ Table\n" +
 			"         │   │   │                   ├─ name: movie_info\n" +
@@ -10211,7 +10211,7 @@ WHERE ci.note = '(voice)'
 			"         │   │       └─ IndexedTableAccess(char_name)\n" +
 			"         │   │           ├─ index: [char_name.id]\n" +
 			"         │   │           ├─ keys: [ci.person_role_id:8]\n" +
-			"         │   │           ├─ colSet: (9-15)\n" +
+			"         │   │           ├─ colSet: (9)\n" +
 			"         │   │           ├─ tableId: 2\n" +
 			"         │   │           └─ Table\n" +
 			"         │   │               ├─ name: char_name\n" +
@@ -10515,7 +10515,7 @@ WHERE ci.note IN ('(voice)',
 			"         │   │   │   │   │   │       │           └─ IndexedTableAccess(name)\n" +
 			"         │   │   │   │   │   │       │               ├─ index: [name.id]\n" +
 			"         │   │   │   │   │   │       │               ├─ keys: [an.person_id:2!null]\n" +
-			"         │   │   │   │   │   │       │               ├─ colSet: (42-50)\n" +
+			"         │   │   │   │   │   │       │               ├─ colSet: (42,43,46)\n" +
 			"         │   │   │   │   │   │       │               ├─ tableId: 8\n" +
 			"         │   │   │   │   │   │       │               └─ Table\n" +
 			"         │   │   │   │   │   │       │                   ├─ name: name\n" +
@@ -10528,7 +10528,7 @@ WHERE ci.note IN ('(voice)',
 			"         │   │   │   │   │   │               └─ IndexedTableAccess(cast_info)\n" +
 			"         │   │   │   │   │   │                   ├─ index: [cast_info.person_id]\n" +
 			"         │   │   │   │   │   │                   ├─ keys: [an.person_id:2!null]\n" +
-			"         │   │   │   │   │   │                   ├─ colSet: (16-22)\n" +
+			"         │   │   │   │   │   │                   ├─ colSet: (17-20,22)\n" +
 			"         │   │   │   │   │   │                   ├─ tableId: 3\n" +
 			"         │   │   │   │   │   │                   └─ Table\n" +
 			"         │   │   │   │   │   │                       ├─ name: cast_info\n" +
@@ -10544,7 +10544,7 @@ WHERE ci.note IN ('(voice)',
 			"         │   │   │   │   │           └─ IndexedTableAccess(movie_info)\n" +
 			"         │   │   │   │   │               ├─ index: [movie_info.movie_id]\n" +
 			"         │   │   │   │   │               ├─ keys: [ci.movie_id:7!null]\n" +
-			"         │   │   │   │   │               ├─ colSet: (37-41)\n" +
+			"         │   │   │   │   │               ├─ colSet: (38-40)\n" +
 			"         │   │   │   │   │               ├─ tableId: 7\n" +
 			"         │   │   │   │   │               └─ Table\n" +
 			"         │   │   │   │   │                   ├─ name: movie_info\n" +
@@ -10565,7 +10565,7 @@ WHERE ci.note IN ('(voice)',
 			"         │   │   │       └─ IndexedTableAccess(char_name)\n" +
 			"         │   │   │           ├─ index: [char_name.id]\n" +
 			"         │   │   │           ├─ keys: [ci.person_role_id:8]\n" +
-			"         │   │   │           ├─ colSet: (9-15)\n" +
+			"         │   │   │           ├─ colSet: (9)\n" +
 			"         │   │   │           ├─ tableId: 2\n" +
 			"         │   │   │           └─ Table\n" +
 			"         │   │   │               ├─ name: char_name\n" +
@@ -10578,7 +10578,7 @@ WHERE ci.note IN ('(voice)',
 			"         │   │           └─ IndexedTableAccess(title)\n" +
 			"         │   │               ├─ index: [title.id]\n" +
 			"         │   │               ├─ keys: [mi.movie_id:11!null]\n" +
-			"         │   │               ├─ colSet: (53-64)\n" +
+			"         │   │               ├─ colSet: (53,54,57)\n" +
 			"         │   │               ├─ tableId: 10\n" +
 			"         │   │               └─ Table\n" +
 			"         │   │                   ├─ name: title\n" +
@@ -10587,7 +10587,7 @@ WHERE ci.note IN ('(voice)',
 			"         │       └─ IndexedTableAccess(movie_companies)\n" +
 			"         │           ├─ index: [movie_companies.movie_id]\n" +
 			"         │           ├─ keys: [mi.movie_id:11!null]\n" +
-			"         │           ├─ colSet: (32-36)\n" +
+			"         │           ├─ colSet: (33,34)\n" +
 			"         │           ├─ tableId: 6\n" +
 			"         │           └─ Table\n" +
 			"         │               ├─ name: movie_companies\n" +
@@ -10870,7 +10870,7 @@ WHERE ci.note IN ('(voice)',
 			"         │   │   │   │   │   │       │           └─ IndexedTableAccess(name)\n" +
 			"         │   │   │   │   │   │       │               ├─ index: [name.id]\n" +
 			"         │   │   │   │   │   │       │               ├─ keys: [an.person_id:2!null]\n" +
-			"         │   │   │   │   │   │       │               ├─ colSet: (42-50)\n" +
+			"         │   │   │   │   │   │       │               ├─ colSet: (42,43,46)\n" +
 			"         │   │   │   │   │   │       │               ├─ tableId: 8\n" +
 			"         │   │   │   │   │   │       │               └─ Table\n" +
 			"         │   │   │   │   │   │       │                   ├─ name: name\n" +
@@ -10883,7 +10883,7 @@ WHERE ci.note IN ('(voice)',
 			"         │   │   │   │   │   │               └─ IndexedTableAccess(cast_info)\n" +
 			"         │   │   │   │   │   │                   ├─ index: [cast_info.person_id]\n" +
 			"         │   │   │   │   │   │                   ├─ keys: [an.person_id:2!null]\n" +
-			"         │   │   │   │   │   │                   ├─ colSet: (16-22)\n" +
+			"         │   │   │   │   │   │                   ├─ colSet: (17-20,22)\n" +
 			"         │   │   │   │   │   │                   ├─ tableId: 3\n" +
 			"         │   │   │   │   │   │                   └─ Table\n" +
 			"         │   │   │   │   │   │                       ├─ name: cast_info\n" +
@@ -10896,7 +10896,7 @@ WHERE ci.note IN ('(voice)',
 			"         │   │   │   │   │           └─ IndexedTableAccess(title)\n" +
 			"         │   │   │   │   │               ├─ index: [title.id]\n" +
 			"         │   │   │   │   │               ├─ keys: [ci.movie_id:7!null]\n" +
-			"         │   │   │   │   │               ├─ colSet: (53-64)\n" +
+			"         │   │   │   │   │               ├─ colSet: (53,54,57)\n" +
 			"         │   │   │   │   │               ├─ tableId: 10\n" +
 			"         │   │   │   │   │               └─ Table\n" +
 			"         │   │   │   │   │                   ├─ name: title\n" +
@@ -10905,7 +10905,7 @@ WHERE ci.note IN ('(voice)',
 			"         │   │   │   │       └─ IndexedTableAccess(movie_info)\n" +
 			"         │   │   │   │           ├─ index: [movie_info.movie_id]\n" +
 			"         │   │   │   │           ├─ keys: [ci.movie_id:7!null]\n" +
-			"         │   │   │   │           ├─ colSet: (37-41)\n" +
+			"         │   │   │   │           ├─ colSet: (38,39)\n" +
 			"         │   │   │   │           ├─ tableId: 7\n" +
 			"         │   │   │   │           └─ Table\n" +
 			"         │   │   │   │               ├─ name: movie_info\n" +
@@ -10914,7 +10914,7 @@ WHERE ci.note IN ('(voice)',
 			"         │   │   │       └─ IndexedTableAccess(movie_companies)\n" +
 			"         │   │   │           ├─ index: [movie_companies.movie_id]\n" +
 			"         │   │   │           ├─ keys: [ci.movie_id:7!null]\n" +
-			"         │   │   │           ├─ colSet: (32-36)\n" +
+			"         │   │   │           ├─ colSet: (33,34)\n" +
 			"         │   │   │           ├─ tableId: 6\n" +
 			"         │   │   │           └─ Table\n" +
 			"         │   │   │               ├─ name: movie_companies\n" +
@@ -10923,7 +10923,7 @@ WHERE ci.note IN ('(voice)',
 			"         │   │       └─ IndexedTableAccess(char_name)\n" +
 			"         │   │           ├─ index: [char_name.id]\n" +
 			"         │   │           ├─ keys: [ci.person_role_id:8]\n" +
-			"         │   │           ├─ colSet: (9-15)\n" +
+			"         │   │           ├─ colSet: (9)\n" +
 			"         │   │           ├─ tableId: 2\n" +
 			"         │   │           └─ Table\n" +
 			"         │   │               ├─ name: char_name\n" +
@@ -11203,7 +11203,7 @@ WHERE ct.kind = 'production companies'
 			"                 │           └─ IndexedTableAccess(movie_companies)\n" +
 			"                 │               ├─ index: [movie_companies.company_type_id]\n" +
 			"                 │               ├─ keys: [ct.id:4!null]\n" +
-			"                 │               ├─ colSet: (5-9)\n" +
+			"                 │               ├─ colSet: (6,8,9)\n" +
 			"                 │               ├─ tableId: 3\n" +
 			"                 │               └─ Table\n" +
 			"                 │                   ├─ name: movie_companies\n" +
@@ -11212,7 +11212,7 @@ WHERE ct.kind = 'production companies'
 			"                     └─ IndexedTableAccess(title)\n" +
 			"                         ├─ index: [title.id]\n" +
 			"                         ├─ keys: [mc.movie_id:6!null]\n" +
-			"                         ├─ colSet: (15-26)\n" +
+			"                         ├─ colSet: (15,16,19)\n" +
 			"                         ├─ tableId: 5\n" +
 			"                         └─ Table\n" +
 			"                             ├─ name: title\n" +
@@ -11377,7 +11377,7 @@ WHERE ct.kind = 'production companies'
 			"                 │           └─ IndexedTableAccess(movie_companies)\n" +
 			"                 │               ├─ index: [movie_companies.company_type_id]\n" +
 			"                 │               ├─ keys: [ct.id:4!null]\n" +
-			"                 │               ├─ colSet: (5-9)\n" +
+			"                 │               ├─ colSet: (6,8,9)\n" +
 			"                 │               ├─ tableId: 3\n" +
 			"                 │               └─ Table\n" +
 			"                 │                   ├─ name: movie_companies\n" +
@@ -11394,7 +11394,7 @@ WHERE ct.kind = 'production companies'
 			"                         └─ IndexedTableAccess(title)\n" +
 			"                             ├─ index: [title.id]\n" +
 			"                             ├─ keys: [mc.movie_id:6!null]\n" +
-			"                             ├─ colSet: (15-26)\n" +
+			"                             ├─ colSet: (15,16,19)\n" +
 			"                             ├─ tableId: 5\n" +
 			"                             └─ Table\n" +
 			"                                 ├─ name: title\n" +
@@ -11566,7 +11566,7 @@ WHERE ct.kind = 'production companies'
 			"                 │           └─ IndexedTableAccess(movie_companies)\n" +
 			"                 │               ├─ index: [movie_companies.company_type_id]\n" +
 			"                 │               ├─ keys: [ct.id:4!null]\n" +
-			"                 │               ├─ colSet: (5-9)\n" +
+			"                 │               ├─ colSet: (6,8,9)\n" +
 			"                 │               ├─ tableId: 3\n" +
 			"                 │               └─ Table\n" +
 			"                 │                   ├─ name: movie_companies\n" +
@@ -11579,7 +11579,7 @@ WHERE ct.kind = 'production companies'
 			"                         └─ IndexedTableAccess(title)\n" +
 			"                             ├─ index: [title.id]\n" +
 			"                             ├─ keys: [mc.movie_id:6!null]\n" +
-			"                             ├─ colSet: (15-26)\n" +
+			"                             ├─ colSet: (15,16,19)\n" +
 			"                             ├─ tableId: 5\n" +
 			"                             └─ Table\n" +
 			"                                 ├─ name: title\n" +
@@ -11748,7 +11748,7 @@ WHERE ct.kind = 'production companies'
 			"                 │           └─ IndexedTableAccess(movie_companies)\n" +
 			"                 │               ├─ index: [movie_companies.company_type_id]\n" +
 			"                 │               ├─ keys: [ct.id:4!null]\n" +
-			"                 │               ├─ colSet: (5-9)\n" +
+			"                 │               ├─ colSet: (6,8,9)\n" +
 			"                 │               ├─ tableId: 3\n" +
 			"                 │               └─ Table\n" +
 			"                 │                   ├─ name: movie_companies\n" +
@@ -11761,7 +11761,7 @@ WHERE ct.kind = 'production companies'
 			"                         └─ IndexedTableAccess(title)\n" +
 			"                             ├─ index: [title.id]\n" +
 			"                             ├─ keys: [mc.movie_id:6!null]\n" +
-			"                             ├─ colSet: (15-26)\n" +
+			"                             ├─ colSet: (15,16,19)\n" +
 			"                             ├─ tableId: 5\n" +
 			"                             └─ Table\n" +
 			"                                 ├─ name: title\n" +
@@ -11943,7 +11943,7 @@ WHERE cct1.kind = 'cast'
 			"         │   │   │   │   │   │   │   │           └─ IndexedTableAccess(title)\n" +
 			"         │   │   │   │   │   │   │   │               ├─ index: [title.id]\n" +
 			"         │   │   │   │   │   │   │   │               ├─ keys: [cc.movie_id:0]\n" +
-			"         │   │   │   │   │   │   │   │               ├─ colSet: (40-51)\n" +
+			"         │   │   │   │   │   │   │   │               ├─ colSet: (40,41,43,44)\n" +
 			"         │   │   │   │   │   │   │   │               ├─ tableId: 10\n" +
 			"         │   │   │   │   │   │   │   │               └─ Table\n" +
 			"         │   │   │   │   │   │   │   │                   ├─ name: title\n" +
@@ -11975,7 +11975,7 @@ WHERE cct1.kind = 'cast'
 			"         │   │   │   │   │       └─ IndexedTableAccess(cast_info)\n" +
 			"         │   │   │   │   │           ├─ index: [cast_info.movie_id]\n" +
 			"         │   │   │   │   │           ├─ keys: [cc.movie_id:0]\n" +
-			"         │   │   │   │   │           ├─ colSet: (16-22)\n" +
+			"         │   │   │   │   │           ├─ colSet: (17-19)\n" +
 			"         │   │   │   │   │           ├─ tableId: 5\n" +
 			"         │   │   │   │   │           └─ Table\n" +
 			"         │   │   │   │   │               ├─ name: cast_info\n" +
@@ -11984,7 +11984,7 @@ WHERE cct1.kind = 'cast'
 			"         │   │   │   │       └─ IndexedTableAccess(movie_keyword)\n" +
 			"         │   │   │   │           ├─ index: [movie_keyword.movie_id]\n" +
 			"         │   │   │   │           ├─ keys: [ci.movie_id:12!null]\n" +
-			"         │   │   │   │           ├─ colSet: (28-30)\n" +
+			"         │   │   │   │           ├─ colSet: (29,30)\n" +
 			"         │   │   │   │           ├─ tableId: 8\n" +
 			"         │   │   │   │           └─ Table\n" +
 			"         │   │   │   │               ├─ name: movie_keyword\n" +
@@ -12024,7 +12024,7 @@ WHERE cct1.kind = 'cast'
 			"         │           └─ IndexedTableAccess(char_name)\n" +
 			"         │               ├─ index: [char_name.id]\n" +
 			"         │               ├─ keys: [ci.person_role_id:13]\n" +
-			"         │               ├─ colSet: (9-15)\n" +
+			"         │               ├─ colSet: (9,10)\n" +
 			"         │               ├─ tableId: 4\n" +
 			"         │               └─ Table\n" +
 			"         │                   ├─ name: char_name\n" +
@@ -12033,7 +12033,7 @@ WHERE cct1.kind = 'cast'
 			"             └─ IndexedTableAccess(name)\n" +
 			"                 ├─ index: [name.id]\n" +
 			"                 ├─ keys: [ci.person_id:11!null]\n" +
-			"                 ├─ colSet: (31-39)\n" +
+			"                 ├─ colSet: (31)\n" +
 			"                 ├─ tableId: 9\n" +
 			"                 └─ Table\n" +
 			"                     ├─ name: name\n" +
@@ -12308,7 +12308,7 @@ WHERE cct1.kind = 'cast'
 			"         │   │   │   │   │   │   │   │           └─ IndexedTableAccess(title)\n" +
 			"         │   │   │   │   │   │   │   │               ├─ index: [title.id]\n" +
 			"         │   │   │   │   │   │   │   │               ├─ keys: [cc.movie_id:0]\n" +
-			"         │   │   │   │   │   │   │   │               ├─ colSet: (40-51)\n" +
+			"         │   │   │   │   │   │   │   │               ├─ colSet: (40,41,43,44)\n" +
 			"         │   │   │   │   │   │   │   │               ├─ tableId: 10\n" +
 			"         │   │   │   │   │   │   │   │               └─ Table\n" +
 			"         │   │   │   │   │   │   │   │                   ├─ name: title\n" +
@@ -12340,7 +12340,7 @@ WHERE cct1.kind = 'cast'
 			"         │   │   │   │   │       └─ IndexedTableAccess(cast_info)\n" +
 			"         │   │   │   │   │           ├─ index: [cast_info.movie_id]\n" +
 			"         │   │   │   │   │           ├─ keys: [cc.movie_id:0]\n" +
-			"         │   │   │   │   │           ├─ colSet: (16-22)\n" +
+			"         │   │   │   │   │           ├─ colSet: (17-19)\n" +
 			"         │   │   │   │   │           ├─ tableId: 5\n" +
 			"         │   │   │   │   │           └─ Table\n" +
 			"         │   │   │   │   │               ├─ name: cast_info\n" +
@@ -12349,7 +12349,7 @@ WHERE cct1.kind = 'cast'
 			"         │   │   │   │       └─ IndexedTableAccess(movie_keyword)\n" +
 			"         │   │   │   │           ├─ index: [movie_keyword.movie_id]\n" +
 			"         │   │   │   │           ├─ keys: [ci.movie_id:12!null]\n" +
-			"         │   │   │   │           ├─ colSet: (28-30)\n" +
+			"         │   │   │   │           ├─ colSet: (29,30)\n" +
 			"         │   │   │   │           ├─ tableId: 8\n" +
 			"         │   │   │   │           └─ Table\n" +
 			"         │   │   │   │               ├─ name: movie_keyword\n" +
@@ -12389,7 +12389,7 @@ WHERE cct1.kind = 'cast'
 			"         │           └─ IndexedTableAccess(char_name)\n" +
 			"         │               ├─ index: [char_name.id]\n" +
 			"         │               ├─ keys: [ci.person_role_id:13]\n" +
-			"         │               ├─ colSet: (9-15)\n" +
+			"         │               ├─ colSet: (9,10)\n" +
 			"         │               ├─ tableId: 4\n" +
 			"         │               └─ Table\n" +
 			"         │                   ├─ name: char_name\n" +
@@ -12400,7 +12400,7 @@ WHERE cct1.kind = 'cast'
 			"                 └─ IndexedTableAccess(name)\n" +
 			"                     ├─ index: [name.id]\n" +
 			"                     ├─ keys: [ci.person_id:11!null]\n" +
-			"                     ├─ colSet: (31-39)\n" +
+			"                     ├─ colSet: (31,32)\n" +
 			"                     ├─ tableId: 9\n" +
 			"                     └─ Table\n" +
 			"                         ├─ name: name\n" +
@@ -12681,7 +12681,7 @@ WHERE cct1.kind = 'cast'
 			"         │   │   │   │   │   │   │   │           └─ IndexedTableAccess(title)\n" +
 			"         │   │   │   │   │   │   │   │               ├─ index: [title.id]\n" +
 			"         │   │   │   │   │   │   │   │               ├─ keys: [cc.movie_id:0]\n" +
-			"         │   │   │   │   │   │   │   │               ├─ colSet: (40-51)\n" +
+			"         │   │   │   │   │   │   │   │               ├─ colSet: (40,41,43,44)\n" +
 			"         │   │   │   │   │   │   │   │               ├─ tableId: 10\n" +
 			"         │   │   │   │   │   │   │   │               └─ Table\n" +
 			"         │   │   │   │   │   │   │   │                   ├─ name: title\n" +
@@ -12713,7 +12713,7 @@ WHERE cct1.kind = 'cast'
 			"         │   │   │   │   │       └─ IndexedTableAccess(cast_info)\n" +
 			"         │   │   │   │   │           ├─ index: [cast_info.movie_id]\n" +
 			"         │   │   │   │   │           ├─ keys: [cc.movie_id:0]\n" +
-			"         │   │   │   │   │           ├─ colSet: (16-22)\n" +
+			"         │   │   │   │   │           ├─ colSet: (17-19)\n" +
 			"         │   │   │   │   │           ├─ tableId: 5\n" +
 			"         │   │   │   │   │           └─ Table\n" +
 			"         │   │   │   │   │               ├─ name: cast_info\n" +
@@ -12722,7 +12722,7 @@ WHERE cct1.kind = 'cast'
 			"         │   │   │   │       └─ IndexedTableAccess(movie_keyword)\n" +
 			"         │   │   │   │           ├─ index: [movie_keyword.movie_id]\n" +
 			"         │   │   │   │           ├─ keys: [ci.movie_id:12!null]\n" +
-			"         │   │   │   │           ├─ colSet: (28-30)\n" +
+			"         │   │   │   │           ├─ colSet: (29,30)\n" +
 			"         │   │   │   │           ├─ tableId: 8\n" +
 			"         │   │   │   │           └─ Table\n" +
 			"         │   │   │   │               ├─ name: movie_keyword\n" +
@@ -12762,7 +12762,7 @@ WHERE cct1.kind = 'cast'
 			"         │           └─ IndexedTableAccess(char_name)\n" +
 			"         │               ├─ index: [char_name.id]\n" +
 			"         │               ├─ keys: [ci.person_role_id:13]\n" +
-			"         │               ├─ colSet: (9-15)\n" +
+			"         │               ├─ colSet: (9,10)\n" +
 			"         │               ├─ tableId: 4\n" +
 			"         │               └─ Table\n" +
 			"         │                   ├─ name: char_name\n" +
@@ -12771,7 +12771,7 @@ WHERE cct1.kind = 'cast'
 			"             └─ IndexedTableAccess(name)\n" +
 			"                 ├─ index: [name.id]\n" +
 			"                 ├─ keys: [ci.person_id:11!null]\n" +
-			"                 ├─ colSet: (31-39)\n" +
+			"                 ├─ colSet: (31,32)\n" +
 			"                 ├─ tableId: 9\n" +
 			"                 └─ Table\n" +
 			"                     ├─ name: name\n" +
@@ -13054,7 +13054,7 @@ WHERE cn.country_code !='[pl]'
 			"         │   │   │   │   │   │   │           └─ IndexedTableAccess(title)\n" +
 			"         │   │   │   │   │   │   │               ├─ index: [title.id]\n" +
 			"         │   │   │   │   │   │   │               ├─ keys: [ml.movie_id:0!null]\n" +
-			"         │   │   │   │   │   │   │               ├─ colSet: (32-43)\n" +
+			"         │   │   │   │   │   │   │               ├─ colSet: (32,33,36)\n" +
 			"         │   │   │   │   │   │   │               ├─ tableId: 9\n" +
 			"         │   │   │   │   │   │   │               └─ Table\n" +
 			"         │   │   │   │   │   │   │                   ├─ name: title\n" +
@@ -13065,7 +13065,7 @@ WHERE cn.country_code !='[pl]'
 			"         │   │   │   │   │   │           └─ IndexedTableAccess(movie_companies)\n" +
 			"         │   │   │   │   │   │               ├─ index: [movie_companies.movie_id]\n" +
 			"         │   │   │   │   │   │               ├─ keys: [ml.movie_id:0!null]\n" +
-			"         │   │   │   │   │   │               ├─ colSet: (15-19)\n" +
+			"         │   │   │   │   │   │               ├─ colSet: (16-19)\n" +
 			"         │   │   │   │   │   │               ├─ tableId: 5\n" +
 			"         │   │   │   │   │   │               └─ Table\n" +
 			"         │   │   │   │   │   │                   ├─ name: movie_companies\n" +
@@ -13083,7 +13083,7 @@ WHERE cn.country_code !='[pl]'
 			"         │   │   │   │   │           └─ IndexedTableAccess(company_name)\n" +
 			"         │   │   │   │   │               ├─ index: [company_name.id]\n" +
 			"         │   │   │   │   │               ├─ keys: [mc.company_id:6!null]\n" +
-			"         │   │   │   │   │               ├─ colSet: (1-7)\n" +
+			"         │   │   │   │   │               ├─ colSet: (1-3)\n" +
 			"         │   │   │   │   │               ├─ tableId: 1\n" +
 			"         │   │   │   │   │               └─ Table\n" +
 			"         │   │   │   │   │                   ├─ name: company_name\n" +
@@ -13114,7 +13114,7 @@ WHERE cn.country_code !='[pl]'
 			"         │   │       └─ IndexedTableAccess(movie_keyword)\n" +
 			"         │   │           ├─ index: [movie_keyword.movie_id]\n" +
 			"         │   │           ├─ keys: [mc.movie_id:5!null]\n" +
-			"         │   │           ├─ colSet: (25-27)\n" +
+			"         │   │           ├─ colSet: (26,27)\n" +
 			"         │   │           ├─ tableId: 7\n" +
 			"         │   │           └─ Table\n" +
 			"         │   │               ├─ name: movie_keyword\n" +
@@ -13127,7 +13127,7 @@ WHERE cn.country_code !='[pl]'
 			"         │           └─ IndexedTableAccess(keyword)\n" +
 			"         │               ├─ index: [keyword.id]\n" +
 			"         │               ├─ keys: [mk.keyword_id:17!null]\n" +
-			"         │               ├─ colSet: (10-12)\n" +
+			"         │               ├─ colSet: (10,11)\n" +
 			"         │               ├─ tableId: 3\n" +
 			"         │               └─ Table\n" +
 			"         │                   ├─ name: keyword\n" +
@@ -13140,7 +13140,7 @@ WHERE cn.country_code !='[pl]'
 			"                 └─ IndexedTableAccess(movie_info)\n" +
 			"                     ├─ index: [movie_info.movie_id]\n" +
 			"                     ├─ keys: [mc.movie_id:5!null]\n" +
-			"                     ├─ colSet: (20-24)\n" +
+			"                     ├─ colSet: (21,23)\n" +
 			"                     ├─ tableId: 6\n" +
 			"                     └─ Table\n" +
 			"                         ├─ name: movie_info\n" +
@@ -13397,7 +13397,7 @@ WHERE cn.country_code !='[pl]'
 			"         │   │   │   │   │   │   │           └─ IndexedTableAccess(title)\n" +
 			"         │   │   │   │   │   │   │               ├─ index: [title.id]\n" +
 			"         │   │   │   │   │   │   │               ├─ keys: [ml.movie_id:0!null]\n" +
-			"         │   │   │   │   │   │   │               ├─ colSet: (32-43)\n" +
+			"         │   │   │   │   │   │   │               ├─ colSet: (32,33,36)\n" +
 			"         │   │   │   │   │   │   │               ├─ tableId: 9\n" +
 			"         │   │   │   │   │   │   │               └─ Table\n" +
 			"         │   │   │   │   │   │   │                   ├─ name: title\n" +
@@ -13408,7 +13408,7 @@ WHERE cn.country_code !='[pl]'
 			"         │   │   │   │   │   │           └─ IndexedTableAccess(movie_companies)\n" +
 			"         │   │   │   │   │   │               ├─ index: [movie_companies.movie_id]\n" +
 			"         │   │   │   │   │   │               ├─ keys: [ml.movie_id:0!null]\n" +
-			"         │   │   │   │   │   │               ├─ colSet: (15-19)\n" +
+			"         │   │   │   │   │   │               ├─ colSet: (16-19)\n" +
 			"         │   │   │   │   │   │               ├─ tableId: 5\n" +
 			"         │   │   │   │   │   │               └─ Table\n" +
 			"         │   │   │   │   │   │                   ├─ name: movie_companies\n" +
@@ -13426,7 +13426,7 @@ WHERE cn.country_code !='[pl]'
 			"         │   │   │   │   │           └─ IndexedTableAccess(company_name)\n" +
 			"         │   │   │   │   │               ├─ index: [company_name.id]\n" +
 			"         │   │   │   │   │               ├─ keys: [mc.company_id:6!null]\n" +
-			"         │   │   │   │   │               ├─ colSet: (1-7)\n" +
+			"         │   │   │   │   │               ├─ colSet: (1-3)\n" +
 			"         │   │   │   │   │               ├─ tableId: 1\n" +
 			"         │   │   │   │   │               └─ Table\n" +
 			"         │   │   │   │   │                   ├─ name: company_name\n" +
@@ -13457,7 +13457,7 @@ WHERE cn.country_code !='[pl]'
 			"         │   │       └─ IndexedTableAccess(movie_keyword)\n" +
 			"         │   │           ├─ index: [movie_keyword.movie_id]\n" +
 			"         │   │           ├─ keys: [mc.movie_id:5!null]\n" +
-			"         │   │           ├─ colSet: (25-27)\n" +
+			"         │   │           ├─ colSet: (26,27)\n" +
 			"         │   │           ├─ tableId: 7\n" +
 			"         │   │           └─ Table\n" +
 			"         │   │               ├─ name: movie_keyword\n" +
@@ -13470,7 +13470,7 @@ WHERE cn.country_code !='[pl]'
 			"         │           └─ IndexedTableAccess(keyword)\n" +
 			"         │               ├─ index: [keyword.id]\n" +
 			"         │               ├─ keys: [mk.keyword_id:17!null]\n" +
-			"         │               ├─ colSet: (10-12)\n" +
+			"         │               ├─ colSet: (10,11)\n" +
 			"         │               ├─ tableId: 3\n" +
 			"         │               └─ Table\n" +
 			"         │                   ├─ name: keyword\n" +
@@ -13483,7 +13483,7 @@ WHERE cn.country_code !='[pl]'
 			"                 └─ IndexedTableAccess(movie_info)\n" +
 			"                     ├─ index: [movie_info.movie_id]\n" +
 			"                     ├─ keys: [mc.movie_id:5!null]\n" +
-			"                     ├─ colSet: (20-24)\n" +
+			"                     ├─ colSet: (21,23)\n" +
 			"                     ├─ tableId: 6\n" +
 			"                     └─ Table\n" +
 			"                         ├─ name: movie_info\n" +
@@ -13747,7 +13747,7 @@ WHERE cn.country_code !='[pl]'
 			"         │   │   │   │   │   │   │           └─ IndexedTableAccess(title)\n" +
 			"         │   │   │   │   │   │   │               ├─ index: [title.id]\n" +
 			"         │   │   │   │   │   │   │               ├─ keys: [ml.movie_id:0!null]\n" +
-			"         │   │   │   │   │   │   │               ├─ colSet: (32-43)\n" +
+			"         │   │   │   │   │   │   │               ├─ colSet: (32,33,36)\n" +
 			"         │   │   │   │   │   │   │               ├─ tableId: 9\n" +
 			"         │   │   │   │   │   │   │               └─ Table\n" +
 			"         │   │   │   │   │   │   │                   ├─ name: title\n" +
@@ -13758,7 +13758,7 @@ WHERE cn.country_code !='[pl]'
 			"         │   │   │   │   │   │           └─ IndexedTableAccess(movie_companies)\n" +
 			"         │   │   │   │   │   │               ├─ index: [movie_companies.movie_id]\n" +
 			"         │   │   │   │   │   │               ├─ keys: [ml.movie_id:0!null]\n" +
-			"         │   │   │   │   │   │               ├─ colSet: (15-19)\n" +
+			"         │   │   │   │   │   │               ├─ colSet: (16-19)\n" +
 			"         │   │   │   │   │   │               ├─ tableId: 5\n" +
 			"         │   │   │   │   │   │               └─ Table\n" +
 			"         │   │   │   │   │   │                   ├─ name: movie_companies\n" +
@@ -13776,7 +13776,7 @@ WHERE cn.country_code !='[pl]'
 			"         │   │   │   │   │           └─ IndexedTableAccess(company_name)\n" +
 			"         │   │   │   │   │               ├─ index: [company_name.id]\n" +
 			"         │   │   │   │   │               ├─ keys: [mc.company_id:6!null]\n" +
-			"         │   │   │   │   │               ├─ colSet: (1-7)\n" +
+			"         │   │   │   │   │               ├─ colSet: (1-3)\n" +
 			"         │   │   │   │   │               ├─ tableId: 1\n" +
 			"         │   │   │   │   │               └─ Table\n" +
 			"         │   │   │   │   │                   ├─ name: company_name\n" +
@@ -13807,7 +13807,7 @@ WHERE cn.country_code !='[pl]'
 			"         │   │       └─ IndexedTableAccess(movie_keyword)\n" +
 			"         │   │           ├─ index: [movie_keyword.movie_id]\n" +
 			"         │   │           ├─ keys: [mc.movie_id:5!null]\n" +
-			"         │   │           ├─ colSet: (25-27)\n" +
+			"         │   │           ├─ colSet: (26,27)\n" +
 			"         │   │           ├─ tableId: 7\n" +
 			"         │   │           └─ Table\n" +
 			"         │   │               ├─ name: movie_keyword\n" +
@@ -13820,7 +13820,7 @@ WHERE cn.country_code !='[pl]'
 			"         │           └─ IndexedTableAccess(keyword)\n" +
 			"         │               ├─ index: [keyword.id]\n" +
 			"         │               ├─ keys: [mk.keyword_id:17!null]\n" +
-			"         │               ├─ colSet: (10-12)\n" +
+			"         │               ├─ colSet: (10,11)\n" +
 			"         │               ├─ tableId: 3\n" +
 			"         │               └─ Table\n" +
 			"         │                   ├─ name: keyword\n" +
@@ -13833,7 +13833,7 @@ WHERE cn.country_code !='[pl]'
 			"                 └─ IndexedTableAccess(movie_info)\n" +
 			"                     ├─ index: [movie_info.movie_id]\n" +
 			"                     ├─ keys: [mc.movie_id:5!null]\n" +
-			"                     ├─ colSet: (20-24)\n" +
+			"                     ├─ colSet: (21,23)\n" +
 			"                     ├─ tableId: 6\n" +
 			"                     └─ Table\n" +
 			"                         ├─ name: movie_info\n" +
@@ -14140,7 +14140,7 @@ WHERE cn.country_code != '[us]'
 			"         │   │   │   │   │   │           └─ IndexedTableAccess(movie_companies)\n" +
 			"         │   │   │   │   │   │               ├─ index: [movie_companies.company_type_id]\n" +
 			"         │   │   │   │   │   │               ├─ keys: [ct.id:4!null]\n" +
-			"         │   │   │   │   │   │               ├─ colSet: (19-23)\n" +
+			"         │   │   │   │   │   │               ├─ colSet: (20-23)\n" +
 			"         │   │   │   │   │   │               ├─ tableId: 7\n" +
 			"         │   │   │   │   │   │               └─ Table\n" +
 			"         │   │   │   │   │   │                   ├─ name: movie_companies\n" +
@@ -14153,7 +14153,7 @@ WHERE cn.country_code != '[us]'
 			"         │   │   │   │   │           └─ IndexedTableAccess(title)\n" +
 			"         │   │   │   │   │               ├─ index: [title.id]\n" +
 			"         │   │   │   │   │               ├─ keys: [mc.movie_id:8!null]\n" +
-			"         │   │   │   │   │               ├─ colSet: (37-48)\n" +
+			"         │   │   │   │   │               ├─ colSet: (37,38,40,41)\n" +
 			"         │   │   │   │   │               ├─ tableId: 11\n" +
 			"         │   │   │   │   │               └─ Table\n" +
 			"         │   │   │   │   │                   ├─ name: title\n" +
@@ -14174,7 +14174,7 @@ WHERE cn.country_code != '[us]'
 			"         │   │   │       └─ IndexedTableAccess(movie_keyword)\n" +
 			"         │   │   │           ├─ index: [movie_keyword.movie_id]\n" +
 			"         │   │   │           ├─ keys: [mc.movie_id:8!null]\n" +
-			"         │   │   │           ├─ colSet: (34-36)\n" +
+			"         │   │   │           ├─ colSet: (35,36)\n" +
 			"         │   │   │           ├─ tableId: 10\n" +
 			"         │   │   │           └─ Table\n" +
 			"         │   │   │               ├─ name: movie_keyword\n" +
@@ -14187,7 +14187,7 @@ WHERE cn.country_code != '[us]'
 			"         │   │           └─ IndexedTableAccess(keyword)\n" +
 			"         │   │               ├─ index: [keyword.id]\n" +
 			"         │   │               ├─ keys: [mk.keyword_id:19!null]\n" +
-			"         │   │               ├─ colSet: (14-16)\n" +
+			"         │   │               ├─ colSet: (14,15)\n" +
 			"         │   │               ├─ tableId: 5\n" +
 			"         │   │               └─ Table\n" +
 			"         │   │                   ├─ name: keyword\n" +
@@ -14200,7 +14200,7 @@ WHERE cn.country_code != '[us]'
 			"         │           └─ IndexedTableAccess(movie_info)\n" +
 			"         │               ├─ index: [movie_info.movie_id]\n" +
 			"         │               ├─ keys: [mc.movie_id:8!null]\n" +
-			"         │               ├─ colSet: (24-28)\n" +
+			"         │               ├─ colSet: (25-27)\n" +
 			"         │               ├─ tableId: 8\n" +
 			"         │               └─ Table\n" +
 			"         │                   ├─ name: movie_info\n" +
@@ -14213,7 +14213,7 @@ WHERE cn.country_code != '[us]'
 			"                 └─ IndexedTableAccess(movie_info_idx)\n" +
 			"                     ├─ index: [movie_info_idx.movie_id]\n" +
 			"                     ├─ keys: [mi.movie_id:22!null]\n" +
-			"                     ├─ colSet: (29-33)\n" +
+			"                     ├─ colSet: (30-32)\n" +
 			"                     ├─ tableId: 9\n" +
 			"                     └─ Table\n" +
 			"                         ├─ name: movie_info_idx\n" +
@@ -14544,7 +14544,7 @@ WHERE cn.country_code != '[us]'
 			"         │   │   │   │   │   │           └─ IndexedTableAccess(movie_companies)\n" +
 			"         │   │   │   │   │   │               ├─ index: [movie_companies.company_type_id]\n" +
 			"         │   │   │   │   │   │               ├─ keys: [ct.id:4!null]\n" +
-			"         │   │   │   │   │   │               ├─ colSet: (19-23)\n" +
+			"         │   │   │   │   │   │               ├─ colSet: (20-23)\n" +
 			"         │   │   │   │   │   │               ├─ tableId: 7\n" +
 			"         │   │   │   │   │   │               └─ Table\n" +
 			"         │   │   │   │   │   │                   ├─ name: movie_companies\n" +
@@ -14557,7 +14557,7 @@ WHERE cn.country_code != '[us]'
 			"         │   │   │   │   │           └─ IndexedTableAccess(title)\n" +
 			"         │   │   │   │   │               ├─ index: [title.id]\n" +
 			"         │   │   │   │   │               ├─ keys: [mc.movie_id:8!null]\n" +
-			"         │   │   │   │   │               ├─ colSet: (37-48)\n" +
+			"         │   │   │   │   │               ├─ colSet: (37,38,40,41)\n" +
 			"         │   │   │   │   │               ├─ tableId: 11\n" +
 			"         │   │   │   │   │               └─ Table\n" +
 			"         │   │   │   │   │                   ├─ name: title\n" +
@@ -14578,7 +14578,7 @@ WHERE cn.country_code != '[us]'
 			"         │   │   │       └─ IndexedTableAccess(movie_keyword)\n" +
 			"         │   │   │           ├─ index: [movie_keyword.movie_id]\n" +
 			"         │   │   │           ├─ keys: [mc.movie_id:8!null]\n" +
-			"         │   │   │           ├─ colSet: (34-36)\n" +
+			"         │   │   │           ├─ colSet: (35,36)\n" +
 			"         │   │   │           ├─ tableId: 10\n" +
 			"         │   │   │           └─ Table\n" +
 			"         │   │   │               ├─ name: movie_keyword\n" +
@@ -14591,7 +14591,7 @@ WHERE cn.country_code != '[us]'
 			"         │   │           └─ IndexedTableAccess(keyword)\n" +
 			"         │   │               ├─ index: [keyword.id]\n" +
 			"         │   │               ├─ keys: [mk.keyword_id:19!null]\n" +
-			"         │   │               ├─ colSet: (14-16)\n" +
+			"         │   │               ├─ colSet: (14,15)\n" +
 			"         │   │               ├─ tableId: 5\n" +
 			"         │   │               └─ Table\n" +
 			"         │   │                   ├─ name: keyword\n" +
@@ -14604,7 +14604,7 @@ WHERE cn.country_code != '[us]'
 			"         │           └─ IndexedTableAccess(movie_info)\n" +
 			"         │               ├─ index: [movie_info.movie_id]\n" +
 			"         │               ├─ keys: [mc.movie_id:8!null]\n" +
-			"         │               ├─ colSet: (24-28)\n" +
+			"         │               ├─ colSet: (25-27)\n" +
 			"         │               ├─ tableId: 8\n" +
 			"         │               └─ Table\n" +
 			"         │                   ├─ name: movie_info\n" +
@@ -14617,7 +14617,7 @@ WHERE cn.country_code != '[us]'
 			"                 └─ IndexedTableAccess(movie_info_idx)\n" +
 			"                     ├─ index: [movie_info_idx.movie_id]\n" +
 			"                     ├─ keys: [mi.movie_id:22!null]\n" +
-			"                     ├─ colSet: (29-33)\n" +
+			"                     ├─ colSet: (30-32)\n" +
 			"                     ├─ tableId: 9\n" +
 			"                     └─ Table\n" +
 			"                         ├─ name: movie_info_idx\n" +
@@ -14954,7 +14954,7 @@ WHERE cn.country_code != '[us]'
 			"         │   │   │   │   │   │           └─ IndexedTableAccess(movie_companies)\n" +
 			"         │   │   │   │   │   │               ├─ index: [movie_companies.company_type_id]\n" +
 			"         │   │   │   │   │   │               ├─ keys: [ct.id:4!null]\n" +
-			"         │   │   │   │   │   │               ├─ colSet: (19-23)\n" +
+			"         │   │   │   │   │   │               ├─ colSet: (20-23)\n" +
 			"         │   │   │   │   │   │               ├─ tableId: 7\n" +
 			"         │   │   │   │   │   │               └─ Table\n" +
 			"         │   │   │   │   │   │                   ├─ name: movie_companies\n" +
@@ -14967,7 +14967,7 @@ WHERE cn.country_code != '[us]'
 			"         │   │   │   │   │           └─ IndexedTableAccess(title)\n" +
 			"         │   │   │   │   │               ├─ index: [title.id]\n" +
 			"         │   │   │   │   │               ├─ keys: [mc.movie_id:8!null]\n" +
-			"         │   │   │   │   │               ├─ colSet: (37-48)\n" +
+			"         │   │   │   │   │               ├─ colSet: (37,38,40,41)\n" +
 			"         │   │   │   │   │               ├─ tableId: 11\n" +
 			"         │   │   │   │   │               └─ Table\n" +
 			"         │   │   │   │   │                   ├─ name: title\n" +
@@ -14988,7 +14988,7 @@ WHERE cn.country_code != '[us]'
 			"         │   │   │       └─ IndexedTableAccess(movie_keyword)\n" +
 			"         │   │   │           ├─ index: [movie_keyword.movie_id]\n" +
 			"         │   │   │           ├─ keys: [mc.movie_id:8!null]\n" +
-			"         │   │   │           ├─ colSet: (34-36)\n" +
+			"         │   │   │           ├─ colSet: (35,36)\n" +
 			"         │   │   │           ├─ tableId: 10\n" +
 			"         │   │   │           └─ Table\n" +
 			"         │   │   │               ├─ name: movie_keyword\n" +
@@ -15001,7 +15001,7 @@ WHERE cn.country_code != '[us]'
 			"         │   │           └─ IndexedTableAccess(keyword)\n" +
 			"         │   │               ├─ index: [keyword.id]\n" +
 			"         │   │               ├─ keys: [mk.keyword_id:19!null]\n" +
-			"         │   │               ├─ colSet: (14-16)\n" +
+			"         │   │               ├─ colSet: (14,15)\n" +
 			"         │   │               ├─ tableId: 5\n" +
 			"         │   │               └─ Table\n" +
 			"         │   │                   ├─ name: keyword\n" +
@@ -15014,7 +15014,7 @@ WHERE cn.country_code != '[us]'
 			"         │           └─ IndexedTableAccess(movie_info)\n" +
 			"         │               ├─ index: [movie_info.movie_id]\n" +
 			"         │               ├─ keys: [mc.movie_id:8!null]\n" +
-			"         │               ├─ colSet: (24-28)\n" +
+			"         │               ├─ colSet: (25-27)\n" +
 			"         │               ├─ tableId: 8\n" +
 			"         │               └─ Table\n" +
 			"         │                   ├─ name: movie_info\n" +
@@ -15027,7 +15027,7 @@ WHERE cn.country_code != '[us]'
 			"                 └─ IndexedTableAccess(movie_info_idx)\n" +
 			"                     ├─ index: [movie_info_idx.movie_id]\n" +
 			"                     ├─ keys: [mi.movie_id:22!null]\n" +
-			"                     ├─ colSet: (29-33)\n" +
+			"                     ├─ colSet: (30-32)\n" +
 			"                     ├─ tableId: 9\n" +
 			"                     └─ Table\n" +
 			"                         ├─ name: movie_info_idx\n" +
@@ -15370,7 +15370,7 @@ WHERE cct1.kind = 'complete+verified'
 			"         │   │   │   │   │   │   │   │   │           └─ IndexedTableAccess(title)\n" +
 			"         │   │   │   │   │   │   │   │   │               ├─ index: [title.id]\n" +
 			"         │   │   │   │   │   │   │   │   │               ├─ keys: [cc.movie_id:0]\n" +
-			"         │   │   │   │   │   │   │   │   │               ├─ colSet: (36-47)\n" +
+			"         │   │   │   │   │   │   │   │   │               ├─ colSet: (36,37,39,40)\n" +
 			"         │   │   │   │   │   │   │   │   │               ├─ tableId: 11\n" +
 			"         │   │   │   │   │   │   │   │   │               └─ Table\n" +
 			"         │   │   │   │   │   │   │   │   │                   ├─ name: title\n" +
@@ -15400,7 +15400,7 @@ WHERE cct1.kind = 'complete+verified'
 			"         │   │   │   │   │   │   │           └─ IndexedTableAccess(movie_info)\n" +
 			"         │   │   │   │   │   │   │               ├─ index: [movie_info.movie_id]\n" +
 			"         │   │   │   │   │   │   │               ├─ keys: [cc.movie_id:0]\n" +
-			"         │   │   │   │   │   │   │               ├─ colSet: (28-32)\n" +
+			"         │   │   │   │   │   │   │               ├─ colSet: (29-32)\n" +
 			"         │   │   │   │   │   │   │               ├─ tableId: 9\n" +
 			"         │   │   │   │   │   │   │               └─ Table\n" +
 			"         │   │   │   │   │   │   │                   ├─ name: movie_info\n" +
@@ -15409,7 +15409,7 @@ WHERE cct1.kind = 'complete+verified'
 			"         │   │   │   │   │   │       └─ IndexedTableAccess(movie_companies)\n" +
 			"         │   │   │   │   │   │           ├─ index: [movie_companies.movie_id]\n" +
 			"         │   │   │   │   │   │           ├─ keys: [cc.movie_id:0]\n" +
-			"         │   │   │   │   │   │           ├─ colSet: (23-27)\n" +
+			"         │   │   │   │   │   │           ├─ colSet: (24-26)\n" +
 			"         │   │   │   │   │   │           ├─ tableId: 8\n" +
 			"         │   │   │   │   │   │           └─ Table\n" +
 			"         │   │   │   │   │   │               ├─ name: movie_companies\n" +
@@ -15422,7 +15422,7 @@ WHERE cct1.kind = 'complete+verified'
 			"         │   │   │   │   │           └─ IndexedTableAccess(company_name)\n" +
 			"         │   │   │   │   │               ├─ index: [company_name.id]\n" +
 			"         │   │   │   │   │               ├─ keys: [mc.company_id:13!null]\n" +
-			"         │   │   │   │   │               ├─ colSet: (7-13)\n" +
+			"         │   │   │   │   │               ├─ colSet: (7,9)\n" +
 			"         │   │   │   │   │               ├─ tableId: 3\n" +
 			"         │   │   │   │   │               └─ Table\n" +
 			"         │   │   │   │   │                   ├─ name: company_name\n" +
@@ -15463,7 +15463,7 @@ WHERE cct1.kind = 'complete+verified'
 			"         │       └─ IndexedTableAccess(movie_keyword)\n" +
 			"         │           ├─ index: [movie_keyword.movie_id]\n" +
 			"         │           ├─ keys: [mi.movie_id:8!null]\n" +
-			"         │           ├─ colSet: (33-35)\n" +
+			"         │           ├─ colSet: (34,35)\n" +
 			"         │           ├─ tableId: 10\n" +
 			"         │           └─ Table\n" +
 			"         │               ├─ name: movie_keyword\n" +
@@ -15472,7 +15472,7 @@ WHERE cct1.kind = 'complete+verified'
 			"             └─ IndexedTableAccess(keyword)\n" +
 			"                 ├─ index: [keyword.id]\n" +
 			"                 ├─ keys: [mk.keyword_id:23!null]\n" +
-			"                 ├─ colSet: (18-20)\n" +
+			"                 ├─ colSet: (18)\n" +
 			"                 ├─ tableId: 6\n" +
 			"                 └─ Table\n" +
 			"                     ├─ name: keyword\n" +
@@ -15817,7 +15817,7 @@ WHERE cct1.kind = 'complete+verified'
 			"         │   │   │   │   │   │   │   │   │           └─ IndexedTableAccess(title)\n" +
 			"         │   │   │   │   │   │   │   │   │               ├─ index: [title.id]\n" +
 			"         │   │   │   │   │   │   │   │   │               ├─ keys: [cc.movie_id:0]\n" +
-			"         │   │   │   │   │   │   │   │   │               ├─ colSet: (36-47)\n" +
+			"         │   │   │   │   │   │   │   │   │               ├─ colSet: (36,37,39,40)\n" +
 			"         │   │   │   │   │   │   │   │   │               ├─ tableId: 11\n" +
 			"         │   │   │   │   │   │   │   │   │               └─ Table\n" +
 			"         │   │   │   │   │   │   │   │   │                   ├─ name: title\n" +
@@ -15847,7 +15847,7 @@ WHERE cct1.kind = 'complete+verified'
 			"         │   │   │   │   │   │   │           └─ IndexedTableAccess(movie_info)\n" +
 			"         │   │   │   │   │   │   │               ├─ index: [movie_info.movie_id]\n" +
 			"         │   │   │   │   │   │   │               ├─ keys: [cc.movie_id:0]\n" +
-			"         │   │   │   │   │   │   │               ├─ colSet: (28-32)\n" +
+			"         │   │   │   │   │   │   │               ├─ colSet: (29-32)\n" +
 			"         │   │   │   │   │   │   │               ├─ tableId: 9\n" +
 			"         │   │   │   │   │   │   │               └─ Table\n" +
 			"         │   │   │   │   │   │   │                   ├─ name: movie_info\n" +
@@ -15856,7 +15856,7 @@ WHERE cct1.kind = 'complete+verified'
 			"         │   │   │   │   │   │       └─ IndexedTableAccess(movie_companies)\n" +
 			"         │   │   │   │   │   │           ├─ index: [movie_companies.movie_id]\n" +
 			"         │   │   │   │   │   │           ├─ keys: [cc.movie_id:0]\n" +
-			"         │   │   │   │   │   │           ├─ colSet: (23-27)\n" +
+			"         │   │   │   │   │   │           ├─ colSet: (24-26)\n" +
 			"         │   │   │   │   │   │           ├─ tableId: 8\n" +
 			"         │   │   │   │   │   │           └─ Table\n" +
 			"         │   │   │   │   │   │               ├─ name: movie_companies\n" +
@@ -15869,7 +15869,7 @@ WHERE cct1.kind = 'complete+verified'
 			"         │   │   │   │   │           └─ IndexedTableAccess(company_name)\n" +
 			"         │   │   │   │   │               ├─ index: [company_name.id]\n" +
 			"         │   │   │   │   │               ├─ keys: [mc.company_id:13!null]\n" +
-			"         │   │   │   │   │               ├─ colSet: (7-13)\n" +
+			"         │   │   │   │   │               ├─ colSet: (7,9)\n" +
 			"         │   │   │   │   │               ├─ tableId: 3\n" +
 			"         │   │   │   │   │               └─ Table\n" +
 			"         │   │   │   │   │                   ├─ name: company_name\n" +
@@ -15910,7 +15910,7 @@ WHERE cct1.kind = 'complete+verified'
 			"         │       └─ IndexedTableAccess(movie_keyword)\n" +
 			"         │           ├─ index: [movie_keyword.movie_id]\n" +
 			"         │           ├─ keys: [mi.movie_id:8!null]\n" +
-			"         │           ├─ colSet: (33-35)\n" +
+			"         │           ├─ colSet: (34,35)\n" +
 			"         │           ├─ tableId: 10\n" +
 			"         │           └─ Table\n" +
 			"         │               ├─ name: movie_keyword\n" +
@@ -15919,7 +15919,7 @@ WHERE cct1.kind = 'complete+verified'
 			"             └─ IndexedTableAccess(keyword)\n" +
 			"                 ├─ index: [keyword.id]\n" +
 			"                 ├─ keys: [mk.keyword_id:23!null]\n" +
-			"                 ├─ colSet: (18-20)\n" +
+			"                 ├─ colSet: (18)\n" +
 			"                 ├─ tableId: 6\n" +
 			"                 └─ Table\n" +
 			"                     ├─ name: keyword\n" +
@@ -16234,7 +16234,7 @@ WHERE ci.note IN ('(voice)',
 			"         │   │   │   │   │   │   │   │       │           └─ IndexedTableAccess(name)\n" +
 			"         │   │   │   │   │   │   │   │       │               ├─ index: [name.id]\n" +
 			"         │   │   │   │   │   │   │   │       │               ├─ keys: [an.person_id:2!null]\n" +
-			"         │   │   │   │   │   │   │   │       │               ├─ colSet: (48-56)\n" +
+			"         │   │   │   │   │   │   │   │       │               ├─ colSet: (48,49,52)\n" +
 			"         │   │   │   │   │   │   │   │       │               ├─ tableId: 10\n" +
 			"         │   │   │   │   │   │   │   │       │               └─ Table\n" +
 			"         │   │   │   │   │   │   │   │       │                   ├─ name: name\n" +
@@ -16247,7 +16247,7 @@ WHERE ci.note IN ('(voice)',
 			"         │   │   │   │   │   │   │   │               └─ IndexedTableAccess(cast_info)\n" +
 			"         │   │   │   │   │   │   │   │                   ├─ index: [cast_info.person_id]\n" +
 			"         │   │   │   │   │   │   │   │                   ├─ keys: [an.person_id:2!null]\n" +
-			"         │   │   │   │   │   │   │   │                   ├─ colSet: (16-22)\n" +
+			"         │   │   │   │   │   │   │   │                   ├─ colSet: (17-20,22)\n" +
 			"         │   │   │   │   │   │   │   │                   ├─ tableId: 3\n" +
 			"         │   │   │   │   │   │   │   │                   └─ Table\n" +
 			"         │   │   │   │   │   │   │   │                       ├─ name: cast_info\n" +
@@ -16256,7 +16256,7 @@ WHERE ci.note IN ('(voice)',
 			"         │   │   │   │   │   │   │       └─ IndexedTableAccess(movie_keyword)\n" +
 			"         │   │   │   │   │   │   │           ├─ index: [movie_keyword.movie_id]\n" +
 			"         │   │   │   │   │   │   │           ├─ keys: [ci.movie_id:7!null]\n" +
-			"         │   │   │   │   │   │   │           ├─ colSet: (45-47)\n" +
+			"         │   │   │   │   │   │   │           ├─ colSet: (46,47)\n" +
 			"         │   │   │   │   │   │   │           ├─ tableId: 9\n" +
 			"         │   │   │   │   │   │   │           └─ Table\n" +
 			"         │   │   │   │   │   │   │               ├─ name: movie_keyword\n" +
@@ -16272,7 +16272,7 @@ WHERE ci.note IN ('(voice)',
 			"         │   │   │   │   │   │           └─ IndexedTableAccess(movie_info)\n" +
 			"         │   │   │   │   │   │               ├─ index: [movie_info.movie_id]\n" +
 			"         │   │   │   │   │   │               ├─ keys: [ci.movie_id:7!null]\n" +
-			"         │   │   │   │   │   │               ├─ colSet: (40-44)\n" +
+			"         │   │   │   │   │   │               ├─ colSet: (41-43)\n" +
 			"         │   │   │   │   │   │               ├─ tableId: 8\n" +
 			"         │   │   │   │   │   │               └─ Table\n" +
 			"         │   │   │   │   │   │                   ├─ name: movie_info\n" +
@@ -16281,7 +16281,7 @@ WHERE ci.note IN ('(voice)',
 			"         │   │   │   │   │       └─ IndexedTableAccess(movie_companies)\n" +
 			"         │   │   │   │   │           ├─ index: [movie_companies.movie_id]\n" +
 			"         │   │   │   │   │           ├─ keys: [ci.movie_id:7!null]\n" +
-			"         │   │   │   │   │           ├─ colSet: (35-39)\n" +
+			"         │   │   │   │   │           ├─ colSet: (36,37)\n" +
 			"         │   │   │   │   │           ├─ tableId: 7\n" +
 			"         │   │   │   │   │           └─ Table\n" +
 			"         │   │   │   │   │               ├─ name: movie_companies\n" +
@@ -16294,7 +16294,7 @@ WHERE ci.note IN ('(voice)',
 			"         │   │   │   │           └─ IndexedTableAccess(title)\n" +
 			"         │   │   │   │               ├─ index: [title.id]\n" +
 			"         │   │   │   │               ├─ keys: [mk.movie_id:11!null]\n" +
-			"         │   │   │   │               ├─ colSet: (59-70)\n" +
+			"         │   │   │   │               ├─ colSet: (59,60,63)\n" +
 			"         │   │   │   │               ├─ tableId: 12\n" +
 			"         │   │   │   │               └─ Table\n" +
 			"         │   │   │   │                   ├─ name: title\n" +
@@ -16303,7 +16303,7 @@ WHERE ci.note IN ('(voice)',
 			"         │   │   │       └─ IndexedTableAccess(char_name)\n" +
 			"         │   │   │           ├─ index: [char_name.id]\n" +
 			"         │   │   │           ├─ keys: [ci.person_role_id:8]\n" +
-			"         │   │   │           ├─ colSet: (9-15)\n" +
+			"         │   │   │           ├─ colSet: (9,10)\n" +
 			"         │   │   │           ├─ tableId: 2\n" +
 			"         │   │   │           └─ Table\n" +
 			"         │   │   │               ├─ name: char_name\n" +
@@ -16671,7 +16671,7 @@ WHERE ci.note IN ('(voice)',
 			"         │   │   │   │   │   │   │   │       │           └─ IndexedTableAccess(name)\n" +
 			"         │   │   │   │   │   │   │   │       │               ├─ index: [name.id]\n" +
 			"         │   │   │   │   │   │   │   │       │               ├─ keys: [an.person_id:2!null]\n" +
-			"         │   │   │   │   │   │   │   │       │               ├─ colSet: (48-56)\n" +
+			"         │   │   │   │   │   │   │   │       │               ├─ colSet: (48,49,52)\n" +
 			"         │   │   │   │   │   │   │   │       │               ├─ tableId: 10\n" +
 			"         │   │   │   │   │   │   │   │       │               └─ Table\n" +
 			"         │   │   │   │   │   │   │   │       │                   ├─ name: name\n" +
@@ -16684,7 +16684,7 @@ WHERE ci.note IN ('(voice)',
 			"         │   │   │   │   │   │   │   │               └─ IndexedTableAccess(cast_info)\n" +
 			"         │   │   │   │   │   │   │   │                   ├─ index: [cast_info.person_id]\n" +
 			"         │   │   │   │   │   │   │   │                   ├─ keys: [an.person_id:2!null]\n" +
-			"         │   │   │   │   │   │   │   │                   ├─ colSet: (16-22)\n" +
+			"         │   │   │   │   │   │   │   │                   ├─ colSet: (17-20,22)\n" +
 			"         │   │   │   │   │   │   │   │                   ├─ tableId: 3\n" +
 			"         │   │   │   │   │   │   │   │                   └─ Table\n" +
 			"         │   │   │   │   │   │   │   │                       ├─ name: cast_info\n" +
@@ -16693,7 +16693,7 @@ WHERE ci.note IN ('(voice)',
 			"         │   │   │   │   │   │   │       └─ IndexedTableAccess(movie_keyword)\n" +
 			"         │   │   │   │   │   │   │           ├─ index: [movie_keyword.movie_id]\n" +
 			"         │   │   │   │   │   │   │           ├─ keys: [ci.movie_id:7!null]\n" +
-			"         │   │   │   │   │   │   │           ├─ colSet: (45-47)\n" +
+			"         │   │   │   │   │   │   │           ├─ colSet: (46,47)\n" +
 			"         │   │   │   │   │   │   │           ├─ tableId: 9\n" +
 			"         │   │   │   │   │   │   │           └─ Table\n" +
 			"         │   │   │   │   │   │   │               ├─ name: movie_keyword\n" +
@@ -16709,7 +16709,7 @@ WHERE ci.note IN ('(voice)',
 			"         │   │   │   │   │   │           └─ IndexedTableAccess(movie_info)\n" +
 			"         │   │   │   │   │   │               ├─ index: [movie_info.movie_id]\n" +
 			"         │   │   │   │   │   │               ├─ keys: [ci.movie_id:7!null]\n" +
-			"         │   │   │   │   │   │               ├─ colSet: (40-44)\n" +
+			"         │   │   │   │   │   │               ├─ colSet: (41-43)\n" +
 			"         │   │   │   │   │   │               ├─ tableId: 8\n" +
 			"         │   │   │   │   │   │               └─ Table\n" +
 			"         │   │   │   │   │   │                   ├─ name: movie_info\n" +
@@ -16718,7 +16718,7 @@ WHERE ci.note IN ('(voice)',
 			"         │   │   │   │   │       └─ IndexedTableAccess(movie_companies)\n" +
 			"         │   │   │   │   │           ├─ index: [movie_companies.movie_id]\n" +
 			"         │   │   │   │   │           ├─ keys: [ci.movie_id:7!null]\n" +
-			"         │   │   │   │   │           ├─ colSet: (35-39)\n" +
+			"         │   │   │   │   │           ├─ colSet: (36,37)\n" +
 			"         │   │   │   │   │           ├─ tableId: 7\n" +
 			"         │   │   │   │   │           └─ Table\n" +
 			"         │   │   │   │   │               ├─ name: movie_companies\n" +
@@ -16727,7 +16727,7 @@ WHERE ci.note IN ('(voice)',
 			"         │   │   │   │       └─ IndexedTableAccess(char_name)\n" +
 			"         │   │   │   │           ├─ index: [char_name.id]\n" +
 			"         │   │   │   │           ├─ keys: [ci.person_role_id:8]\n" +
-			"         │   │   │   │           ├─ colSet: (9-15)\n" +
+			"         │   │   │   │           ├─ colSet: (9,10)\n" +
 			"         │   │   │   │           ├─ tableId: 2\n" +
 			"         │   │   │   │           └─ Table\n" +
 			"         │   │   │   │               ├─ name: char_name\n" +
@@ -16748,7 +16748,7 @@ WHERE ci.note IN ('(voice)',
 			"         │   │   │           └─ IndexedTableAccess(title)\n" +
 			"         │   │   │               ├─ index: [title.id]\n" +
 			"         │   │   │               ├─ keys: [mk.movie_id:11!null]\n" +
-			"         │   │   │               ├─ colSet: (59-70)\n" +
+			"         │   │   │               ├─ colSet: (59,60,63)\n" +
 			"         │   │   │               ├─ tableId: 12\n" +
 			"         │   │   │               └─ Table\n" +
 			"         │   │   │                   ├─ name: title\n" +
@@ -17091,7 +17091,7 @@ WHERE ci.note IN ('(writer)',
 			"         │   │   │   │   │   │   │   │   └─ IndexedTableAccess(movie_info_idx)\n" +
 			"         │   │   │   │   │   │   │   │       ├─ index: [movie_info_idx.movie_id]\n" +
 			"         │   │   │   │   │   │   │   │       ├─ static: [{[NULL, ∞)}]\n" +
-			"         │   │   │   │   │   │   │   │       ├─ colSet: (20-24)\n" +
+			"         │   │   │   │   │   │   │   │       ├─ colSet: (21-23)\n" +
 			"         │   │   │   │   │   │   │   │       ├─ tableId: 6\n" +
 			"         │   │   │   │   │   │   │   │       └─ Table\n" +
 			"         │   │   │   │   │   │   │   │           ├─ name: movie_info_idx\n" +
@@ -17100,7 +17100,7 @@ WHERE ci.note IN ('(writer)',
 			"         │   │   │   │   │   │   │       └─ IndexedTableAccess(title)\n" +
 			"         │   │   │   │   │   │   │           ├─ index: [title.id]\n" +
 			"         │   │   │   │   │   │   │           ├─ static: [{[NULL, ∞)}]\n" +
-			"         │   │   │   │   │   │   │           ├─ colSet: (37-48)\n" +
+			"         │   │   │   │   │   │   │           ├─ colSet: (37,38)\n" +
 			"         │   │   │   │   │   │   │           ├─ tableId: 9\n" +
 			"         │   │   │   │   │   │   │           └─ Table\n" +
 			"         │   │   │   │   │   │   │               ├─ name: title\n" +
@@ -17113,7 +17113,7 @@ WHERE ci.note IN ('(writer)',
 			"         │   │   │   │   │   │           └─ IndexedTableAccess(cast_info)\n" +
 			"         │   │   │   │   │   │               ├─ index: [cast_info.movie_id]\n" +
 			"         │   │   │   │   │   │               ├─ keys: [mi_idx.movie_id:0!null]\n" +
-			"         │   │   │   │   │   │               ├─ colSet: (1-7)\n" +
+			"         │   │   │   │   │   │               ├─ colSet: (2,3,5)\n" +
 			"         │   │   │   │   │   │               ├─ tableId: 1\n" +
 			"         │   │   │   │   │   │               └─ Table\n" +
 			"         │   │   │   │   │   │                   ├─ name: cast_info\n" +
@@ -17138,7 +17138,7 @@ WHERE ci.note IN ('(writer)',
 			"         │   │   │   │           └─ IndexedTableAccess(movie_info)\n" +
 			"         │   │   │   │               ├─ index: [movie_info.movie_id]\n" +
 			"         │   │   │   │               ├─ keys: [mi_idx.movie_id:0!null]\n" +
-			"         │   │   │   │               ├─ colSet: (15-19)\n" +
+			"         │   │   │   │               ├─ colSet: (16-18)\n" +
 			"         │   │   │   │               ├─ tableId: 5\n" +
 			"         │   │   │   │               └─ Table\n" +
 			"         │   │   │   │                   ├─ name: movie_info\n" +
@@ -17164,7 +17164,7 @@ WHERE ci.note IN ('(writer)',
 			"         │   │           └─ IndexedTableAccess(name)\n" +
 			"         │   │               ├─ index: [name.id]\n" +
 			"         │   │               ├─ keys: [ci.person_id:5!null]\n" +
-			"         │   │               ├─ colSet: (28-36)\n" +
+			"         │   │               ├─ colSet: (28,29,32)\n" +
 			"         │   │               ├─ tableId: 8\n" +
 			"         │   │               └─ Table\n" +
 			"         │   │                   ├─ name: name\n" +
@@ -17173,7 +17173,7 @@ WHERE ci.note IN ('(writer)',
 			"         │       └─ IndexedTableAccess(movie_keyword)\n" +
 			"         │           ├─ index: [movie_keyword.movie_id]\n" +
 			"         │           ├─ keys: [ci.movie_id:6!null]\n" +
-			"         │           ├─ colSet: (25-27)\n" +
+			"         │           ├─ colSet: (26,27)\n" +
 			"         │           ├─ tableId: 7\n" +
 			"         │           └─ Table\n" +
 			"         │               ├─ name: movie_keyword\n" +
@@ -17448,7 +17448,7 @@ WHERE ci.note IN ('(writer)',
 			"         │   │   │   │   │   │   │   │   └─ IndexedTableAccess(movie_info_idx)\n" +
 			"         │   │   │   │   │   │   │   │       ├─ index: [movie_info_idx.movie_id]\n" +
 			"         │   │   │   │   │   │   │   │       ├─ static: [{[NULL, ∞)}]\n" +
-			"         │   │   │   │   │   │   │   │       ├─ colSet: (20-24)\n" +
+			"         │   │   │   │   │   │   │   │       ├─ colSet: (21-23)\n" +
 			"         │   │   │   │   │   │   │   │       ├─ tableId: 6\n" +
 			"         │   │   │   │   │   │   │   │       └─ Table\n" +
 			"         │   │   │   │   │   │   │   │           ├─ name: movie_info_idx\n" +
@@ -17469,7 +17469,7 @@ WHERE ci.note IN ('(writer)',
 			"         │   │   │   │   │   │   │           └─ IndexedTableAccess(title)\n" +
 			"         │   │   │   │   │   │   │               ├─ index: [title.id]\n" +
 			"         │   │   │   │   │   │   │               ├─ static: [{[NULL, ∞)}]\n" +
-			"         │   │   │   │   │   │   │               ├─ colSet: (37-48)\n" +
+			"         │   │   │   │   │   │   │               ├─ colSet: (37,38,41)\n" +
 			"         │   │   │   │   │   │   │               ├─ tableId: 9\n" +
 			"         │   │   │   │   │   │   │               └─ Table\n" +
 			"         │   │   │   │   │   │   │                   ├─ name: title\n" +
@@ -17482,7 +17482,7 @@ WHERE ci.note IN ('(writer)',
 			"         │   │   │   │   │   │           └─ IndexedTableAccess(cast_info)\n" +
 			"         │   │   │   │   │   │               ├─ index: [cast_info.movie_id]\n" +
 			"         │   │   │   │   │   │               ├─ keys: [mi_idx.movie_id:0!null]\n" +
-			"         │   │   │   │   │   │               ├─ colSet: (1-7)\n" +
+			"         │   │   │   │   │   │               ├─ colSet: (2,3,5)\n" +
 			"         │   │   │   │   │   │               ├─ tableId: 1\n" +
 			"         │   │   │   │   │   │               └─ Table\n" +
 			"         │   │   │   │   │   │                   ├─ name: cast_info\n" +
@@ -17507,7 +17507,7 @@ WHERE ci.note IN ('(writer)',
 			"         │   │   │   │           └─ IndexedTableAccess(movie_info)\n" +
 			"         │   │   │   │               ├─ index: [movie_info.movie_id]\n" +
 			"         │   │   │   │               ├─ keys: [mi_idx.movie_id:0!null]\n" +
-			"         │   │   │   │               ├─ colSet: (15-19)\n" +
+			"         │   │   │   │               ├─ colSet: (16-18)\n" +
 			"         │   │   │   │               ├─ tableId: 5\n" +
 			"         │   │   │   │               └─ Table\n" +
 			"         │   │   │   │                   ├─ name: movie_info\n" +
@@ -17533,7 +17533,7 @@ WHERE ci.note IN ('(writer)',
 			"         │   │           └─ IndexedTableAccess(name)\n" +
 			"         │   │               ├─ index: [name.id]\n" +
 			"         │   │               ├─ keys: [ci.person_id:6!null]\n" +
-			"         │   │               ├─ colSet: (28-36)\n" +
+			"         │   │               ├─ colSet: (28,29,32)\n" +
 			"         │   │               ├─ tableId: 8\n" +
 			"         │   │               └─ Table\n" +
 			"         │   │                   ├─ name: name\n" +
@@ -17542,7 +17542,7 @@ WHERE ci.note IN ('(writer)',
 			"         │       └─ IndexedTableAccess(movie_keyword)\n" +
 			"         │           ├─ index: [movie_keyword.movie_id]\n" +
 			"         │           ├─ keys: [ci.movie_id:7!null]\n" +
-			"         │           ├─ colSet: (25-27)\n" +
+			"         │           ├─ colSet: (26,27)\n" +
 			"         │           ├─ tableId: 7\n" +
 			"         │           └─ Table\n" +
 			"         │               ├─ name: movie_keyword\n" +
@@ -17826,7 +17826,7 @@ WHERE ci.note IN ('(writer)',
 			"         │   │   │   │   │   │   │   │   └─ IndexedTableAccess(movie_info_idx)\n" +
 			"         │   │   │   │   │   │   │   │       ├─ index: [movie_info_idx.movie_id]\n" +
 			"         │   │   │   │   │   │   │   │       ├─ static: [{[NULL, ∞)}]\n" +
-			"         │   │   │   │   │   │   │   │       ├─ colSet: (20-24)\n" +
+			"         │   │   │   │   │   │   │   │       ├─ colSet: (21-23)\n" +
 			"         │   │   │   │   │   │   │   │       ├─ tableId: 6\n" +
 			"         │   │   │   │   │   │   │   │       └─ Table\n" +
 			"         │   │   │   │   │   │   │   │           ├─ name: movie_info_idx\n" +
@@ -17835,7 +17835,7 @@ WHERE ci.note IN ('(writer)',
 			"         │   │   │   │   │   │   │       └─ IndexedTableAccess(title)\n" +
 			"         │   │   │   │   │   │   │           ├─ index: [title.id]\n" +
 			"         │   │   │   │   │   │   │           ├─ static: [{[NULL, ∞)}]\n" +
-			"         │   │   │   │   │   │   │           ├─ colSet: (37-48)\n" +
+			"         │   │   │   │   │   │   │           ├─ colSet: (37,38)\n" +
 			"         │   │   │   │   │   │   │           ├─ tableId: 9\n" +
 			"         │   │   │   │   │   │   │           └─ Table\n" +
 			"         │   │   │   │   │   │   │               ├─ name: title\n" +
@@ -17848,7 +17848,7 @@ WHERE ci.note IN ('(writer)',
 			"         │   │   │   │   │   │           └─ IndexedTableAccess(cast_info)\n" +
 			"         │   │   │   │   │   │               ├─ index: [cast_info.movie_id]\n" +
 			"         │   │   │   │   │   │               ├─ keys: [mi_idx.movie_id:0!null]\n" +
-			"         │   │   │   │   │   │               ├─ colSet: (1-7)\n" +
+			"         │   │   │   │   │   │               ├─ colSet: (2,3,5)\n" +
 			"         │   │   │   │   │   │               ├─ tableId: 1\n" +
 			"         │   │   │   │   │   │               └─ Table\n" +
 			"         │   │   │   │   │   │                   ├─ name: cast_info\n" +
@@ -17873,7 +17873,7 @@ WHERE ci.note IN ('(writer)',
 			"         │   │   │   │           └─ IndexedTableAccess(movie_info)\n" +
 			"         │   │   │   │               ├─ index: [movie_info.movie_id]\n" +
 			"         │   │   │   │               ├─ keys: [mi_idx.movie_id:0!null]\n" +
-			"         │   │   │   │               ├─ colSet: (15-19)\n" +
+			"         │   │   │   │               ├─ colSet: (16-18)\n" +
 			"         │   │   │   │               ├─ tableId: 5\n" +
 			"         │   │   │   │               └─ Table\n" +
 			"         │   │   │   │                   ├─ name: movie_info\n" +
@@ -17899,7 +17899,7 @@ WHERE ci.note IN ('(writer)',
 			"         │   │           └─ IndexedTableAccess(name)\n" +
 			"         │   │               ├─ index: [name.id]\n" +
 			"         │   │               ├─ keys: [ci.person_id:5!null]\n" +
-			"         │   │               ├─ colSet: (28-36)\n" +
+			"         │   │               ├─ colSet: (28,29,32)\n" +
 			"         │   │               ├─ tableId: 8\n" +
 			"         │   │               └─ Table\n" +
 			"         │   │                   ├─ name: name\n" +
@@ -17908,7 +17908,7 @@ WHERE ci.note IN ('(writer)',
 			"         │       └─ IndexedTableAccess(movie_keyword)\n" +
 			"         │           ├─ index: [movie_keyword.movie_id]\n" +
 			"         │           ├─ keys: [ci.movie_id:6!null]\n" +
-			"         │           ├─ colSet: (25-27)\n" +
+			"         │           ├─ colSet: (26,27)\n" +
 			"         │           ├─ tableId: 7\n" +
 			"         │           └─ Table\n" +
 			"         │               ├─ name: movie_keyword\n" +
@@ -18202,7 +18202,7 @@ WHERE cct1.kind = 'cast'
 			"         │   │   │   │   │   │   │   │   │   │           └─ IndexedTableAccess(title)\n" +
 			"         │   │   │   │   │   │   │   │   │   │               ├─ index: [title.id]\n" +
 			"         │   │   │   │   │   │   │   │   │   │               ├─ keys: [cc.movie_id:0]\n" +
-			"         │   │   │   │   │   │   │   │   │   │               ├─ colSet: (47-58)\n" +
+			"         │   │   │   │   │   │   │   │   │   │               ├─ colSet: (47,48,50,51)\n" +
 			"         │   │   │   │   │   │   │   │   │   │               ├─ tableId: 12\n" +
 			"         │   │   │   │   │   │   │   │   │   │               └─ Table\n" +
 			"         │   │   │   │   │   │   │   │   │   │                   ├─ name: title\n" +
@@ -18234,7 +18234,7 @@ WHERE cct1.kind = 'cast'
 			"         │   │   │   │   │   │   │       └─ IndexedTableAccess(cast_info)\n" +
 			"         │   │   │   │   │   │   │           ├─ index: [cast_info.movie_id]\n" +
 			"         │   │   │   │   │   │   │           ├─ keys: [cc.movie_id:0]\n" +
-			"         │   │   │   │   │   │   │           ├─ colSet: (16-22)\n" +
+			"         │   │   │   │   │   │   │           ├─ colSet: (17-19)\n" +
 			"         │   │   │   │   │   │   │           ├─ tableId: 5\n" +
 			"         │   │   │   │   │   │   │           └─ Table\n" +
 			"         │   │   │   │   │   │   │               ├─ name: cast_info\n" +
@@ -18247,7 +18247,7 @@ WHERE cct1.kind = 'cast'
 			"         │   │   │   │   │   │           └─ IndexedTableAccess(movie_info_idx)\n" +
 			"         │   │   │   │   │   │               ├─ index: [movie_info_idx.movie_id]\n" +
 			"         │   │   │   │   │   │               ├─ keys: [ci.movie_id:12!null]\n" +
-			"         │   │   │   │   │   │               ├─ colSet: (30-34)\n" +
+			"         │   │   │   │   │   │               ├─ colSet: (31-33)\n" +
 			"         │   │   │   │   │   │               ├─ tableId: 9\n" +
 			"         │   │   │   │   │   │               └─ Table\n" +
 			"         │   │   │   │   │   │                   ├─ name: movie_info_idx\n" +
@@ -18268,7 +18268,7 @@ WHERE cct1.kind = 'cast'
 			"         │   │   │   │       └─ IndexedTableAccess(movie_keyword)\n" +
 			"         │   │   │   │           ├─ index: [movie_keyword.movie_id]\n" +
 			"         │   │   │   │           ├─ keys: [mi_idx.movie_id:14!null]\n" +
-			"         │   │   │   │           ├─ colSet: (35-37)\n" +
+			"         │   │   │   │           ├─ colSet: (36,37)\n" +
 			"         │   │   │   │           ├─ tableId: 10\n" +
 			"         │   │   │   │           └─ Table\n" +
 			"         │   │   │   │               ├─ name: movie_keyword\n" +
@@ -18308,7 +18308,7 @@ WHERE cct1.kind = 'cast'
 			"         │           └─ IndexedTableAccess(char_name)\n" +
 			"         │               ├─ index: [char_name.id]\n" +
 			"         │               ├─ keys: [ci.person_role_id:13]\n" +
-			"         │               ├─ colSet: (9-15)\n" +
+			"         │               ├─ colSet: (9,10)\n" +
 			"         │               ├─ tableId: 4\n" +
 			"         │               └─ Table\n" +
 			"         │                   ├─ name: char_name\n" +
@@ -18317,7 +18317,7 @@ WHERE cct1.kind = 'cast'
 			"             └─ IndexedTableAccess(name)\n" +
 			"                 ├─ index: [name.id]\n" +
 			"                 ├─ keys: [ci.person_id:11!null]\n" +
-			"                 ├─ colSet: (38-46)\n" +
+			"                 ├─ colSet: (38,39)\n" +
 			"                 ├─ tableId: 11\n" +
 			"                 └─ Table\n" +
 			"                     ├─ name: name\n" +
@@ -18702,7 +18702,7 @@ WHERE cct1.kind = 'cast'
 			"         │   │   │   │   │   │   │   │   │   │           └─ IndexedTableAccess(title)\n" +
 			"         │   │   │   │   │   │   │   │   │   │               ├─ index: [title.id]\n" +
 			"         │   │   │   │   │   │   │   │   │   │               ├─ keys: [cc.movie_id:0]\n" +
-			"         │   │   │   │   │   │   │   │   │   │               ├─ colSet: (47-58)\n" +
+			"         │   │   │   │   │   │   │   │   │   │               ├─ colSet: (47,48,50,51)\n" +
 			"         │   │   │   │   │   │   │   │   │   │               ├─ tableId: 12\n" +
 			"         │   │   │   │   │   │   │   │   │   │               └─ Table\n" +
 			"         │   │   │   │   │   │   │   │   │   │                   ├─ name: title\n" +
@@ -18734,7 +18734,7 @@ WHERE cct1.kind = 'cast'
 			"         │   │   │   │   │   │   │       └─ IndexedTableAccess(cast_info)\n" +
 			"         │   │   │   │   │   │   │           ├─ index: [cast_info.movie_id]\n" +
 			"         │   │   │   │   │   │   │           ├─ keys: [cc.movie_id:0]\n" +
-			"         │   │   │   │   │   │   │           ├─ colSet: (16-22)\n" +
+			"         │   │   │   │   │   │   │           ├─ colSet: (17-19)\n" +
 			"         │   │   │   │   │   │   │           ├─ tableId: 5\n" +
 			"         │   │   │   │   │   │   │           └─ Table\n" +
 			"         │   │   │   │   │   │   │               ├─ name: cast_info\n" +
@@ -18743,7 +18743,7 @@ WHERE cct1.kind = 'cast'
 			"         │   │   │   │   │   │       └─ IndexedTableAccess(movie_keyword)\n" +
 			"         │   │   │   │   │   │           ├─ index: [movie_keyword.movie_id]\n" +
 			"         │   │   │   │   │   │           ├─ keys: [ci.movie_id:12!null]\n" +
-			"         │   │   │   │   │   │           ├─ colSet: (35-37)\n" +
+			"         │   │   │   │   │   │           ├─ colSet: (36,37)\n" +
 			"         │   │   │   │   │   │           ├─ tableId: 10\n" +
 			"         │   │   │   │   │   │           └─ Table\n" +
 			"         │   │   │   │   │   │               ├─ name: movie_keyword\n" +
@@ -18752,7 +18752,7 @@ WHERE cct1.kind = 'cast'
 			"         │   │   │   │   │       └─ IndexedTableAccess(movie_info_idx)\n" +
 			"         │   │   │   │   │           ├─ index: [movie_info_idx.movie_id]\n" +
 			"         │   │   │   │   │           ├─ keys: [ci.movie_id:12!null]\n" +
-			"         │   │   │   │   │           ├─ colSet: (30-34)\n" +
+			"         │   │   │   │   │           ├─ colSet: (31-33)\n" +
 			"         │   │   │   │   │           ├─ tableId: 9\n" +
 			"         │   │   │   │   │           └─ Table\n" +
 			"         │   │   │   │   │               ├─ name: movie_info_idx\n" +
@@ -18804,7 +18804,7 @@ WHERE cct1.kind = 'cast'
 			"         │           └─ IndexedTableAccess(char_name)\n" +
 			"         │               ├─ index: [char_name.id]\n" +
 			"         │               ├─ keys: [ci.person_role_id:13]\n" +
-			"         │               ├─ colSet: (9-15)\n" +
+			"         │               ├─ colSet: (9,10)\n" +
 			"         │               ├─ tableId: 4\n" +
 			"         │               └─ Table\n" +
 			"         │                   ├─ name: char_name\n" +
@@ -18813,7 +18813,7 @@ WHERE cct1.kind = 'cast'
 			"             └─ IndexedTableAccess(name)\n" +
 			"                 ├─ index: [name.id]\n" +
 			"                 ├─ keys: [ci.person_id:11!null]\n" +
-			"                 ├─ colSet: (38-46)\n" +
+			"                 ├─ colSet: (38)\n" +
 			"                 ├─ tableId: 11\n" +
 			"                 └─ Table\n" +
 			"                     ├─ name: name\n" +
@@ -19210,7 +19210,7 @@ WHERE cct1.kind IN ('cast',
 			"         │   │   │   │   │   │   │   │   │   │           └─ IndexedTableAccess(title)\n" +
 			"         │   │   │   │   │   │   │   │   │   │               ├─ index: [title.id]\n" +
 			"         │   │   │   │   │   │   │   │   │   │               ├─ keys: [ml.movie_id:0!null]\n" +
-			"         │   │   │   │   │   │   │   │   │   │               ├─ colSet: (40-51)\n" +
+			"         │   │   │   │   │   │   │   │   │   │               ├─ colSet: (40,41,44)\n" +
 			"         │   │   │   │   │   │   │   │   │   │               ├─ tableId: 12\n" +
 			"         │   │   │   │   │   │   │   │   │   │               └─ Table\n" +
 			"         │   │   │   │   │   │   │   │   │   │                   ├─ name: title\n" +
@@ -19219,7 +19219,7 @@ WHERE cct1.kind IN ('cast',
 			"         │   │   │   │   │   │   │   │   │       └─ IndexedTableAccess(complete_cast)\n" +
 			"         │   │   │   │   │   │   │   │   │           ├─ index: [complete_cast.movie_id]\n" +
 			"         │   │   │   │   │   │   │   │   │           ├─ keys: [ml.movie_id:0!null]\n" +
-			"         │   │   │   │   │   │   │   │   │           ├─ colSet: (1-4)\n" +
+			"         │   │   │   │   │   │   │   │   │           ├─ colSet: (2-4)\n" +
 			"         │   │   │   │   │   │   │   │   │           ├─ tableId: 1\n" +
 			"         │   │   │   │   │   │   │   │   │           └─ Table\n" +
 			"         │   │   │   │   │   │   │   │   │               ├─ name: complete_cast\n" +
@@ -19255,7 +19255,7 @@ WHERE cct1.kind IN ('cast',
 			"         │   │   │   │   │   │           └─ IndexedTableAccess(movie_companies)\n" +
 			"         │   │   │   │   │   │               ├─ index: [movie_companies.movie_id]\n" +
 			"         │   │   │   │   │   │               ├─ keys: [cc.movie_id:5]\n" +
-			"         │   │   │   │   │   │               ├─ colSet: (23-27)\n" +
+			"         │   │   │   │   │   │               ├─ colSet: (24-27)\n" +
 			"         │   │   │   │   │   │               ├─ tableId: 8\n" +
 			"         │   │   │   │   │   │               └─ Table\n" +
 			"         │   │   │   │   │   │                   ├─ name: movie_companies\n" +
@@ -19273,7 +19273,7 @@ WHERE cct1.kind IN ('cast',
 			"         │   │   │   │   │           └─ IndexedTableAccess(company_name)\n" +
 			"         │   │   │   │   │               ├─ index: [company_name.id]\n" +
 			"         │   │   │   │   │               ├─ keys: [mc.company_id:13!null]\n" +
-			"         │   │   │   │   │               ├─ colSet: (9-15)\n" +
+			"         │   │   │   │   │               ├─ colSet: (9-11)\n" +
 			"         │   │   │   │   │               ├─ tableId: 4\n" +
 			"         │   │   │   │   │               └─ Table\n" +
 			"         │   │   │   │   │                   ├─ name: company_name\n" +
@@ -19294,7 +19294,7 @@ WHERE cct1.kind IN ('cast',
 			"         │   │   │       └─ IndexedTableAccess(movie_keyword)\n" +
 			"         │   │   │           ├─ index: [movie_keyword.movie_id]\n" +
 			"         │   │   │           ├─ keys: [mc.movie_id:12!null]\n" +
-			"         │   │   │           ├─ colSet: (33-35)\n" +
+			"         │   │   │           ├─ colSet: (34,35)\n" +
 			"         │   │   │           ├─ tableId: 10\n" +
 			"         │   │   │           └─ Table\n" +
 			"         │   │   │               ├─ name: movie_keyword\n" +
@@ -19307,7 +19307,7 @@ WHERE cct1.kind IN ('cast',
 			"         │   │           └─ IndexedTableAccess(keyword)\n" +
 			"         │   │               ├─ index: [keyword.id]\n" +
 			"         │   │               ├─ keys: [mk.keyword_id:22!null]\n" +
-			"         │   │               ├─ colSet: (18-20)\n" +
+			"         │   │               ├─ colSet: (18,19)\n" +
 			"         │   │               ├─ tableId: 6\n" +
 			"         │   │               └─ Table\n" +
 			"         │   │                   ├─ name: keyword\n" +
@@ -19320,7 +19320,7 @@ WHERE cct1.kind IN ('cast',
 			"         │           └─ IndexedTableAccess(movie_info)\n" +
 			"         │               ├─ index: [movie_info.movie_id]\n" +
 			"         │               ├─ keys: [mc.movie_id:12!null]\n" +
-			"         │               ├─ colSet: (28-32)\n" +
+			"         │               ├─ colSet: (29,31)\n" +
 			"         │               ├─ tableId: 9\n" +
 			"         │               └─ Table\n" +
 			"         │                   ├─ name: movie_info\n" +
@@ -19890,7 +19890,7 @@ WHERE cct1.kind = 'cast'
 			"         │   │   │   │   │   │   │   │   │   │   │   │           └─ IndexedTableAccess(title)\n" +
 			"         │   │   │   │   │   │   │   │   │   │   │   │               ├─ index: [title.id]\n" +
 			"         │   │   │   │   │   │   │   │   │   │   │   │               ├─ keys: [cc.movie_id:0]\n" +
-			"         │   │   │   │   │   │   │   │   │   │   │   │               ├─ colSet: (45-56)\n" +
+			"         │   │   │   │   │   │   │   │   │   │   │   │               ├─ colSet: (45,46,48,49)\n" +
 			"         │   │   │   │   │   │   │   │   │   │   │   │               ├─ tableId: 14\n" +
 			"         │   │   │   │   │   │   │   │   │   │   │   │               └─ Table\n" +
 			"         │   │   │   │   │   │   │   │   │   │   │   │                   ├─ name: title\n" +
@@ -19928,7 +19928,7 @@ WHERE cct1.kind = 'cast'
 			"         │   │   │   │   │   │   │   │   │           └─ IndexedTableAccess(movie_info)\n" +
 			"         │   │   │   │   │   │   │   │   │               ├─ index: [movie_info.movie_id]\n" +
 			"         │   │   │   │   │   │   │   │   │               ├─ keys: [cc.movie_id:0]\n" +
-			"         │   │   │   │   │   │   │   │   │               ├─ colSet: (32-36)\n" +
+			"         │   │   │   │   │   │   │   │   │               ├─ colSet: (33-35)\n" +
 			"         │   │   │   │   │   │   │   │   │               ├─ tableId: 11\n" +
 			"         │   │   │   │   │   │   │   │   │               └─ Table\n" +
 			"         │   │   │   │   │   │   │   │   │                   ├─ name: movie_info\n" +
@@ -19942,7 +19942,7 @@ WHERE cct1.kind = 'cast'
 			"         │   │   │   │   │   │   │   │           └─ IndexedTableAccess(movie_companies)\n" +
 			"         │   │   │   │   │   │   │   │               ├─ index: [movie_companies.movie_id]\n" +
 			"         │   │   │   │   │   │   │   │               ├─ keys: [cc.movie_id:0]\n" +
-			"         │   │   │   │   │   │   │   │               ├─ colSet: (27-31)\n" +
+			"         │   │   │   │   │   │   │   │               ├─ colSet: (28-31)\n" +
 			"         │   │   │   │   │   │   │   │               ├─ tableId: 10\n" +
 			"         │   │   │   │   │   │   │   │               └─ Table\n" +
 			"         │   │   │   │   │   │   │   │                   ├─ name: movie_companies\n" +
@@ -19955,7 +19955,7 @@ WHERE cct1.kind = 'cast'
 			"         │   │   │   │   │   │   │           └─ IndexedTableAccess(movie_info_idx)\n" +
 			"         │   │   │   │   │   │   │               ├─ index: [movie_info_idx.movie_id]\n" +
 			"         │   │   │   │   │   │   │               ├─ keys: [mi.movie_id:11!null]\n" +
-			"         │   │   │   │   │   │   │               ├─ colSet: (37-41)\n" +
+			"         │   │   │   │   │   │   │               ├─ colSet: (38-40)\n" +
 			"         │   │   │   │   │   │   │               ├─ tableId: 12\n" +
 			"         │   │   │   │   │   │   │               └─ Table\n" +
 			"         │   │   │   │   │   │   │                   ├─ name: movie_info_idx\n" +
@@ -19969,7 +19969,7 @@ WHERE cct1.kind = 'cast'
 			"         │   │   │   │   │   │           └─ IndexedTableAccess(company_name)\n" +
 			"         │   │   │   │   │   │               ├─ index: [company_name.id]\n" +
 			"         │   │   │   │   │   │               ├─ keys: [mc.company_id:15!null]\n" +
-			"         │   │   │   │   │   │               ├─ colSet: (9-15)\n" +
+			"         │   │   │   │   │   │               ├─ colSet: (9-11)\n" +
 			"         │   │   │   │   │   │               ├─ tableId: 4\n" +
 			"         │   │   │   │   │   │               └─ Table\n" +
 			"         │   │   │   │   │   │                   ├─ name: company_name\n" +
@@ -20023,7 +20023,7 @@ WHERE cct1.kind = 'cast'
 			"         │       └─ IndexedTableAccess(movie_keyword)\n" +
 			"         │           ├─ index: [movie_keyword.movie_id]\n" +
 			"         │           ├─ keys: [mi.movie_id:11!null]\n" +
-			"         │           ├─ colSet: (42-44)\n" +
+			"         │           ├─ colSet: (43,44)\n" +
 			"         │           ├─ tableId: 13\n" +
 			"         │           └─ Table\n" +
 			"         │               ├─ name: movie_keyword\n" +
@@ -20036,7 +20036,7 @@ WHERE cct1.kind = 'cast'
 			"                 └─ IndexedTableAccess(keyword)\n" +
 			"                     ├─ index: [keyword.id]\n" +
 			"                     ├─ keys: [mk.keyword_id:32!null]\n" +
-			"                     ├─ colSet: (22-24)\n" +
+			"                     ├─ colSet: (22,23)\n" +
 			"                     ├─ tableId: 8\n" +
 			"                     └─ Table\n" +
 			"                         ├─ name: keyword\n" +
@@ -20524,7 +20524,7 @@ WHERE cct1.kind ='cast'
 			"         │   │   │   │   │   │   │   │   │   │   │           └─ IndexedTableAccess(cast_info)\n" +
 			"         │   │   │   │   │   │   │   │   │   │   │               ├─ index: [cast_info.person_role_id]\n" +
 			"         │   │   │   │   │   │   │   │   │   │   │               ├─ keys: [chn.id:8!null]\n" +
-			"         │   │   │   │   │   │   │   │   │   │   │               ├─ colSet: (24-30)\n" +
+			"         │   │   │   │   │   │   │   │   │   │   │               ├─ colSet: (25-28,30)\n" +
 			"         │   │   │   │   │   │   │   │   │   │   │               ├─ tableId: 6\n" +
 			"         │   │   │   │   │   │   │   │   │   │   │               └─ Table\n" +
 			"         │   │   │   │   │   │   │   │   │   │   │                   ├─ name: cast_info\n" +
@@ -20570,7 +20570,7 @@ WHERE cct1.kind ='cast'
 			"         │   │   │   │   │   │       └─ IndexedTableAccess(movie_companies)\n" +
 			"         │   │   │   │   │   │           ├─ index: [movie_companies.movie_id]\n" +
 			"         │   │   │   │   │   │           ├─ keys: [ci.movie_id:11!null]\n" +
-			"         │   │   │   │   │   │           ├─ colSet: (45-49)\n" +
+			"         │   │   │   │   │   │           ├─ colSet: (46,47)\n" +
 			"         │   │   │   │   │   │           ├─ tableId: 11\n" +
 			"         │   │   │   │   │   │           └─ Table\n" +
 			"         │   │   │   │   │   │               ├─ name: movie_companies\n" +
@@ -20586,7 +20586,7 @@ WHERE cct1.kind ='cast'
 			"         │   │   │   │   │           └─ IndexedTableAccess(movie_info)\n" +
 			"         │   │   │   │   │               ├─ index: [movie_info.movie_id]\n" +
 			"         │   │   │   │   │               ├─ keys: [mc.movie_id:23!null]\n" +
-			"         │   │   │   │   │               ├─ colSet: (50-54)\n" +
+			"         │   │   │   │   │               ├─ colSet: (51-53)\n" +
 			"         │   │   │   │   │               ├─ tableId: 12\n" +
 			"         │   │   │   │   │               └─ Table\n" +
 			"         │   │   │   │   │                   ├─ name: movie_info\n" +
@@ -20595,7 +20595,7 @@ WHERE cct1.kind ='cast'
 			"         │   │   │   │       └─ IndexedTableAccess(movie_keyword)\n" +
 			"         │   │   │   │           ├─ index: [movie_keyword.movie_id]\n" +
 			"         │   │   │   │           ├─ keys: [mc.movie_id:23!null]\n" +
-			"         │   │   │   │           ├─ colSet: (55-57)\n" +
+			"         │   │   │   │           ├─ colSet: (56,57)\n" +
 			"         │   │   │   │           ├─ tableId: 13\n" +
 			"         │   │   │   │           └─ Table\n" +
 			"         │   │   │   │               ├─ name: movie_keyword\n" +
@@ -20610,7 +20610,7 @@ WHERE cct1.kind ='cast'
 			"         │   │   │           └─ IndexedTableAccess(name)\n" +
 			"         │   │   │               ├─ index: [name.id]\n" +
 			"         │   │   │               ├─ keys: [ci.person_id:10!null]\n" +
-			"         │   │   │               ├─ colSet: (58-66)\n" +
+			"         │   │   │               ├─ colSet: (58,59,62)\n" +
 			"         │   │   │               ├─ tableId: 14\n" +
 			"         │   │   │               └─ Table\n" +
 			"         │   │   │                   ├─ name: name\n" +
@@ -20619,7 +20619,7 @@ WHERE cct1.kind ='cast'
 			"         │   │       └─ IndexedTableAccess(person_info)\n" +
 			"         │   │           ├─ index: [person_info.person_id]\n" +
 			"         │   │           ├─ keys: [n.id:30!null]\n" +
-			"         │   │           ├─ colSet: (67-71)\n" +
+			"         │   │           ├─ colSet: (68,69)\n" +
 			"         │   │           ├─ tableId: 15\n" +
 			"         │   │           └─ Table\n" +
 			"         │   │               ├─ name: person_info\n" +
@@ -20649,7 +20649,7 @@ WHERE cct1.kind ='cast'
 			"                 └─ IndexedTableAccess(title)\n" +
 			"                     ├─ index: [title.id]\n" +
 			"                     ├─ keys: [mi.movie_id:25!null]\n" +
-			"                     ├─ colSet: (74-85)\n" +
+			"                     ├─ colSet: (74,75,78)\n" +
 			"                     ├─ tableId: 17\n" +
 			"                     └─ Table\n" +
 			"                         ├─ name: title\n" +
@@ -21145,7 +21145,7 @@ WHERE cct1.kind ='cast'
 			"         │   │   │   │   │   │   │   │   │   │   │           └─ IndexedTableAccess(cast_info)\n" +
 			"         │   │   │   │   │   │   │   │   │   │   │               ├─ index: [cast_info.person_role_id]\n" +
 			"         │   │   │   │   │   │   │   │   │   │   │               ├─ keys: [chn.id:8!null]\n" +
-			"         │   │   │   │   │   │   │   │   │   │   │               ├─ colSet: (24-30)\n" +
+			"         │   │   │   │   │   │   │   │   │   │   │               ├─ colSet: (25-28,30)\n" +
 			"         │   │   │   │   │   │   │   │   │   │   │               ├─ tableId: 6\n" +
 			"         │   │   │   │   │   │   │   │   │   │   │               └─ Table\n" +
 			"         │   │   │   │   │   │   │   │   │   │   │                   ├─ name: cast_info\n" +
@@ -21191,7 +21191,7 @@ WHERE cct1.kind ='cast'
 			"         │   │   │   │   │   │       └─ IndexedTableAccess(movie_companies)\n" +
 			"         │   │   │   │   │   │           ├─ index: [movie_companies.movie_id]\n" +
 			"         │   │   │   │   │   │           ├─ keys: [ci.movie_id:11!null]\n" +
-			"         │   │   │   │   │   │           ├─ colSet: (45-49)\n" +
+			"         │   │   │   │   │   │           ├─ colSet: (46,47)\n" +
 			"         │   │   │   │   │   │           ├─ tableId: 11\n" +
 			"         │   │   │   │   │   │           └─ Table\n" +
 			"         │   │   │   │   │   │               ├─ name: movie_companies\n" +
@@ -21202,7 +21202,7 @@ WHERE cct1.kind ='cast'
 			"         │   │   │   │   │           └─ IndexedTableAccess(movie_info)\n" +
 			"         │   │   │   │   │               ├─ index: [movie_info.movie_id]\n" +
 			"         │   │   │   │   │               ├─ keys: [mc.movie_id:23!null]\n" +
-			"         │   │   │   │   │               ├─ colSet: (50-54)\n" +
+			"         │   │   │   │   │               ├─ colSet: (51-53)\n" +
 			"         │   │   │   │   │               ├─ tableId: 12\n" +
 			"         │   │   │   │   │               └─ Table\n" +
 			"         │   │   │   │   │                   ├─ name: movie_info\n" +
@@ -21211,7 +21211,7 @@ WHERE cct1.kind ='cast'
 			"         │   │   │   │       └─ IndexedTableAccess(movie_keyword)\n" +
 			"         │   │   │   │           ├─ index: [movie_keyword.movie_id]\n" +
 			"         │   │   │   │           ├─ keys: [mc.movie_id:23!null]\n" +
-			"         │   │   │   │           ├─ colSet: (55-57)\n" +
+			"         │   │   │   │           ├─ colSet: (56,57)\n" +
 			"         │   │   │   │           ├─ tableId: 13\n" +
 			"         │   │   │   │           └─ Table\n" +
 			"         │   │   │   │               ├─ name: movie_keyword\n" +
@@ -21226,7 +21226,7 @@ WHERE cct1.kind ='cast'
 			"         │   │   │           └─ IndexedTableAccess(name)\n" +
 			"         │   │   │               ├─ index: [name.id]\n" +
 			"         │   │   │               ├─ keys: [ci.person_id:10!null]\n" +
-			"         │   │   │               ├─ colSet: (58-66)\n" +
+			"         │   │   │               ├─ colSet: (58,59,62)\n" +
 			"         │   │   │               ├─ tableId: 14\n" +
 			"         │   │   │               └─ Table\n" +
 			"         │   │   │                   ├─ name: name\n" +
@@ -21235,7 +21235,7 @@ WHERE cct1.kind ='cast'
 			"         │   │       └─ IndexedTableAccess(person_info)\n" +
 			"         │   │           ├─ index: [person_info.person_id]\n" +
 			"         │   │           ├─ keys: [n.id:30!null]\n" +
-			"         │   │           ├─ colSet: (67-71)\n" +
+			"         │   │           ├─ colSet: (68,69)\n" +
 			"         │   │           ├─ tableId: 15\n" +
 			"         │   │           └─ Table\n" +
 			"         │   │               ├─ name: person_info\n" +
@@ -21265,7 +21265,7 @@ WHERE cct1.kind ='cast'
 			"                 └─ IndexedTableAccess(title)\n" +
 			"                     ├─ index: [title.id]\n" +
 			"                     ├─ keys: [mi.movie_id:25!null]\n" +
-			"                     ├─ colSet: (74-85)\n" +
+			"                     ├─ colSet: (74,75,78)\n" +
 			"                     ├─ tableId: 17\n" +
 			"                     └─ Table\n" +
 			"                         ├─ name: title\n" +
@@ -21758,7 +21758,7 @@ WHERE cct1.kind ='cast'
 			"         │   │   │   │   │   │   │   │   │   │   │           └─ IndexedTableAccess(cast_info)\n" +
 			"         │   │   │   │   │   │   │   │   │   │   │               ├─ index: [cast_info.person_role_id]\n" +
 			"         │   │   │   │   │   │   │   │   │   │   │               ├─ keys: [chn.id:8!null]\n" +
-			"         │   │   │   │   │   │   │   │   │   │   │               ├─ colSet: (24-30)\n" +
+			"         │   │   │   │   │   │   │   │   │   │   │               ├─ colSet: (25-28,30)\n" +
 			"         │   │   │   │   │   │   │   │   │   │   │               ├─ tableId: 6\n" +
 			"         │   │   │   │   │   │   │   │   │   │   │               └─ Table\n" +
 			"         │   │   │   │   │   │   │   │   │   │   │                   ├─ name: cast_info\n" +
@@ -21804,7 +21804,7 @@ WHERE cct1.kind ='cast'
 			"         │   │   │   │   │   │       └─ IndexedTableAccess(movie_companies)\n" +
 			"         │   │   │   │   │   │           ├─ index: [movie_companies.movie_id]\n" +
 			"         │   │   │   │   │   │           ├─ keys: [ci.movie_id:11!null]\n" +
-			"         │   │   │   │   │   │           ├─ colSet: (45-49)\n" +
+			"         │   │   │   │   │   │           ├─ colSet: (46,47)\n" +
 			"         │   │   │   │   │   │           ├─ tableId: 11\n" +
 			"         │   │   │   │   │   │           └─ Table\n" +
 			"         │   │   │   │   │   │               ├─ name: movie_companies\n" +
@@ -21820,7 +21820,7 @@ WHERE cct1.kind ='cast'
 			"         │   │   │   │   │           └─ IndexedTableAccess(movie_info)\n" +
 			"         │   │   │   │   │               ├─ index: [movie_info.movie_id]\n" +
 			"         │   │   │   │   │               ├─ keys: [mc.movie_id:23!null]\n" +
-			"         │   │   │   │   │               ├─ colSet: (50-54)\n" +
+			"         │   │   │   │   │               ├─ colSet: (51-53)\n" +
 			"         │   │   │   │   │               ├─ tableId: 12\n" +
 			"         │   │   │   │   │               └─ Table\n" +
 			"         │   │   │   │   │                   ├─ name: movie_info\n" +
@@ -21829,7 +21829,7 @@ WHERE cct1.kind ='cast'
 			"         │   │   │   │       └─ IndexedTableAccess(movie_keyword)\n" +
 			"         │   │   │   │           ├─ index: [movie_keyword.movie_id]\n" +
 			"         │   │   │   │           ├─ keys: [mc.movie_id:23!null]\n" +
-			"         │   │   │   │           ├─ colSet: (55-57)\n" +
+			"         │   │   │   │           ├─ colSet: (56,57)\n" +
 			"         │   │   │   │           ├─ tableId: 13\n" +
 			"         │   │   │   │           └─ Table\n" +
 			"         │   │   │   │               ├─ name: movie_keyword\n" +
@@ -21844,7 +21844,7 @@ WHERE cct1.kind ='cast'
 			"         │   │   │           └─ IndexedTableAccess(name)\n" +
 			"         │   │   │               ├─ index: [name.id]\n" +
 			"         │   │   │               ├─ keys: [ci.person_id:10!null]\n" +
-			"         │   │   │               ├─ colSet: (58-66)\n" +
+			"         │   │   │               ├─ colSet: (58,59,62)\n" +
 			"         │   │   │               ├─ tableId: 14\n" +
 			"         │   │   │               └─ Table\n" +
 			"         │   │   │                   ├─ name: name\n" +
@@ -21853,7 +21853,7 @@ WHERE cct1.kind ='cast'
 			"         │   │       └─ IndexedTableAccess(person_info)\n" +
 			"         │   │           ├─ index: [person_info.person_id]\n" +
 			"         │   │           ├─ keys: [n.id:30!null]\n" +
-			"         │   │           ├─ colSet: (67-71)\n" +
+			"         │   │           ├─ colSet: (68,69)\n" +
 			"         │   │           ├─ tableId: 15\n" +
 			"         │   │           └─ Table\n" +
 			"         │   │               ├─ name: person_info\n" +
@@ -21879,7 +21879,7 @@ WHERE cct1.kind ='cast'
 			"                 └─ IndexedTableAccess(title)\n" +
 			"                     ├─ index: [title.id]\n" +
 			"                     ├─ keys: [mi.movie_id:25!null]\n" +
-			"                     ├─ colSet: (74-85)\n" +
+			"                     ├─ colSet: (74,75,78)\n" +
 			"                     ├─ tableId: 17\n" +
 			"                     └─ Table\n" +
 			"                         ├─ name: title\n" +
@@ -22198,7 +22198,7 @@ WHERE cn.country_code ='[de]'
 			"         │   │   │   │   └─ IndexedTableAccess(movie_companies)\n" +
 			"         │   │   │   │       ├─ index: [movie_companies.movie_id]\n" +
 			"         │   │   │   │       ├─ static: [{[NULL, ∞)}]\n" +
-			"         │   │   │   │       ├─ colSet: (11-15)\n" +
+			"         │   │   │   │       ├─ colSet: (12,13)\n" +
 			"         │   │   │   │       ├─ tableId: 3\n" +
 			"         │   │   │   │       └─ Table\n" +
 			"         │   │   │   │           ├─ name: movie_companies\n" +
@@ -22207,7 +22207,7 @@ WHERE cn.country_code ='[de]'
 			"         │   │   │       └─ IndexedTableAccess(title)\n" +
 			"         │   │   │           ├─ index: [title.id]\n" +
 			"         │   │   │           ├─ static: [{[NULL, ∞)}]\n" +
-			"         │   │   │           ├─ colSet: (19-30)\n" +
+			"         │   │   │           ├─ colSet: (19,20)\n" +
 			"         │   │   │           ├─ tableId: 5\n" +
 			"         │   │   │           └─ Table\n" +
 			"         │   │   │               ├─ name: title\n" +
@@ -22228,7 +22228,7 @@ WHERE cn.country_code ='[de]'
 			"         │       └─ IndexedTableAccess(movie_keyword)\n" +
 			"         │           ├─ index: [movie_keyword.movie_id]\n" +
 			"         │           ├─ keys: [mc.movie_id:0!null]\n" +
-			"         │           ├─ colSet: (16-18)\n" +
+			"         │           ├─ colSet: (17,18)\n" +
 			"         │           ├─ tableId: 4\n" +
 			"         │           └─ Table\n" +
 			"         │               ├─ name: movie_keyword\n" +
@@ -22383,7 +22383,7 @@ WHERE cn.country_code ='[nl]'
 			"         │   │   │   │   └─ IndexedTableAccess(movie_companies)\n" +
 			"         │   │   │   │       ├─ index: [movie_companies.movie_id]\n" +
 			"         │   │   │   │       ├─ static: [{[NULL, ∞)}]\n" +
-			"         │   │   │   │       ├─ colSet: (11-15)\n" +
+			"         │   │   │   │       ├─ colSet: (12,13)\n" +
 			"         │   │   │   │       ├─ tableId: 3\n" +
 			"         │   │   │   │       └─ Table\n" +
 			"         │   │   │   │           ├─ name: movie_companies\n" +
@@ -22392,7 +22392,7 @@ WHERE cn.country_code ='[nl]'
 			"         │   │   │       └─ IndexedTableAccess(title)\n" +
 			"         │   │   │           ├─ index: [title.id]\n" +
 			"         │   │   │           ├─ static: [{[NULL, ∞)}]\n" +
-			"         │   │   │           ├─ colSet: (19-30)\n" +
+			"         │   │   │           ├─ colSet: (19,20)\n" +
 			"         │   │   │           ├─ tableId: 5\n" +
 			"         │   │   │           └─ Table\n" +
 			"         │   │   │               ├─ name: title\n" +
@@ -22413,7 +22413,7 @@ WHERE cn.country_code ='[nl]'
 			"         │       └─ IndexedTableAccess(movie_keyword)\n" +
 			"         │           ├─ index: [movie_keyword.movie_id]\n" +
 			"         │           ├─ keys: [mc.movie_id:0!null]\n" +
-			"         │           ├─ colSet: (16-18)\n" +
+			"         │           ├─ colSet: (17,18)\n" +
 			"         │           ├─ tableId: 4\n" +
 			"         │           └─ Table\n" +
 			"         │               ├─ name: movie_keyword\n" +
@@ -22568,7 +22568,7 @@ WHERE cn.country_code ='[sm]'
 			"         │   │   │   │   └─ IndexedTableAccess(movie_companies)\n" +
 			"         │   │   │   │       ├─ index: [movie_companies.movie_id]\n" +
 			"         │   │   │   │       ├─ static: [{[NULL, ∞)}]\n" +
-			"         │   │   │   │       ├─ colSet: (11-15)\n" +
+			"         │   │   │   │       ├─ colSet: (12,13)\n" +
 			"         │   │   │   │       ├─ tableId: 3\n" +
 			"         │   │   │   │       └─ Table\n" +
 			"         │   │   │   │           ├─ name: movie_companies\n" +
@@ -22577,7 +22577,7 @@ WHERE cn.country_code ='[sm]'
 			"         │   │   │       └─ IndexedTableAccess(title)\n" +
 			"         │   │   │           ├─ index: [title.id]\n" +
 			"         │   │   │           ├─ static: [{[NULL, ∞)}]\n" +
-			"         │   │   │           ├─ colSet: (19-30)\n" +
+			"         │   │   │           ├─ colSet: (19,20)\n" +
 			"         │   │   │           ├─ tableId: 5\n" +
 			"         │   │   │           └─ Table\n" +
 			"         │   │   │               ├─ name: title\n" +
@@ -22598,7 +22598,7 @@ WHERE cn.country_code ='[sm]'
 			"         │       └─ IndexedTableAccess(movie_keyword)\n" +
 			"         │           ├─ index: [movie_keyword.movie_id]\n" +
 			"         │           ├─ keys: [mc.movie_id:0!null]\n" +
-			"         │           ├─ colSet: (16-18)\n" +
+			"         │           ├─ colSet: (17,18)\n" +
 			"         │           ├─ tableId: 4\n" +
 			"         │           └─ Table\n" +
 			"         │               ├─ name: movie_keyword\n" +
@@ -22753,7 +22753,7 @@ WHERE cn.country_code ='[us]'
 			"         │   │   │   │   └─ IndexedTableAccess(movie_companies)\n" +
 			"         │   │   │   │       ├─ index: [movie_companies.movie_id]\n" +
 			"         │   │   │   │       ├─ static: [{[NULL, ∞)}]\n" +
-			"         │   │   │   │       ├─ colSet: (11-15)\n" +
+			"         │   │   │   │       ├─ colSet: (12,13)\n" +
 			"         │   │   │   │       ├─ tableId: 3\n" +
 			"         │   │   │   │       └─ Table\n" +
 			"         │   │   │   │           ├─ name: movie_companies\n" +
@@ -22762,7 +22762,7 @@ WHERE cn.country_code ='[us]'
 			"         │   │   │       └─ IndexedTableAccess(title)\n" +
 			"         │   │   │           ├─ index: [title.id]\n" +
 			"         │   │   │           ├─ static: [{[NULL, ∞)}]\n" +
-			"         │   │   │           ├─ colSet: (19-30)\n" +
+			"         │   │   │           ├─ colSet: (19,20)\n" +
 			"         │   │   │           ├─ tableId: 5\n" +
 			"         │   │   │           └─ Table\n" +
 			"         │   │   │               ├─ name: title\n" +
@@ -22783,7 +22783,7 @@ WHERE cn.country_code ='[us]'
 			"         │       └─ IndexedTableAccess(movie_keyword)\n" +
 			"         │           ├─ index: [movie_keyword.movie_id]\n" +
 			"         │           ├─ keys: [mc.movie_id:0!null]\n" +
-			"         │           ├─ colSet: (16-18)\n" +
+			"         │           ├─ colSet: (17,18)\n" +
 			"         │           ├─ tableId: 4\n" +
 			"         │           └─ Table\n" +
 			"         │               ├─ name: movie_keyword\n" +
@@ -23097,7 +23097,7 @@ WHERE cct1.kind IN ('cast',
 			"         │   │   │   │   │   │   │   │   │   │           └─ IndexedTableAccess(title)\n" +
 			"         │   │   │   │   │   │   │   │   │   │               ├─ index: [title.id]\n" +
 			"         │   │   │   │   │   │   │   │   │   │               ├─ keys: [cc.movie_id:0]\n" +
-			"         │   │   │   │   │   │   │   │   │   │               ├─ colSet: (45-56)\n" +
+			"         │   │   │   │   │   │   │   │   │   │               ├─ colSet: (45,46,49)\n" +
 			"         │   │   │   │   │   │   │   │   │   │               ├─ tableId: 12\n" +
 			"         │   │   │   │   │   │   │   │   │   │               └─ Table\n" +
 			"         │   │   │   │   │   │   │   │   │   │                   ├─ name: title\n" +
@@ -23135,7 +23135,7 @@ WHERE cct1.kind IN ('cast',
 			"         │   │   │   │   │   │   │           └─ IndexedTableAccess(cast_info)\n" +
 			"         │   │   │   │   │   │   │               ├─ index: [cast_info.movie_id]\n" +
 			"         │   │   │   │   │   │   │               ├─ keys: [cc.movie_id:0]\n" +
-			"         │   │   │   │   │   │   │               ├─ colSet: (9-15)\n" +
+			"         │   │   │   │   │   │   │               ├─ colSet: (10,11,13)\n" +
 			"         │   │   │   │   │   │   │               ├─ tableId: 4\n" +
 			"         │   │   │   │   │   │   │               └─ Table\n" +
 			"         │   │   │   │   │   │   │                   ├─ name: cast_info\n" +
@@ -23148,7 +23148,7 @@ WHERE cct1.kind IN ('cast',
 			"         │   │   │   │   │   │           └─ IndexedTableAccess(name)\n" +
 			"         │   │   │   │   │   │               ├─ index: [name.id]\n" +
 			"         │   │   │   │   │   │               ├─ keys: [ci.person_id:10!null]\n" +
-			"         │   │   │   │   │   │               ├─ colSet: (36-44)\n" +
+			"         │   │   │   │   │   │               ├─ colSet: (36,37,40)\n" +
 			"         │   │   │   │   │   │               ├─ tableId: 11\n" +
 			"         │   │   │   │   │   │               └─ Table\n" +
 			"         │   │   │   │   │   │                   ├─ name: name\n" +
@@ -23157,7 +23157,7 @@ WHERE cct1.kind IN ('cast',
 			"         │   │   │   │   │       └─ IndexedTableAccess(movie_info_idx)\n" +
 			"         │   │   │   │   │           ├─ index: [movie_info_idx.movie_id]\n" +
 			"         │   │   │   │   │           ├─ keys: [ci.movie_id:11!null]\n" +
-			"         │   │   │   │   │           ├─ colSet: (28-32)\n" +
+			"         │   │   │   │   │           ├─ colSet: (29-31)\n" +
 			"         │   │   │   │   │           ├─ tableId: 9\n" +
 			"         │   │   │   │   │           └─ Table\n" +
 			"         │   │   │   │   │               ├─ name: movie_info_idx\n" +
@@ -23178,7 +23178,7 @@ WHERE cct1.kind IN ('cast',
 			"         │   │   │       └─ IndexedTableAccess(movie_keyword)\n" +
 			"         │   │   │           ├─ index: [movie_keyword.movie_id]\n" +
 			"         │   │   │           ├─ keys: [mi_idx.movie_id:16!null]\n" +
-			"         │   │   │           ├─ colSet: (33-35)\n" +
+			"         │   │   │           ├─ colSet: (34,35)\n" +
 			"         │   │   │           ├─ tableId: 10\n" +
 			"         │   │   │           └─ Table\n" +
 			"         │   │   │               ├─ name: movie_keyword\n" +
@@ -23191,7 +23191,7 @@ WHERE cct1.kind IN ('cast',
 			"         │   │           └─ IndexedTableAccess(movie_info)\n" +
 			"         │   │               ├─ index: [movie_info.movie_id]\n" +
 			"         │   │               ├─ keys: [mi_idx.movie_id:16!null]\n" +
-			"         │   │               ├─ colSet: (23-27)\n" +
+			"         │   │               ├─ colSet: (24-26)\n" +
 			"         │   │               ├─ tableId: 8\n" +
 			"         │   │               └─ Table\n" +
 			"         │   │                   ├─ name: movie_info\n" +
@@ -23569,7 +23569,7 @@ WHERE cct1.kind = 'cast'
 			"         │   │   │   │   │   │   │   │   │   │       └─ IndexedTableAccess(title)\n" +
 			"         │   │   │   │   │   │   │   │   │   │           ├─ index: [title.id]\n" +
 			"         │   │   │   │   │   │   │   │   │   │           ├─ keys: [cc.movie_id:0]\n" +
-			"         │   │   │   │   │   │   │   │   │   │           ├─ colSet: (45-56)\n" +
+			"         │   │   │   │   │   │   │   │   │   │           ├─ colSet: (45,46)\n" +
 			"         │   │   │   │   │   │   │   │   │   │           ├─ tableId: 12\n" +
 			"         │   │   │   │   │   │   │   │   │   │           └─ Table\n" +
 			"         │   │   │   │   │   │   │   │   │   │               ├─ name: title\n" +
@@ -23607,7 +23607,7 @@ WHERE cct1.kind = 'cast'
 			"         │   │   │   │   │   │   │           └─ IndexedTableAccess(cast_info)\n" +
 			"         │   │   │   │   │   │   │               ├─ index: [cast_info.movie_id]\n" +
 			"         │   │   │   │   │   │   │               ├─ keys: [cc.movie_id:0]\n" +
-			"         │   │   │   │   │   │   │               ├─ colSet: (9-15)\n" +
+			"         │   │   │   │   │   │   │               ├─ colSet: (10,11,13)\n" +
 			"         │   │   │   │   │   │   │               ├─ tableId: 4\n" +
 			"         │   │   │   │   │   │   │               └─ Table\n" +
 			"         │   │   │   │   │   │   │                   ├─ name: cast_info\n" +
@@ -23620,7 +23620,7 @@ WHERE cct1.kind = 'cast'
 			"         │   │   │   │   │   │           └─ IndexedTableAccess(name)\n" +
 			"         │   │   │   │   │   │               ├─ index: [name.id]\n" +
 			"         │   │   │   │   │   │               ├─ keys: [ci.person_id:9!null]\n" +
-			"         │   │   │   │   │   │               ├─ colSet: (36-44)\n" +
+			"         │   │   │   │   │   │               ├─ colSet: (36,37,40)\n" +
 			"         │   │   │   │   │   │               ├─ tableId: 11\n" +
 			"         │   │   │   │   │   │               └─ Table\n" +
 			"         │   │   │   │   │   │                   ├─ name: name\n" +
@@ -23629,7 +23629,7 @@ WHERE cct1.kind = 'cast'
 			"         │   │   │   │   │       └─ IndexedTableAccess(movie_info_idx)\n" +
 			"         │   │   │   │   │           ├─ index: [movie_info_idx.movie_id]\n" +
 			"         │   │   │   │   │           ├─ keys: [ci.movie_id:10!null]\n" +
-			"         │   │   │   │   │           ├─ colSet: (28-32)\n" +
+			"         │   │   │   │   │           ├─ colSet: (29-31)\n" +
 			"         │   │   │   │   │           ├─ tableId: 9\n" +
 			"         │   │   │   │   │           └─ Table\n" +
 			"         │   │   │   │   │               ├─ name: movie_info_idx\n" +
@@ -23650,7 +23650,7 @@ WHERE cct1.kind = 'cast'
 			"         │   │   │       └─ IndexedTableAccess(movie_keyword)\n" +
 			"         │   │   │           ├─ index: [movie_keyword.movie_id]\n" +
 			"         │   │   │           ├─ keys: [mi_idx.movie_id:15!null]\n" +
-			"         │   │   │           ├─ colSet: (33-35)\n" +
+			"         │   │   │           ├─ colSet: (34,35)\n" +
 			"         │   │   │           ├─ tableId: 10\n" +
 			"         │   │   │           └─ Table\n" +
 			"         │   │   │               ├─ name: movie_keyword\n" +
@@ -23663,7 +23663,7 @@ WHERE cct1.kind = 'cast'
 			"         │   │           └─ IndexedTableAccess(movie_info)\n" +
 			"         │   │               ├─ index: [movie_info.movie_id]\n" +
 			"         │   │               ├─ keys: [mi_idx.movie_id:15!null]\n" +
-			"         │   │               ├─ colSet: (23-27)\n" +
+			"         │   │               ├─ colSet: (24-26)\n" +
 			"         │   │               ├─ tableId: 8\n" +
 			"         │   │               └─ Table\n" +
 			"         │   │                   ├─ name: movie_info\n" +
@@ -24020,7 +24020,7 @@ WHERE ci.note IN ('(writer)',
 			"         │   │   │   │   │   │   │       └─ IndexedTableAccess(company_name)\n" +
 			"         │   │   │   │   │   │   │           ├─ index: [company_name.id]\n" +
 			"         │   │   │   │   │   │   │           ├─ static: [{[NULL, ∞)}]\n" +
-			"         │   │   │   │   │   │   │           ├─ colSet: (8-14)\n" +
+			"         │   │   │   │   │   │   │           ├─ colSet: (8,9)\n" +
 			"         │   │   │   │   │   │   │           ├─ tableId: 2\n" +
 			"         │   │   │   │   │   │   │           └─ Table\n" +
 			"         │   │   │   │   │   │   │               ├─ name: company_name\n" +
@@ -24029,7 +24029,7 @@ WHERE ci.note IN ('(writer)',
 			"         │   │   │   │   │   │       └─ IndexedTableAccess(movie_companies)\n" +
 			"         │   │   │   │   │   │           ├─ index: [movie_companies.company_id]\n" +
 			"         │   │   │   │   │   │           ├─ static: [{[NULL, ∞)}]\n" +
-			"         │   │   │   │   │   │           ├─ colSet: (22-26)\n" +
+			"         │   │   │   │   │   │           ├─ colSet: (23,24)\n" +
 			"         │   │   │   │   │   │           ├─ tableId: 6\n" +
 			"         │   │   │   │   │   │           └─ Table\n" +
 			"         │   │   │   │   │   │               ├─ name: movie_companies\n" +
@@ -24050,7 +24050,7 @@ WHERE ci.note IN ('(writer)',
 			"         │   │   │   │   │           │   │   │   └─ IndexedTableAccess(movie_info_idx)\n" +
 			"         │   │   │   │   │           │   │   │       ├─ index: [movie_info_idx.movie_id]\n" +
 			"         │   │   │   │   │           │   │   │       ├─ static: [{[NULL, ∞)}]\n" +
-			"         │   │   │   │   │           │   │   │       ├─ colSet: (32-36)\n" +
+			"         │   │   │   │   │           │   │   │       ├─ colSet: (33-35)\n" +
 			"         │   │   │   │   │           │   │   │       ├─ tableId: 8\n" +
 			"         │   │   │   │   │           │   │   │       └─ Table\n" +
 			"         │   │   │   │   │           │   │   │           ├─ name: movie_info_idx\n" +
@@ -24059,7 +24059,7 @@ WHERE ci.note IN ('(writer)',
 			"         │   │   │   │   │           │   │       └─ IndexedTableAccess(title)\n" +
 			"         │   │   │   │   │           │   │           ├─ index: [title.id]\n" +
 			"         │   │   │   │   │           │   │           ├─ static: [{[NULL, ∞)}]\n" +
-			"         │   │   │   │   │           │   │           ├─ colSet: (49-60)\n" +
+			"         │   │   │   │   │           │   │           ├─ colSet: (49,50)\n" +
 			"         │   │   │   │   │           │   │           ├─ tableId: 11\n" +
 			"         │   │   │   │   │           │   │           └─ Table\n" +
 			"         │   │   │   │   │           │   │               ├─ name: title\n" +
@@ -24072,7 +24072,7 @@ WHERE ci.note IN ('(writer)',
 			"         │   │   │   │   │           │           └─ IndexedTableAccess(movie_info)\n" +
 			"         │   │   │   │   │           │               ├─ index: [movie_info.movie_id]\n" +
 			"         │   │   │   │   │           │               ├─ keys: [mi_idx.movie_id:4!null]\n" +
-			"         │   │   │   │   │           │               ├─ colSet: (27-31)\n" +
+			"         │   │   │   │   │           │               ├─ colSet: (28-30)\n" +
 			"         │   │   │   │   │           │               ├─ tableId: 7\n" +
 			"         │   │   │   │   │           │               └─ Table\n" +
 			"         │   │   │   │   │           │                   ├─ name: movie_info\n" +
@@ -24093,7 +24093,7 @@ WHERE ci.note IN ('(writer)',
 			"         │   │   │   │       └─ IndexedTableAccess(movie_keyword)\n" +
 			"         │   │   │   │           ├─ index: [movie_keyword.movie_id]\n" +
 			"         │   │   │   │           ├─ keys: [mi_idx.movie_id:4!null]\n" +
-			"         │   │   │   │           ├─ colSet: (37-39)\n" +
+			"         │   │   │   │           ├─ colSet: (38,39)\n" +
 			"         │   │   │   │           ├─ tableId: 9\n" +
 			"         │   │   │   │           └─ Table\n" +
 			"         │   │   │   │               ├─ name: movie_keyword\n" +
@@ -24106,7 +24106,7 @@ WHERE ci.note IN ('(writer)',
 			"         │   │   │           └─ IndexedTableAccess(cast_info)\n" +
 			"         │   │   │               ├─ index: [cast_info.movie_id]\n" +
 			"         │   │   │               ├─ keys: [mc.movie_id:2!null]\n" +
-			"         │   │   │               ├─ colSet: (1-7)\n" +
+			"         │   │   │               ├─ colSet: (2,3,5)\n" +
 			"         │   │   │               ├─ tableId: 1\n" +
 			"         │   │   │               └─ Table\n" +
 			"         │   │   │                   ├─ name: cast_info\n" +
@@ -24144,7 +24144,7 @@ WHERE ci.note IN ('(writer)',
 			"                 └─ IndexedTableAccess(name)\n" +
 			"                     ├─ index: [name.id]\n" +
 			"                     ├─ keys: [ci.person_id:16!null]\n" +
-			"                     ├─ colSet: (40-48)\n" +
+			"                     ├─ colSet: (40,41,44)\n" +
 			"                     ├─ tableId: 10\n" +
 			"                     └─ Table\n" +
 			"                         ├─ name: name\n" +
@@ -24463,7 +24463,7 @@ WHERE ci.note IN ('(writer)',
 			"         │   │   │   │   │   │   │       └─ IndexedTableAccess(company_name)\n" +
 			"         │   │   │   │   │   │   │           ├─ index: [company_name.id]\n" +
 			"         │   │   │   │   │   │   │           ├─ static: [{[NULL, ∞)}]\n" +
-			"         │   │   │   │   │   │   │           ├─ colSet: (8-14)\n" +
+			"         │   │   │   │   │   │   │           ├─ colSet: (8,9)\n" +
 			"         │   │   │   │   │   │   │           ├─ tableId: 2\n" +
 			"         │   │   │   │   │   │   │           └─ Table\n" +
 			"         │   │   │   │   │   │   │               ├─ name: company_name\n" +
@@ -24474,7 +24474,7 @@ WHERE ci.note IN ('(writer)',
 			"         │   │   │   │   │   │           └─ IndexedTableAccess(movie_companies)\n" +
 			"         │   │   │   │   │   │               ├─ index: [movie_companies.company_id]\n" +
 			"         │   │   │   │   │   │               ├─ static: [{[NULL, ∞)}]\n" +
-			"         │   │   │   │   │   │               ├─ colSet: (22-26)\n" +
+			"         │   │   │   │   │   │               ├─ colSet: (23,24,26)\n" +
 			"         │   │   │   │   │   │               ├─ tableId: 6\n" +
 			"         │   │   │   │   │   │               └─ Table\n" +
 			"         │   │   │   │   │   │                   ├─ name: movie_companies\n" +
@@ -24495,7 +24495,7 @@ WHERE ci.note IN ('(writer)',
 			"         │   │   │   │   │           │   │   │   └─ IndexedTableAccess(movie_info_idx)\n" +
 			"         │   │   │   │   │           │   │   │       ├─ index: [movie_info_idx.movie_id]\n" +
 			"         │   │   │   │   │           │   │   │       ├─ static: [{[NULL, ∞)}]\n" +
-			"         │   │   │   │   │           │   │   │       ├─ colSet: (32-36)\n" +
+			"         │   │   │   │   │           │   │   │       ├─ colSet: (33-35)\n" +
 			"         │   │   │   │   │           │   │   │       ├─ tableId: 8\n" +
 			"         │   │   │   │   │           │   │   │       └─ Table\n" +
 			"         │   │   │   │   │           │   │   │           ├─ name: movie_info_idx\n" +
@@ -24520,7 +24520,7 @@ WHERE ci.note IN ('(writer)',
 			"         │   │   │   │   │           │   │           └─ IndexedTableAccess(title)\n" +
 			"         │   │   │   │   │           │   │               ├─ index: [title.id]\n" +
 			"         │   │   │   │   │           │   │               ├─ static: [{[NULL, ∞)}]\n" +
-			"         │   │   │   │   │           │   │               ├─ colSet: (49-60)\n" +
+			"         │   │   │   │   │           │   │               ├─ colSet: (49,50,53)\n" +
 			"         │   │   │   │   │           │   │               ├─ tableId: 11\n" +
 			"         │   │   │   │   │           │   │               └─ Table\n" +
 			"         │   │   │   │   │           │   │                   ├─ name: title\n" +
@@ -24533,7 +24533,7 @@ WHERE ci.note IN ('(writer)',
 			"         │   │   │   │   │           │           └─ IndexedTableAccess(movie_info)\n" +
 			"         │   │   │   │   │           │               ├─ index: [movie_info.movie_id]\n" +
 			"         │   │   │   │   │           │               ├─ keys: [mi_idx.movie_id:5!null]\n" +
-			"         │   │   │   │   │           │               ├─ colSet: (27-31)\n" +
+			"         │   │   │   │   │           │               ├─ colSet: (28-30)\n" +
 			"         │   │   │   │   │           │               ├─ tableId: 7\n" +
 			"         │   │   │   │   │           │               └─ Table\n" +
 			"         │   │   │   │   │           │                   ├─ name: movie_info\n" +
@@ -24554,7 +24554,7 @@ WHERE ci.note IN ('(writer)',
 			"         │   │   │   │       └─ IndexedTableAccess(movie_keyword)\n" +
 			"         │   │   │   │           ├─ index: [movie_keyword.movie_id]\n" +
 			"         │   │   │   │           ├─ keys: [mi_idx.movie_id:5!null]\n" +
-			"         │   │   │   │           ├─ colSet: (37-39)\n" +
+			"         │   │   │   │           ├─ colSet: (38,39)\n" +
 			"         │   │   │   │           ├─ tableId: 9\n" +
 			"         │   │   │   │           └─ Table\n" +
 			"         │   │   │   │               ├─ name: movie_keyword\n" +
@@ -24567,7 +24567,7 @@ WHERE ci.note IN ('(writer)',
 			"         │   │   │           └─ IndexedTableAccess(cast_info)\n" +
 			"         │   │   │               ├─ index: [cast_info.movie_id]\n" +
 			"         │   │   │               ├─ keys: [mc.movie_id:2!null]\n" +
-			"         │   │   │               ├─ colSet: (1-7)\n" +
+			"         │   │   │               ├─ colSet: (2,3,5)\n" +
 			"         │   │   │               ├─ tableId: 1\n" +
 			"         │   │   │               └─ Table\n" +
 			"         │   │   │                   ├─ name: cast_info\n" +
@@ -24605,7 +24605,7 @@ WHERE ci.note IN ('(writer)',
 			"                 └─ IndexedTableAccess(name)\n" +
 			"                     ├─ index: [name.id]\n" +
 			"                     ├─ keys: [ci.person_id:18!null]\n" +
-			"                     ├─ colSet: (40-48)\n" +
+			"                     ├─ colSet: (40,41,44)\n" +
 			"                     ├─ tableId: 10\n" +
 			"                     └─ Table\n" +
 			"                         ├─ name: name\n" +
@@ -24930,7 +24930,7 @@ WHERE ci.note IN ('(writer)',
 			"         │   │   │   │   │   │   │       └─ IndexedTableAccess(company_name)\n" +
 			"         │   │   │   │   │   │   │           ├─ index: [company_name.id]\n" +
 			"         │   │   │   │   │   │   │           ├─ static: [{[NULL, ∞)}]\n" +
-			"         │   │   │   │   │   │   │           ├─ colSet: (8-14)\n" +
+			"         │   │   │   │   │   │   │           ├─ colSet: (8,9)\n" +
 			"         │   │   │   │   │   │   │           ├─ tableId: 2\n" +
 			"         │   │   │   │   │   │   │           └─ Table\n" +
 			"         │   │   │   │   │   │   │               ├─ name: company_name\n" +
@@ -24939,7 +24939,7 @@ WHERE ci.note IN ('(writer)',
 			"         │   │   │   │   │   │       └─ IndexedTableAccess(movie_companies)\n" +
 			"         │   │   │   │   │   │           ├─ index: [movie_companies.company_id]\n" +
 			"         │   │   │   │   │   │           ├─ static: [{[NULL, ∞)}]\n" +
-			"         │   │   │   │   │   │           ├─ colSet: (22-26)\n" +
+			"         │   │   │   │   │   │           ├─ colSet: (23,24)\n" +
 			"         │   │   │   │   │   │           ├─ tableId: 6\n" +
 			"         │   │   │   │   │   │           └─ Table\n" +
 			"         │   │   │   │   │   │               ├─ name: movie_companies\n" +
@@ -24960,7 +24960,7 @@ WHERE ci.note IN ('(writer)',
 			"         │   │   │   │   │           │   │   │   └─ IndexedTableAccess(movie_info_idx)\n" +
 			"         │   │   │   │   │           │   │   │       ├─ index: [movie_info_idx.movie_id]\n" +
 			"         │   │   │   │   │           │   │   │       ├─ static: [{[NULL, ∞)}]\n" +
-			"         │   │   │   │   │           │   │   │       ├─ colSet: (32-36)\n" +
+			"         │   │   │   │   │           │   │   │       ├─ colSet: (33-35)\n" +
 			"         │   │   │   │   │           │   │   │       ├─ tableId: 8\n" +
 			"         │   │   │   │   │           │   │   │       └─ Table\n" +
 			"         │   │   │   │   │           │   │   │           ├─ name: movie_info_idx\n" +
@@ -24969,7 +24969,7 @@ WHERE ci.note IN ('(writer)',
 			"         │   │   │   │   │           │   │       └─ IndexedTableAccess(title)\n" +
 			"         │   │   │   │   │           │   │           ├─ index: [title.id]\n" +
 			"         │   │   │   │   │           │   │           ├─ static: [{[NULL, ∞)}]\n" +
-			"         │   │   │   │   │           │   │           ├─ colSet: (49-60)\n" +
+			"         │   │   │   │   │           │   │           ├─ colSet: (49,50)\n" +
 			"         │   │   │   │   │           │   │           ├─ tableId: 11\n" +
 			"         │   │   │   │   │           │   │           └─ Table\n" +
 			"         │   │   │   │   │           │   │               ├─ name: title\n" +
@@ -24982,7 +24982,7 @@ WHERE ci.note IN ('(writer)',
 			"         │   │   │   │   │           │           └─ IndexedTableAccess(movie_info)\n" +
 			"         │   │   │   │   │           │               ├─ index: [movie_info.movie_id]\n" +
 			"         │   │   │   │   │           │               ├─ keys: [mi_idx.movie_id:4!null]\n" +
-			"         │   │   │   │   │           │               ├─ colSet: (27-31)\n" +
+			"         │   │   │   │   │           │               ├─ colSet: (28-30)\n" +
 			"         │   │   │   │   │           │               ├─ tableId: 7\n" +
 			"         │   │   │   │   │           │               └─ Table\n" +
 			"         │   │   │   │   │           │                   ├─ name: movie_info\n" +
@@ -25003,7 +25003,7 @@ WHERE ci.note IN ('(writer)',
 			"         │   │   │   │       └─ IndexedTableAccess(movie_keyword)\n" +
 			"         │   │   │   │           ├─ index: [movie_keyword.movie_id]\n" +
 			"         │   │   │   │           ├─ keys: [mi_idx.movie_id:4!null]\n" +
-			"         │   │   │   │           ├─ colSet: (37-39)\n" +
+			"         │   │   │   │           ├─ colSet: (38,39)\n" +
 			"         │   │   │   │           ├─ tableId: 9\n" +
 			"         │   │   │   │           └─ Table\n" +
 			"         │   │   │   │               ├─ name: movie_keyword\n" +
@@ -25016,7 +25016,7 @@ WHERE ci.note IN ('(writer)',
 			"         │   │   │           └─ IndexedTableAccess(cast_info)\n" +
 			"         │   │   │               ├─ index: [cast_info.movie_id]\n" +
 			"         │   │   │               ├─ keys: [mc.movie_id:2!null]\n" +
-			"         │   │   │               ├─ colSet: (1-7)\n" +
+			"         │   │   │               ├─ colSet: (2,3,5)\n" +
 			"         │   │   │               ├─ tableId: 1\n" +
 			"         │   │   │               └─ Table\n" +
 			"         │   │   │                   ├─ name: cast_info\n" +
@@ -25050,7 +25050,7 @@ WHERE ci.note IN ('(writer)',
 			"             └─ IndexedTableAccess(name)\n" +
 			"                 ├─ index: [name.id]\n" +
 			"                 ├─ keys: [ci.person_id:16!null]\n" +
-			"                 ├─ colSet: (40-48)\n" +
+			"                 ├─ colSet: (40,41)\n" +
 			"                 ├─ tableId: 10\n" +
 			"                 └─ Table\n" +
 			"                     ├─ name: name\n" +
@@ -25310,7 +25310,7 @@ WHERE k.keyword ='10,000-mile-club'
 			"         │   │   │   │       └─ IndexedTableAccess(movie_link)\n" +
 			"         │   │   │   │           ├─ index: [movie_link.link_type_id]\n" +
 			"         │   │   │   │           ├─ static: [{[NULL, ∞)}]\n" +
-			"         │   │   │   │           ├─ colSet: (9-12)\n" +
+			"         │   │   │   │           ├─ colSet: (10-12)\n" +
 			"         │   │   │   │           ├─ tableId: 4\n" +
 			"         │   │   │   │           └─ Table\n" +
 			"         │   │   │   │               ├─ name: movie_link\n" +
@@ -25319,7 +25319,7 @@ WHERE k.keyword ='10,000-mile-club'
 			"         │   │   │       └─ IndexedTableAccess(title)\n" +
 			"         │   │   │           ├─ index: [title.id]\n" +
 			"         │   │   │           ├─ keys: [ml.linked_movie_id:3!null]\n" +
-			"         │   │   │           ├─ colSet: (25-36)\n" +
+			"         │   │   │           ├─ colSet: (25,26)\n" +
 			"         │   │   │           ├─ tableId: 6\n" +
 			"         │   │   │           └─ Table\n" +
 			"         │   │   │               ├─ name: title\n" +
@@ -25328,7 +25328,7 @@ WHERE k.keyword ='10,000-mile-club'
 			"         │   │       └─ IndexedTableAccess(title)\n" +
 			"         │   │           ├─ index: [title.id]\n" +
 			"         │   │           ├─ keys: [ml.movie_id:2!null]\n" +
-			"         │   │           ├─ colSet: (13-24)\n" +
+			"         │   │           ├─ colSet: (13,14)\n" +
 			"         │   │           ├─ tableId: 5\n" +
 			"         │   │           └─ Table\n" +
 			"         │   │               ├─ name: title\n" +
@@ -25337,7 +25337,7 @@ WHERE k.keyword ='10,000-mile-club'
 			"         │       └─ IndexedTableAccess(movie_keyword)\n" +
 			"         │           ├─ index: [movie_keyword.movie_id]\n" +
 			"         │           ├─ keys: [t1.id:7!null]\n" +
-			"         │           ├─ colSet: (6-8)\n" +
+			"         │           ├─ colSet: (7,8)\n" +
 			"         │           ├─ tableId: 3\n" +
 			"         │           └─ Table\n" +
 			"         │               ├─ name: movie_keyword\n" +
@@ -25350,7 +25350,7 @@ WHERE k.keyword ='10,000-mile-club'
 			"                 └─ IndexedTableAccess(keyword)\n" +
 			"                     ├─ index: [keyword.id]\n" +
 			"                     ├─ keys: [mk.keyword_id:10!null]\n" +
-			"                     ├─ colSet: (1-3)\n" +
+			"                     ├─ colSet: (1,2)\n" +
 			"                     ├─ tableId: 1\n" +
 			"                     └─ Table\n" +
 			"                         ├─ name: keyword\n" +
@@ -25500,7 +25500,7 @@ WHERE k.keyword ='character-name-in-title'
 			"         │   │   │   │       └─ IndexedTableAccess(movie_link)\n" +
 			"         │   │   │   │           ├─ index: [movie_link.link_type_id]\n" +
 			"         │   │   │   │           ├─ static: [{[NULL, ∞)}]\n" +
-			"         │   │   │   │           ├─ colSet: (9-12)\n" +
+			"         │   │   │   │           ├─ colSet: (10-12)\n" +
 			"         │   │   │   │           ├─ tableId: 4\n" +
 			"         │   │   │   │           └─ Table\n" +
 			"         │   │   │   │               ├─ name: movie_link\n" +
@@ -25509,7 +25509,7 @@ WHERE k.keyword ='character-name-in-title'
 			"         │   │   │       └─ IndexedTableAccess(title)\n" +
 			"         │   │   │           ├─ index: [title.id]\n" +
 			"         │   │   │           ├─ keys: [ml.linked_movie_id:3!null]\n" +
-			"         │   │   │           ├─ colSet: (25-36)\n" +
+			"         │   │   │           ├─ colSet: (25,26)\n" +
 			"         │   │   │           ├─ tableId: 6\n" +
 			"         │   │   │           └─ Table\n" +
 			"         │   │   │               ├─ name: title\n" +
@@ -25518,7 +25518,7 @@ WHERE k.keyword ='character-name-in-title'
 			"         │   │       └─ IndexedTableAccess(title)\n" +
 			"         │   │           ├─ index: [title.id]\n" +
 			"         │   │           ├─ keys: [ml.movie_id:2!null]\n" +
-			"         │   │           ├─ colSet: (13-24)\n" +
+			"         │   │           ├─ colSet: (13,14)\n" +
 			"         │   │           ├─ tableId: 5\n" +
 			"         │   │           └─ Table\n" +
 			"         │   │               ├─ name: title\n" +
@@ -25527,7 +25527,7 @@ WHERE k.keyword ='character-name-in-title'
 			"         │       └─ IndexedTableAccess(movie_keyword)\n" +
 			"         │           ├─ index: [movie_keyword.movie_id]\n" +
 			"         │           ├─ keys: [t1.id:7!null]\n" +
-			"         │           ├─ colSet: (6-8)\n" +
+			"         │           ├─ colSet: (7,8)\n" +
 			"         │           ├─ tableId: 3\n" +
 			"         │           └─ Table\n" +
 			"         │               ├─ name: movie_keyword\n" +
@@ -25540,7 +25540,7 @@ WHERE k.keyword ='character-name-in-title'
 			"                 └─ IndexedTableAccess(keyword)\n" +
 			"                     ├─ index: [keyword.id]\n" +
 			"                     ├─ keys: [mk.keyword_id:10!null]\n" +
-			"                     ├─ colSet: (1-3)\n" +
+			"                     ├─ colSet: (1,2)\n" +
 			"                     ├─ tableId: 1\n" +
 			"                     └─ Table\n" +
 			"                         ├─ name: keyword\n" +
@@ -25734,7 +25734,7 @@ WHERE cn1.country_code = '[us]'
 			"         │   │   │   │           └─ IndexedTableAccess(title)\n" +
 			"         │   │   │   │               ├─ index: [title.kind_id]\n" +
 			"         │   │   │   │               ├─ static: [{[NULL, ∞)}]\n" +
-			"         │   │   │   │               ├─ colSet: (61-72)\n" +
+			"         │   │   │   │               ├─ colSet: (61,62,64,65)\n" +
 			"         │   │   │   │               ├─ tableId: 14\n" +
 			"         │   │   │   │               └─ Table\n" +
 			"         │   │   │   │                   ├─ name: title\n" +
@@ -25771,7 +25771,7 @@ WHERE cn1.country_code = '[us]'
 			"         │   │   │           │   │   │   │   │   │   │       └─ IndexedTableAccess(movie_companies)\n" +
 			"         │   │   │           │   │   │   │   │   │   │           ├─ index: [movie_companies.movie_id]\n" +
 			"         │   │   │           │   │   │   │   │   │   │           ├─ keys: [ml.linked_movie_id:7!null]\n" +
-			"         │   │   │           │   │   │   │   │   │   │           ├─ colSet: (30-34)\n" +
+			"         │   │   │           │   │   │   │   │   │   │           ├─ colSet: (31,32)\n" +
 			"         │   │   │           │   │   │   │   │   │   │           ├─ tableId: 9\n" +
 			"         │   │   │           │   │   │   │   │   │   │           └─ Table\n" +
 			"         │   │   │           │   │   │   │   │   │   │               ├─ name: movie_companies\n" +
@@ -25780,7 +25780,7 @@ WHERE cn1.country_code = '[us]'
 			"         │   │   │           │   │   │   │   │   │       └─ IndexedTableAccess(company_name)\n" +
 			"         │   │   │           │   │   │   │   │   │           ├─ index: [company_name.id]\n" +
 			"         │   │   │           │   │   │   │   │   │           ├─ keys: [mc2.company_id:10!null]\n" +
-			"         │   │   │           │   │   │   │   │   │           ├─ colSet: (8-14)\n" +
+			"         │   │   │           │   │   │   │   │   │           ├─ colSet: (8,9)\n" +
 			"         │   │   │           │   │   │   │   │   │           ├─ tableId: 2\n" +
 			"         │   │   │           │   │   │   │   │   │           └─ Table\n" +
 			"         │   │   │           │   │   │   │   │   │               ├─ name: company_name\n" +
@@ -25789,7 +25789,7 @@ WHERE cn1.country_code = '[us]'
 			"         │   │   │           │   │   │   │   │       └─ IndexedTableAccess(movie_companies)\n" +
 			"         │   │   │           │   │   │   │   │           ├─ index: [movie_companies.movie_id]\n" +
 			"         │   │   │           │   │   │   │   │           ├─ keys: [ml.movie_id:6!null]\n" +
-			"         │   │   │           │   │   │   │   │           ├─ colSet: (25-29)\n" +
+			"         │   │   │           │   │   │   │   │           ├─ colSet: (26,27)\n" +
 			"         │   │   │           │   │   │   │   │           ├─ tableId: 8\n" +
 			"         │   │   │           │   │   │   │   │           └─ Table\n" +
 			"         │   │   │           │   │   │   │   │               ├─ name: movie_companies\n" +
@@ -25802,7 +25802,7 @@ WHERE cn1.country_code = '[us]'
 			"         │   │   │           │   │   │   │           └─ IndexedTableAccess(company_name)\n" +
 			"         │   │   │           │   │   │   │               ├─ index: [company_name.id]\n" +
 			"         │   │   │           │   │   │   │               ├─ keys: [mc1.company_id:14!null]\n" +
-			"         │   │   │           │   │   │   │               ├─ colSet: (1-7)\n" +
+			"         │   │   │           │   │   │   │               ├─ colSet: (1-3)\n" +
 			"         │   │   │           │   │   │   │               ├─ tableId: 1\n" +
 			"         │   │   │           │   │   │   │               └─ Table\n" +
 			"         │   │   │           │   │   │   │                   ├─ name: company_name\n" +
@@ -25811,7 +25811,7 @@ WHERE cn1.country_code = '[us]'
 			"         │   │   │           │   │   │       └─ IndexedTableAccess(movie_info_idx)\n" +
 			"         │   │   │           │   │   │           ├─ index: [movie_info_idx.movie_id]\n" +
 			"         │   │   │           │   │   │           ├─ keys: [mc1.movie_id:13!null]\n" +
-			"         │   │   │           │   │   │           ├─ colSet: (35-39)\n" +
+			"         │   │   │           │   │   │           ├─ colSet: (36-38)\n" +
 			"         │   │   │           │   │   │           ├─ tableId: 10\n" +
 			"         │   │   │           │   │   │           └─ Table\n" +
 			"         │   │   │           │   │   │               ├─ name: movie_info_idx\n" +
@@ -25836,7 +25836,7 @@ WHERE cn1.country_code = '[us]'
 			"         │   │   │           │           └─ IndexedTableAccess(movie_info_idx)\n" +
 			"         │   │   │           │               ├─ index: [movie_info_idx.movie_id]\n" +
 			"         │   │   │           │               ├─ keys: [mc2.movie_id:9!null]\n" +
-			"         │   │   │           │               ├─ colSet: (40-44)\n" +
+			"         │   │   │           │               ├─ colSet: (41-43)\n" +
 			"         │   │   │           │               ├─ tableId: 11\n" +
 			"         │   │   │           │               └─ Table\n" +
 			"         │   │   │           │                   ├─ name: movie_info_idx\n" +
@@ -25858,7 +25858,7 @@ WHERE cn1.country_code = '[us]'
 			"         │   │       └─ IndexedTableAccess(title)\n" +
 			"         │   │           ├─ index: [title.id]\n" +
 			"         │   │           ├─ keys: [ml.movie_id:6!null]\n" +
-			"         │   │           ├─ colSet: (49-60)\n" +
+			"         │   │           ├─ colSet: (49,50,52)\n" +
 			"         │   │           ├─ tableId: 13\n" +
 			"         │   │           └─ Table\n" +
 			"         │   │               ├─ name: title\n" +
@@ -26221,7 +26221,7 @@ WHERE cn1.country_code = '[nl]'
 			"         │   │   │   │           └─ IndexedTableAccess(title)\n" +
 			"         │   │   │   │               ├─ index: [title.kind_id]\n" +
 			"         │   │   │   │               ├─ static: [{[NULL, ∞)}]\n" +
-			"         │   │   │   │               ├─ colSet: (61-72)\n" +
+			"         │   │   │   │               ├─ colSet: (61,62,64,65)\n" +
 			"         │   │   │   │               ├─ tableId: 14\n" +
 			"         │   │   │   │               └─ Table\n" +
 			"         │   │   │   │                   ├─ name: title\n" +
@@ -26258,7 +26258,7 @@ WHERE cn1.country_code = '[nl]'
 			"         │   │   │           │   │   │   │   │   │   │       └─ IndexedTableAccess(movie_companies)\n" +
 			"         │   │   │           │   │   │   │   │   │   │           ├─ index: [movie_companies.movie_id]\n" +
 			"         │   │   │           │   │   │   │   │   │   │           ├─ keys: [ml.linked_movie_id:7!null]\n" +
-			"         │   │   │           │   │   │   │   │   │   │           ├─ colSet: (30-34)\n" +
+			"         │   │   │           │   │   │   │   │   │   │           ├─ colSet: (31,32)\n" +
 			"         │   │   │           │   │   │   │   │   │   │           ├─ tableId: 9\n" +
 			"         │   │   │           │   │   │   │   │   │   │           └─ Table\n" +
 			"         │   │   │           │   │   │   │   │   │   │               ├─ name: movie_companies\n" +
@@ -26267,7 +26267,7 @@ WHERE cn1.country_code = '[nl]'
 			"         │   │   │           │   │   │   │   │   │       └─ IndexedTableAccess(company_name)\n" +
 			"         │   │   │           │   │   │   │   │   │           ├─ index: [company_name.id]\n" +
 			"         │   │   │           │   │   │   │   │   │           ├─ keys: [mc2.company_id:10!null]\n" +
-			"         │   │   │           │   │   │   │   │   │           ├─ colSet: (8-14)\n" +
+			"         │   │   │           │   │   │   │   │   │           ├─ colSet: (8,9)\n" +
 			"         │   │   │           │   │   │   │   │   │           ├─ tableId: 2\n" +
 			"         │   │   │           │   │   │   │   │   │           └─ Table\n" +
 			"         │   │   │           │   │   │   │   │   │               ├─ name: company_name\n" +
@@ -26276,7 +26276,7 @@ WHERE cn1.country_code = '[nl]'
 			"         │   │   │           │   │   │   │   │       └─ IndexedTableAccess(movie_companies)\n" +
 			"         │   │   │           │   │   │   │   │           ├─ index: [movie_companies.movie_id]\n" +
 			"         │   │   │           │   │   │   │   │           ├─ keys: [ml.movie_id:6!null]\n" +
-			"         │   │   │           │   │   │   │   │           ├─ colSet: (25-29)\n" +
+			"         │   │   │           │   │   │   │   │           ├─ colSet: (26,27)\n" +
 			"         │   │   │           │   │   │   │   │           ├─ tableId: 8\n" +
 			"         │   │   │           │   │   │   │   │           └─ Table\n" +
 			"         │   │   │           │   │   │   │   │               ├─ name: movie_companies\n" +
@@ -26289,7 +26289,7 @@ WHERE cn1.country_code = '[nl]'
 			"         │   │   │           │   │   │   │           └─ IndexedTableAccess(company_name)\n" +
 			"         │   │   │           │   │   │   │               ├─ index: [company_name.id]\n" +
 			"         │   │   │           │   │   │   │               ├─ keys: [mc1.company_id:14!null]\n" +
-			"         │   │   │           │   │   │   │               ├─ colSet: (1-7)\n" +
+			"         │   │   │           │   │   │   │               ├─ colSet: (1-3)\n" +
 			"         │   │   │           │   │   │   │               ├─ tableId: 1\n" +
 			"         │   │   │           │   │   │   │               └─ Table\n" +
 			"         │   │   │           │   │   │   │                   ├─ name: company_name\n" +
@@ -26298,7 +26298,7 @@ WHERE cn1.country_code = '[nl]'
 			"         │   │   │           │   │   │       └─ IndexedTableAccess(movie_info_idx)\n" +
 			"         │   │   │           │   │   │           ├─ index: [movie_info_idx.movie_id]\n" +
 			"         │   │   │           │   │   │           ├─ keys: [mc1.movie_id:13!null]\n" +
-			"         │   │   │           │   │   │           ├─ colSet: (35-39)\n" +
+			"         │   │   │           │   │   │           ├─ colSet: (36-38)\n" +
 			"         │   │   │           │   │   │           ├─ tableId: 10\n" +
 			"         │   │   │           │   │   │           └─ Table\n" +
 			"         │   │   │           │   │   │               ├─ name: movie_info_idx\n" +
@@ -26323,7 +26323,7 @@ WHERE cn1.country_code = '[nl]'
 			"         │   │   │           │           └─ IndexedTableAccess(movie_info_idx)\n" +
 			"         │   │   │           │               ├─ index: [movie_info_idx.movie_id]\n" +
 			"         │   │   │           │               ├─ keys: [mc2.movie_id:9!null]\n" +
-			"         │   │   │           │               ├─ colSet: (40-44)\n" +
+			"         │   │   │           │               ├─ colSet: (41-43)\n" +
 			"         │   │   │           │               ├─ tableId: 11\n" +
 			"         │   │   │           │               └─ Table\n" +
 			"         │   │   │           │                   ├─ name: movie_info_idx\n" +
@@ -26345,7 +26345,7 @@ WHERE cn1.country_code = '[nl]'
 			"         │   │       └─ IndexedTableAccess(title)\n" +
 			"         │   │           ├─ index: [title.id]\n" +
 			"         │   │           ├─ keys: [ml.movie_id:6!null]\n" +
-			"         │   │           ├─ colSet: (49-60)\n" +
+			"         │   │           ├─ colSet: (49,50,52)\n" +
 			"         │   │           ├─ tableId: 13\n" +
 			"         │   │           └─ Table\n" +
 			"         │   │               ├─ name: title\n" +
@@ -26714,7 +26714,7 @@ WHERE cn1.country_code != '[us]'
 			"         │   │   │   │           └─ IndexedTableAccess(title)\n" +
 			"         │   │   │   │               ├─ index: [title.kind_id]\n" +
 			"         │   │   │   │               ├─ static: [{[NULL, ∞)}]\n" +
-			"         │   │   │   │               ├─ colSet: (61-72)\n" +
+			"         │   │   │   │               ├─ colSet: (61,62,64,65)\n" +
 			"         │   │   │   │               ├─ tableId: 14\n" +
 			"         │   │   │   │               └─ Table\n" +
 			"         │   │   │   │                   ├─ name: title\n" +
@@ -26751,7 +26751,7 @@ WHERE cn1.country_code != '[us]'
 			"         │   │   │           │   │   │   │   │   │   │       └─ IndexedTableAccess(movie_companies)\n" +
 			"         │   │   │           │   │   │   │   │   │   │           ├─ index: [movie_companies.movie_id]\n" +
 			"         │   │   │           │   │   │   │   │   │   │           ├─ keys: [ml.linked_movie_id:7!null]\n" +
-			"         │   │   │           │   │   │   │   │   │   │           ├─ colSet: (30-34)\n" +
+			"         │   │   │           │   │   │   │   │   │   │           ├─ colSet: (31,32)\n" +
 			"         │   │   │           │   │   │   │   │   │   │           ├─ tableId: 9\n" +
 			"         │   │   │           │   │   │   │   │   │   │           └─ Table\n" +
 			"         │   │   │           │   │   │   │   │   │   │               ├─ name: movie_companies\n" +
@@ -26760,7 +26760,7 @@ WHERE cn1.country_code != '[us]'
 			"         │   │   │           │   │   │   │   │   │       └─ IndexedTableAccess(company_name)\n" +
 			"         │   │   │           │   │   │   │   │   │           ├─ index: [company_name.id]\n" +
 			"         │   │   │           │   │   │   │   │   │           ├─ keys: [mc2.company_id:10!null]\n" +
-			"         │   │   │           │   │   │   │   │   │           ├─ colSet: (8-14)\n" +
+			"         │   │   │           │   │   │   │   │   │           ├─ colSet: (8,9)\n" +
 			"         │   │   │           │   │   │   │   │   │           ├─ tableId: 2\n" +
 			"         │   │   │           │   │   │   │   │   │           └─ Table\n" +
 			"         │   │   │           │   │   │   │   │   │               ├─ name: company_name\n" +
@@ -26769,7 +26769,7 @@ WHERE cn1.country_code != '[us]'
 			"         │   │   │           │   │   │   │   │       └─ IndexedTableAccess(movie_companies)\n" +
 			"         │   │   │           │   │   │   │   │           ├─ index: [movie_companies.movie_id]\n" +
 			"         │   │   │           │   │   │   │   │           ├─ keys: [ml.movie_id:6!null]\n" +
-			"         │   │   │           │   │   │   │   │           ├─ colSet: (25-29)\n" +
+			"         │   │   │           │   │   │   │   │           ├─ colSet: (26,27)\n" +
 			"         │   │   │           │   │   │   │   │           ├─ tableId: 8\n" +
 			"         │   │   │           │   │   │   │   │           └─ Table\n" +
 			"         │   │   │           │   │   │   │   │               ├─ name: movie_companies\n" +
@@ -26783,7 +26783,7 @@ WHERE cn1.country_code != '[us]'
 			"         │   │   │           │   │   │   │           └─ IndexedTableAccess(company_name)\n" +
 			"         │   │   │           │   │   │   │               ├─ index: [company_name.id]\n" +
 			"         │   │   │           │   │   │   │               ├─ keys: [mc1.company_id:14!null]\n" +
-			"         │   │   │           │   │   │   │               ├─ colSet: (1-7)\n" +
+			"         │   │   │           │   │   │   │               ├─ colSet: (1-3)\n" +
 			"         │   │   │           │   │   │   │               ├─ tableId: 1\n" +
 			"         │   │   │           │   │   │   │               └─ Table\n" +
 			"         │   │   │           │   │   │   │                   ├─ name: company_name\n" +
@@ -26792,7 +26792,7 @@ WHERE cn1.country_code != '[us]'
 			"         │   │   │           │   │   │       └─ IndexedTableAccess(movie_info_idx)\n" +
 			"         │   │   │           │   │   │           ├─ index: [movie_info_idx.movie_id]\n" +
 			"         │   │   │           │   │   │           ├─ keys: [mc1.movie_id:13!null]\n" +
-			"         │   │   │           │   │   │           ├─ colSet: (35-39)\n" +
+			"         │   │   │           │   │   │           ├─ colSet: (36-38)\n" +
 			"         │   │   │           │   │   │           ├─ tableId: 10\n" +
 			"         │   │   │           │   │   │           └─ Table\n" +
 			"         │   │   │           │   │   │               ├─ name: movie_info_idx\n" +
@@ -26817,7 +26817,7 @@ WHERE cn1.country_code != '[us]'
 			"         │   │   │           │           └─ IndexedTableAccess(movie_info_idx)\n" +
 			"         │   │   │           │               ├─ index: [movie_info_idx.movie_id]\n" +
 			"         │   │   │           │               ├─ keys: [mc2.movie_id:9!null]\n" +
-			"         │   │   │           │               ├─ colSet: (40-44)\n" +
+			"         │   │   │           │               ├─ colSet: (41-43)\n" +
 			"         │   │   │           │               ├─ tableId: 11\n" +
 			"         │   │   │           │               └─ Table\n" +
 			"         │   │   │           │                   ├─ name: movie_info_idx\n" +
@@ -26839,7 +26839,7 @@ WHERE cn1.country_code != '[us]'
 			"         │   │       └─ IndexedTableAccess(title)\n" +
 			"         │   │           ├─ index: [title.id]\n" +
 			"         │   │           ├─ keys: [ml.movie_id:6!null]\n" +
-			"         │   │           ├─ colSet: (49-60)\n" +
+			"         │   │           ├─ colSet: (49,50,52)\n" +
 			"         │   │           ├─ tableId: 13\n" +
 			"         │   │           └─ Table\n" +
 			"         │   │               ├─ name: title\n" +
@@ -27155,7 +27155,7 @@ WHERE k.keyword LIKE '%sequel%'
 			"         │   │   │   └─ IndexedTableAccess(movie_keyword)\n" +
 			"         │   │   │       ├─ index: [movie_keyword.movie_id]\n" +
 			"         │   │   │       ├─ static: [{[NULL, ∞)}]\n" +
-			"         │   │   │       ├─ colSet: (9-11)\n" +
+			"         │   │   │       ├─ colSet: (10,11)\n" +
 			"         │   │   │       ├─ tableId: 3\n" +
 			"         │   │   │       └─ Table\n" +
 			"         │   │   │           ├─ name: movie_keyword\n" +
@@ -27168,7 +27168,7 @@ WHERE k.keyword LIKE '%sequel%'
 			"         │   │           └─ IndexedTableAccess(title)\n" +
 			"         │   │               ├─ index: [title.id]\n" +
 			"         │   │               ├─ static: [{[NULL, ∞)}]\n" +
-			"         │   │               ├─ colSet: (12-23)\n" +
+			"         │   │               ├─ colSet: (12,13,16)\n" +
 			"         │   │               ├─ tableId: 4\n" +
 			"         │   │               └─ Table\n" +
 			"         │   │                   ├─ name: title\n" +
@@ -27191,7 +27191,7 @@ WHERE k.keyword LIKE '%sequel%'
 			"                 └─ IndexedTableAccess(movie_info)\n" +
 			"                     ├─ index: [movie_info.movie_id]\n" +
 			"                     ├─ keys: [mk.movie_id:0!null]\n" +
-			"                     ├─ colSet: (4-8)\n" +
+			"                     ├─ colSet: (5,7)\n" +
 			"                     ├─ tableId: 2\n" +
 			"                     └─ Table\n" +
 			"                         ├─ name: movie_info\n" +
@@ -27315,7 +27315,7 @@ WHERE k.keyword LIKE '%sequel%'
 			"         │   │   │   └─ IndexedTableAccess(movie_keyword)\n" +
 			"         │   │   │       ├─ index: [movie_keyword.movie_id]\n" +
 			"         │   │   │       ├─ static: [{[NULL, ∞)}]\n" +
-			"         │   │   │       ├─ colSet: (9-11)\n" +
+			"         │   │   │       ├─ colSet: (10,11)\n" +
 			"         │   │   │       ├─ tableId: 3\n" +
 			"         │   │   │       └─ Table\n" +
 			"         │   │   │           ├─ name: movie_keyword\n" +
@@ -27328,7 +27328,7 @@ WHERE k.keyword LIKE '%sequel%'
 			"         │   │           └─ IndexedTableAccess(title)\n" +
 			"         │   │               ├─ index: [title.id]\n" +
 			"         │   │               ├─ static: [{[NULL, ∞)}]\n" +
-			"         │   │               ├─ colSet: (12-23)\n" +
+			"         │   │               ├─ colSet: (12,13,16)\n" +
 			"         │   │               ├─ tableId: 4\n" +
 			"         │   │               └─ Table\n" +
 			"         │   │                   ├─ name: title\n" +
@@ -27351,7 +27351,7 @@ WHERE k.keyword LIKE '%sequel%'
 			"                 └─ IndexedTableAccess(movie_info)\n" +
 			"                     ├─ index: [movie_info.movie_id]\n" +
 			"                     ├─ keys: [mk.movie_id:0!null]\n" +
-			"                     ├─ colSet: (4-8)\n" +
+			"                     ├─ colSet: (5,7)\n" +
 			"                     ├─ tableId: 2\n" +
 			"                     └─ Table\n" +
 			"                         ├─ name: movie_info\n" +
@@ -27484,7 +27484,7 @@ WHERE k.keyword LIKE '%sequel%'
 			"         │   │   │   └─ IndexedTableAccess(movie_keyword)\n" +
 			"         │   │   │       ├─ index: [movie_keyword.movie_id]\n" +
 			"         │   │   │       ├─ static: [{[NULL, ∞)}]\n" +
-			"         │   │   │       ├─ colSet: (9-11)\n" +
+			"         │   │   │       ├─ colSet: (10,11)\n" +
 			"         │   │   │       ├─ tableId: 3\n" +
 			"         │   │   │       └─ Table\n" +
 			"         │   │   │           ├─ name: movie_keyword\n" +
@@ -27497,7 +27497,7 @@ WHERE k.keyword LIKE '%sequel%'
 			"         │   │           └─ IndexedTableAccess(title)\n" +
 			"         │   │               ├─ index: [title.id]\n" +
 			"         │   │               ├─ static: [{[NULL, ∞)}]\n" +
-			"         │   │               ├─ colSet: (12-23)\n" +
+			"         │   │               ├─ colSet: (12,13,16)\n" +
 			"         │   │               ├─ tableId: 4\n" +
 			"         │   │               └─ Table\n" +
 			"         │   │                   ├─ name: title\n" +
@@ -27520,7 +27520,7 @@ WHERE k.keyword LIKE '%sequel%'
 			"                 └─ IndexedTableAccess(movie_info)\n" +
 			"                     ├─ index: [movie_info.movie_id]\n" +
 			"                     ├─ keys: [mk.movie_id:0!null]\n" +
-			"                     ├─ colSet: (4-8)\n" +
+			"                     ├─ colSet: (5,7)\n" +
 			"                     ├─ tableId: 2\n" +
 			"                     └─ Table\n" +
 			"                         ├─ name: movie_info\n" +
@@ -27656,7 +27656,7 @@ WHERE it.info ='rating'
 			"         │   │   │   │       └─ IndexedTableAccess(movie_info_idx)\n" +
 			"         │   │   │   │           ├─ index: [movie_info_idx.movie_id]\n" +
 			"         │   │   │   │           ├─ static: [{[NULL, ∞)}]\n" +
-			"         │   │   │   │           ├─ colSet: (6-10)\n" +
+			"         │   │   │   │           ├─ colSet: (7-9)\n" +
 			"         │   │   │   │           ├─ tableId: 3\n" +
 			"         │   │   │   │           └─ Table\n" +
 			"         │   │   │   │               ├─ name: movie_info_idx\n" +
@@ -27669,7 +27669,7 @@ WHERE it.info ='rating'
 			"         │   │   │           └─ IndexedTableAccess(title)\n" +
 			"         │   │   │               ├─ index: [title.id]\n" +
 			"         │   │   │               ├─ static: [{[NULL, ∞)}]\n" +
-			"         │   │   │               ├─ colSet: (14-25)\n" +
+			"         │   │   │               ├─ colSet: (14,15,18)\n" +
 			"         │   │   │               ├─ tableId: 5\n" +
 			"         │   │   │               └─ Table\n" +
 			"         │   │   │                   ├─ name: title\n" +
@@ -27690,7 +27690,7 @@ WHERE it.info ='rating'
 			"         │       └─ IndexedTableAccess(movie_keyword)\n" +
 			"         │           ├─ index: [movie_keyword.movie_id]\n" +
 			"         │           ├─ keys: [mi_idx.movie_id:0!null]\n" +
-			"         │           ├─ colSet: (11-13)\n" +
+			"         │           ├─ colSet: (12,13)\n" +
 			"         │           ├─ tableId: 4\n" +
 			"         │           └─ Table\n" +
 			"         │               ├─ name: movie_keyword\n" +
@@ -27858,7 +27858,7 @@ WHERE it.info ='rating'
 			"         │   │   │   │       └─ IndexedTableAccess(movie_info_idx)\n" +
 			"         │   │   │   │           ├─ index: [movie_info_idx.movie_id]\n" +
 			"         │   │   │   │           ├─ static: [{[NULL, ∞)}]\n" +
-			"         │   │   │   │           ├─ colSet: (6-10)\n" +
+			"         │   │   │   │           ├─ colSet: (7-9)\n" +
 			"         │   │   │   │           ├─ tableId: 3\n" +
 			"         │   │   │   │           └─ Table\n" +
 			"         │   │   │   │               ├─ name: movie_info_idx\n" +
@@ -27871,7 +27871,7 @@ WHERE it.info ='rating'
 			"         │   │   │           └─ IndexedTableAccess(title)\n" +
 			"         │   │   │               ├─ index: [title.id]\n" +
 			"         │   │   │               ├─ static: [{[NULL, ∞)}]\n" +
-			"         │   │   │               ├─ colSet: (14-25)\n" +
+			"         │   │   │               ├─ colSet: (14,15,18)\n" +
 			"         │   │   │               ├─ tableId: 5\n" +
 			"         │   │   │               └─ Table\n" +
 			"         │   │   │                   ├─ name: title\n" +
@@ -27892,7 +27892,7 @@ WHERE it.info ='rating'
 			"         │       └─ IndexedTableAccess(movie_keyword)\n" +
 			"         │           ├─ index: [movie_keyword.movie_id]\n" +
 			"         │           ├─ keys: [mi_idx.movie_id:0!null]\n" +
-			"         │           ├─ colSet: (11-13)\n" +
+			"         │           ├─ colSet: (12,13)\n" +
 			"         │           ├─ tableId: 4\n" +
 			"         │           └─ Table\n" +
 			"         │               ├─ name: movie_keyword\n" +
@@ -28060,7 +28060,7 @@ WHERE it.info ='rating'
 			"         │   │   │   │       └─ IndexedTableAccess(movie_info_idx)\n" +
 			"         │   │   │   │           ├─ index: [movie_info_idx.movie_id]\n" +
 			"         │   │   │   │           ├─ static: [{[NULL, ∞)}]\n" +
-			"         │   │   │   │           ├─ colSet: (6-10)\n" +
+			"         │   │   │   │           ├─ colSet: (7-9)\n" +
 			"         │   │   │   │           ├─ tableId: 3\n" +
 			"         │   │   │   │           └─ Table\n" +
 			"         │   │   │   │               ├─ name: movie_info_idx\n" +
@@ -28073,7 +28073,7 @@ WHERE it.info ='rating'
 			"         │   │   │           └─ IndexedTableAccess(title)\n" +
 			"         │   │   │               ├─ index: [title.id]\n" +
 			"         │   │   │               ├─ static: [{[NULL, ∞)}]\n" +
-			"         │   │   │               ├─ colSet: (14-25)\n" +
+			"         │   │   │               ├─ colSet: (14,15,18)\n" +
 			"         │   │   │               ├─ tableId: 5\n" +
 			"         │   │   │               └─ Table\n" +
 			"         │   │   │                   ├─ name: title\n" +
@@ -28094,7 +28094,7 @@ WHERE it.info ='rating'
 			"         │       └─ IndexedTableAccess(movie_keyword)\n" +
 			"         │           ├─ index: [movie_keyword.movie_id]\n" +
 			"         │           ├─ keys: [mi_idx.movie_id:0!null]\n" +
-			"         │           ├─ colSet: (11-13)\n" +
+			"         │           ├─ colSet: (12,13)\n" +
 			"         │           ├─ tableId: 4\n" +
 			"         │           └─ Table\n" +
 			"         │               ├─ name: movie_keyword\n" +
@@ -28294,7 +28294,7 @@ WHERE ct.kind = 'production companies'
 			"                 │           └─ IndexedTableAccess(movie_info)\n" +
 			"                 │               ├─ index: [movie_info.info_type_id]\n" +
 			"                 │               ├─ keys: [it.id:3!null]\n" +
-			"                 │               ├─ colSet: (10-14)\n" +
+			"                 │               ├─ colSet: (11-13)\n" +
 			"                 │               ├─ tableId: 4\n" +
 			"                 │               └─ Table\n" +
 			"                 │                   ├─ name: movie_info\n" +
@@ -28307,7 +28307,7 @@ WHERE ct.kind = 'production companies'
 			"                         └─ IndexedTableAccess(title)\n" +
 			"                             ├─ index: [title.id]\n" +
 			"                             ├─ keys: [mi.movie_id:6!null]\n" +
-			"                             ├─ colSet: (15-26)\n" +
+			"                             ├─ colSet: (15,16,19)\n" +
 			"                             ├─ tableId: 5\n" +
 			"                             └─ Table\n" +
 			"                                 ├─ name: title\n" +
@@ -28480,7 +28480,7 @@ WHERE ct.kind = 'production companies'
 			"                 │           └─ IndexedTableAccess(movie_info)\n" +
 			"                 │               ├─ index: [movie_info.info_type_id]\n" +
 			"                 │               ├─ keys: [it.id:3!null]\n" +
-			"                 │               ├─ colSet: (10-14)\n" +
+			"                 │               ├─ colSet: (11-13)\n" +
 			"                 │               ├─ tableId: 4\n" +
 			"                 │               └─ Table\n" +
 			"                 │                   ├─ name: movie_info\n" +
@@ -28493,7 +28493,7 @@ WHERE ct.kind = 'production companies'
 			"                         └─ IndexedTableAccess(title)\n" +
 			"                             ├─ index: [title.id]\n" +
 			"                             ├─ keys: [mi.movie_id:6!null]\n" +
-			"                             ├─ colSet: (15-26)\n" +
+			"                             ├─ colSet: (15,16,19)\n" +
 			"                             ├─ tableId: 5\n" +
 			"                             └─ Table\n" +
 			"                                 ├─ name: title\n" +
@@ -28672,7 +28672,7 @@ WHERE ct.kind = 'production companies'
 			"                 │           └─ IndexedTableAccess(movie_info)\n" +
 			"                 │               ├─ index: [movie_info.info_type_id]\n" +
 			"                 │               ├─ keys: [it.id:3!null]\n" +
-			"                 │               ├─ colSet: (10-14)\n" +
+			"                 │               ├─ colSet: (11-13)\n" +
 			"                 │               ├─ tableId: 4\n" +
 			"                 │               └─ Table\n" +
 			"                 │                   ├─ name: movie_info\n" +
@@ -28685,7 +28685,7 @@ WHERE ct.kind = 'production companies'
 			"                         └─ IndexedTableAccess(title)\n" +
 			"                             ├─ index: [title.id]\n" +
 			"                             ├─ keys: [mi.movie_id:6!null]\n" +
-			"                             ├─ colSet: (15-26)\n" +
+			"                             ├─ colSet: (15,16,19)\n" +
 			"                             ├─ tableId: 5\n" +
 			"                             └─ Table\n" +
 			"                                 ├─ name: title\n" +
@@ -28825,7 +28825,7 @@ WHERE k.keyword = 'marvel-cinematic-universe'
 			"         │   │   │   │   └─ IndexedTableAccess(movie_keyword)\n" +
 			"         │   │   │   │       ├─ index: [movie_keyword.movie_id]\n" +
 			"         │   │   │   │       ├─ static: [{[NULL, ∞)}]\n" +
-			"         │   │   │   │       ├─ colSet: (11-13)\n" +
+			"         │   │   │   │       ├─ colSet: (12,13)\n" +
 			"         │   │   │   │       ├─ tableId: 3\n" +
 			"         │   │   │   │       └─ Table\n" +
 			"         │   │   │   │           ├─ name: movie_keyword\n" +
@@ -28838,7 +28838,7 @@ WHERE k.keyword = 'marvel-cinematic-universe'
 			"         │   │   │           └─ IndexedTableAccess(title)\n" +
 			"         │   │   │               ├─ index: [title.id]\n" +
 			"         │   │   │               ├─ static: [{[NULL, ∞)}]\n" +
-			"         │   │   │               ├─ colSet: (23-34)\n" +
+			"         │   │   │               ├─ colSet: (23,24,27)\n" +
 			"         │   │   │               ├─ tableId: 5\n" +
 			"         │   │   │               └─ Table\n" +
 			"         │   │   │                   ├─ name: title\n" +
@@ -28859,7 +28859,7 @@ WHERE k.keyword = 'marvel-cinematic-universe'
 			"         │       └─ IndexedTableAccess(cast_info)\n" +
 			"         │           ├─ index: [cast_info.movie_id]\n" +
 			"         │           ├─ keys: [mk.movie_id:0!null]\n" +
-			"         │           ├─ colSet: (1-7)\n" +
+			"         │           ├─ colSet: (2,3)\n" +
 			"         │           ├─ tableId: 1\n" +
 			"         │           └─ Table\n" +
 			"         │               ├─ name: cast_info\n" +
@@ -29026,7 +29026,7 @@ WHERE k.keyword IN ('superhero',
 			"         │   │   │   │   └─ IndexedTableAccess(movie_keyword)\n" +
 			"         │   │   │   │       ├─ index: [movie_keyword.movie_id]\n" +
 			"         │   │   │   │       ├─ static: [{[NULL, ∞)}]\n" +
-			"         │   │   │   │       ├─ colSet: (11-13)\n" +
+			"         │   │   │   │       ├─ colSet: (12,13)\n" +
 			"         │   │   │   │       ├─ tableId: 3\n" +
 			"         │   │   │   │       └─ Table\n" +
 			"         │   │   │   │           ├─ name: movie_keyword\n" +
@@ -29039,7 +29039,7 @@ WHERE k.keyword IN ('superhero',
 			"         │   │   │           └─ IndexedTableAccess(title)\n" +
 			"         │   │   │               ├─ index: [title.id]\n" +
 			"         │   │   │               ├─ static: [{[NULL, ∞)}]\n" +
-			"         │   │   │               ├─ colSet: (23-34)\n" +
+			"         │   │   │               ├─ colSet: (23,24,27)\n" +
 			"         │   │   │               ├─ tableId: 5\n" +
 			"         │   │   │               └─ Table\n" +
 			"         │   │   │                   ├─ name: title\n" +
@@ -29060,7 +29060,7 @@ WHERE k.keyword IN ('superhero',
 			"         │       └─ IndexedTableAccess(cast_info)\n" +
 			"         │           ├─ index: [cast_info.movie_id]\n" +
 			"         │           ├─ keys: [mk.movie_id:0!null]\n" +
-			"         │           ├─ colSet: (1-7)\n" +
+			"         │           ├─ colSet: (2,3)\n" +
 			"         │           ├─ tableId: 1\n" +
 			"         │           └─ Table\n" +
 			"         │               ├─ name: cast_info\n" +
@@ -29220,7 +29220,7 @@ WHERE k.keyword = 'marvel-cinematic-universe'
 			"         │   │   │   │   └─ IndexedTableAccess(movie_keyword)\n" +
 			"         │   │   │   │       ├─ index: [movie_keyword.movie_id]\n" +
 			"         │   │   │   │       ├─ static: [{[NULL, ∞)}]\n" +
-			"         │   │   │   │       ├─ colSet: (11-13)\n" +
+			"         │   │   │   │       ├─ colSet: (12,13)\n" +
 			"         │   │   │   │       ├─ tableId: 3\n" +
 			"         │   │   │   │       └─ Table\n" +
 			"         │   │   │   │           ├─ name: movie_keyword\n" +
@@ -29233,7 +29233,7 @@ WHERE k.keyword = 'marvel-cinematic-universe'
 			"         │   │   │           └─ IndexedTableAccess(title)\n" +
 			"         │   │   │               ├─ index: [title.id]\n" +
 			"         │   │   │               ├─ static: [{[NULL, ∞)}]\n" +
-			"         │   │   │               ├─ colSet: (23-34)\n" +
+			"         │   │   │               ├─ colSet: (23,24,27)\n" +
 			"         │   │   │               ├─ tableId: 5\n" +
 			"         │   │   │               └─ Table\n" +
 			"         │   │   │                   ├─ name: title\n" +
@@ -29254,7 +29254,7 @@ WHERE k.keyword = 'marvel-cinematic-universe'
 			"         │       └─ IndexedTableAccess(cast_info)\n" +
 			"         │           ├─ index: [cast_info.movie_id]\n" +
 			"         │           ├─ keys: [mk.movie_id:0!null]\n" +
-			"         │           ├─ colSet: (1-7)\n" +
+			"         │           ├─ colSet: (2,3)\n" +
 			"         │           ├─ tableId: 1\n" +
 			"         │           └─ Table\n" +
 			"         │               ├─ name: cast_info\n" +
@@ -29421,7 +29421,7 @@ WHERE k.keyword IN ('superhero',
 			"         │   │   │   │   └─ IndexedTableAccess(movie_keyword)\n" +
 			"         │   │   │   │       ├─ index: [movie_keyword.movie_id]\n" +
 			"         │   │   │   │       ├─ static: [{[NULL, ∞)}]\n" +
-			"         │   │   │   │       ├─ colSet: (11-13)\n" +
+			"         │   │   │   │       ├─ colSet: (12,13)\n" +
 			"         │   │   │   │       ├─ tableId: 3\n" +
 			"         │   │   │   │       └─ Table\n" +
 			"         │   │   │   │           ├─ name: movie_keyword\n" +
@@ -29434,7 +29434,7 @@ WHERE k.keyword IN ('superhero',
 			"         │   │   │           └─ IndexedTableAccess(title)\n" +
 			"         │   │   │               ├─ index: [title.id]\n" +
 			"         │   │   │               ├─ static: [{[NULL, ∞)}]\n" +
-			"         │   │   │               ├─ colSet: (23-34)\n" +
+			"         │   │   │               ├─ colSet: (23,24,27)\n" +
 			"         │   │   │               ├─ tableId: 5\n" +
 			"         │   │   │               └─ Table\n" +
 			"         │   │   │                   ├─ name: title\n" +
@@ -29455,7 +29455,7 @@ WHERE k.keyword IN ('superhero',
 			"         │       └─ IndexedTableAccess(cast_info)\n" +
 			"         │           ├─ index: [cast_info.movie_id]\n" +
 			"         │           ├─ keys: [mk.movie_id:0!null]\n" +
-			"         │           ├─ colSet: (1-7)\n" +
+			"         │           ├─ colSet: (2,3)\n" +
 			"         │           ├─ tableId: 1\n" +
 			"         │           └─ Table\n" +
 			"         │               ├─ name: cast_info\n" +
@@ -29615,7 +29615,7 @@ WHERE k.keyword = 'marvel-cinematic-universe'
 			"         │   │   │   │   └─ IndexedTableAccess(movie_keyword)\n" +
 			"         │   │   │   │       ├─ index: [movie_keyword.movie_id]\n" +
 			"         │   │   │   │       ├─ static: [{[NULL, ∞)}]\n" +
-			"         │   │   │   │       ├─ colSet: (11-13)\n" +
+			"         │   │   │   │       ├─ colSet: (12,13)\n" +
 			"         │   │   │   │       ├─ tableId: 3\n" +
 			"         │   │   │   │       └─ Table\n" +
 			"         │   │   │   │           ├─ name: movie_keyword\n" +
@@ -29628,7 +29628,7 @@ WHERE k.keyword = 'marvel-cinematic-universe'
 			"         │   │   │           └─ IndexedTableAccess(title)\n" +
 			"         │   │   │               ├─ index: [title.id]\n" +
 			"         │   │   │               ├─ static: [{[NULL, ∞)}]\n" +
-			"         │   │   │               ├─ colSet: (23-34)\n" +
+			"         │   │   │               ├─ colSet: (23,24,27)\n" +
 			"         │   │   │               ├─ tableId: 5\n" +
 			"         │   │   │               └─ Table\n" +
 			"         │   │   │                   ├─ name: title\n" +
@@ -29649,7 +29649,7 @@ WHERE k.keyword = 'marvel-cinematic-universe'
 			"         │       └─ IndexedTableAccess(cast_info)\n" +
 			"         │           ├─ index: [cast_info.movie_id]\n" +
 			"         │           ├─ keys: [mk.movie_id:0!null]\n" +
-			"         │           ├─ colSet: (1-7)\n" +
+			"         │           ├─ colSet: (2,3)\n" +
 			"         │           ├─ tableId: 1\n" +
 			"         │           └─ Table\n" +
 			"         │               ├─ name: cast_info\n" +
@@ -29815,7 +29815,7 @@ WHERE k.keyword IN ('superhero',
 			"         │   │   │   │   └─ IndexedTableAccess(movie_keyword)\n" +
 			"         │   │   │   │       ├─ index: [movie_keyword.movie_id]\n" +
 			"         │   │   │   │       ├─ static: [{[NULL, ∞)}]\n" +
-			"         │   │   │   │       ├─ colSet: (11-13)\n" +
+			"         │   │   │   │       ├─ colSet: (12,13)\n" +
 			"         │   │   │   │       ├─ tableId: 3\n" +
 			"         │   │   │   │       └─ Table\n" +
 			"         │   │   │   │           ├─ name: movie_keyword\n" +
@@ -29828,7 +29828,7 @@ WHERE k.keyword IN ('superhero',
 			"         │   │   │           └─ IndexedTableAccess(title)\n" +
 			"         │   │   │               ├─ index: [title.id]\n" +
 			"         │   │   │               ├─ static: [{[NULL, ∞)}]\n" +
-			"         │   │   │               ├─ colSet: (23-34)\n" +
+			"         │   │   │               ├─ colSet: (23,24,27)\n" +
 			"         │   │   │               ├─ tableId: 5\n" +
 			"         │   │   │               └─ Table\n" +
 			"         │   │   │                   ├─ name: title\n" +
@@ -29849,7 +29849,7 @@ WHERE k.keyword IN ('superhero',
 			"         │       └─ IndexedTableAccess(cast_info)\n" +
 			"         │           ├─ index: [cast_info.movie_id]\n" +
 			"         │           ├─ keys: [mk.movie_id:0!null]\n" +
-			"         │           ├─ colSet: (1-7)\n" +
+			"         │           ├─ colSet: (2,3)\n" +
 			"         │           ├─ tableId: 1\n" +
 			"         │           └─ Table\n" +
 			"         │               ├─ name: cast_info\n" +
@@ -30042,7 +30042,7 @@ WHERE an.name LIKE '%a%'
 			"         │   │   │           └─ IndexedTableAccess(name)\n" +
 			"         │   │   │               ├─ index: [name.id]\n" +
 			"         │   │   │               ├─ keys: [an.person_id:0!null]\n" +
-			"         │   │   │               ├─ colSet: (24-32)\n" +
+			"         │   │   │               ├─ colSet: (24,25,28,29)\n" +
 			"         │   │   │               ├─ tableId: 6\n" +
 			"         │   │   │               └─ Table\n" +
 			"         │   │   │                   ├─ name: name\n" +
@@ -30073,7 +30073,7 @@ WHERE an.name LIKE '%a%'
 			"         │   │           │   │           └─ IndexedTableAccess(title)\n" +
 			"         │   │           │   │               ├─ index: [title.id]\n" +
 			"         │   │           │   │               ├─ keys: [ml.linked_movie_id:6!null]\n" +
-			"         │   │           │   │               ├─ colSet: (38-49)\n" +
+			"         │   │           │   │               ├─ colSet: (38,39,42)\n" +
 			"         │   │           │   │               ├─ tableId: 8\n" +
 			"         │   │           │   │               └─ Table\n" +
 			"         │   │           │   │                   ├─ name: title\n" +
@@ -30082,7 +30082,7 @@ WHERE an.name LIKE '%a%'
 			"         │   │           │       └─ IndexedTableAccess(cast_info)\n" +
 			"         │   │           │           ├─ index: [cast_info.movie_id]\n" +
 			"         │   │           │           ├─ keys: [ml.linked_movie_id:6!null]\n" +
-			"         │   │           │           ├─ colSet: (9-15)\n" +
+			"         │   │           │           ├─ colSet: (10,11)\n" +
 			"         │   │           │           ├─ tableId: 2\n" +
 			"         │   │           │           └─ Table\n" +
 			"         │   │           │               ├─ name: cast_info\n" +
@@ -30107,7 +30107,7 @@ WHERE an.name LIKE '%a%'
 			"         │           └─ IndexedTableAccess(person_info)\n" +
 			"         │               ├─ index: [person_info.person_id]\n" +
 			"         │               ├─ keys: [n.id:2!null]\n" +
-			"         │               ├─ colSet: (33-37)\n" +
+			"         │               ├─ colSet: (34,35,37)\n" +
 			"         │               ├─ tableId: 7\n" +
 			"         │               └─ Table\n" +
 			"         │                   ├─ name: person_info\n" +
@@ -30342,7 +30342,7 @@ WHERE an.name LIKE '%a%'
 			"         │   │   │           └─ IndexedTableAccess(name)\n" +
 			"         │   │   │               ├─ index: [name.id]\n" +
 			"         │   │   │               ├─ keys: [an.person_id:0!null]\n" +
-			"         │   │   │               ├─ colSet: (24-32)\n" +
+			"         │   │   │               ├─ colSet: (24,25,28,29)\n" +
 			"         │   │   │               ├─ tableId: 6\n" +
 			"         │   │   │               └─ Table\n" +
 			"         │   │   │                   ├─ name: name\n" +
@@ -30373,7 +30373,7 @@ WHERE an.name LIKE '%a%'
 			"         │   │           │   │           └─ IndexedTableAccess(title)\n" +
 			"         │   │           │   │               ├─ index: [title.id]\n" +
 			"         │   │           │   │               ├─ keys: [ml.linked_movie_id:6!null]\n" +
-			"         │   │           │   │               ├─ colSet: (38-49)\n" +
+			"         │   │           │   │               ├─ colSet: (38,39,42)\n" +
 			"         │   │           │   │               ├─ tableId: 8\n" +
 			"         │   │           │   │               └─ Table\n" +
 			"         │   │           │   │                   ├─ name: title\n" +
@@ -30382,7 +30382,7 @@ WHERE an.name LIKE '%a%'
 			"         │   │           │       └─ IndexedTableAccess(cast_info)\n" +
 			"         │   │           │           ├─ index: [cast_info.movie_id]\n" +
 			"         │   │           │           ├─ keys: [ml.linked_movie_id:6!null]\n" +
-			"         │   │           │           ├─ colSet: (9-15)\n" +
+			"         │   │           │           ├─ colSet: (10,11)\n" +
 			"         │   │           │           ├─ tableId: 2\n" +
 			"         │   │           │           └─ Table\n" +
 			"         │   │           │               ├─ name: cast_info\n" +
@@ -30407,7 +30407,7 @@ WHERE an.name LIKE '%a%'
 			"         │           └─ IndexedTableAccess(person_info)\n" +
 			"         │               ├─ index: [person_info.person_id]\n" +
 			"         │               ├─ keys: [n.id:2!null]\n" +
-			"         │               ├─ colSet: (33-37)\n" +
+			"         │               ├─ colSet: (34,35,37)\n" +
 			"         │               ├─ tableId: 7\n" +
 			"         │               └─ Table\n" +
 			"         │                   ├─ name: person_info\n" +
@@ -30672,7 +30672,7 @@ WHERE an.name IS NOT NULL
 			"         │   │   │           └─ IndexedTableAccess(name)\n" +
 			"         │   │   │               ├─ index: [name.id]\n" +
 			"         │   │   │               ├─ keys: [an.person_id:0!null]\n" +
-			"         │   │   │               ├─ colSet: (24-32)\n" +
+			"         │   │   │               ├─ colSet: (24,25,28,29)\n" +
 			"         │   │   │               ├─ tableId: 6\n" +
 			"         │   │   │               └─ Table\n" +
 			"         │   │   │                   ├─ name: name\n" +
@@ -30703,7 +30703,7 @@ WHERE an.name IS NOT NULL
 			"         │   │           │   │           └─ IndexedTableAccess(title)\n" +
 			"         │   │           │   │               ├─ index: [title.id]\n" +
 			"         │   │           │   │               ├─ keys: [ml.linked_movie_id:6!null]\n" +
-			"         │   │           │   │               ├─ colSet: (38-49)\n" +
+			"         │   │           │   │               ├─ colSet: (38,42)\n" +
 			"         │   │           │   │               ├─ tableId: 8\n" +
 			"         │   │           │   │               └─ Table\n" +
 			"         │   │           │   │                   ├─ name: title\n" +
@@ -30712,7 +30712,7 @@ WHERE an.name IS NOT NULL
 			"         │   │           │       └─ IndexedTableAccess(cast_info)\n" +
 			"         │   │           │           ├─ index: [cast_info.movie_id]\n" +
 			"         │   │           │           ├─ keys: [ml.linked_movie_id:6!null]\n" +
-			"         │   │           │           ├─ colSet: (9-15)\n" +
+			"         │   │           │           ├─ colSet: (10,11)\n" +
 			"         │   │           │           ├─ tableId: 2\n" +
 			"         │   │           │           └─ Table\n" +
 			"         │   │           │               ├─ name: cast_info\n" +
@@ -30736,7 +30736,7 @@ WHERE an.name IS NOT NULL
 			"         │           └─ IndexedTableAccess(person_info)\n" +
 			"         │               ├─ index: [person_info.person_id]\n" +
 			"         │               ├─ keys: [n.id:2!null]\n" +
-			"         │               ├─ colSet: (33-37)\n" +
+			"         │               ├─ colSet: (34-37)\n" +
 			"         │               ├─ tableId: 7\n" +
 			"         │               └─ Table\n" +
 			"         │                   ├─ name: person_info\n" +
@@ -30975,7 +30975,7 @@ WHERE ci.note ='(voice: English version)'
 			"         │   │   │       │           └─ IndexedTableAccess(name)\n" +
 			"         │   │   │       │               ├─ index: [name.id]\n" +
 			"         │   │   │       │               ├─ keys: [an1.person_id:2!null]\n" +
-			"         │   │   │       │               ├─ colSet: (28-36)\n" +
+			"         │   │   │       │               ├─ colSet: (28,29)\n" +
 			"         │   │   │       │               ├─ tableId: 5\n" +
 			"         │   │   │       │               └─ Table\n" +
 			"         │   │   │       │                   ├─ name: name\n" +
@@ -30988,7 +30988,7 @@ WHERE ci.note ='(voice: English version)'
 			"         │   │   │               └─ IndexedTableAccess(cast_info)\n" +
 			"         │   │   │                   ├─ index: [cast_info.person_id]\n" +
 			"         │   │   │                   ├─ keys: [an1.person_id:2!null]\n" +
-			"         │   │   │                   ├─ colSet: (9-15)\n" +
+			"         │   │   │                   ├─ colSet: (10,11,13,15)\n" +
 			"         │   │   │                   ├─ tableId: 2\n" +
 			"         │   │   │                   └─ Table\n" +
 			"         │   │   │                       ├─ name: cast_info\n" +
@@ -30997,7 +30997,7 @@ WHERE ci.note ='(voice: English version)'
 			"         │   │       └─ IndexedTableAccess(title)\n" +
 			"         │   │           ├─ index: [title.id]\n" +
 			"         │   │           ├─ keys: [ci.movie_id:7!null]\n" +
-			"         │   │           ├─ colSet: (39-50)\n" +
+			"         │   │           ├─ colSet: (39,40)\n" +
 			"         │   │           ├─ tableId: 7\n" +
 			"         │   │           └─ Table\n" +
 			"         │   │               ├─ name: title\n" +
@@ -31011,7 +31011,7 @@ WHERE ci.note ='(voice: English version)'
 			"         │           └─ IndexedTableAccess(movie_companies)\n" +
 			"         │               ├─ index: [movie_companies.movie_id]\n" +
 			"         │               ├─ keys: [ci.movie_id:7!null]\n" +
-			"         │               ├─ colSet: (23-27)\n" +
+			"         │               ├─ colSet: (24,25,27)\n" +
 			"         │               ├─ tableId: 4\n" +
 			"         │               └─ Table\n" +
 			"         │                   ├─ name: movie_companies\n" +
@@ -31231,7 +31231,7 @@ WHERE ci.note ='(voice: English version)'
 			"         │   │   │       │           └─ IndexedTableAccess(name)\n" +
 			"         │   │   │       │               ├─ index: [name.id]\n" +
 			"         │   │   │       │               ├─ keys: [an.person_id:2!null]\n" +
-			"         │   │   │       │               ├─ colSet: (28-36)\n" +
+			"         │   │   │       │               ├─ colSet: (28,29)\n" +
 			"         │   │   │       │               ├─ tableId: 5\n" +
 			"         │   │   │       │               └─ Table\n" +
 			"         │   │   │       │                   ├─ name: name\n" +
@@ -31244,7 +31244,7 @@ WHERE ci.note ='(voice: English version)'
 			"         │   │   │               └─ IndexedTableAccess(cast_info)\n" +
 			"         │   │   │                   ├─ index: [cast_info.person_id]\n" +
 			"         │   │   │                   ├─ keys: [an.person_id:2!null]\n" +
-			"         │   │   │                   ├─ colSet: (9-15)\n" +
+			"         │   │   │                   ├─ colSet: (10,11,13,15)\n" +
 			"         │   │   │                   ├─ tableId: 2\n" +
 			"         │   │   │                   └─ Table\n" +
 			"         │   │   │                       ├─ name: cast_info\n" +
@@ -31277,7 +31277,7 @@ WHERE ci.note ='(voice: English version)'
 			"         │   │           └─ IndexedTableAccess(title)\n" +
 			"         │   │               ├─ index: [title.id]\n" +
 			"         │   │               ├─ keys: [ci.movie_id:7!null]\n" +
-			"         │   │               ├─ colSet: (39-50)\n" +
+			"         │   │               ├─ colSet: (39,40,43)\n" +
 			"         │   │               ├─ tableId: 7\n" +
 			"         │   │               └─ Table\n" +
 			"         │   │                   ├─ name: title\n" +
@@ -31295,7 +31295,7 @@ WHERE ci.note ='(voice: English version)'
 			"         │           └─ IndexedTableAccess(movie_companies)\n" +
 			"         │               ├─ index: [movie_companies.movie_id]\n" +
 			"         │               ├─ keys: [ci.movie_id:7!null]\n" +
-			"         │               ├─ colSet: (23-27)\n" +
+			"         │               ├─ colSet: (24,25,27)\n" +
 			"         │               ├─ tableId: 4\n" +
 			"         │               └─ Table\n" +
 			"         │                   ├─ name: movie_companies\n" +
@@ -31504,7 +31504,7 @@ WHERE cn.country_code ='[us]'
 			"         │   │   │       │       └─ IndexedTableAccess(name)\n" +
 			"         │   │   │       │           ├─ index: [name.id]\n" +
 			"         │   │   │       │           ├─ keys: [a1.person_id:2!null]\n" +
-			"         │   │   │       │           ├─ colSet: (28-36)\n" +
+			"         │   │   │       │           ├─ colSet: (28)\n" +
 			"         │   │   │       │           ├─ tableId: 5\n" +
 			"         │   │   │       │           └─ Table\n" +
 			"         │   │   │       │               ├─ name: name\n" +
@@ -31513,7 +31513,7 @@ WHERE cn.country_code ='[us]'
 			"         │   │   │           └─ IndexedTableAccess(cast_info)\n" +
 			"         │   │   │               ├─ index: [cast_info.person_id]\n" +
 			"         │   │   │               ├─ keys: [a1.person_id:2!null]\n" +
-			"         │   │   │               ├─ colSet: (9-15)\n" +
+			"         │   │   │               ├─ colSet: (10,11,15)\n" +
 			"         │   │   │               ├─ tableId: 2\n" +
 			"         │   │   │               └─ Table\n" +
 			"         │   │   │                   ├─ name: cast_info\n" +
@@ -31522,7 +31522,7 @@ WHERE cn.country_code ='[us]'
 			"         │   │       └─ IndexedTableAccess(movie_companies)\n" +
 			"         │   │           ├─ index: [movie_companies.movie_id]\n" +
 			"         │   │           ├─ keys: [ci.movie_id:6!null]\n" +
-			"         │   │           ├─ colSet: (23-27)\n" +
+			"         │   │           ├─ colSet: (24,25)\n" +
 			"         │   │           ├─ tableId: 4\n" +
 			"         │   │           └─ Table\n" +
 			"         │   │               ├─ name: movie_companies\n" +
@@ -31543,7 +31543,7 @@ WHERE cn.country_code ='[us]'
 			"             └─ IndexedTableAccess(title)\n" +
 			"                 ├─ index: [title.id]\n" +
 			"                 ├─ keys: [ci.movie_id:6!null]\n" +
-			"                 ├─ colSet: (39-50)\n" +
+			"                 ├─ colSet: (39,40)\n" +
 			"                 ├─ tableId: 7\n" +
 			"                 └─ Table\n" +
 			"                     ├─ name: title\n" +
@@ -31724,7 +31724,7 @@ WHERE cn.country_code ='[us]'
 			"         │   │   │       │       └─ IndexedTableAccess(name)\n" +
 			"         │   │   │       │           ├─ index: [name.id]\n" +
 			"         │   │   │       │           ├─ keys: [an1.person_id:2!null]\n" +
-			"         │   │   │       │           ├─ colSet: (28-36)\n" +
+			"         │   │   │       │           ├─ colSet: (28)\n" +
 			"         │   │   │       │           ├─ tableId: 5\n" +
 			"         │   │   │       │           └─ Table\n" +
 			"         │   │   │       │               ├─ name: name\n" +
@@ -31733,7 +31733,7 @@ WHERE cn.country_code ='[us]'
 			"         │   │   │           └─ IndexedTableAccess(cast_info)\n" +
 			"         │   │   │               ├─ index: [cast_info.person_id]\n" +
 			"         │   │   │               ├─ keys: [an1.person_id:2!null]\n" +
-			"         │   │   │               ├─ colSet: (9-15)\n" +
+			"         │   │   │               ├─ colSet: (10,11,15)\n" +
 			"         │   │   │               ├─ tableId: 2\n" +
 			"         │   │   │               └─ Table\n" +
 			"         │   │   │                   ├─ name: cast_info\n" +
@@ -31742,7 +31742,7 @@ WHERE cn.country_code ='[us]'
 			"         │   │       └─ IndexedTableAccess(movie_companies)\n" +
 			"         │   │           ├─ index: [movie_companies.movie_id]\n" +
 			"         │   │           ├─ keys: [ci.movie_id:6!null]\n" +
-			"         │   │           ├─ colSet: (23-27)\n" +
+			"         │   │           ├─ colSet: (24,25)\n" +
 			"         │   │           ├─ tableId: 4\n" +
 			"         │   │           └─ Table\n" +
 			"         │   │               ├─ name: movie_companies\n" +
@@ -31763,7 +31763,7 @@ WHERE cn.country_code ='[us]'
 			"             └─ IndexedTableAccess(title)\n" +
 			"                 ├─ index: [title.id]\n" +
 			"                 ├─ keys: [ci.movie_id:6!null]\n" +
-			"                 ├─ colSet: (39-50)\n" +
+			"                 ├─ colSet: (39,40)\n" +
 			"                 ├─ tableId: 7\n" +
 			"                 └─ Table\n" +
 			"                     ├─ name: title\n" +
@@ -31964,7 +31964,7 @@ WHERE ci.note IN ('(voice)',
 			"         │   │   │   │       │           └─ IndexedTableAccess(name)\n" +
 			"         │   │   │   │       │               ├─ index: [name.id]\n" +
 			"         │   │   │   │       │               ├─ keys: [an.person_id:2!null]\n" +
-			"         │   │   │   │       │               ├─ colSet: (35-43)\n" +
+			"         │   │   │   │       │               ├─ colSet: (35,36,39)\n" +
 			"         │   │   │   │       │               ├─ tableId: 6\n" +
 			"         │   │   │   │       │               └─ Table\n" +
 			"         │   │   │   │       │                   ├─ name: name\n" +
@@ -31977,7 +31977,7 @@ WHERE ci.note IN ('(voice)',
 			"         │   │   │   │               └─ IndexedTableAccess(cast_info)\n" +
 			"         │   │   │   │                   ├─ index: [cast_info.person_id]\n" +
 			"         │   │   │   │                   ├─ keys: [an.person_id:2!null]\n" +
-			"         │   │   │   │                   ├─ colSet: (16-22)\n" +
+			"         │   │   │   │                   ├─ colSet: (17-20,22)\n" +
 			"         │   │   │   │                   ├─ tableId: 3\n" +
 			"         │   │   │   │                   └─ Table\n" +
 			"         │   │   │   │                       ├─ name: cast_info\n" +
@@ -31994,7 +31994,7 @@ WHERE ci.note IN ('(voice)',
 			"         │   │   │           └─ IndexedTableAccess(title)\n" +
 			"         │   │   │               ├─ index: [title.id]\n" +
 			"         │   │   │               ├─ keys: [ci.movie_id:8!null]\n" +
-			"         │   │   │               ├─ colSet: (46-57)\n" +
+			"         │   │   │               ├─ colSet: (46,47,50)\n" +
 			"         │   │   │               ├─ tableId: 8\n" +
 			"         │   │   │               └─ Table\n" +
 			"         │   │   │                   ├─ name: title\n" +
@@ -32003,7 +32003,7 @@ WHERE ci.note IN ('(voice)',
 			"         │   │       └─ IndexedTableAccess(char_name)\n" +
 			"         │   │           ├─ index: [char_name.id]\n" +
 			"         │   │           ├─ keys: [ci.person_role_id:9]\n" +
-			"         │   │           ├─ colSet: (9-15)\n" +
+			"         │   │           ├─ colSet: (9,10)\n" +
 			"         │   │           ├─ tableId: 2\n" +
 			"         │   │           └─ Table\n" +
 			"         │   │               ├─ name: char_name\n" +
@@ -32019,7 +32019,7 @@ WHERE ci.note IN ('(voice)',
 			"         │           └─ IndexedTableAccess(movie_companies)\n" +
 			"         │               ├─ index: [movie_companies.movie_id]\n" +
 			"         │               ├─ keys: [ci.movie_id:8!null]\n" +
-			"         │               ├─ colSet: (30-34)\n" +
+			"         │               ├─ colSet: (31,32,34)\n" +
 			"         │               ├─ tableId: 5\n" +
 			"         │               └─ Table\n" +
 			"         │                   ├─ name: movie_companies\n" +
@@ -32258,7 +32258,7 @@ WHERE ci.note = '(voice)'
 			"         │   │   │   │       │           └─ IndexedTableAccess(name)\n" +
 			"         │   │   │   │       │               ├─ index: [name.id]\n" +
 			"         │   │   │   │       │               ├─ keys: [an.person_id:2!null]\n" +
-			"         │   │   │   │       │               ├─ colSet: (35-43)\n" +
+			"         │   │   │   │       │               ├─ colSet: (35,36,39)\n" +
 			"         │   │   │   │       │               ├─ tableId: 6\n" +
 			"         │   │   │   │       │               └─ Table\n" +
 			"         │   │   │   │       │                   ├─ name: name\n" +
@@ -32271,7 +32271,7 @@ WHERE ci.note = '(voice)'
 			"         │   │   │   │               └─ IndexedTableAccess(cast_info)\n" +
 			"         │   │   │   │                   ├─ index: [cast_info.person_id]\n" +
 			"         │   │   │   │                   ├─ keys: [an.person_id:2!null]\n" +
-			"         │   │   │   │                   ├─ colSet: (16-22)\n" +
+			"         │   │   │   │                   ├─ colSet: (17-20,22)\n" +
 			"         │   │   │   │                   ├─ tableId: 3\n" +
 			"         │   │   │   │                   └─ Table\n" +
 			"         │   │   │   │                       ├─ name: cast_info\n" +
@@ -32288,7 +32288,7 @@ WHERE ci.note = '(voice)'
 			"         │   │   │           └─ IndexedTableAccess(title)\n" +
 			"         │   │   │               ├─ index: [title.id]\n" +
 			"         │   │   │               ├─ keys: [ci.movie_id:8!null]\n" +
-			"         │   │   │               ├─ colSet: (46-57)\n" +
+			"         │   │   │               ├─ colSet: (46,47,50)\n" +
 			"         │   │   │               ├─ tableId: 8\n" +
 			"         │   │   │               └─ Table\n" +
 			"         │   │   │                   ├─ name: title\n" +
@@ -32297,7 +32297,7 @@ WHERE ci.note = '(voice)'
 			"         │   │       └─ IndexedTableAccess(char_name)\n" +
 			"         │   │           ├─ index: [char_name.id]\n" +
 			"         │   │           ├─ keys: [ci.person_role_id:9]\n" +
-			"         │   │           ├─ colSet: (9-15)\n" +
+			"         │   │           ├─ colSet: (9,10)\n" +
 			"         │   │           ├─ tableId: 2\n" +
 			"         │   │           └─ Table\n" +
 			"         │   │               ├─ name: char_name\n" +
@@ -32312,7 +32312,7 @@ WHERE ci.note = '(voice)'
 			"         │           └─ IndexedTableAccess(movie_companies)\n" +
 			"         │               ├─ index: [movie_companies.movie_id]\n" +
 			"         │               ├─ keys: [ci.movie_id:8!null]\n" +
-			"         │               ├─ colSet: (30-34)\n" +
+			"         │               ├─ colSet: (31,32,34)\n" +
 			"         │               ├─ tableId: 5\n" +
 			"         │               └─ Table\n" +
 			"         │                   ├─ name: movie_companies\n" +
@@ -32550,7 +32550,7 @@ WHERE ci.note IN ('(voice)',
 			"         │   │   │   │       │           └─ IndexedTableAccess(name)\n" +
 			"         │   │   │   │       │               ├─ index: [name.id]\n" +
 			"         │   │   │   │       │               ├─ keys: [an.person_id:2!null]\n" +
-			"         │   │   │   │       │               ├─ colSet: (35-43)\n" +
+			"         │   │   │   │       │               ├─ colSet: (35,36,39)\n" +
 			"         │   │   │   │       │               ├─ tableId: 6\n" +
 			"         │   │   │   │       │               └─ Table\n" +
 			"         │   │   │   │       │                   ├─ name: name\n" +
@@ -32563,7 +32563,7 @@ WHERE ci.note IN ('(voice)',
 			"         │   │   │   │               └─ IndexedTableAccess(cast_info)\n" +
 			"         │   │   │   │                   ├─ index: [cast_info.person_id]\n" +
 			"         │   │   │   │                   ├─ keys: [an.person_id:2!null]\n" +
-			"         │   │   │   │                   ├─ colSet: (16-22)\n" +
+			"         │   │   │   │                   ├─ colSet: (17-20,22)\n" +
 			"         │   │   │   │                   ├─ tableId: 3\n" +
 			"         │   │   │   │                   └─ Table\n" +
 			"         │   │   │   │                       ├─ name: cast_info\n" +
@@ -32572,7 +32572,7 @@ WHERE ci.note IN ('(voice)',
 			"         │   │   │       └─ IndexedTableAccess(title)\n" +
 			"         │   │   │           ├─ index: [title.id]\n" +
 			"         │   │   │           ├─ keys: [ci.movie_id:8!null]\n" +
-			"         │   │   │           ├─ colSet: (46-57)\n" +
+			"         │   │   │           ├─ colSet: (46,47)\n" +
 			"         │   │   │           ├─ tableId: 8\n" +
 			"         │   │   │           └─ Table\n" +
 			"         │   │   │               ├─ name: title\n" +
@@ -32581,7 +32581,7 @@ WHERE ci.note IN ('(voice)',
 			"         │   │       └─ IndexedTableAccess(movie_companies)\n" +
 			"         │   │           ├─ index: [movie_companies.movie_id]\n" +
 			"         │   │           ├─ keys: [ci.movie_id:8!null]\n" +
-			"         │   │           ├─ colSet: (30-34)\n" +
+			"         │   │           ├─ colSet: (31,32)\n" +
 			"         │   │           ├─ tableId: 5\n" +
 			"         │   │           └─ Table\n" +
 			"         │   │               ├─ name: movie_companies\n" +
@@ -32590,7 +32590,7 @@ WHERE ci.note IN ('(voice)',
 			"         │       └─ IndexedTableAccess(char_name)\n" +
 			"         │           ├─ index: [char_name.id]\n" +
 			"         │           ├─ keys: [ci.person_role_id:9]\n" +
-			"         │           ├─ colSet: (9-15)\n" +
+			"         │           ├─ colSet: (9,10)\n" +
 			"         │           ├─ tableId: 2\n" +
 			"         │           └─ Table\n" +
 			"         │               ├─ name: char_name\n" +
@@ -32817,7 +32817,7 @@ WHERE ci.note IN ('(voice)',
 			"         │   │   │   │       │           └─ IndexedTableAccess(name)\n" +
 			"         │   │   │   │       │               ├─ index: [name.id]\n" +
 			"         │   │   │   │       │               ├─ keys: [an.person_id:2!null]\n" +
-			"         │   │   │   │       │               ├─ colSet: (35-43)\n" +
+			"         │   │   │   │       │               ├─ colSet: (35,36,39)\n" +
 			"         │   │   │   │       │               ├─ tableId: 6\n" +
 			"         │   │   │   │       │               └─ Table\n" +
 			"         │   │   │   │       │                   ├─ name: name\n" +
@@ -32830,7 +32830,7 @@ WHERE ci.note IN ('(voice)',
 			"         │   │   │   │               └─ IndexedTableAccess(cast_info)\n" +
 			"         │   │   │   │                   ├─ index: [cast_info.person_id]\n" +
 			"         │   │   │   │                   ├─ keys: [an.person_id:2!null]\n" +
-			"         │   │   │   │                   ├─ colSet: (16-22)\n" +
+			"         │   │   │   │                   ├─ colSet: (17-20,22)\n" +
 			"         │   │   │   │                   ├─ tableId: 3\n" +
 			"         │   │   │   │                   └─ Table\n" +
 			"         │   │   │   │                       ├─ name: cast_info\n" +
@@ -32839,7 +32839,7 @@ WHERE ci.note IN ('(voice)',
 			"         │   │   │       └─ IndexedTableAccess(title)\n" +
 			"         │   │   │           ├─ index: [title.id]\n" +
 			"         │   │   │           ├─ keys: [ci.movie_id:8!null]\n" +
-			"         │   │   │           ├─ colSet: (46-57)\n" +
+			"         │   │   │           ├─ colSet: (46,47)\n" +
 			"         │   │   │           ├─ tableId: 8\n" +
 			"         │   │   │           └─ Table\n" +
 			"         │   │   │               ├─ name: title\n" +
@@ -32848,7 +32848,7 @@ WHERE ci.note IN ('(voice)',
 			"         │   │       └─ IndexedTableAccess(movie_companies)\n" +
 			"         │   │           ├─ index: [movie_companies.movie_id]\n" +
 			"         │   │           ├─ keys: [ci.movie_id:8!null]\n" +
-			"         │   │           ├─ colSet: (30-34)\n" +
+			"         │   │           ├─ colSet: (31,32)\n" +
 			"         │   │           ├─ tableId: 5\n" +
 			"         │   │           └─ Table\n" +
 			"         │   │               ├─ name: movie_companies\n" +
@@ -32857,7 +32857,7 @@ WHERE ci.note IN ('(voice)',
 			"         │       └─ IndexedTableAccess(char_name)\n" +
 			"         │           ├─ index: [char_name.id]\n" +
 			"         │           ├─ keys: [ci.person_role_id:9]\n" +
-			"         │           ├─ colSet: (9-15)\n" +
+			"         │           ├─ colSet: (9,10)\n" +
 			"         │           ├─ tableId: 2\n" +
 			"         │           └─ Table\n" +
 			"         │               ├─ name: char_name\n" +
