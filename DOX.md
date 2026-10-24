@@ -25,6 +25,9 @@ Root owns the pinned upstream base, adaptation policy and attribution in FORK.md
 
 - Historical bind parameters defer only during explicit metadata preparation. Execution rebinds the original AST, resolves the supplied revision and rejects NULL or missing values; current-schema preparation does not promise access to historical-only tables or columns.
 
+- Correlated lateral filters remain inside the non-preserved join input; preserve NULL-extended rows. Session select limits apply to simple SELECT and DISTINCT without overriding explicit LIMIT.
+- Error-handler operations follow interpreter branch/loop counters, drain and close results, and propagate failures. Procedure result-set multiplicity remains unchanged.
+
 ## Work Guidance
 
 Keep the patch focused on the reported SQL behavior; qualify the complete consumer dependency tuple before installation.

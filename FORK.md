@@ -33,3 +33,13 @@ Adapt James Cor's GMS PR #4047, carried by Dolt PR #12197, retaining exact-decim
 ## Prepared historical table bindings
 
 Dolt issue [#12191](https://github.com/dolthub/dolt/issues/12191) is addressed by distinguishing metadata preparation from value binding. A bare `AS OF ?` uses the current table schema for prepare metadata, then resolves the supplied revision afresh on every execution. Execution with NULL, absent or invalid revisions remains an error; it cannot fall back to HEAD. Tables or columns absent from the current schema still require a literal revision for preparation.
+
+## Lateral filters, session limits and error handlers
+
+Adapt the SQL fixes carried by [Dolt PR #12205](https://github.com/dolthub/dolt/pull/12205), preserving the existing decimal and Full-Text safeguards:
+
+- [GMS #4062](https://github.com/dolthub/go-mysql-server/pull/4062), Dem1241: keep correlated filters inside a non-preserved lateral input, retaining the outer NULL-extended rows.
+- [GMS #4059](https://github.com/dolthub/go-mysql-server/pull/4059), Dem1241: apply sql_select_limit to simple SELECT and DISTINCT; explicit LIMIT takes precedence.
+- [GMS #4058](https://github.com/dolthub/go-mysql-server/pull/4058), James Cor: execute every handler operation. The additional fork correction follows the returned instruction counter for IF/GOTO/WHILE and closes drained iterators. The proposal's counter=-1 and sequential iteration can panic on conditional handlers; retain the independent conditional/loop regression.
+
+The normal/prepared embedded-driver fixtures cover both branch outcomes and complete loop execution. This does not add multiple procedure result sets ([Dolt #12199](https://github.com/dolthub/dolt/issues/12199)).

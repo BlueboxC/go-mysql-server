@@ -1807,6 +1807,103 @@ END`,
 			},
 		},
 	},
+
+	{
+		Dialect: "mysql",
+		Name:    "EXIT HANDLER FOR SQLEXCEPTION with multiple queries",
+		SetUpScript: []string{
+			`CREATE TABLE t1 (pk BIGINT PRIMARY KEY);`,
+			`CREATE PROCEDURE p1()
+BEGIN
+	DECLARE EXIT HANDLER FOR SQLEXCEPTION
+	BEGIN
+		SET @var1 = 1;
+		SET @var2 = 2;
+		SET @var3 = 3;
+	END;
+	INSERT INTO TABLE_THAT_DOES_NOT_EXIST VALUES(1);
+	SELECT 'IMPOSSIBLE' AS RESULT;
+END;`,
+			`CREATE PROCEDURE p2()
+BEGIN
+	DECLARE EXIT HANDLER FOR SQLEXCEPTION
+	BEGIN
+		INSERT INTO t1 VALUES(1);
+		INSERT INTO t1 VALUES(2);
+		INSERT INTO t1 VALUES(3);
+	END;
+	INSERT INTO TABLE_THAT_DOES_NOT_EXIST VALUES(1);
+	SELECT 'IMPOSSIBLE' AS RESULT;
+END;`,
+			`CREATE PROCEDURE p3()
+BEGIN
+	DECLARE EXIT HANDLER FOR SQLEXCEPTION
+	BEGIN
+		INSERT INTO TABLE_THAT_DOES_NOT_EXIST VALUES(1);
+	END;
+	INSERT INTO TABLE_THAT_DOES_NOT_EXIST VALUES(1);
+	SELECT 'IMPOSSIBLE' AS RESULT;
+END;`,
+		},
+		Assertions: []ScriptTestAssertion{
+			{
+				Query: "CALL p1();",
+				Expected: []sql.Row{
+					{types.NewOkResult(0)},
+				},
+			},
+			{
+				Query: "SELECT @var1, @var2, @var3;",
+				Expected: []sql.Row{
+					{1, 2, 3},
+				},
+			},
+			{
+				Query: "CALL p2();",
+				Expected: []sql.Row{
+					{types.NewOkResult(0)}, // TODO: should be 1 Row Affected
+				},
+			},
+			{
+				Query: "SELECT * FROM t1;",
+				Expected: []sql.Row{
+					{1},
+					{2},
+					{3},
+				},
+			},
+			{
+				Query:       "CALL p3()",
+				ExpectedErr: sql.ErrTableNotFound,
+			},
+		},
+	},
+
+	{
+		Name: "EXIT handler preserves conditionals and loops",
+		SetUpScript: []string{
+			`CREATE PROCEDURE guarded_handler()
+BEGIN
+ DECLARE EXIT HANDLER FOR SQLEXCEPTION
+ BEGIN
+  IF @gate = 1 THEN SET @branch = 10; ELSE SET @branch = 20; END IF;
+  SET @n = 0;
+  WHILE @n < 3 DO SET @n = @n + 1; END WHILE;
+  SET @tail = 30;
+ END;
+ INSERT INTO absent_handler_table VALUES (1);
+END`,
+		},
+		Assertions: []ScriptTestAssertion{
+			{Query: "SET @gate=0,@branch=0,@n=0,@tail=0", Expected: []sql.Row{{types.NewOkResult(0)}}},
+			{Query: "CALL guarded_handler()", Expected: []sql.Row{{types.NewOkResult(0)}}},
+			{Query: "SELECT @branch,@n,@tail", Expected: []sql.Row{{20, 3, 30}}},
+			{Query: "SET @gate=1,@branch=0,@n=0,@tail=0", Expected: []sql.Row{{types.NewOkResult(0)}}},
+			{Query: "CALL guarded_handler()", Expected: []sql.Row{{types.NewOkResult(0)}}},
+			{Query: "SELECT @branch,@n,@tail", Expected: []sql.Row{{10, 3, 30}}},
+		},
+	},
+
 	{
 		Name:        "Duplicate parameter names",
 		Query:       "CREATE PROCEDURE p1(abc DATETIME, abc DOUBLE) SELECT abc",
