@@ -43,3 +43,9 @@ Adapt the SQL fixes carried by [Dolt PR #12205](https://github.com/dolthub/dolt/
 - [GMS #4058](https://github.com/dolthub/go-mysql-server/pull/4058), James Cor: execute every handler operation. The additional fork correction follows the returned instruction counter for IF/GOTO/WHILE and closes drained iterators. The proposal's counter=-1 and sequential iteration can panic on conditional handlers; retain the independent conditional/loop regression.
 
 The normal/prepared embedded-driver fixtures cover both branch outcomes and complete loop execution. This does not add multiple procedure result sets ([Dolt #12199](https://github.com/dolthub/dolt/issues/12199)).
+
+## Global system-variable authorization
+
+[Dolt #12207](https://github.com/dolthub/dolt/issues/12207): require SYSTEM_VARIABLES_ADMIN (also implied by SUPER) for GLOBAL, PERSIST and PERSIST_ONLY assignments. Check the entire SET before evaluating assignments, and check current privileges again when executing retained bound plans. Expression rewrites preserve the authorization handler. Session variables, user variables, row assignments and engine initialization through the variable registry retain their existing behavior.
+
+Regressions cover explicit scope aliases, global transactions, persisted values, grant/revoke on a retained session, copied bound plans and rejection before partial assignment.

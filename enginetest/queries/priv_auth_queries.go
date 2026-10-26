@@ -108,6 +108,36 @@ type ServerAuthenticationTestAssertion struct {
 // UserPrivTests test the user and privilege systems. These tests always have the root account available, and the root
 // account is used with any queries in the SetUpScript.
 var UserPrivTests = []UserPrivilegeTest{
+	{
+		Name: "Fork SET GLOBAL authorization",
+		SetUpScript: []string{
+			"CREATE USER 'variable_reader'@'localhost';",
+			"GRANT SELECT ON mydb.* TO 'variable_reader'@'localhost';",
+			"SET GLOBAL max_connections = 37;",
+		},
+		Assertions: []UserPrivilegeTestAssertion{
+			{User: "variable_reader", Host: "localhost", Query: "SET @@GLOBAL.max_connections = 38;", ExpectedErr: sql.ErrPrivilegeCheckFailed},
+			{User: "variable_reader", Host: "localhost", Query: "SET PERSIST max_connections = 38;", ExpectedErr: sql.ErrPrivilegeCheckFailed},
+			{User: "variable_reader", Host: "localhost", Query: "SET @@PERSIST.max_connections = 38;", ExpectedErr: sql.ErrPrivilegeCheckFailed},
+			{User: "variable_reader", Host: "localhost", Query: "SET PERSIST_ONLY max_connections = 38;", ExpectedErr: sql.ErrPrivilegeCheckFailed},
+			{User: "variable_reader", Host: "localhost", Query: "SET @@PERSIST_ONLY.max_connections = 38;", ExpectedErr: sql.ErrPrivilegeCheckFailed},
+			{User: "variable_reader", Host: "localhost", Query: "SET GLOBAL TRANSACTION READ ONLY;", ExpectedErr: sql.ErrPrivilegeCheckFailed},
+			{User: "variable_reader", Host: "localhost", Query: "SET SESSION sql_select_limit = 12;", Expected: []sql.Row{{types.NewOkResult(0)}}},
+			{User: "variable_reader", Host: "localhost", Query: "SET LOCAL sql_select_limit = 12;", Expected: []sql.Row{{types.NewOkResult(0)}}},
+			{User: "variable_reader", Host: "localhost", Query: "SET @ordinary_user_var = 12;", Expected: []sql.Row{{types.NewOkResult(0)}}},
+			{User: "variable_reader", Host: "localhost", Query: "SET NAMES utf8mb4;", Expected: []sql.Row{{types.NewOkResult(0)}}},
+			{
+				User:        "variable_reader",
+				Host:        "localhost",
+				Query:       "SET GLOBAL max_connections = 38;",
+				ExpectedErr: sql.ErrPrivilegeCheckFailed,
+			},
+			{
+				Query:    "SELECT @@GLOBAL.max_connections;",
+				Expected: []sql.Row{{int64(37)}},
+			},
+		},
+	},
 	// https://github.com/dolthub/dolt/issues/10083
 	{
 		Name: "Selecting a view only needs SELECT grants",

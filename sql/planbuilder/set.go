@@ -54,7 +54,17 @@ func (b *Builder) buildSet(inScope *scope, n *ast.Set) (outScope *scope) {
 	exprs := b.setExprsToExpressions(inScope, setVarExprs)
 
 	outScope = inScope.push()
-	outScope.node = plan.NewSet(exprs)
+	set := plan.NewSet(exprs)
+	// Stored trigger bodies defer binding authorization, but still require it at execution.
+	if b.cat != nil && (b.authEnabled || b.TriggerCtx().Call) {
+		set.AuthHandler = b.cat.AuthorizationHandler()
+	}
+	if b.authEnabled && set.AuthHandler != nil {
+		if err := set.AuthHandler.HandleAuthNode(b.ctx, b.authQueryState, set); err != nil {
+			b.handleErr(err)
+		}
+	}
+	outScope.node = set
 	return outScope
 }
 

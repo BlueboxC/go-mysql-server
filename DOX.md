@@ -27,6 +27,7 @@ Root owns the pinned upstream base, adaptation policy and attribution in FORK.md
 
 - Correlated lateral filters remain inside the non-preserved join input; preserve NULL-extended rows. Session select limits apply to simple SELECT and DISTINCT without overriding explicit LIMIT.
 - Error-handler operations follow interpreter branch/loop counters, drain and close results, and propagate failures. Procedure result-set multiplicity remains unchanged.
+- SQL assignments to GLOBAL, PERSIST and PERSIST_ONLY require SYSTEM_VARIABLES_ADMIN or SUPER. Check the complete SET before evaluation and recheck current privileges on bound-plan execution; expression rewrites retain authorization. Preserve session/user/row assignments and trusted no-auth engine initialization.
 
 ## Work Guidance
 
@@ -35,6 +36,8 @@ Keep the patch focused on the reported SQL behavior; qualify the complete consum
 ## Verification
 
 Run view and reported SQL queries in normal and prepared mode, query-plan suites, expression/types, catalog and planbuilder tests. Compare broader failures against the unchanged base; pure-Go regex behavior is distinct from ICU expectations.
+
+Run TestSetGlobalAuthorization and TestUserPrivileges, including grant/revoke on the same session, copied bound plans, persistence and rejection before partial assignment. Qualify the Dolt SQL server with disposable users and persisted configuration before consumer installation.
 
 ## Child DOX Index
 

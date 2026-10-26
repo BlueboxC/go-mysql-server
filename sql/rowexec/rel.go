@@ -357,6 +357,12 @@ func (b *BaseBuilder) buildSet(ctx *sql.Context, n *plan.Set, row sql.Row) (sql.
 	span, ctx := ctx.Span("plan.Set")
 	defer span.End()
 
+	if n.AuthHandler != nil {
+		if err := n.AuthHandler.HandleAuthNode(ctx, nil, n); err != nil {
+			return nil, err
+		}
+	}
+
 	var updateExprs []sql.Expression
 	for _, v := range n.Exprs {
 		setField, ok := v.(*expression.SetField)

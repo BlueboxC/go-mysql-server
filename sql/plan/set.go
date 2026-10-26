@@ -18,16 +18,46 @@ import (
 	"strings"
 
 	"github.com/dolthub/go-mysql-server/sql"
+	"github.com/dolthub/go-mysql-server/sql/expression"
 	"github.com/dolthub/go-mysql-server/sql/types"
 )
 
 // Set represents a set statement. This can be variables, but in some instances can also refer to row values.
 type Set struct {
 	Exprs []sql.Expression
+	// AuthHandler is retained on bound plans so execution checks current privileges.
+	AuthHandler sql.AuthorizationHandler
 }
 
 var _ sql.Node = (*Set)(nil)
 var _ sql.CollationCoercible = (*Set)(nil)
+var _ sql.AuthorizationCheckerNode = (*Set)(nil)
+
+const DynamicPrivilege_SystemVariablesAdmin = "system_variables_admin"
+
+// CheckAuth checks the complete statement before any assignment or RHS is evaluated.
+func (s *Set) CheckAuth(ctx *sql.Context, checker sql.PrivilegedOperationChecker) bool {
+	for _, expr := range s.Exprs {
+		assignment, ok := expr.(*expression.SetField)
+		if !ok {
+			continue
+		}
+		variable, ok := assignment.LeftChild.(*expression.SystemVar)
+		if !ok {
+			continue
+		}
+		scope, ok := variable.Scope.(*sql.MysqlScope)
+		if !ok {
+			continue
+		}
+		switch scope.Type {
+		case sql.SystemVariableScope_Global, sql.SystemVariableScope_Persist,
+			sql.SystemVariableScope_PersistOnly, sql.SystemVariableScope_ResetPersist:
+			return checker.UserHasPrivileges(ctx, sql.NewDynamicPrivilegedOperation(DynamicPrivilege_SystemVariablesAdmin))
+		}
+	}
+	return true
+}
 
 // NewSet creates a new Set node.
 func NewSet(vars []sql.Expression) *Set {
@@ -69,7 +99,9 @@ func (s *Set) WithExpressions(ctx *sql.Context, exprs ...sql.Expression) (sql.No
 		return nil, sql.ErrInvalidChildrenNumber.New(s, len(exprs), len(s.Exprs))
 	}
 
-	return NewSet(exprs), nil
+	copy := *s
+	copy.Exprs = exprs
+	return &copy, nil
 }
 
 // Expressions implements the sql.Expressioner interface.
