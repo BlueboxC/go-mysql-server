@@ -4,6 +4,8 @@
 
 Retain fulghum's complete shared keyless-unique scripts from [GMS #4078](https://github.com/dolthub/go-mysql-server/pull/4078), head `686f05f280d84b33253be7e3ef60218e4faf03da`, including normal/prepared memory-harness entry points and its explicit unsupported virtual-unique skip. Dolt exercises those scripts against its native storage writer; a memory-harness pass alone does not qualify Dolt indexes.
 
+The NULL branch correction is limited to floating and date/datetime types; typed NULL projections retain the authored column name in either branch. Preserve the existing integer, decimal, BIT and binary coercions. The shared set-operation scripts include NULL-first/last named CTAS, derived-column references and BIT insertion controls.
+
 Adapt skysoul1024's Dolt #12218 and #12220–12223 reproductions: convert and truncate IGNORE values by the target text/binary family, materialize omitted required defaults before generated expressions with runtime warnings, retain non-NULL UNION types, preserve zero-date numeric zero, and convert booleans through existing YEAR/ENUM/SET integer rules. Normal and prepared consumer SQL fixtures cover the reported behavior. Keep strict-mode rejection and duplicate-only-ignore semantics separate.
 
 This dependency fork starts at Dolt v2.6.0's analyzer, dolthub/go-mysql-server `38a1fb50b434dc88df4a6e6dd3a3b50598dc9446`, and requires Go 1.27.3. The upstream base now includes PRs #4044 and #4056; retain each correction once, together with the fork's SQL, catalog and historical-parameter protections.

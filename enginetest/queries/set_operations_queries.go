@@ -23,6 +23,21 @@ import (
 // SetOperationsScriptTests contains self-contained set operations script tests.
 var SetOperationsScriptTests = []ScriptTest{
 	{
+		Name: "NULL union branches preserve authored column identity and numeric type",
+		SetUpScript: []string{
+			"CREATE TABLE null_first AS SELECT NULL AS authored UNION ALL SELECT 1E0",
+			"CREATE TABLE null_last AS SELECT 1E0 AS authored UNION ALL SELECT NULL",
+			"CREATE TABLE bits (x BIT(8))",
+			"INSERT INTO bits SELECT NULL AS authored UNION ALL SELECT 1E0",
+		},
+		Assertions: []ScriptTestAssertion{
+			{Query: "SELECT authored FROM null_first ORDER BY authored", Expected: []sql.Row{{nil}, {float64(1)}}},
+			{Query: "SELECT authored FROM null_last ORDER BY authored", Expected: []sql.Row{{nil}, {float64(1)}}},
+			{Query: "SELECT authored FROM (SELECT NULL AS authored UNION ALL SELECT 1E0) u WHERE authored = 1", Expected: []sql.Row{{float64(1)}}},
+			{Query: "SELECT HEX(x) FROM bits ORDER BY x", Expected: []sql.Row{{nil}, {"1"}}},
+		},
+	},
+	{
 		// https://github.com/dolthub/go-mysql-server/issues/3216
 		Name: "UNION ALL with BLOB columns",
 		SetUpScript: []string{

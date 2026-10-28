@@ -208,12 +208,14 @@ func (b *Builder) mergeSetOpSchemas(u *plan.SetOp) sql.Node {
 			continue
 		}
 		hasdiff = true
-		if types.IsNullType(ls[i].Type) {
-			les[i] = expression.NewLiteral(nil, rs[i].Type)
+		// Avoid lossy CHAR conversion for floating/temporal NULL branches;
+		// retain authored names and the existing coercions of other families.
+		if types.IsNullType(ls[i].Type) && (types.IsFloat(rs[i].Type) || types.IsTime(rs[i].Type)) {
+			les[i] = expression.NewAlias(b.ctx, ls[i].Name, expression.NewLiteral(nil, rs[i].Type))
 			continue
 		}
-		if types.IsNullType(rs[i].Type) {
-			res[i] = expression.NewLiteral(nil, ls[i].Type)
+		if types.IsNullType(rs[i].Type) && (types.IsFloat(ls[i].Type) || types.IsTime(ls[i].Type)) {
+			res[i] = expression.NewAlias(b.ctx, rs[i].Name, expression.NewLiteral(nil, ls[i].Type))
 			continue
 		}
 
