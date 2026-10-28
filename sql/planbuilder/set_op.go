@@ -208,6 +208,14 @@ func (b *Builder) mergeSetOpSchemas(u *plan.SetOp) sql.Node {
 			continue
 		}
 		hasdiff = true
+		if types.IsNullType(ls[i].Type) {
+			les[i] = expression.NewLiteral(nil, rs[i].Type)
+			continue
+		}
+		if types.IsNullType(rs[i].Type) {
+			res[i] = expression.NewLiteral(nil, ls[i].Type)
+			continue
+		}
 
 		// try to get optimal type to convert both into
 		convertTo := expression.GetConvertToType(ls[i].Type, rs[i].Type)

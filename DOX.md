@@ -31,6 +31,9 @@ Root owns the pinned upstream base, adaptation policy and attribution in FORK.md
 
 ## Work Guidance
 
+- INSERT/UPDATE IGNORE converts oversized values to their string/binary family before truncation; text limits count Unicode characters. Omitted required fields receive their implicit value before generated-column evaluation, with execution-time warnings. Duplicate-only ignore remains separate.
+- NULL set-operation branches preserve the other branch's type without a lossy text conversion. Numeric zero dates remain zero; YEAR/ENUM/SET booleans follow the existing integer conversion and strict-mode policy.
+
 Keep the patch focused on the reported SQL behavior; qualify the complete consumer dependency tuple before installation.
 
 ## Verification

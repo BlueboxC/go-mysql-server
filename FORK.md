@@ -1,5 +1,9 @@
 # SQL analyzer corrections for Dolt
 
+## October 27 report corrections
+
+Adapt skysoul1024's Dolt #12218 and #12220–12223 reproductions: convert and truncate IGNORE values by the target text/binary family, materialize omitted required defaults before generated expressions with runtime warnings, retain non-NULL UNION types, preserve zero-date numeric zero, and convert booleans through existing YEAR/ENUM/SET integer rules. Normal and prepared consumer SQL fixtures cover the reported behavior. Keep strict-mode rejection and duplicate-only-ignore semantics separate.
+
 This dependency fork starts at Dolt v2.6.0's analyzer, dolthub/go-mysql-server `38a1fb50b434dc88df4a6e6dd3a3b50598dc9446`, and requires Go 1.27.3. The upstream base now includes PRs #4044 and #4056; retain each correction once, together with the fork's SQL, catalog and historical-parameter protections.
 
 It adapts angelamayxie's [PR #4044](https://github.com/dolthub/go-mysql-server/pull/4044), head `8de54b7c6a8955680da461ed2bf7fbf25414f201`, for [Dolt #12141](https://github.com/dolthub/dolt/issues/12141). Every projected alias receives a column ID even when it is unavailable to sibling projections. Preserve the contributor's view and query-plan regressions.
